@@ -1,0 +1,806 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QA Frontend — Cambio de puesto RM</title>
+  <style>
+    :root {
+      --bg: #f4f6f8;
+      --card: #fff;
+      --border: #dde3ea;
+      --text: #1a2332;
+      --muted: #5c6b7a;
+      --accent: #7c3aed;
+      --ok: #059669;
+      --warn: #d97706;
+    }
+    * { box-sizing: border-box; }
+    body {
+      font-family: "Segoe UI", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 1.5rem;
+      line-height: 1.45;
+    }
+    header { max-width: 960px; margin: 0 auto 1.5rem; }
+    h1 { font-size: 1.5rem; margin: 0 0 .25rem; }
+    .subtitle { color: var(--muted); font-size: .9rem; margin-bottom: 1rem; }
+    .info {
+      max-width: 960px; margin: 0 auto 1rem;
+      background: #faf5ff; border: 1px solid #e9d5ff; border-left: 4px solid var(--accent);
+      border-radius: 8px; padding: .85rem 1rem; font-size: .88rem;
+    }
+    .info code { font-size: .82rem; background: #f3f4f6; padding: .1rem .35rem; border-radius: 4px; }
+    .info-doc {
+      max-width: 960px; margin: 0 auto 1rem;
+      background: #eff6ff; border: 1px solid #bfdbfe; border-left: 4px solid #2563eb;
+      border-radius: 8px; padding: .85rem 1rem; font-size: .88rem;
+    }
+    .info-doc ul { margin: .5rem 0 0; padding-left: 1.2rem; }
+    .info-doc li { margin: .2rem 0; }
+    .toolbar {
+      display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; margin-bottom: 1rem;
+    }
+    .progress-wrap { flex: 1; min-width: 200px; }
+    .progress-bar { height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; }
+    .progress-fill { height: 100%; background: var(--ok); width: 0%; transition: width .3s; }
+    .progress-text { font-size: .85rem; color: var(--muted); margin-top: .35rem; }
+    button {
+      border: 1px solid var(--border); background: var(--card);
+      padding: .45rem .85rem; border-radius: 6px; cursor: pointer; font-size: .85rem;
+    }
+    button:hover { border-color: var(--accent); color: var(--accent); }
+    button.danger:hover { border-color: #dc2626; color: #dc2626; }
+    .tester { display: flex; gap: .5rem; align-items: center; font-size: .85rem; }
+    .tester input {
+      padding: .4rem .6rem; border: 1px solid var(--border); border-radius: 6px; width: 180px;
+    }
+    section {
+      max-width: 960px; margin: 0 auto 1.25rem;
+      background: var(--card); border: 1px solid var(--border); border-radius: 10px; overflow: hidden;
+    }
+    section h2 {
+      margin: 0; padding: .85rem 1rem; font-size: 1rem;
+      background: #f5f3ff; border-bottom: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+    }
+    .section-count { font-weight: normal; color: var(--muted); font-size: .85rem; }
+    .repo {
+      font-size: .7rem; font-weight: 600; padding: .15rem .45rem;
+      border-radius: 4px; margin-right: .35rem;
+    }
+    .repo-fe { background: #fef3c7; color: #b45309; }
+    .repo-api { background: #dbeafe; color: #1d4ed8; }
+    .repo-e2e { background: #d1fae5; color: #047857; }
+    .repo-block { background: #fee2e2; color: #b91c1c; }
+    ul { list-style: none; margin: 0; padding: 0; }
+    li {
+      border-bottom: 1px solid var(--border);
+      padding: .65rem 1rem;
+      display: grid; grid-template-columns: auto 1fr;
+      gap: .65rem; align-items: start;
+    }
+    li:last-child { border-bottom: none; }
+    li.done { background: #f0fdf4; }
+    li.done .label { text-decoration: line-through; color: var(--muted); }
+    li.crit { border-left: 3px solid var(--accent); }
+    li.blocked { border-left: 3px solid #dc2626; background: #fffbfb; }
+    input[type="checkbox"] {
+      width: 18px; height: 18px; margin-top: 2px; cursor: pointer; accent-color: var(--ok);
+    }
+    .label { font-size: .92rem; }
+    .label strong { color: var(--accent); }
+    .hint { font-size: .8rem; color: var(--muted); margin-top: .25rem; }
+    .tag-ok { color: var(--ok); font-weight: 600; font-size: .75rem; }
+    .tag-warn { color: var(--warn); font-weight: 600; font-size: .75rem; }
+    notes textarea {
+      width: 100%; min-height: 100px; margin-top: .5rem;
+      padding: .5rem; border: 1px solid var(--border);
+      border-radius: 6px; font-family: inherit; font-size: .85rem; resize: vertical;
+    }
+    footer {
+      max-width: 960px; margin: 1rem auto;
+      font-size: .8rem; color: var(--muted); text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Checklist QA Frontend — Cambio de puesto RM</h1>
+  <p class="subtitle">rrmm-frontend (Angular) · RF v.6 · FE-01..FE-15 · CA/CU solo UI · Complementa checklist backend · Guía: <code>Guia_FE_Cambio_Puesto_RM.md</code></p>
+  <div class="toolbar">
+    <div class="progress-wrap">
+      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+      <div class="progress-text" id="progressText">0 / 0 completados (0%)</div>
+    </div>
+    <div class="tester">
+      <label for="testerName">Tester:</label>
+      <input type="text" id="testerName" placeholder="Tu nombre">
+    </div>
+    <button type="button" id="btnExport">Exportar JSON</button>
+    <button type="button" id="btnCopyEmbedded">Copiar estado (guardar en HTML)</button>
+    <button type="button" class="danger" id="btnReset">Resetear</button>
+  </div>
+</header>
+
+<div class="info">
+  <strong>Prerrequisitos demo:</strong> BE desplegado (MR cambio-puesto) · ACL <code>CAMBIAR_PUESTO_RM</code> configurado ·
+  RM en estado <strong>Pendiente</strong> (INF4_RM_LOG ESTADO_ID=8). Display: <code>showCambiarPuestoRM</code> en ficha RM.
+  <br><strong>API base:</strong> <code>/rrmm-backend/rm/cambio-puesto/*</code> y <code>PUT /rm/{rmId}/cambiar-puesto</code>.
+  <br><strong>Paralelo:</strong> marcar ítems API/E2E ya cubiertos en <code>QA_Checklist_Cambio_Puesto_RM_Backend.html</code> como referencia, no duplicar BD.
+</div>
+
+<div class="info-doc">
+  <strong>Documentación de integración (desarrollo / Cursor):</strong>
+  <code>Guia_FE_Cambio_Puesto_RM.md</code>
+  <ul>
+    <li>Contrato SIMULAR / CONFIRMAR, escenarios RL, errores HTTP y <code>customMessage</code></li>
+    <li>Códigos <code>avisos[]</code> / <code>warnings[]</code> y bloque i18n en español listo para pegar</li>
+    <li>Flujo UI, tareas FE-01…FE-13 y datos de prueba de referencia</li>
+  </ul>
+  <strong>Prompt sugerido en Cursor:</strong> <em>Implementa el modal de cambio de puesto RM siguiendo <code>Guia_FE_Cambio_Puesto_RM.md</code> y esta checklist.</em>
+</div>
+
+<!-- DOCUMENTACIÓN -->
+<section>
+  <h2>Guía de integración — lectura previa (Cursor) <span class="section-count"></span></h2>
+  <ul>
+    <li data-id="doc-guia-leida" class="crit">
+      <input type="checkbox" id="doc-guia-leida">
+      <div>
+        <label class="label" for="doc-guia-leida"><span class="repo repo-fe">DOC</span>Leída <code>Guia_FE_Cambio_Puesto_RM.md</code> antes de implementar</label>
+        <div class="hint">Contrato API, SIMULAR/CONFIRMAR, escenarios RL, errores HTTP</div>
+      </div>
+    </li>
+    <li data-id="doc-i18n-pegar">
+      <input type="checkbox" id="doc-i18n-pegar">
+      <div>
+        <label class="label" for="doc-i18n-pegar"><span class="repo repo-fe">DOC</span>Bloque <code>cambioPuesto</code> de i18n copiado desde la guía (§ Códigos de aviso)</label>
+        <div class="hint">5 códigos aviso + textos RL + éxito confirmar + nota CA-14</div>
+      </div>
+    </li>
+    <li data-id="doc-simular-bloqueante">
+      <input type="checkbox" id="doc-simular-bloqueante">
+      <div>
+        <label class="label" for="doc-simular-bloqueante"><span class="repo repo-fe">DOC</span>Entendido: <code>bloqueante=true</code> muestra <code>mensajeFuncional</code> y no abre resumen</label>
+        <div class="hint">Avisos informativos (CA-15, CU-11, impacto) <strong>no</strong> bloquean</div>
+      </div>
+    </li>
+  </ul>
+</section>
+
+<!-- SMOKE BUILD -->
+<section>
+  <h2>Smoke build (FE-01) <span class="section-count"></span></h2>
+  <ul>
+    <li data-id="fe01-build">
+      <input type="checkbox" id="fe01-build">
+      <div>
+        <label class="label" for="fe01-build"><span class="repo repo-fe">FE</span><strong>FE-01</strong> Build demo incluye módulo cambio puesto (sin errores consola al abrir ficha RM)</label>
+        <div class="hint">Componentes: modal, resumen, servicio API · registro en <code>modals.module.ts</code></div>
+      </div>
+    </li>
+    <li data-id="fe01-ruta">
+      <input type="checkbox" id="fe01-ruta">
+      <div>
+        <label class="label" for="fe01-ruta"><span class="repo repo-fe">FE</span>Ficha RM carga displays sin 404 en <code>/display-elements</code></label>
+      </div>
+    </li>
+  </ul>
+</section>
+
+<!-- ACCESO -->
+<section>
+  <h2>Acceso, permisos y regresión <span class="section-count"></span></h2>
+  <ul>
+    <li data-id="fe02-ca01" class="crit">
+      <input type="checkbox" id="fe02-ca01">
+      <div>
+        <label class="label" for="fe02-ca01"><span class="repo repo-fe">FE</span><strong>FE-02 / CA-01</strong> Icono «cambiar puesto» visible en ficha RM</label>
+        <div class="hint">Solo si RM pendiente + display <code>showCambiarPuestoRM=true</code> (ACL CAMBIAR_PUESTO_RM)</div>
+      </div>
+    </li>
+    <li data-id="fe02-oculto">
+      <input type="checkbox" id="fe02-oculto">
+      <div>
+        <label class="label" for="fe02-oculto"><span class="repo repo-fe">FE</span>Icono <strong>oculto</strong> sin permiso o RM no pendiente</label>
+        <div class="hint">Usuario sin CAMBIAR_PUESTO_RM · RM validado/finalizado</div>
+      </div>
+    </li>
+    <li data-id="ca16-cu09">
+      <input type="checkbox" id="ca16-cu09">
+      <div>
+        <label class="label" for="ca16-cu09"><span class="repo repo-fe">FE</span><strong>CA-16 / CU-09</strong> Historial Médico → flujo legacy (sin modal MINERVA)</label>
+        <div class="hint">Regresión: no aparece icono nuevo ni modal Angular en historial</div>
+      </div>
+    </li>
+    <li data-id="cu08-cancelar">
+      <input type="checkbox" id="cu08-cancelar">
+      <div>
+        <label class="label" for="cu08-cancelar"><span class="repo repo-fe">FE</span><strong>CU-08</strong> Cancelar en cualquier punto cierra sin cambios</label>
+        <div class="hint">Modal principal y ventana resumen · sin llamada CONFIRMAR</div>
+      </div>
+    </li>
+  </ul>
+</section>
+
+<!-- MODAL ESTRUCTURA -->
+<section>
+  <h2>Modal principal — estructura (FE-03) <span class="section-count"></span></h2>
+  <ul>
+    <li data-id="fe03-abre">
+      <input type="checkbox" id="fe03-abre">
+      <div>
+        <label class="label" for="fe03-abre"><span class="repo repo-fe">FE</span><strong>FE-03</strong> Abre NgbModal al pulsar icono</label>
+        <div class="hint">Patrón <code>modal-medicos-enfermeros</code> · registro en <code>modals.module.ts</code></div>
+      </div>
+    </li>
+    <li data-id="ca03-cabecera">
+      <input type="checkbox" id="ca03-cabecera">
+      <div>
+        <label class="label" for="ca03-cabecera"><span class="repo repo-fe">FE</span><strong>CA-03</strong> Cabecera muestra nombre de la persona</label>
+        <div class="hint">Datos de ficha RM / datosGenerales</div>
+      </div>
+    </li>
+    <li data-id="fe03-footer">
+      <input type="checkbox" id="fe03-footer">
+      <div>
+        <label class="label" for="fe03-footer"><span class="repo repo-fe">FE</span>Footer: botones <strong>Cancelar</strong> y <strong>Continuar</strong></label>
+        <div class="hint">Continuar deshabilitado hasta selección válida (cliente+centro+puesto principal)</div>
+      </div>
+    </li>
+    <li data-id="fe03-estado-inicial">
+      <input type="checkbox" id="fe03-estado-inicial">
+      <div>
+        <label class="label" for="fe03-estado-inicial"><span class="repo repo-fe">FE</span>Estado inicial: cliente/centro/puesto actual del RM precargados donde aplique</label>
+        <div class="hint">CA-07: puesto principal actual visible y seleccionado</div>
+      </div>
+    </li>
+  </ul>
+</section>
+
+<!-- CLIENTE -->
+<section>
+  <h2>Búsqueda cliente (FE-04) <span class="section-count"></span></h2>
+  <ul>
+    <li data-id="ca04-min-chars">
+      <input type="checkbox" id="ca04-min-chars">
+      <div>
+        <label class="label" for="ca04-min-chars"><span class="repo repo-fe">FE</span><span class="repo repo-api">API</span><strong>CA-04</strong> &lt;3 caracteres → sin resultados + mensaje mínimo</label>
+        <div class="hint">No llama API o muestra vacío · GET <code>/cambio-puesto/clientes?q=</code> → 422</div>
+      </div>
+    </li>
+    <li data-id="ca05-busqueda">
+      <input type="checkbox" id="ca05-busqueda">
+      <div>
+        <label class="label" for="ca05-busqueda"><span class="repo repo-fe">FE</span><span class="repo repo-api">API</span><strong>CA-05 / CU-02</strong> ≥3 chars o CIF válido → typeahead con resultados (máx. 20)</label>
+        <div class="hint">NgbTypeahead + debounce · selección rellena cliente</div>
+      </div>
+    </li>
+    <li data-id="fe04-cambio-cliente">
+      <input type="checkbox" id="fe04-cambio-cliente">
+      <div>
+        <label class="label" for="fe04-cambio-cliente"><span class="repo repo-fe">FE</span>Al cambiar cliente se resetea centro y recarga catálogo puestos</label>
+        <div class="hint">CA-06: dispara GET centros + GET puestos</div>
+      </div>
+    </li>
+  </ul>
+</section>
+
+<!-- CENTROS -->
+<section>
+  <h2>Selección centro (FE-05) <span class="section-count"></span></h2>
+  <ul>
+    <li data-id="ca06-tabla">
+      <input type="checkbox" id="ca06-tabla">
+      <div>
+        <label class="label" for="ca06-tabla"><span class="repo repo-fe">FE</span><span class="repo repo-api">API</span><strong>CA-06 / CU-03</strong> Tabla centros tras elegir cliente</label>
+        <div class="hint">GET <code>/cambio-puesto/centros?clienteId=</code> · columnas nombre/provincia/localidad</div>
+      </div>
+    </li>
+    <li data-id="fe05-filtro">
+      <input type="checkbox" id="fe05-filtro">
+      <div>
+        <label class="label" for="fe05-filtro"><span class="repo repo-fe">FE</span>Filtros en tabla (nombre, provincia, localidad)</label>
+        <div class="hint">Query params opcionales en API</div>
+      </div>
+    </li>
+    <li data-id="fe05-seleccion">
+      <input type="checkbox" id="fe05-seleccion">
+      <div>
+        <label class="label" for="fe05-seleccion"><span class="repo repo-fe">FE</span>Seleccionar centro recarga bloque puestos y resetea selección incompatible</label>
+      </div>
+    </li>
+  </ul>
+</section>
+
+<!-- PUESTO PRINCIPAL -->
+<section>
+  <h2>Puesto principal (FE-06) <span class="section-count"></span></h2>
+  <ul>
+    <li data-id="ca07-desplegado">
+      <input type="checkbox" id="ca07-desplegado">
+      <div>
+        <label class="label" for="ca07-desplegado"><span class="repo repo-fe">FE</span><strong>CA-07</strong> Bloque puesto principal desplegado; actual preseleccionado</label>
+      </div>
+    </li>
+    <li data-id="ca08-radio">
+      <input type="checkbox" id="ca08-radio">
+      <div>
+        <label class="label" for="ca08-radio"><span class="repo repo-fe">FE</span><strong>CA-08 / CU-04</strong> Radio único — solo un puesto principal</label>
+        <div class="hint">Prevención (C) · Vigilancia (EC) · Estándar (E)</div>
+      </div>
+    </li>
+    <li data-id="fe06-catalogo">
+      <input type="checkbox" id="fe06-catalogo">
+      <div>
+        <label class="label" for="fe06-catalogo"><span class="repo repo-fe">FE</span><span class="repo repo-api">API</span>GET catálogo puestos al elegir centro</label>
+        <div class="hint"><code>/cambio-puesto/puestos/{cli}/{cen}?rmId=</code> · tipoCentroDefault C/EC/E</div>
+      </div>
+    </li>
+    <li data-id="fe06-columnas">
+      <input type="checkbox" id="fe06-columnas">
+      <div>
+        <label class="label" for="fe06-columnas"><span class="repo repo-fe">FE</span>Columnas código / denominación / nº trabajadores (centro y cliente)</label>
+      </div>
+    </li>
+    <li data-id="fe06-estandar-typeahead">
+      <input type="checkbox" id="fe06-estandar-typeahead">
+      <div>
+        <label class="label" for="fe06-estandar-typeahead"><span class="repo repo-fe">FE</span><span class="repo repo-api">API</span>Typeahead estándar ≥3 chars (precarga ~150 + búsqueda máx. 50)</label>
+        <div class="hint"><code>/puestos/{cli}/{cen}/estandar?criterio=</code></div>
+      </div>
+    </li>
+    <li data-id="fe06-busqueda-local">
+      <input type="checkbox" id="fe06-busqueda-local">
+      <div>
+        <label class="label" for="fe06-busqueda-local"><span class="repo repo-fe">FE</span>Búsqueda/filtro local en listas C y EC (si aplica UX)</label>
+      </div>
+    </li>
+  </ul>
+</section>
+
+<!-- ADICIONALES -->
+<section>
+  <h2>Puestos adicionales (FE-07) <span class="section-count"></span></h2>
+  <ul>
+    <li data-id="ca09-chips">
+      <input type="checkbox" id="ca09-chips">
+      <div>
+        <label class="label" for="ca09-chips"><span class="repo repo-fe">FE</span><strong>CA-09</strong> Adicionales como chips eliminables; bloque plegado por defecto</label>
+      </div>
+    </li>
+    <li data-id="ca10-multiple">
+      <input type="checkbox" id="ca10-multiple">
+      <div>
+        <label class="label" for="ca10-multiple"><span class="repo repo-fe">FE</span><strong>CA-10 / CU-05</strong> Checkbox múltiple + «Añadir» varios adicionales</label>
+        <div class="hint">Payload: <code>puestosAdicionales[]</code> con puestoId + estandar</div>
+      </div>
+    </li>
+    <li data-id="n3-reglas">
+      <input type="checkbox" id="n3-reglas">
+      <div>
+        <label class="label" for="n3-reglas"><span class="repo repo-fe">FE</span><strong>N3</strong> No promover adicional → principal; quitar chip antes de elegirlo como principal</label>
+        <div class="hint">Mensaje bloqueante en UI si conflicto (FE-08)</div>
+      </div>
+    </li>
+    <li data-id="fe07-nombre-chip">
+      <input type="checkbox" id="fe07-nombre-chip">
+      <div>
+        <label class="label" for="fe07-nombre-chip"><span class="repo repo-fe">FE</span>Chips muestran nombre legible (campo <code>nombre</code> del API)</label>
+      </div>
+    </li>
+  </ul>
+</section>
+
+<!-- ESTADOS UX -->
+<section>
+  <h2>Estados, errores y carga (FE-08) <span class="section-count"></span></h2>
+  <ul>
+    <li data-id="fe08-loading">
+      <input type="checkbox" id="fe08-loading">
+      <div>
+        <label class="label" for="fe08-loading"><span class="repo repo-fe">FE</span>Spinners/disabled durante llamadas API (catálogo, SIMULAR, CONFIRMAR)</label>
+      </div>
+    </li>
+    <li data-id="fe08-bloqueante">
+      <input type="checkbox" id="fe08-bloqueante">
+      <div>
+        <label class="label" for="fe08-bloqueante"><span class="repo repo-fe">FE</span><span class="repo repo-api">API</span>SIMULAR <code>bloqueante=true</code> → muestra <code>mensajeFuncional</code> y no abre resumen</label>
+        <div class="hint">RL sin resolver · OK técnico · varias RL · sin PVS</div>
+      </div>
+    </li>
+    <li data-id="fe08-error-http">
+      <input type="checkbox" id="fe08-error-http">
+      <div>
+        <label class="label" for="fe08-error-http"><span class="repo repo-fe">FE</span>Errores HTTP: 403, 409, 422, 502 con mensaje usuario (no stack trace)</label>
+      </div>
+    </li>
+    <li data-id="fe08-403-acl">
+      <input type="checkbox" id="fe08-403-acl">
+      <div>
+        <label class="label" for="fe08-403-acl"><span class="repo repo-fe">FE</span>403 sin CAMBIAR_PUESTO_RM en Continuar/Confirmar (mensaje claro)</label>
+      </div>
+    </li>
+    <li data-id="fe08-continuar-disable">
+      <input type="checkbox" id="fe08-continuar-disable">
+      <div>
+        <label class="label" for="fe08-continuar-disable"><span class="repo repo-fe">FE</span>«Continuar» deshabilitado si falta cliente, centro o puesto principal</label>
+      </div>
+    </li>
+  </ul>
+</section>
+
+<!-- RESUMEN -->
+<section>
+  <h2>Ventana resumen — SIMULAR (FE-09) <span class="section-count"></span></h2>
+  <ul>
+    <li data-id="ca11-simular" class="crit">
+      <input type="checkbox" id="ca11-simular">
+      <div>
+        <label class="label" for="ca11-simular"><span class="repo repo-fe">FE</span><span class="repo repo-api">API</span><strong>CA-11 / CU-06</strong> Continuar → PUT SIMULAR → abre resumen sin persistir</label>
+        <div class="hint">Network: <code>accion=SIMULAR</code> · ficha RM intacta tras cerrar sin confirmar</div>
+      </div>
+    </li>
+    <li data-id="fe09-solo-deltas">
+      <input type="checkbox" id="fe09-solo-deltas">
+      <div>
+        <label class="label" for="fe09-solo-deltas"><span class="repo repo-fe">FE</span><strong>FE-09</strong> Solo bloques con cambio: protocolos, pruebas, parámetros, perfiles, cuestionarios</label>
+        <div class="hint">Ocultar categorías vacías en <code>deltas</code></div>
+      </div>
+    </li>
+    <li data-id="fe09-anadir-quitar">
+      <input type="checkbox" id="fe09-anadir-quitar">
+      <div>
+        <label class="label" for="fe09-anadir-quitar"><span class="repo repo-fe">FE</span>En cada bloque: listas <strong>añadidos</strong> y <strong>eliminados</strong> legibles</label>
+      </div>
+    </li>
+    <li data-id="fe09-periodicidad">
+      <input type="checkbox" id="fe09-periodicidad">
+      <div>
+        <label class="label" for="fe09-periodicidad"><span class="repo repo-fe">FE</span>Delta periodicidad y fecha recomendada (antes → después) si vienen en response</label>
+        <div class="hint"><code>deltas.periodicidad</code> · <code>deltas.fechaRecomendada</code></div>
+      </div>
+    </li>
+    <li data-id="fe09-rl-escenario">
+      <input type="checkbox" id="fe09-rl-escenario">
+      <div>
+        <label class="label" for="fe09-rl-escenario"><span class="repo repo-fe">FE</span>Muestra escenario RL previsto (EDITAR / CREAR / ASOCIAR / SOLO_ADICIONALES) si UX lo incluye</label>
+        <div class="hint"><code>rlEscenario</code> en SIMULAR · textos <code>cambioPuesto.rl.*</code> en guía FE</div>
+      </div>
+    </li>
+    <li data-id="ca14-nota">
+      <input type="checkbox" id="ca14-nota">
+      <div>
+        <label class="label" for="ca14-nota"><span class="repo repo-fe">FE</span><strong>CA-14</strong> Nota fija: pruebas ya cumplimentadas se conservan</label>
+        <div class="hint">i18n: <code>cambioPuesto.resumen.pruebasCumplimentadas</code> · validación BD en checklist backend</div>
+      </div>
+    </li>
+    <li data-id="ca12-cancelar-resumen">
+      <input type="checkbox" id="ca12-cancelar-resumen">
+      <div>
+        <label class="label" for="ca12-cancelar-resumen"><span class="repo repo-fe">FE</span><strong>CA-12</strong> Cancelar en resumen → cierra sin CONFIRMAR ni cambios</label>
+      </div>
+    </li>
+  </ul>
+</section>
+
+<!-- CONFIRMAR -->
+<section>
+  <h2>Confirmar y post-acción (FE-10) <span class="section-count"></span></h2>
+  <ul>
+    <li data-id="ca13-confirmar" class="crit">
+      <input type="checkbox" id="ca13-confirmar">
+      <div>
+        <label class="label" for="ca13-confirmar"><span class="repo repo-fe">FE</span><span class="repo repo-e2e">E2E</span><strong>CA-13 / CU-07</strong> Confirmar → PUT CONFIRMAR → éxito y cierre modal</label>
+        <div class="hint">Response: <code>logId</code> · <code>warnings[]</code> opcional</div>
+      </div>
+    </li>
+    <li data-id="fe10-refresh-ficha">
+      <input type="checkbox" id="fe10-refresh-ficha">
+      <div>
+        <label class="label" for="fe10-refresh-ficha"><span class="repo repo-fe">FE</span><strong>FE-10</strong> Tras OK: refresh ficha RM (cliente, centro, puesto, adicionales)</label>
+      </div>
+    </li>
+    <li data-id="fe10-tab-resultados">
+      <input type="checkbox" id="fe10-tab-resultados">
+      <div>
+        <label class="label" for="fe10-tab-resultados"><span class="repo repo-fe">FE</span>Refresh tab Resultados vía <code>ResultadosService</code> (periodicidad, fecha)</label>
+      </div>
+    </li>
+    <li data-id="fe10-toast-ok">
+      <input type="checkbox" id="fe10-toast-ok">
+      <div>
+        <label class="label" for="fe10-toast-ok"><span class="repo repo-fe">FE</span>Mensaje éxito tras confirmar según <code>rlAccion</code> (toast o equivalente)</label>
+        <div class="hint">i18n: <code>cambioPuesto.confirmar.exito.editada|creada|asociada</code></div>
+      </div>
+    </li>
+    <li data-id="fe10-error-confirmar">
+      <input type="checkbox" id="fe10-error-confirmar">
+      <div>
+        <label class="label" for="fe10-error-confirmar"><span class="repo repo-fe">FE</span>409/502 en CONFIRMAR: modal de error, ficha coherente (no estado UI «éxito»)</label>
+      </div>
+    </li>
+  </ul>
+</section>
+
+<!-- AVISOS -->
+<section>
+  <h2>Avisos CA-15 / CU-11 (FE-11) <span class="section-count"></span></h2>
+  <ul>
+    <li data-id="fe11-lab-comunicado">
+      <input type="checkbox" id="fe11-lab-comunicado">
+      <div>
+        <label class="label" for="fe11-lab-comunicado"><span class="repo repo-fe">FE</span><strong>CA-15 / FE-11</strong> Código <code>laboratorioComunicado</code> → aviso informativo</label>
+        <div class="hint"><strong>No bloquea</strong> Continuar/Confirmar (N1 cerrado) · i18n: <code>cambioPuesto.aviso.laboratorioComunicado</code></div>
+      </div>
+    </li>
+    <li data-id="fe11-cu11-dual">
+      <input type="checkbox" id="fe11-cu11-dual">
+      <div>
+        <label class="label" for="fe11-cu11-dual"><span class="repo repo-fe">FE</span><strong>CU-11</strong> Lab comunicado + nuevos parámetros/perfiles → <code>analiticaComunicadaNuevosParametros</code></label>
+        <div class="hint">Doble aviso: resumen + junto a «Comunicar lab» · i18n: <code>cambioPuesto.aviso.analiticaComunicadaNuevosParametros</code></div>
+      </div>
+    </li>
+    <li data-id="fe11-avisos-impacto">
+      <input type="checkbox" id="fe11-avisos-impacto">
+      <div>
+        <label class="label" for="fe11-avisos-impacto"><span class="repo repo-fe">FE</span>Iconos/textos para <code>protocolosImpacto</code>, <code>analiticaImpacto</code>, <code>periodicidadImpacto</code></label>
+        <div class="hint">SIMULAR <code>avisos[]</code> · textos en <code>Guia_FE_Cambio_Puesto_RM.md</code> § i18n</div>
+      </div>
+    </li>
+    <li data-id="fe11-warnings-confirmar">
+      <input type="checkbox" id="fe11-warnings-confirmar">
+      <div>
+        <label class="label" for="fe11-warnings-confirmar"><span class="repo repo-fe">FE</span>CONFIRMAR: muestra <code>warnings[]</code> de respuesta si vienen</label>
+      </div>
+    </li>
+  </ul>
+</section>
+
+<!-- E2E UI ESCENARIOS -->
+<section>
+  <h2>Flujos E2E en UI por escenario RL <span class="section-count"></span></h2>
+  <ul>
+    <li data-id="e2e-editar">
+      <input type="checkbox" id="e2e-editar">
+      <div>
+        <label class="label" for="e2e-editar"><span class="repo repo-e2e">E2E</span><strong>EDITAR</strong> — Mismo cli/cen, otro puesto principal</label>
+        <div class="hint"><span class="tag-ok">Ref. backend</span> rmId=12341907 · UI completa modal → resumen → confirmar</div>
+      </div>
+    </li>
+    <li data-id="e2e-solo-adic">
+      <input type="checkbox" id="e2e-solo-adic">
+      <div>
+        <label class="label" for="e2e-solo-adic"><span class="repo repo-e2e">E2E</span><strong>SOLO_ADICIONALES</strong> — Mismo principal, cambian chips adicionales</label>
+      </div>
+    </li>
+    <li data-id="e2e-crear">
+      <input type="checkbox" id="e2e-crear">
+      <div>
+        <label class="label" for="e2e-crear"><span class="repo repo-e2e">E2E</span><strong>CREAR</strong> — Cambio de centro/cliente sin RL destino</label>
+        <div class="hint"><span class="tag-ok">Ref. backend</span> logId=10 · ficha muestra nuevo cli/cen/puesto</div>
+      </div>
+    </li>
+    <li data-id="e2e-asociar-simular">
+      <input type="checkbox" id="e2e-asociar-simular">
+      <div>
+        <label class="label" for="e2e-asociar-simular"><span class="repo repo-e2e">E2E</span><strong>ASOCIAR</strong> — SIMULAR OK en UI (resumen con rlEscenario=ASOCIAR)</label>
+      </div>
+    </li>
+    <li data-id="e2e-asociar-confirmar" class="blocked">
+      <input type="checkbox" id="e2e-asociar-confirmar">
+      <div>
+        <label class="label" for="e2e-asociar-confirmar"><span class="repo repo-block">BLOQ</span><strong>ASOCIAR CONFIRMAR</strong> — E2E completo</label>
+        <div class="hint"><span class="tag-warn">BUG-01 Vitaly</span> destino con 2+ contratos PVS (ej. cli 280/cen 1) · pendiente fix rrmm-utils</div>
+      </div>
+    </li>
+    <li data-id="e2e-bloquear-ui">
+      <input type="checkbox" id="e2e-bloquear-ui">
+      <div>
+        <label class="label" for="e2e-bloquear-ui"><span class="repo repo-e2e">E2E</span><strong>BLOQUEAR</strong> — UI muestra bloqueo (sin resumen)</label>
+        <div class="hint">Sin RL origen · varias RL · mensajeFuncional visible</div>
+      </div>
+    </li>
+  </ul>
+</section>
+
+<!-- INTEGRACION API -->
+<section>
+  <h2>Contrato API desde UI (smoke DevTools) <span class="section-count"></span></h2>
+  <ul>
+    <li data-id="api-clientes"><input type="checkbox" id="api-clientes"><div><label class="label" for="api-clientes"><span class="repo repo-api">API</span>GET <code>/rm/cambio-puesto/clientes?q=</code></label></div></li>
+    <li data-id="api-centros"><input type="checkbox" id="api-centros"><div><label class="label" for="api-centros"><span class="repo repo-api">API</span>GET <code>/rm/cambio-puesto/centros?clienteId=</code></label></div></li>
+    <li data-id="api-puestos"><input type="checkbox" id="api-puestos"><div><label class="label" for="api-puestos"><span class="repo repo-api">API</span>GET <code>/rm/cambio-puesto/puestos/{cli}/{cen}?rmId=</code></label></div></li>
+    <li data-id="api-estandar"><input type="checkbox" id="api-estandar"><div><label class="label" for="api-estandar"><span class="repo repo-api">API</span>GET <code>/rm/cambio-puesto/puestos/{cli}/{cen}/estandar?criterio=</code></label></div></li>
+    <li data-id="api-simular"><input type="checkbox" id="api-simular"><div><label class="label" for="api-simular"><span class="repo repo-api">API</span>PUT <code>/rm/{rmId}/cambiar-puesto</code> accion=SIMULAR — body completo</label><div class="hint">clienteId, centroId, puestoId, estandar, tipoPuesto, puestosAdicionales</div></div></li>
+    <li data-id="api-confirmar"><input type="checkbox" id="api-confirmar"><div><label class="label" for="api-confirmar"><span class="repo repo-api">API</span>PUT accion=CONFIRMAR — mismo body que SIMULAR previo</label></div></li>
+    <li data-id="api-jwt"><input type="checkbox" id="api-jwt"><div><label class="label" for="api-jwt"><span class="repo repo-api">API</span>Todas las llamadas llevan JWT (mismo patrón que resto rrmm-frontend)</label></div></li>
+  </ul>
+</section>
+
+<!-- CALIDAD -->
+<section>
+  <h2>Calidad UI (FE-13) y opcional <span class="section-count"></span></h2>
+  <ul>
+    <li data-id="fe13-i18n">
+      <input type="checkbox" id="fe13-i18n">
+      <div>
+        <label class="label" for="fe13-i18n"><span class="repo repo-fe">FE</span><strong>FE-13</strong> Textos en i18n (es como mínimo; en/ca si aplica)</label>
+        <div class="hint">Copiar bloque JSON de <code>Guia_FE_Cambio_Puesto_RM.md</code> → <code>cambioPuesto.*</code></div>
+      </div>
+    </li>
+    <li data-id="fe13-responsive">
+      <input type="checkbox" id="fe13-responsive">
+      <div>
+        <label class="label" for="fe13-responsive"><span class="repo repo-fe">FE</span>Modal usable en resolución estándar (1366×768) sin cortes críticos</label>
+      </div>
+    </li>
+    <li data-id="fe13-a11y">
+      <input type="checkbox" id="fe13-a11y">
+      <div>
+        <label class="label" for="fe13-a11y"><span class="repo repo-fe">FE</span>Focus trap en modal · Esc cierra · labels en controles clave</label>
+      </div>
+    </li>
+    <li data-id="fe12-alt">
+      <input type="checkbox" id="fe12-alt">
+      <div>
+        <label class="label" for="fe12-alt"><span class="repo repo-fe">FE</span><strong>FE-12</strong> Flujo alternativo §6.2 — actualizar protocolos sin cambio puesto</label>
+        <div class="hint">Opcional sprint 2 · solo si FE lo implementa</div>
+      </div>
+    </li>
+    <li data-id="fe14-checklist">
+      <input type="checkbox" id="fe14-checklist">
+      <div>
+        <label class="label" for="fe14-checklist"><span class="repo repo-fe">FE</span><strong>FE-14</strong> Cobertura CA-01..CA-17 en UI — defectos registrados y re-test</label>
+        <div class="hint">Esta checklist + incidencias enlazadas a Monday/Jira</div>
+      </div>
+    </li>
+    <li data-id="fe15-karma">
+      <input type="checkbox" id="fe15-karma">
+      <div>
+        <label class="label" for="fe15-karma"><span class="repo repo-fe">FE</span><strong>FE-15</strong> Tests Karma/Jasmine modal + resumen (si entregados)</label>
+      </div>
+    </li>
+  </ul>
+</section>
+
+<section>
+  <h2>Notas de sesión</h2>
+  <div style="padding: 1rem;">
+    <textarea id="sessionNotes" placeholder="rmId, build FE, incidencias UX, capturas…">Entorno: demo · rrmm-frontend rama: _____ · BE: feature/Cambio-puesto-sprint-1
+
+Orden sugerido QA FE:
+1. Acceso CA-01 + regresión CA-16
+2. Modal FE-03..FE-07 (navegación sin confirmar)
+3. SIMULAR + resumen FE-09
+4. CONFIRMAR + refresh FE-10
+5. Avisos FE-11
+6. E2E por escenario (excepto ASOCIAR CONFIRMAR → BUG-01)
+
+Pendiente Vitaly (no bloquea resto FE salvo ASOCIAR confirmar):
+- BUG-01 getCentroClienteMp2 multi-PVS
+- BUG-02 protocolos huérfanos (workaround backend activo)</textarea>
+  </div>
+</section>
+
+<footer>Progreso embebido en <code>qa-embedded-state</code> + localStorage · Jul 2026 · <code>Guia_FE_Cambio_Puesto_RM.md</code></footer>
+
+<script type="application/json" id="qa-embedded-state">
+{
+  "revision": 1,
+  "updatedAt": "2026-07-06",
+  "tester": "",
+  "checked": [],
+  "nextItems": [
+    "fe01-build", "fe02-ca01", "fe03-abre", "ca03-cabecera", "ca04-min-chars", "ca06-tabla",
+    "ca07-desplegado", "ca08-radio", "ca11-simular", "fe09-solo-deltas", "ca14-nota"
+  ]
+}
+</script>
+
+<script>
+  const STORAGE_KEY = 'qa_cambio_puesto_rm_frontend_v1';
+  const EMBEDDED = JSON.parse(document.getElementById('qa-embedded-state').textContent.trim());
+
+  function loadState() {
+    let local = {};
+    try { local = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch { local = {}; }
+    if ((local.revision || 0) >= (EMBEDDED.revision || 1) && local.checked) return local;
+    const checked = {};
+    (EMBEDDED.checked || []).forEach(id => { checked[id] = true; });
+    return { revision: EMBEDDED.revision, tester: EMBEDDED.tester || '', notes: null, checked };
+  }
+
+  function saveState(s) {
+    s.revision = s.revision || EMBEDDED.revision;
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(s));
+  }
+
+  function buildEmbeddedPayload() {
+    return {
+      revision: (state.revision || EMBEDDED.revision) + 1,
+      updatedAt: new Date().toISOString().slice(0, 10),
+      tester: tester.value,
+      checked: [...checkboxes].filter(c => c.checked).map(c => c.id),
+      nextItems: EMBEDDED.nextItems || []
+    };
+  }
+
+  const state = loadState();
+  const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+  const notes = document.getElementById('sessionNotes');
+  const tester = document.getElementById('testerName');
+
+  checkboxes.forEach(cb => {
+    if (state.checked?.[cb.id]) cb.checked = true;
+    cb.addEventListener('change', () => {
+      state.checked = state.checked || {};
+      state.checked[cb.id] = cb.checked;
+      saveState(state);
+      updateUI();
+    });
+  });
+
+  if (state.notes) notes.value = state.notes;
+  if (state.tester) tester.value = state.tester;
+  notes.addEventListener('input', () => { state.notes = notes.value; saveState(state); });
+  tester.addEventListener('input', () => { state.tester = tester.value; saveState(state); });
+
+  function updateUI() {
+    const total = checkboxes.length;
+    const done = [...checkboxes].filter(c => c.checked).length;
+    const pct = total ? Math.round((done / total) * 100) : 0;
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('progressText').textContent =
+      done + ' / ' + total + ' completados (' + pct + '%)';
+    document.querySelectorAll('li[data-id]').forEach(li => {
+      const cb = li.querySelector('input[type="checkbox"]');
+      li.classList.toggle('done', cb?.checked);
+    });
+    document.querySelectorAll('.section-count').forEach(el => {
+      const cbs = el.closest('section').querySelectorAll('input[type="checkbox"]');
+      const d = [...cbs].filter(c => c.checked).length;
+      el.textContent = d + ' / ' + cbs.length;
+    });
+  }
+
+  document.getElementById('btnReset').addEventListener('click', () => {
+    if (!confirm('¿Resetear progreso local?')) return;
+    localStorage.removeItem(STORAGE_KEY);
+    location.reload();
+  });
+
+  document.getElementById('btnExport').addEventListener('click', () => {
+    const data = {
+      exportedAt: new Date().toISOString(),
+      scope: 'frontend-only',
+      tester: tester.value,
+      notes: notes.value,
+      completed: [...checkboxes].filter(c => c.checked).map(c => c.id),
+      total: checkboxes.length,
+      revision: state.revision || EMBEDDED.revision
+    };
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([JSON.stringify(data, null, 2)]));
+    a.download = 'qa-frontend-cambio-puesto-' + new Date().toISOString().slice(0, 10) + '.json';
+    a.click();
+  });
+
+  document.getElementById('btnCopyEmbedded').addEventListener('click', async () => {
+    const block = JSON.stringify(buildEmbeddedPayload(), null, 2);
+    try {
+      await navigator.clipboard.writeText(block);
+      alert('Estado copiado. Pega en qa-embedded-state y guarda el HTML.');
+    } catch {
+      prompt('Copia este JSON:', block);
+    }
+  });
+
+  updateUI();
+</script>
+</body>
+</html>

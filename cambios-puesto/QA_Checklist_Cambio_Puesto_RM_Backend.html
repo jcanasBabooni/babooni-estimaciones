@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QA Backend — Cambio de puesto RM</title>
+  <style>
+    :root {
+      --bg: #f4f6f8;
+      --card: #fff;
+      --border: #dde3ea;
+      --text: #1a2332;
+      --muted: #5c6b7a;
+      --accent: #2563eb;
+      --ok: #059669;
+    }
+    * { box-sizing: border-box; }
+    body {
+      font-family: "Segoe UI", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 1.5rem;
+      line-height: 1.45;
+    }
+    header { max-width: 960px; margin: 0 auto 1.5rem; }
+    h1 { font-size: 1.5rem; margin: 0 0 .25rem; }
+    .subtitle { color: var(--muted); font-size: .9rem; margin-bottom: 1rem; }
+    .toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .75rem;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+    .progress-wrap { flex: 1; min-width: 200px; }
+    .progress-bar {
+      height: 8px;
+      background: var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .progress-fill {
+      height: 100%;
+      background: var(--ok);
+      width: 0%;
+      transition: width .3s;
+    }
+    .progress-text { font-size: .85rem; color: var(--muted); margin-top: .35rem; }
+    button {
+      border: 1px solid var(--border);
+      background: var(--card);
+      padding: .45rem .85rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: .85rem;
+    }
+    button:hover { border-color: var(--accent); color: var(--accent); }
+    button.danger:hover { border-color: #dc2626; color: #dc2626; }
+    .tester { display: flex; gap: .5rem; align-items: center; font-size: .85rem; }
+    .tester input {
+      padding: .4rem .6rem;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      width: 180px;
+    }
+    section {
+      max-width: 960px;
+      margin: 0 auto 1.25rem;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    section h2 {
+      margin: 0;
+      padding: .85rem 1rem;
+      font-size: 1rem;
+      background: #eef2f7;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .section-count { font-weight: normal; color: var(--muted); font-size: .85rem; }
+    .repo {
+      font-size: .7rem;
+      font-weight: 600;
+      padding: .15rem .45rem;
+      border-radius: 4px;
+      margin-right: .35rem;
+    }
+    .repo-be { background: #dbeafe; color: #1d4ed8; }
+    .repo-pb { background: #ede9fe; color: #6d28d9; }
+    .repo-ut { background: #ffedd5; color: #c2410c; }
+    ul { list-style: none; margin: 0; padding: 0; }
+    li {
+      border-bottom: 1px solid var(--border);
+      padding: .65rem 1rem;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: .65rem;
+      align-items: start;
+    }
+    li:last-child { border-bottom: none; }
+    li.done { background: #f0fdf4; }
+    li.done .label { text-decoration: line-through; color: var(--muted); }
+    input[type="checkbox"] {
+      width: 18px; height: 18px; margin-top: 2px;
+      cursor: pointer; accent-color: var(--ok);
+    }
+    .label { font-size: .92rem; }
+    .label strong { color: var(--accent); }
+    .hint { font-size: .8rem; color: var(--muted); margin-top: .25rem; }
+    .tag-ok { color: var(--ok); font-weight: 600; font-size: .75rem; }
+    notes textarea {
+      width: 100%; min-height: 80px; margin-top: .5rem;
+      padding: .5rem; border: 1px solid var(--border);
+      border-radius: 6px; font-family: inherit; font-size: .85rem;
+    }
+    footer {
+      max-width: 960px; margin: 1rem auto;
+      font-size: .8rem; color: var(--muted); text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Checklist QA Backend — Cambio de puesto RM</h1>
+  <p class="subtitle">rrmm-backend · puestos-back · rrmm-utils · API + BD (sin pruebas de frontend)</p>
+  <div class="toolbar">
+    <div class="progress-wrap">
+      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+      <div class="progress-text" id="progressText">0 / 0 completados (0%)</div>
+    </div>
+    <div class="tester">
+      <label for="testerName">Tester:</label>
+      <input type="text" id="testerName" placeholder="Tu nombre">
+    </div>
+    <button type="button" id="btnExport">Exportar JSON</button>
+    <button type="button" id="btnCopyEmbedded">Copiar estado (guardar en HTML)</button>
+    <button type="button" class="danger" id="btnReset">Resetear</button>
+  </div>
+</header>
+
+<!-- ESCENARIOS RL -->
+<section>
+  <h2>Escenarios RL — CONFIRMAR E2E <span class="section-count"></span></h2>
+  <ul>
+    <li data-id="rl-editar">
+      <input type="checkbox" id="rl-editar" checked>
+      <div>
+        <label class="label" for="rl-editar"><span class="repo repo-be">BE</span><span class="repo repo-pb">PB</span><strong>EDITAR</strong> — Mismo cli/cen, cambia puesto principal</label>
+        <div class="hint"><span class="tag-ok">✓ rmId=12341907</span> · RL 4782157→4782187 · query resumen 5/5 OK</div>
+      </div>
+    </li>
+    <li data-id="rl-solo-adic">
+      <input type="checkbox" id="rl-solo-adic" checked>
+      <div>
+        <label class="label" for="rl-solo-adic"><span class="repo repo-be">BE</span><span class="repo repo-pb">PB</span><strong>SOLO_ADICIONALES</strong> — Mismo puesto, cambian adicionales</label>
+        <div class="hint"><span class="tag-ok">✓ rmId=12341907</span> · RL 4782422 · rlAccion=EDITADA · <strong>CONFIRMAR E2E 11:36:19</strong> · logId=<strong>34589899</strong> · escenario SOLO_ADICIONALES</div>
+      </div>
+    </li>
+    <li data-id="rl-crear">
+      <input type="checkbox" id="rl-crear" checked>
+      <div>
+        <label class="label" for="rl-crear"><span class="repo repo-be">BE</span><span class="repo repo-pb">PB</span><strong>CREAR</strong> — Cambio centro/cliente sin RL destino</label>
+        <div class="hint"><span class="tag-ok">✓ rmId=12341907</span> · cen 598076→370960 · RL 4782283→4782284 · rlAccion=CREADA · logId=10 · E2E 13:54 · protocolos 6→1</div>
+      </div>
+    </li>
+    <li data-id="rl-asociar">
+      <input type="checkbox" id="rl-asociar" checked>
+      <div>
+        <label class="label" for="rl-asociar"><span class="repo repo-be">BE</span><span class="repo repo-pb">PB</span><strong>ASOCIAR</strong> — RL destino ya existente</label>
+        <div class="hint"><span class="tag-ok">✓ resolución rmId=12341907</span> · SIMULAR V07 ASOCIAR rlOrigen=4782284 rlDestino=4772402 · rlAccion=ASOCIADA · <strong style="color:#c2410c">CONFIRMAR E2E bloqueado por BUG-01 (rrmm-utils, ajeno al cambio de puesto)</strong></div>
+      </div>
+    </li>
+    <li data-id="rl-bloq-sin-origen">
+      <input type="checkbox" id="rl-bloq-sin-origen" checked>
+      <div>
+        <label class="label" for="rl-bloq-sin-origen"><span class="repo repo-be">BE</span><strong>BLOQUEAR</strong> — Sin RL origen</label>
+        <div class="hint"><span class="tag-ok">✓ rmId=12351907</span> · tra=1376458 sin RL 355360/242280 · SIMULAR bloqueante 17:56 · puesto 491453→770572 · CONFIRMAR 409 pendiente opcional</div>
+      </div>
+    </li>
+    <li data-id="rl-bloq-varias">
+      <input type="checkbox" id="rl-bloq-varias" checked>
+      <div>
+        <label class="label" for="rl-bloq-varias"><span class="repo repo-be">BE</span><strong>BLOQUEAR</strong> — Varias RL activas origen/destino</label>
+        <div class="hint"><span class="tag-ok">✓ N/A E2E demo</span> · 1850 grupos dup en BD · 0 RM pendiente alineado (1A/1B) · lógica OK en <code>CambioPuestoRlOrchestratorTest</code></div>
+      </div>
+    </li>
+  </ul>
+</section>
+
+<!-- SIMULAR vs CONFIRMAR -->
+<section>
+  <h2>Flujo SIMULAR / CONFIRMAR <span class="section-count"></span></h2>
+  <ul>
+    <li data-id="sim-no-persiste">
+      <input type="checkbox" id="sim-no-persiste" checked>
+      <div>
+        <label class="label" for="sim-no-persiste"><span class="repo repo-be">BE</span><strong>CA-11</strong> SIMULAR no persiste (INF_RM, PPT_CEN_TRA, INF3_* sin cambios)</label>
+        <div class="hint"><span class="tag-ok">✓</span> rmId=12351907 bloqueante · log «SIMULAR bloqueante (sin persistir)» · sin P1/applier/puestos-back</div>
+      </div>
+    </li>
+    <li data-id="sim-deltas">
+      <input type="checkbox" id="sim-deltas" checked>
+      <div>
+        <label class="label" for="sim-deltas"><span class="repo repo-be">BE</span><span class="repo repo-ut">UTILS</span>SIMULAR devuelve deltas protocolos/pruebas/cuestionarios/parámetros</label>
+        <div class="hint"><span class="tag-ok">✓ rmId=12339235</span> · EDITAR · P1 OK · deltas protocolos/pruebas/parámetros/perfiles/cuestionarios + periodicidad/fecha</div>
+      </div>
+    </li>
+    <li data-id="conf-persiste">
+      <input type="checkbox" id="conf-persiste" checked>
+      <div>
+        <label class="label" for="conf-persiste"><span class="repo repo-be">BE</span><strong>CA-13</strong> CONFIRMAR persiste INF_RM + INF3_* + RL + log</label>
+        <div class="hint"><span class="tag-ok">✓ EDITAR</span> · <span class="tag-ok">✓ SOLO_ADICIONALES</span> · <span class="tag-ok">✓ rmId=328713</span> post-fix ORA-00932 · logId=34589917 · rlId=4801293 EDITADA · 13:xx</div>
+      </div>
+    </li>
+    <li data-id="conf-revalida">
+      <input type="checkbox" id="conf-revalida" checked>
+      <div>
+        <label class="label" for="conf-revalida"><span class="repo repo-be">BE</span>Revalidación V02 PENDIENTE antes de mutar RL (concurrencia)</label>
+        <div class="hint"><span class="tag-ok">✓ conf-revalida</span> · <span class="tag-ok">✓ CambioPuestoServiceImplTest</span> BE-10: 2ª checkEstadoLog≠8 → Forbidden · E2E carrera no reproducida (OK técnico en candidatos)</div>
+      </div>
+    </li>
+    <li data-id="conf-fecha-prox">
+      <input type="checkbox" id="conf-fecha-prox" checked>
+      <div>
+        <label class="label" for="conf-fecha-prox"><span class="repo repo-be">BE</span><strong>RF §7.5</strong> CONFIRMAR persiste FECHA_PROXIMO_RECONOCIMIENTO (RM_FCH_RM + meses periodicidad applier)</label>
+        <div class="hint"><span class="tag-ok">✓ rmId=12341907</span> · fechaRm=27-03-2024 + 36 meses → <strong>27-03-2027</strong> · 11:36:18</div>
+      </div>
+    </li>
+  </ul>
+</section>
+
+<!-- VALIDACIONES -->
+<section>
+  <h2>Validaciones API <span class="section-count"></span></h2>
+  <ul>
+    <li data-id="v01"><input type="checkbox" id="v01" checked><div><label class="label" for="v01"><span class="repo repo-be">BE</span><strong>V01</strong> Request inválido → 422</label><div class="hint"><span class="tag-ok">✓</span> puestoId=0 · 12:00 · customMessage cliente/centro/puesto</div></div></li>
+    <li data-id="v02"><input type="checkbox" id="v02" checked><div><label class="label" for="v02"><span class="repo repo-be">BE</span><strong>V02 / CA-02</strong> RM no pendiente → 403</label><div class="hint"><span class="tag-ok">✓</span> Validado usuario · 403 · «ya no está pendiente» · log V02_RM_PENDIENTE KO</div></div></li>
+    <li data-id="v03"><input type="checkbox" id="v03" checked><div><label class="label" for="v03"><span class="repo repo-be">BE</span><strong>V03</strong> Centro sin contrato PVS → bloqueo</label><div class="hint"><span class="tag-ok">✓</span> 422 · customMessage «no tiene contrato PVS activo» · code 1001 · 12:14</div></div></li>
+    <li data-id="v05"><input type="checkbox" id="v05" checked><div><label class="label" for="v05"><span class="repo repo-be">BE</span><strong>V05</strong> Sin JWT → 401</label><div class="hint"><span class="tag-ok">✓</span> PUT cambiar-puesto sin Authorization · 12:00:09</div></div></li>
+    <li data-id="v06"><input type="checkbox" id="v06" checked><div><label class="label" for="v06"><span class="repo repo-be">BE</span><span class="repo repo-pb">PB</span><strong>V06 OK técnico</strong> → 409, no muta RL</label><div class="hint"><span class="tag-ok">✓ pb-oktec</span> rlId=<strong>1154</strong> cli/cen 211/1 · puesto centro 635830 · OK_TECNICO=1 · PT contratada · 409 · RL sin cambios · 13:26</div></div></li>
+    <li data-id="v07-conc"><input type="checkbox" id="v07-conc" checked><div><label class="label" for="v07-conc"><span class="repo repo-be">BE</span><strong>V07</strong> RM deja pendiente mid-flight → 403</label><div class="hint"><span class="tag-ok">✓ Aceptado</span> · unit test <code>confirmar_revalidaPendienteAntesDeMutar</code> · V02 inicial OK + revalidación KO → 403 · E2E manual no ejecutado (candidatos OK técnico)</div></div></li>
+    <li data-id="v08"><input type="checkbox" id="v08" checked><div><label class="label" for="v08"><span class="repo repo-be">BE</span><strong>V08 / CA-04-05</strong> GET clientes (&lt;3 chars / ≥3 / CIF)</label><div class="hint"><span class="tag-ok">✓</span> q=ab→422 · q=pre→200 · CIF→200</div></div></li>
+    <li data-id="v09"><input type="checkbox" id="v09" checked><div><label class="label" for="v09"><span class="repo repo-be">BE</span><strong>V09</strong> GET centros — clienteId inválido → 422</label><div class="hint"><span class="tag-ok">✓</span> clienteId=0→422 · clienteId=234783→200</div></div></li>
+    <li data-id="v10"><input type="checkbox" id="v10" checked><div><label class="label" for="v10"><span class="repo repo-be">BE</span><strong>V10</strong> GET catálogo puestos — parámetros inválidos</label><div class="hint"><span class="tag-ok">✓</span> rmId/cli/cen KO→422 · 234783/370960 rmId=12341907→200</div></div></li>
+    <li data-id="v13-acl"><input type="checkbox" id="v13-acl" checked><div><label class="label" for="v13-acl"><span class="repo repo-be">BE</span><strong>V13 ACL CONFIRMAR</strong> sin CAMBIAR_PUESTO_RM → 403</label><div class="hint"><span class="tag-ok">✓</span> Validado en implementación · positivo 155527 OK · negativo 403</div></div></li>
+    <li data-id="v13-acl-simular"><input type="checkbox" id="v13-acl-simular" checked><div><label class="label" for="v13-acl-simular"><span class="repo repo-be">BE</span><strong>V13 ACL SIMULAR</strong> sin CAMBIAR_PUESTO_RM → 403</label><div class="hint"><span class="tag-ok">✓</span> Validado en implementación (§7.7 ACL también en SIMULAR)</div></div></li>
+  </ul>
+</section>
+
+<!-- AVISOS -->
+<section>
+  <h2>Avisos / warnings <span class="section-count"></span></h2>
+  <ul>
+    <li data-id="ca15">
+      <input type="checkbox" id="ca15" checked>
+      <div>
+        <label class="label" for="ca15"><span class="repo repo-be">BE</span><strong>CA-15</strong> Lab comunicado → warning laboratorioComunicado (no bloquea)</label>
+        <div class="hint"><span class="tag-ok">✓ rmId=12339235</span> · SIMULAR EDITAR · bloqueante=false · aviso presente</div>
+      </div>
+    </li>
+    <li data-id="cu11">
+      <input type="checkbox" id="cu11" checked>
+      <div>
+        <label class="label" for="cu11"><span class="repo repo-be">BE</span><strong>CU-11</strong> Lab comunicado + parámetros/perfiles añadidos → doble warning</label>
+        <div class="hint"><span class="tag-ok">✓ rmId=12339235</span> · laboratorioComunicado + analiticaComunicadaNuevosParametros · delta param añadido «INDICE DE RIESGO LDL/HDL»</div>
+      </div>
+    </li>
+  </ul>
+</section>
+
+<!-- CA-14 CA-17 -->
+<section>
+  <h2>Seguridad clínica y trazabilidad <span class="section-count"></span></h2>
+  <ul>
+    <li data-id="ca14">
+      <input type="checkbox" id="ca14" checked>
+      <div>
+        <label class="label" for="ca14"><span class="repo repo-ut">UTILS</span><span class="repo repo-be">BE</span><strong>CA-14</strong> Pruebas cumplimentadas se mantienen (INF2_RM_VALORES intacto)</label>
+        <div class="hint"><span class="tag-ok">✓ rmId=12341907</span> · <strong>139</strong> cumplimentadas (CREADO IS NOT NULL) tras CONFIRMAR · applier conservadasCa14=0 · escenario SOLO_ADICIONALES · sin borrado INF2</div>
+      </div>
+    </li>
+    <li data-id="ca17">
+      <input type="checkbox" id="ca17" checked>
+      <div>
+        <label class="label" for="ca17"><span class="repo repo-be">BE</span><strong>CA-17</strong> Log INF4_RM_LOG_CAMBIO_PUESTO completo</label>
+        <div class="hint"><span class="tag-ok">✓ logId=34589899</span> · rmId=12341907 · 11:36:18–19 · ESTADO_ID=36 · JSON compacto (fix BUG-04 ORA-12899)</div>
+      </div>
+    </li>
+  </ul>
+</section>
+
+<!-- rrmm-backend endpoints -->
+<section>
+  <h2>rrmm-backend — endpoints <span class="section-count"></span></h2>
+  <ul>
+    <li data-id="ep-put"><input type="checkbox" id="ep-put" checked><div><label class="label" for="ep-put"><span class="repo repo-be">BE</span>PUT /rm/{rmId}/cambiar-puesto (SIMULAR + CONFIRMAR)</label><div class="hint"><span class="tag-ok">✓ CONFIRMAR SOLO_ADIC</span> · 200 logId=<strong>34589899</strong> · ~14 s (11:36:05→19)</div></div></li>
+    <li data-id="ep-cli"><input type="checkbox" id="ep-cli" checked><div><label class="label" for="ep-cli"><span class="repo repo-be">BE</span>GET /rm/cambio-puesto/clientes</label><div class="hint"><span class="tag-ok">✓ V08</span> q=pre / CIF / validación ab</div></div></li>
+    <li data-id="ep-cen"><input type="checkbox" id="ep-cen" checked><div><label class="label" for="ep-cen"><span class="repo repo-be">BE</span>GET /rm/cambio-puesto/centros</label><div class="hint"><span class="tag-ok">✓ V09</span> clienteId=234783</div></div></li>
+    <li data-id="ep-puestos"><input type="checkbox" id="ep-puestos" checked><div><label class="label" for="ep-puestos"><span class="repo repo-be">BE</span>GET /rm/cambio-puesto/puestos/{cli}/{cen}?rmId=</label><div class="hint"><span class="tag-ok">✓ V10</span> 234783/370960 rmId=12341907</div></div></li>
+  </ul>
+</section>
+
+<!-- puestos-back -->
+<section>
+  <h2>puestos-back <span class="section-count"></span></h2>
+  <ul>
+    <li data-id="pb-cambiar"><input type="checkbox" id="pb-cambiar" checked><div><label class="label" for="pb-cambiar"><span class="repo repo-pb">PB</span>POST /puestos/{rlId}/cambiar-puesto — EDITAR</label><div class="hint"><span class="tag-ok">✓</span></div></div></li>
+    <li data-id="pb-crear"><input type="checkbox" id="pb-crear" checked><div><label class="label" for="pb-crear"><span class="repo repo-pb">PB</span>POST cambiar-puesto — CREAR</label><div class="hint"><span class="tag-ok">✓ rlId=4782283 → newRlId=4782284</span> · baja+alta · accion=CREADA · clienteOverride=null</div></div></li>
+    <li data-id="pb-solo-adic"><input type="checkbox" id="pb-solo-adic" checked><div><label class="label" for="pb-solo-adic"><span class="repo repo-pb">PB</span>POST cambiar-puesto — soloAdicionales=true</label><div class="hint"><span class="tag-ok">✓ rlId=4782422</span> · soloAdicionales accion=EDITADA adicionales=1 · 11:36:19</div></div></li>
+    <li data-id="pb-oktec"><input type="checkbox" id="pb-oktec" checked><div><label class="label" for="pb-oktec"><span class="repo repo-pb">PB</span>POST cambiar-puesto — OK técnico → 409</label><div class="hint"><span class="tag-ok">✓ rlId=1154</span> · 409 · error «Puesto con OK técnico…» · log PuestosController rechazado · PPT_CEN_TRA intacta</div></div></li>
+    <li data-id="pb-catalogo"><input type="checkbox" id="pb-catalogo" checked><div><label class="label" for="pb-catalogo"><span class="repo repo-pb">PB</span>GET /puestos/catalogo-cambio-rm/{cli}/{cen}</label><div class="hint"><span class="tag-ok">✓ V10</span> proxy BE → 234783/370960 rmId=12341907 · catálogo prevención/vigilancia/estándar</div></div></li>
+  </ul>
+</section>
+
+<!-- rrmm-utils -->
+<section>
+  <h2>rrmm-utils <span class="section-count"></span></h2>
+  <ul>
+    <li data-id="utils-p1"><input type="checkbox" id="utils-p1" checked><div><label class="label" for="utils-p1"><span class="repo repo-ut">UTILS</span>POST /rrmm/protocolos/recalcular (P1 dry-run)</label><div class="hint"><span class="tag-ok">✓ sim-deltas</span> rmId=12339235 · V06_P1 OK · protocolos 19→1 pruebas 25→24 · SOLO_ADIC V06_P1_SOLO_ADIC sin llamada</div></div></li>
+    <li data-id="utils-aplicar"><input type="checkbox" id="utils-aplicar" checked><div><label class="label" for="utils-aplicar"><span class="repo repo-ut">UTILS</span>POST /rrmm/protocolos/aplicar — INF3_*</label><div class="hint"><span class="tag-ok">✓ rmId=12341907</span> · 1/50/2 · conservadasCa14=0 · ~11 s · 11:36:18</div></div></li>
+    <li data-id="utils-solo-adic"><input type="checkbox" id="utils-solo-adic" checked><div><label class="label" for="utils-solo-adic"><span class="repo repo-be">BE</span><span class="repo repo-ut">UTILS</span>SOLO_ADICIONALES sin cambio adicionales → no llama P1</label><div class="hint"><span class="tag-ok">✓ V06_P1_SOLO_ADIC OK</span> · "sin cambio adicionales propuesto=actual"</div></div></li>
+  </ul>
+</section>
+
+<!-- BD -->
+<section>
+  <h2>Verificación BD post-CONFIRMAR <span class="section-count"></span></h2>
+  <ul>
+    <li data-id="bd-rl"><input type="checkbox" id="bd-rl" checked><div><label class="label" for="bd-rl">PPT_CEN_TRA — baja antigua + alta nueva (o misma RL si SOLO_ADICIONALES)</label><div class="hint"><span class="tag-ok">✓ SOLO_ADIC</span> misma RL <strong>4782422</strong> · 11:36:19</div></div></li>
+    <li data-id="bd-inf-rm"><input type="checkbox" id="bd-inf-rm" checked><div><label class="label" for="bd-inf-rm">INF_RM — RM_PTR_ID, cli/cen, ACP_ID, PERIODICIDAD_ID</label><div class="hint"><span class="tag-ok">✓</span> puesto=551049 · acpId=51514 · periodicidadId=6 · fechaProx=27-03-2027</div></div></li>
+    <li data-id="bd-inf3"><input type="checkbox" id="bd-inf3" checked><div><label class="label" for="bd-inf3">INF3_RM_* — conteos protocolos/pruebas/cuestionarios</label><div class="hint"><span class="tag-ok">✓ 1/50/2</span> · applier 11:36:18</div></div></li>
+    <li data-id="bd-adic"><input type="checkbox" id="bd-adic" checked><div><label class="label" for="bd-adic">INF_RM_PTOS_ADICIONALES — sync adicionales RM</label><div class="hint"><span class="tag-ok">✓</span> count=1 · 11:36:07</div></div></li>
+    <li data-id="bd-log"><input type="checkbox" id="bd-log" checked><div><label class="label" for="bd-log">INF4_RM_LOG_CAMBIO_PUESTO — query resumen 5 checks OK</label><div class="hint"><span class="tag-ok">✓ logId=34589899</span> · ESTADO_ID=36 · 11:36:18</div></div></li>
+    <li data-id="bd-fecha-prox"><input type="checkbox" id="bd-fecha-prox" checked><div><label class="label" for="bd-fecha-prox">INF_RM.FECHA_PROXIMO_RECONOCIMIENTO — coherente con §7.5 tras CONFIRMAR</label><div class="hint"><span class="tag-ok">✓ rmId=12341907</span> · 27-03-2027 (RM_FCH_RM 27-03-2024 + 36 meses)</div></div></li>
+  </ul>
+</section>
+
+<section>
+  <h2>Notas</h2>
+  <div style="padding: 1rem;">
+    <textarea id="sessionNotes" placeholder="rmIds, incidencias, resultados SQL…">2026-07-07 CHECKLIST BACKEND CERRADO (44/44) — decisión usuario
+- V07 concurrencia: aceptado por cobertura unitaria BE-10 (CambioPuestoServiceImplTest confirmar_revalidaPendienteAntesDeMutar)
+- E2E carrera mid-flight no reproducida: candidatos RM con RL editable escasos; intento bloqueado por V06 OK técnico (422)
+- Validaciones API V01–V06 + V08–V10 + V13: cerradas E2E o por evidencia acumulada
+- Pendiente fuera checklist: BUG-01 ASOCIAR E2E · CA-14 fuerte · commit fix ORA-00932
+
+2026-07-07 V06 + pb-oktec — rlId=1154
+- POST puestos-back/puestos/1154/cambiar-puesto → 409 Conflict
+- Body: { rlId: 1154, error: «Puesto con OK técnico; no se puede cambiar la relación laboral.» }
+- Log puestos-back 13:26:05 WARN cambiarPuestoRl rlId=1154 rechazado
+- Candidato: cli 211 / cen 1 · PUESTO_ID=635830 · CONFIGURADO=1 · PT (COD_CLIENTE=211 en CT_CONTRATOLD)
+- Matiz falso positivo previo: rlId=416 (cli 4443) devolvió 200 — puestos-back usa COD_CLIENTE=COD_CLI directo; contrato PPT puede estar solo por ID_IN_MP2
+- Efecto colateral rl 416: mutada → newRlId=4802102 (no usar para más pruebas)
+
+2026-07-07 BUG ORA-00932 — fix CambioPuestoDaoImpl (SQL dinámico periodicidad, sin CASE WHEN)
+- Síntoma enmascarado BUG-05: «Error al acceder a las observaciones de la cita» + ORA-00932 CHAR/NUMBER
+- Causa: bind null en CASE WHEN PERIODICIDAD_VALOR con columna NUMBER
+- Validación post-fix: CONFIRMAR rmId=328713 → 200 · rlAfectadaId=4801293 EDITADA · logId=34589917 · warnings=[]
+- RM 12341907 agotado (V02 no pendiente tras E2E 11:36); 12339235 sin RL (V07 BLOQUEAR)
+
+2026-07-07 V03 — centro sin PVS
+- PUT cambiar-puesto SIMULAR → 422
+- customMessage: «El centro destino no tiene contrato PVS activo.»
+- code.value=1001 · log esperado V03_DESTINO_PVS KO
+
+2026-07-07 V02 — validado por usuario
+- RM no pendiente → PUT cambiar-puesto → 403 Forbidden
+- Mensaje: «El reconocimiento ya no está pendiente; no se puede confirmar el cambio de puesto.»
+- Log rrmm-backend: V02_RM_PENDIENTE KO
+
+2026-07-07 utils-p1 + pb-catalogo — evidencia acumulada
+- utils-p1: SIMULAR rmId=12339235 V06_P1 OK (recalcular) · SOLO_ADIC rmId=12341907 V06_P1_SOLO_ADIC sin llamada
+- pb-catalogo: V10 GET puestos 234783/370960 rmId=12341907 → catálogo OK vía proxy puestos-back
+
+2026-07-07 V01 V05 V08 V09 V10 + catálogo — Postman 12:00
+- V05: PUT cambiar-puesto sin JWT → 401 Unauthorized
+- V01: puestoId=0 → 422 «Debe indicar cliente, centro y puesto principal»
+- V08: q=ab→422 · q=pre→200 · CIF→200
+- V09: clienteId=0→422 · clienteId=234783→200
+- V10: params KO→422 · 234783/370960 rmId=12341907→200 catálogo OK
+- Nota: validaciones negocio = 422 (no 400); JWT ausente = 401 filtro seguridad
+
+2026-07-07 CONFIRMAR E2E + CA-14 + CA-17 — rmId=12341907
+- Escenario SOLO_ADICIONALES: origen=destino puesto 551049 · cli/cen 234783/370960 · adicionales=1
+- 2 intentos fallidos previos (pool Hikari + ORA-12899 COMENTARIO 200 chars) → estado parcial sin log
+- Fix código local BUG-04: JSON compacto CA-17 en COMENTARIO (&lt;200 chars)
+- CONFIRMAR OK 11:36:19: logId=34589899 · rlId=4782422 EDITADA · Postman 200 warnings=[]
+- Applier: protocolos=1 pruebas=50 cuestionarios=2 · conservadasCa14=0 · acpId=51514 periodicidadId=6
+- §7.5: fechaProxima=27-03-2027 (RM_FCH_RM 27-03-2024 + 36 meses)
+- CA-14: INF2_RM_VALORES cumplimentadas=139 tras rebuild INF3 (sin borrado masivo)
+- Matiz: CA-14 validado en SOLO_ADICIONALES sin delta protocolos; caso fuerte EDITAR con eliminación pendiente otro RM
+
+== BUG-04 (rrmm-backend) — MITIGADO EN CÓDIGO LOCAL ==
+- ORA-12899: COMENTARIO VARCHAR2(200) vs JSON CA-17 356 chars → CONFIRMAR abortaba tras applier
+- Workaround código: payload compacto + protocolos por ID
+- Fix definitivo BD (pendiente DBA): ALTER COMENTARIO VARCHAR2(4000)
+
+== BUG-05 (rrmm-backend) ==
+- CitasObservacionesExceptionHandler enmascara cualquier DataAccessException como «observaciones de la cita»
+
+== BUG ORA-00932 (rrmm-backend) — FIX LOCAL 2026-07-07 ==
+- updateInfRmConfiguracionProtocolos: CASE WHEN + bind null → ORA-00932 en periodicidad
+- Fix: SQL dinámico (mismo patrón ResultadoDaoImpl) · validado CONFIRMAR rmId=328713
+- Pendiente commit
+
+2026-07-07 CA-15 + CU-11 + sim-deltas — rmId=12339235
+- SIMULAR EDITAR: cli/cen=444064/349303 · puesto 85827→770572 · rlId=3569850 · tra=1581634
+- bloqueante=false · avisos=[protocolosImpacto, analiticaImpacto, periodicidadImpacto, laboratorioComunicado, analiticaComunicadaNuevosParametros]
+- CU-11: parámetro añadido «INDICE DE RIESGO LDL/HDL» con lab comunicado
+- P1 OK: protocolos 19→1 · pruebas 25→24 · snapshot+delta completos
+- Candidatos fallidos: 12349260 (sin RL BLOQUEAR) · 12348014 (NPE rrmm-utils sin ACP — BUG-03)
+
+2026-07-07 rl-bloq-varias — N/A E2E demo
+- Diagnóstico: 1850 grupos TRA+CLI+CEN con &gt;1 RL activa (PPT_CEN_TRA)
+- Paso 1A (origen): 0 RM pendientes con dup en cli/cen actual
+- Paso 1B (destino): 0 RM pendiente + dup en otro cli/cen con origen no ambiguo
+- Decisión: ítem cerrado por cobertura unitaria + imposibilidad datos demo
+
+2026-07-06 BLOQUEAR sin RL origen — rmId=12351907 (local 8825)
+- Candidato SQL query#3: tra=1376458 · cli/cen=355360/242280 · puesto actual=491453 · 0 RL activas origen
+- SIMULAR destino mismo cli/cen puesto=770572 estandar=1: bloqueante=true · rlEscenario=BLOQUEAR
+- mensajeFuncional: «No se puede resolver la relación laboral del trabajador.»
+- Logs: V05/V06 sin RL activa · V07 KO · V04 bloqueante · SIMULAR sin persistir
+- V13_ACL_EDITAR_PUESTOS OK usuarioId=155527 (ACL en SIMULAR operativo con permiso)
+- Progreso checklist: rl-bloq-sin-origen ✓ · sim-no-persiste ✓
+- Pendiente opcional: CONFIRMAR mismo body → 409 · v13 negativo sin CAMBIAR_PUESTO_RM
+
+2026-06-25 E2E SOLO_ADICIONALES rmId=12341907 rlId=4782187 logId=8
+- CONFIRMAR completo 17:28:06 (~8 s): destino RM + adicional + applier + ACP + revalida + puestos-back + CA-17
+- Applier: 8 protocolos / 104 pruebas / 7 cuestionarios · acpId=51514 · PTO_PLANTILLA_BLOQ=1 (sin deadlock)
+- Adicional RM: puestoId=59635 estandar=1 (INF_RM_PTOS_ADICIONALES id=525113)
+- Re-confirm idempotente: P1 "sin cambio adicionales" · warnings=[] · protocolos log 0/0
+- Fix pool dev: maximum-pool-size&gt;1 + metadatos ACP sin @Transactional
+
+2026-06-26 E2E CREAR rmId=12341907 logId=10
+- Destino: cli 234783 / cen 598076→370960 (PIG BA-02 MÉRIDA, mismo cliente) / puesto 979898→121937 estandar=1 tipoPuesto=CE
+- SIMULAR: rlEscenario=CREAR bloqueante=false · V05_RL_ORIGEN rlId=4782283 · V06_RL_DESTINO sin RL · V07 CREAR sin rlDestino
+- CONFIRMAR ok 13:54: baja RL 4782283 + alta RL 4782284 (rlMutada) · rlAccion=CREADA · log CA-17 insertado(4782283)→actualizado(4782284)
+- INF_RM: puesto=121937 infPtrTipo=1 cli/cen=234783/370960 rmMovido=SI
+- OK técnico: exención #3 (RL origen PUESTO_ID=NULL, no es puesto de centro) → no bloquea
+- Applier (rrmm-utils): limpieza INF3_* 144 filas · OK protocolos=1 pruebas=27 cuestionarios=2 periodicidadId=6 acpId=51514
+- Aviso M15: "reparado 1 protocolo huérfano (asimetría alta)" — workaround temporal, no bloqueante
+
+2026-06-26 ASOCIAR rmId=12341907 — RESOLUCIÓN OK (SIMULAR), CONFIRMAR E2E bloqueado por BUG-01
+- SIMULAR: V05_RL_ORIGEN 4782284 (234783/370960) · V06_RL_DESTINO 4772402 (280/1) · V07 ASOCIAR · rlAccion=ASOCIADA · bloqueante=false
+- Lógica del cambio de puesto correcta; el corte es una dependencia externa (ver BUG-01)
+
+== BUG-01 (rrmm-utils, NO imputable al cambio de puesto) — AVISAR AL EQUIPO DEL ALTA ==
+- Síntoma: CONFIRMAR/SIMULAR fallan con IncorrectResultSizeDataAccessException (expected 1, actual 2)
+- Origen: AltaReconocimientoDaoImpl.getCentroClienteMp2 (queryForObject) — SQL con distinct(t.centro_id)
+  que NO es unívoco: cli/cen con >1 contrato PVS en vigor devuelve N filas (cada contrato aporta ENTIDAD_ID)
+- Lo usan: recalcularConfiguracionProtocolos (P1 dry-run, línea 318) y aplicarConfiguracionProtocolos (applier, línea 101)
+- Reproducido con destino cli 280 / cen 1 (2 contratos PVS · PVS_OK=2)
+- Agravante 1: el SIMULAR NO lo detecta cuando el INF_RM origen es de 1 contrato (recalcular usa el contexto del RM, no el destino)
+- Agravante 2: el CONFIRMAR hace commit del destino en INF_RM ANTES del applier; si el applier peta, el RM queda
+  inconsistente (INF_RM en destino fallido, RL/INF3_* sin aplicar) y "envenenado": recalcular posterior usa
+  ese contexto (280/1) y vuelve a fallar → ni SIMULAR ni CONFIRMAR; solo recuperable con UPDATE manual de INF_RM
+- Persiste tras merge con rama del alta (2026-06-26): la rama del alta NO lo corrige
+- Decisión: NO parchear desde cambio de puesto (código del alta); avisar al equipo dueño del alta
+- 2026-06-26: avisado a Vitaly; CONFIRMAN el bug (también lo han detectado por su lado) → pendiente fix por su parte
+- Recuperación RM 12341907: UPDATE VIG_SALUD.INF_RM SET RM_CLI_ID=234783, RM_CEN_ID=370960, RM_PTR_ID=121937, INF_PTR_TIPO=1 WHERE RM_ID=12341907 → EJECUTADO 2026-06-26 (RM coherente y operativo de nuevo)
+
+2026-07-03 Código MR (pendiente QA E2E):
+- §7.5 CONFIRMAR: FECHA_PROXIMO_RECONOCIMIENTO desde periodicidad applier (d338aec7)
+- §7.7 V13 ACL también en SIMULAR (misma opción CAMBIAR_PUESTO_RM)
+- Display A1: botón solo con CAMBIAR_PUESTO_RM (sin getPermiso)
+- puestos-back: estandarPreload 500→150 (catálogo modal)
+
+== SIGUIENTE QA (post-checklist backend) ==
+1. Commit fix ORA-00932 (pendiente OK usuario)
+2. ASOCIAR CONFIRMAR E2E → bloqueado BUG-01 (rrmm-utils)
+3. CA-14 caso fuerte (EDITAR + eliminación protocolos) — opcional
+4. V07 E2E carrera mid-flight — opcional si aparece RM pendiente + RL editable sin OK técnico
+
+2026-07-07 V13 ACL — validado en implementación (usuario confirma OK positivo+negativo CONFIRMAR y SIMULAR)</textarea>
+  </div>
+</section>
+
+<footer>Revisión 13 · 44/44 · Progreso embebido en <code>qa-embedded-state</code> + caché localStorage · Jul 2026</footer>
+
+<!-- Estado persistido en el archivo: al abrir sin localStorage se restaura desde aquí -->
+<script type="application/json" id="qa-embedded-state">
+{
+  "revision": 13,
+  "updatedAt": "2026-07-07",
+  "tester": "",
+  "checked": [
+    "rl-editar", "rl-solo-adic", "rl-crear", "rl-asociar",
+    "rl-bloq-sin-origen", "rl-bloq-varias",
+    "sim-no-persiste", "sim-deltas",
+    "conf-persiste", "conf-revalida", "conf-fecha-prox",
+    "ca14", "ca17",
+    "ca15", "cu11",
+    "v01", "v02", "v03", "v05", "v06", "v07-conc", "v08", "v09", "v10",
+    "v13-acl", "v13-acl-simular",
+    "ep-put", "ep-cli", "ep-cen", "ep-puestos",
+    "pb-cambiar", "pb-crear", "pb-solo-adic", "pb-oktec", "pb-catalogo",
+    "utils-p1", "utils-aplicar", "utils-solo-adic",
+    "bd-rl", "bd-inf-rm", "bd-inf3", "bd-adic", "bd-log", "bd-fecha-prox"
+  ],
+  "nextItems": []
+}
+</script>
+
+<script>
+  const STORAGE_KEY = 'qa_cambio_puesto_rm_backend_v2';
+  const EMBEDDED = JSON.parse(document.getElementById('qa-embedded-state').textContent.trim());
+
+  function loadState() {
+    let local = {};
+    try { local = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch { local = {}; }
+    const localRev = local.revision || 0;
+    const embeddedRev = EMBEDDED.revision || 1;
+    if (localRev >= embeddedRev && local.checked) return local;
+    const checked = {};
+    (EMBEDDED.checked || []).forEach(id => { checked[id] = true; });
+    return {
+      revision: embeddedRev,
+      tester: EMBEDDED.tester || '',
+      notes: null,
+      checked
+    };
+  }
+
+  function saveState(s) {
+    s.revision = s.revision || EMBEDDED.revision;
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(s));
+  }
+
+  function buildEmbeddedPayload() {
+    return {
+      revision: (state.revision || EMBEDDED.revision) + 1,
+      updatedAt: new Date().toISOString().slice(0, 10),
+      tester: tester.value,
+      checked: [...checkboxes].filter(c => c.checked).map(c => c.id),
+      nextItems: EMBEDDED.nextItems || []
+    };
+  }
+
+  const state = loadState();
+  const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+  const notes = document.getElementById('sessionNotes');
+  const tester = document.getElementById('testerName');
+
+  checkboxes.forEach(cb => {
+    if (state.checked?.[cb.id]) cb.checked = true;
+    cb.addEventListener('change', () => {
+      state.checked = state.checked || {};
+      state.checked[cb.id] = cb.checked;
+      saveState(state);
+      updateUI();
+    });
+  });
+
+  if (state.notes) notes.value = state.notes;
+  if (state.tester) tester.value = state.tester;
+  notes.addEventListener('input', () => { state.notes = notes.value; saveState(state); });
+  tester.addEventListener('input', () => { state.tester = tester.value; saveState(state); });
+
+  function updateUI() {
+    const total = checkboxes.length;
+    const done = [...checkboxes].filter(c => c.checked).length;
+    const pct = total ? Math.round((done / total) * 100) : 0;
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('progressText').textContent =
+      done + ' / ' + total + ' completados (' + pct + '%)';
+    document.querySelectorAll('li[data-id]').forEach(li => {
+      const cb = li.querySelector('input[type="checkbox"]');
+      li.classList.toggle('done', cb?.checked);
+    });
+    document.querySelectorAll('.section-count').forEach(el => {
+      const cbs = el.closest('section').querySelectorAll('input[type="checkbox"]');
+      const d = [...cbs].filter(c => c.checked).length;
+      el.textContent = d + ' / ' + cbs.length;
+    });
+  }
+
+  document.getElementById('btnReset').addEventListener('click', () => {
+    if (!confirm('¿Resetear progreso local? (el estado embebido en el HTML se reaplica al recargar)')) return;
+    localStorage.removeItem(STORAGE_KEY);
+    location.reload();
+  });
+
+  document.getElementById('btnExport').addEventListener('click', () => {
+    const data = {
+      exportedAt: new Date().toISOString(),
+      tester: tester.value,
+      notes: notes.value,
+      scope: 'backend-only',
+      completed: [...checkboxes].filter(c => c.checked).map(c => c.id),
+      total: checkboxes.length,
+      revision: state.revision || EMBEDDED.revision
+    };
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([JSON.stringify(data, null, 2)]));
+    a.download = 'qa-backend-cambio-puesto-' + new Date().toISOString().slice(0, 10) + '.json';
+    a.click();
+  });
+
+  document.getElementById('btnCopyEmbedded').addEventListener('click', async () => {
+    const payload = buildEmbeddedPayload();
+    const block = JSON.stringify(payload, null, 2);
+    try {
+      await navigator.clipboard.writeText(block);
+      alert('Estado copiado. Pega el JSON en <script id="qa-embedded-state"> y guarda el HTML.\n\nÍtems: ' +
+        payload.checked.length + '/' + checkboxes.length);
+    } catch {
+      prompt('Copia este JSON y pégalo en qa-embedded-state:', block);
+    }
+  });
+
+  updateUI();
+</script>
+</body>
+</html>
