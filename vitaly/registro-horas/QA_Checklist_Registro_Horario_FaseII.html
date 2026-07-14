@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QA Checklist — Registro Horario Fase II</title>
+  <style>
+    :root {
+      --bg: #f0f2f5;
+      --card: #fff;
+      --border: #d5dde6;
+      --text: #1a2332;
+      --muted: #5c6b7a;
+      --accent: #c41e3a;
+      --accent-soft: #fde8eb;
+      --ok: #059669;
+      --warn: #d97706;
+      --black: #111827;
+    }
+    * { box-sizing: border-box; }
+    body {
+      font-family: "Segoe UI", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 1.25rem 1.5rem 2rem;
+      line-height: 1.5;
+    }
+    header { max-width: 1040px; margin: 0 auto 1rem; }
+    h1 { font-size: 1.55rem; margin: 0 0 .35rem; }
+    .subtitle { color: var(--muted); font-size: .9rem; margin-bottom: .75rem; }
+    .meta {
+      display: flex; flex-wrap: wrap; gap: .5rem; margin-bottom: 1rem;
+      font-size: .78rem;
+    }
+    .meta span {
+      background: var(--card); border: 1px solid var(--border);
+      padding: .25rem .55rem; border-radius: 6px;
+    }
+    .info {
+      max-width: 1040px; margin: 0 auto 1rem;
+      background: #fff; border: 1px solid var(--border); border-left: 4px solid var(--accent);
+      border-radius: 8px; padding: .85rem 1rem; font-size: .88rem;
+    }
+    .info h2 { margin: 0 0 .5rem; font-size: .95rem; }
+    .info ul { margin: .35rem 0 0 1.1rem; padding: 0; }
+    .info code { font-size: .82rem; background: #f3f4f6; padding: .1rem .35rem; border-radius: 4px; }
+    .toolbar {
+      display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; margin-bottom: 1rem;
+    }
+    .progress-wrap { flex: 1; min-width: 220px; }
+    .progress-bar { height: 8px; background: var(--border); border-radius: 4px; overflow: hidden; }
+    .progress-fill { height: 100%; background: var(--ok); width: 0%; transition: width .3s; }
+    .progress-text { font-size: .85rem; color: var(--muted); margin-top: .35rem; }
+    button {
+      border: 1px solid var(--border); background: var(--card);
+      padding: .45rem .85rem; border-radius: 6px; cursor: pointer; font-size: .85rem;
+    }
+    button:hover { border-color: var(--accent); color: var(--accent); }
+    button.danger:hover { border-color: #dc2626; color: #dc2626; }
+    .tester { display: flex; gap: .5rem; align-items: center; font-size: .85rem; }
+    .tester input {
+      padding: .4rem .6rem; border: 1px solid var(--border); border-radius: 6px; width: 160px;
+    }
+    section {
+      max-width: 1040px; margin: 0 auto 1rem;
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: 10px; overflow: hidden;
+    }
+    section h2 {
+      margin: 0; padding: .75rem 1rem; font-size: .98rem;
+      background: linear-gradient(135deg, var(--black) 0%, #374151 100%);
+      color: #fff; border-bottom: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center; gap: .5rem;
+    }
+    section h2 .section-desc-inline {
+      font-weight: normal; font-size: .78rem; color: #d1d5db; flex: 1; text-align: right;
+    }
+    .section-count { font-weight: normal; color: #e5e7eb; font-size: .85rem; white-space: nowrap; }
+    ul { list-style: none; margin: 0; padding: 0; }
+    li {
+      border-bottom: 1px solid var(--border);
+      padding: .7rem 1rem;
+      display: grid; grid-template-columns: auto 1fr;
+      gap: .65rem; align-items: start;
+    }
+    li:last-child { border-bottom: none; }
+    li.done { background: #f0fdf4; }
+    li.done .label { text-decoration: line-through; color: var(--muted); }
+    li.crit { border-left: 3px solid var(--accent); }
+    input[type="checkbox"] {
+      width: 18px; height: 18px; margin-top: 3px; cursor: pointer; accent-color: var(--ok);
+    }
+    .label { font-size: .9rem; }
+    .label strong { color: var(--accent); }
+    .hint {
+      font-size: .8rem; color: var(--muted); margin-top: .25rem; line-height: 1.45;
+    }
+    .hint ol, .hint ul { margin: .25rem 0 0 1rem; padding: 0; }
+    .tag {
+      display: inline-block; font-size: .68rem; padding: .12rem .4rem;
+      border-radius: 4px; margin-right: .3rem; margin-bottom: .15rem;
+      font-weight: 700; vertical-align: middle;
+    }
+    .tag-be { background: #ffedd5; color: #c2410c; }
+    .tag-fe { background: #fef3c7; color: #b45309; }
+    .tag-api { background: #dbeafe; color: #1d4ed8; }
+    .tag-sec { background: #fee2e2; color: #b91c1c; }
+    .tag-e2e { background: #e0e7ff; color: #4338ca; }
+    .tag-csv { background: #d1fae5; color: #047857; }
+    .tag-reg { background: #f3e8ff; color: #7e22ce; }
+    .tag-pend { background: #fef9c3; color: #a16207; }
+    notes textarea {
+      width: 100%; min-height: 90px; margin-top: .5rem; padding: .55rem;
+      border: 1px solid var(--border); border-radius: 6px;
+      font-family: inherit; font-size: .85rem; resize: vertical;
+    }
+    footer {
+      max-width: 1040px; margin: 1rem auto;
+      font-size: .78rem; color: var(--muted); text-align: center;
+    }
+    @media print {
+      .toolbar, button { display: none; }
+      section { break-inside: avoid; }
+      li.done { background: #f9fafb; }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Checklist QA — Registro Horario Fase II</h1>
+  <p class="subtitle">CU-01…07 · CA-01…25 · Seguridad · API · Regresión Fase I · Golden CSV</p>
+  <div class="meta">
+    <span><strong>Repos:</strong> registrohorario-backend · registro-horario-frontend</span>
+    <span><strong>Export:</strong> CSV (no Excel)</span>
+    <span><strong>Anonim.:</strong> nombre/apellidos difuminados · ID visible</span>
+    <span><strong>QA formal:</strong> Sprint 3 (QA-5.* · BE-C* · FE-C*)</span>
+    <span><strong>Ref:</strong> CU_CA_Registro_Horario_FaseII.md</span>
+  </div>
+
+  <div class="toolbar">
+    <div class="progress-wrap">
+      <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+      <div class="progress-text" id="progressText">0 / 0 completados (0%)</div>
+    </div>
+    <div class="tester">
+      <label for="testerName">Tester:</label>
+      <input type="text" id="testerName" placeholder="Nombre">
+    </div>
+    <button type="button" id="btnExport">Exportar JSON</button>
+    <button type="button" class="danger" id="btnReset">Resetear</button>
+  </div>
+</header>
+
+<div class="info">
+  <h2>Cómo usar este checklist</h2>
+  <ul>
+    <li><strong>Sprints 1–2:</strong> las «puertas de sprint» son <em>smoke de desarrollo</em> (build verde, integración). No sustituyen el QA formal.</li>
+    <li><strong>Sprint 3:</strong> ejecutar aquí todo el QA (QA-5.*, BE-C*, FE-C*), CA/SEC/GOLD y UAT antes de MR DEMO y PRO.</li>
+    <li>Marcar ítems al validar: <strong>BE</strong> API/contratos; <strong>FE</strong> UI/guards; <strong>E2E</strong> recorrido completo.</li>
+    <li>Los <strong>CA-xx</strong> son criterios de aceptación de negocio (obligatorios para cerrar UAT). Tareas: ver <code>Tareas_FE_BE_Registro_Horario_FaseII.md</code>.</li>
+    <li><strong>SEC-xx</strong> y <strong>V-xx</strong>: probar con Postman/curl además de UI — el Inspector debe fallar en backend aunque la UI esté deshabilitada.</li>
+    <li><strong>GOLD-xx</strong> requieren <strong>dataset UAT</strong> de negocio (pendiente). Hasta entonces: smoke manual con datos demo.</li>
+    <li>Regresión <strong>REG-xx</strong>: perfiles Fase I (Admin, Usuario, Superadmin simulación) no deben romperse.</li>
+  </ul>
+</div>
+
+<!-- SPRINT GATES -->
+<section>
+  <h2>Puertas de sprint (smoke desarrollo) <span class="section-count" data-section="sprint"></span></h2>
+  <ul>
+    <li data-id="sp1-adr" class="crit">
+      <input type="checkbox" id="sp1-adr">
+      <div>
+        <label class="label" for="sp1-adr"><strong>Sprint 1</strong> — ADR accesos externos + contrato Informes CSV documentado</label>
+        <div class="hint"><span class="tag tag-be">BE</span> TR-1 · Modelo A/B/C cerrado · OpenAPI o ADR en repo</div>
+      </div>
+    </li>
+    <li data-id="sp1-vitaly">
+      <input type="checkbox" id="sp1-vitaly">
+      <div>
+        <label class="label" for="sp1-vitaly"><strong>Sprint 1</strong> — Merge rama <code>fase_II_ux</code> sin MSW; build FE+BE verde</label>
+        <div class="hint"><span class="tag tag-fe">FE</span> FE-0.5 · Rutas Informes y Accesos externos visibles en dev</div>
+      </div>
+    </li>
+    <li data-id="sp1-roles" class="crit">
+      <input type="checkbox" id="sp1-roles">
+      <div>
+        <label class="label" for="sp1-roles"><strong>Sprint 1</strong> — Roles Inspector/RLPT, solo lectura BE+FE y anonimización base</label>
+        <div class="hint"><span class="tag tag-be">BE</span><span class="tag tag-fe">FE</span> BE-0.1/0.2/0.3 · FE-0.1/0.2 · PUT/POST/DELETE → 403 Inspector</div>
+      </div>
+    </li>
+    <li data-id="sp1-accesos">
+      <input type="checkbox" id="sp1-accesos">
+      <div>
+        <label class="label" for="sp1-accesos"><strong>Sprint 1</strong> — CRUD Accesos externos + empresas Inspector (BE-2.1)</label>
+        <div class="hint"><span class="tag tag-be">BE</span><span class="tag tag-fe">FE</span> BE-0.4/0.5 · BE-3.* · FE-3.* · Smoke CA-17…19</div>
+      </div>
+    </li>
+    <li data-id="sp2-suplant" class="crit">
+      <input type="checkbox" id="sp2-suplant">
+      <div>
+        <label class="label" for="sp2-suplant"><strong>Sprint 2</strong> — Suplantación Keycloak + banner (sin QA formal aún)</label>
+        <div class="hint"><span class="tag tag-be">BE</span><span class="tag tag-fe">FE</span> BE-0.6 · FE-0.4 · Smoke CA-21/24 · QA-5.5 en S3</div>
+      </div>
+    </li>
+    <li data-id="sp2-inspector">
+      <input type="checkbox" id="sp2-inspector">
+      <div>
+        <label class="label" for="sp2-inspector"><strong>Sprint 2</strong> — Inspector parcial + Informes avanzado (listado, CSV, filtros, tabla)</label>
+        <div class="hint"><span class="tag tag-be">BE</span><span class="tag tag-fe">FE</span> BE-2.2–2.4 · FE-2.1–2.3 · BE-1.1–1.7 · FE-1.1–1.6</div>
+      </div>
+    </li>
+    <li data-id="sp3-dev" class="crit">
+      <input type="checkbox" id="sp3-dev">
+      <div>
+        <label class="label" for="sp3-dev"><strong>Sprint 3</strong> — Desarrollo restante listo (Informes cierre, Inspector completo, RLPT)</label>
+        <div class="hint"><span class="tag tag-csv">CSV</span> BE-1.9 · FE-1.7/1.8 · BE-2.5/2.6 · FE-2.4/2.6 · BE-4.* · FE-4.*</div>
+      </div>
+    </li>
+    <li data-id="sp3-qa" class="crit">
+      <input type="checkbox" id="sp3-qa">
+      <div>
+        <label class="label" for="sp3-qa"><strong>Sprint 3</strong> — QA funcional completo (QA-5.1–5.5) + CA/SEC/GOLD/REG verdes</label>
+        <div class="hint"><span class="tag tag-pend">UAT</span> Ejecutar secciones CA, SEC, V, REG y GOLD de este checklist</div>
+      </div>
+    </li>
+    <li data-id="sp3-cierre" class="crit">
+      <input type="checkbox" id="sp3-cierre">
+      <div>
+        <label class="label" for="sp3-cierre"><strong>Sprint 3</strong> — Cierre técnico + MR DEMO + plan PRO</label>
+        <div class="hint"><span class="tag tag-be">BE</span><span class="tag tag-fe">FE</span> BE-C1–C7 · FE-C1–C6 · TR-3 · Jacoco · Pitest · Karma</div>
+      </div>
+    </li>
+  </ul>
+</section>
+
+<!-- CA INFORMES -->
+<section>
+  <h2>CA Informes — CU-01 / CU-02 <span class="section-desc-inline">BE-1.* · FE-1.* · QA-5.3</span><span class="section-count" data-section="ca-inf"></span></h2>
+  <ul>
+    <li data-id="ca01" class="crit">
+      <input type="checkbox" id="ca01">
+      <div>
+        <label class="label" for="ca01"><strong>CA-01</strong> Pantalla Informes: Semana actual por defecto, tabla ID ↑, cabecera y botón Descargar</label>
+        <div class="hint">
+          <span class="tag tag-fe">FE</span><span class="tag tag-e2e">E2E</span>
+          <ol>
+            <li>Login Admin → navegar a Informes.</li>
+            <li>Verificar selector periodo = «Semana actual».</li>
+            <li>Primera columna ordenada ascendente por ID (PT-01, PT-02…).</li>
+            <li>Comprobar título, subtítulo y botón «Descargar informe».</li>
+          </ol>
+        </div>
+      </div>
+    </li>
+    <li data-id="ca02">
+      <input type="checkbox" id="ca02">
+      <div>
+        <label class="label" for="ca02"><strong>CA-02</strong> Selector periodo: Hoy / Semana / Mes / Personalizado (Desde ≤ Hasta)</label>
+        <div class="hint">
+          <span class="tag tag-fe">FE</span><span class="tag tag-api">API</span>
+          Probar cada opción; en Personalizado: fecha Desde posterior a Hasta → error en modal, no llamada API.
+        </div>
+      </div>
+    </li>
+    <li data-id="ca03">
+      <input type="checkbox" id="ca03">
+      <div>
+        <label class="label" for="ca03"><strong>CA-03</strong> Filtros: Admin/RLPT buscan por nombre; Inspector por ID; multiselect puesto/centro; Limpiar filtros</label>
+        <div class="hint">
+          <span class="tag tag-fe">FE</span><span class="tag tag-api">API</span>
+          Verificar query params en GET listado agregado. Inspector: búsqueda por nombre no debe devolver resultados identificativos.
+        </div>
+      </div>
+    </li>
+    <li data-id="ca04">
+      <input type="checkbox" id="ca04">
+      <div>
+        <label class="label" for="ca04"><strong>CA-04</strong> Cambio filtros → refresh inmediato, página 1, 10 filas/página</label>
+        <div class="hint"><span class="tag tag-fe">FE</span> Paginación coherente con <code>paginacion.utils</code> Fase I.</div>
+      </div>
+    </li>
+    <li data-id="ca05">
+      <input type="checkbox" id="ca05">
+      <div>
+        <label class="label" for="ca05"><strong>CA-05</strong> Columnas ordenables; compensaciones verde (+) / rojo (−) / gris (0)</label>
+        <div class="hint"><span class="tag tag-fe">FE</span><span class="tag tag-be">BE</span> BE-1.3 balance · click en cada cabecera de columna.</div>
+      </div>
+    </li>
+    <li data-id="ca06">
+      <input type="checkbox" id="ca06">
+      <div>
+        <label class="label" for="ca06"><strong>CA-06</strong> Sin resultados: ocultar tabla, mensaje + botón limpiar filtros</label>
+        <div class="hint"><span class="tag tag-fe">FE</span> FE-1.5 · Filtro imposible (puesto inexistente + periodo futuro).</div>
+      </div>
+    </li>
+    <li data-id="ca07">
+      <input type="checkbox" id="ca07">
+      <div>
+        <label class="label" for="ca07"><strong>CA-07</strong> Modal export: 3 radios — tabla / simple / detallado (Inspector: sin columna nombre en tabla)</label>
+        <div class="hint"><span class="tag tag-fe">FE</span> FE-1.7 · FE-1.8 parametrización por rol.</div>
+      </div>
+    </li>
+    <li data-id="ca08" class="crit">
+      <input type="checkbox" id="ca08">
+      <div>
+        <label class="label" for="ca08"><strong>CA-08</strong> 0 registros en pantalla → Exportar no genera CSV + toast</label>
+        <div class="hint">
+          <span class="tag tag-be">BE</span><span class="tag tag-api">API</span> BE-1.7 · Respuesta sin attachment; FE muestra toast (no descarga vacía).
+        </div>
+      </div>
+    </li>
+    <li data-id="ca09" class="crit">
+      <input type="checkbox" id="ca09">
+      <div>
+        <label class="label" for="ca09"><strong>CA-09</strong> Export OK → archivo <code>.csv</code> con nombre dinámico (tipo + fecha)</label>
+        <div class="hint">
+          <span class="tag tag-csv">CSV</span><span class="tag tag-be">BE</span>
+          Validar Content-Type, encoding UTF-8, separador coherente Fase I. Probar los 3 formatos (BE-1.4, 1.5, 1.6).
+        </div>
+      </div>
+    </li>
+  </ul>
+</section>
+
+<!-- CA INSPECTOR -->
+<section>
+  <h2>CA Inspector/a — CU-03 / CU-04 <span class="section-desc-inline">BE-2.* · FE-2.* · QA-5.1 · QA-5.4</span><span class="section-count" data-section="ca-insp"></span></h2>
+  <ul>
+    <li data-id="ca10">
+      <input type="checkbox" id="ca10">
+      <div>
+        <label class="label" for="ca10"><strong>CA-10</strong> Badge sidebar «Inspector/a solo lectura · Datos anonimizados»</label>
+        <div class="hint"><span class="tag tag-fe">FE</span> FE-2.1 · Visible en todas las pantallas del rol.</div>
+      </div>
+    </li>
+    <li data-id="ca11" class="crit">
+      <input type="checkbox" id="ca11">
+      <div>
+        <label class="label" for="ca11"><strong>CA-11</strong> Sin empresa: solo módulo Empresas; cabecera «Sin empresa seleccionada»</label>
+        <div class="hint">
+          <span class="tag tag-fe">FE</span><span class="tag tag-be">BE</span>
+          FE-2.2 Caso A · <code>/v1/me</code> no exige membership activo (excepción Inspector). URL directa a /usuarios → redirect/bloqueo.
+        </div>
+      </div>
+    </li>
+    <li data-id="ca12" class="crit">
+      <input type="checkbox" id="ca12">
+      <div>
+        <label class="label" for="ca12"><strong>CA-12</strong> Acceder a empresa → desbloquea Usuarios, Informes, Config (solo lectura)</label>
+        <div class="hint"><span class="tag tag-e2e">E2E</span> FE-2.3 · Contexto empresa en cabecera igual patrón Fase I superadmin.</div>
+      </div>
+    </li>
+    <li data-id="ca13" class="crit">
+      <input type="checkbox" id="ca13">
+      <div>
+        <label class="label" for="ca13"><strong>CA-13</strong> Listado usuarios: ID, Centro, fechas, Horas, Ojo — sin nombre/apellidos</label>
+        <div class="hint">
+          <span class="tag tag-sec">SEC</span><span class="tag tag-api">API</span>
+          BE-2.2 · Inspeccionar JSON response: no campos <code>nombre</code>, <code>apellidos</code>, NIF en listado.
+        </div>
+      </div>
+    </li>
+    <li data-id="ca14" class="crit">
+      <input type="checkbox" id="ca14">
+      <div>
+        <label class="label" for="ca14"><strong>CA-14</strong> Ficha Ojo: lectura, nombre/apellidos difuminados, aviso legal</label>
+        <div class="hint"><span class="tag tag-sec">SEC</span> BE-2.4 · FE-2.4 · CSS blur + BE no envía texto plano identificativo.</div>
+      </div>
+    </li>
+    <li data-id="ca15">
+      <input type="checkbox" id="ca15">
+      <div>
+        <label class="label" for="ca15"><strong>CA-15</strong> Compensaciones/calendario ficha: solo lectura; «Limpiar configuración» deshabilitado</label>
+        <div class="hint"><span class="tag tag-fe">FE</span> Hereda ficha Fase I + <code>modoSoloLectura</code>.</div>
+      </div>
+    </li>
+    <li data-id="ca16">
+      <input type="checkbox" id="ca16">
+      <div>
+        <label class="label" for="ca16"><strong>CA-16</strong> Config Inspector: 5 pestañas congeladas lectura (sin Accesos externos)</label>
+        <div class="hint"><span class="tag tag-fe">FE</span> FE-2.6 · Intentar guardar → botones disabled + API 403 si fuerza PUT.</div>
+      </div>
+    </li>
+    <li data-id="ca23">
+      <input type="checkbox" id="ca23">
+      <div>
+        <label class="label" for="ca23"><strong>CA-23</strong> Export CSV movimientos compensaciones ficha — anonimizado</label>
+        <div class="hint"><span class="tag tag-csv">CSV</span><span class="tag tag-be">BE</span> BE-2.6 · Columnas Fecha, Descripción, Horas, Comentarios según funcional §4.3.4 (comentarios visibles D03).</div>
+      </div>
+    </li>
+    <li data-id="ca25">
+      <input type="checkbox" id="ca25">
+      <div>
+        <label class="label" for="ca25"><strong>CA-25</strong> KPIs Inspector: Sin registro / Correcto / Incompleto vs reglas D09</label>
+        <div class="hint">
+          <span class="tag tag-be">BE</span><span class="tag tag-pend">UAT</span>
+          BE-2.3 · Comparar con dataset UAT y KPIs Admin Fase I (misma base, distinto ámbito).
+        </div>
+      </div>
+    </li>
+  </ul>
+</section>
+
+<!-- CA ACCESOS + RLPT + SUPERADMIN -->
+<section>
+  <h2>CA Accesos · RLPT · Superadmin <span class="section-desc-inline">BE-0.* · BE-3.* · BE-4.* · FE-0.* · FE-3.* · FE-4.*</span><span class="section-count" data-section="ca-otros"></span></h2>
+  <ul>
+    <li data-id="ca17">
+      <input type="checkbox" id="ca17">
+      <div>
+        <label class="label" for="ca17"><strong>CA-17</strong> Pestaña Accesos externos: buscador + «+ Añadir acceso»</label>
+        <div class="hint"><span class="tag tag-fe">FE</span> FE-3.* · Solo visible Admin (no Inspector).</div>
+      </div>
+    </li>
+    <li data-id="ca18">
+      <input type="checkbox" id="ca18">
+      <div>
+        <label class="label" for="ca18"><strong>CA-18</strong> Alta: tipo Inspector/RLPT, nombre, email válido → registro en lista + invitación</label>
+        <div class="hint"><span class="tag tag-be">BE</span> BE-3.1/3.2 · Email duplicado: comportamiento definido en ADR (rechazar o idempotencia).</div>
+      </div>
+    </li>
+    <li data-id="ca19">
+      <input type="checkbox" id="ca19">
+      <div>
+        <label class="label" for="ca19"><strong>CA-19</strong> Eliminar acceso: modal confirmación revocación irreversible</label>
+        <div class="hint"><span class="tag tag-e2e">E2E</span> Tras eliminar: login externo bloqueado (revocación inmediata D06).</div>
+      </div>
+    </li>
+    <li data-id="ca22">
+      <input type="checkbox" id="ca22">
+      <div>
+        <label class="label" for="ca22"><strong>CA-22</strong> RLPT en Informes: datos reales (nombre visible), plantilla completa</label>
+        <div class="hint"><span class="tag tag-fe">FE</span><span class="tag tag-sec">SEC</span> Contraste con Inspector mismo informe: RLPT ve nombres; Inspector no.</div>
+      </div>
+    </li>
+    <li data-id="ca20">
+      <input type="checkbox" id="ca20">
+      <div>
+        <label class="label" for="ca20"><strong>CA-20</strong> Superadmin simulación: Importar/Crear/Guardar/Nueva compensación deshabilitados</label>
+        <div class="hint"><span class="tag tag-reg">REG</span> Patrón Fase I <code>modoSimulacion</code> · FE-0.2 generalizado.</div>
+      </div>
+    </li>
+    <li data-id="ca21" class="crit">
+      <input type="checkbox" id="ca21">
+      <div>
+        <label class="label" for="ca21"><strong>CA-21</strong> Suplantar usuario: sesión adopta rol/vista del trabajador</label>
+        <div class="hint">
+          <span class="tag tag-e2e">E2E</span><span class="tag tag-be">BE</span>
+          Banner «Estás suplantando a…» · Menú = Usuario destino · Sin permisos Admin extra.
+        </div>
+      </div>
+    </li>
+    <li data-id="ca24" class="crit">
+      <input type="checkbox" id="ca24">
+      <div>
+        <label class="label" for="ca24"><strong>CA-24</strong> Fin suplantación: vuelta Superadmin + registro auditoría</label>
+        <div class="hint">
+          <span class="tag tag-be">BE</span> BE-0.6 · Evento: actor real, suplantado, inicio/fin · QA-5.5.
+        </div>
+      </div>
+    </li>
+  </ul>
+</section>
+
+<!-- CU SMOKE -->
+<section>
+  <h2>Smoke casos de uso (CU) <span class="section-count" data-section="cu"></span></h2>
+  <ul>
+    <li data-id="cu01"><input type="checkbox" id="cu01"><div><label class="label" for="cu01"><strong>CU-01</strong> Filtrar y consultar Informes (Admin + Inspector + RLPT)</label><div class="hint">Recorrido E2E por rol con mismos filtros adaptados.</div></div></li>
+    <li data-id="cu02"><input type="checkbox" id="cu02"><div><label class="label" for="cu02"><strong>CU-02</strong> Exportar informes CSV (3 formatos Admin/RLPT; anonimizado Inspector)</label></div></li>
+    <li data-id="cu03"><input type="checkbox" id="cu03"><div><label class="label" for="cu03"><strong>CU-03</strong> Inspector: login → empresas → entrar en empresa</label></div></li>
+    <li data-id="cu04"><input type="checkbox" id="cu04"><div><label class="label" for="cu04"><strong>CU-04</strong> Inspector: auditoría plantilla anonimizada (usuarios + ficha + config)</label></div></li>
+    <li data-id="cu05"><input type="checkbox" id="cu05"><div><label class="label" for="cu05"><strong>CU-05</strong> Admin: alta y revocación accesos externos</label></div></li>
+    <li data-id="cu06"><input type="checkbox" id="cu06"><div><label class="label" for="cu06"><strong>CU-06</strong> Superadmin: simulación + suplantación</label></div></li>
+    <li data-id="cu07"><input type="checkbox" id="cu07"><div><label class="label" for="cu07"><strong>CU-07</strong> RLPT: Usuario Fase I + Informes datos reales</label></div></li>
+  </ul>
+</section>
+
+<!-- SEGURIDAD -->
+<section>
+  <h2>Seguridad y casos borde (SEC) <span class="section-desc-inline">Probar API sin confiar solo en UI</span><span class="section-count" data-section="sec"></span></h2>
+  <ul>
+    <li data-id="sec01" class="crit">
+      <input type="checkbox" id="sec01">
+      <div>
+        <label class="label" for="sec01"><strong>SEC-01</strong> Inspector: PUT/POST/DELETE cualquier endpoint mutante → 403</label>
+        <div class="hint"><span class="tag tag-sec">SEC</span><span class="tag tag-api">API</span> curl con token Inspector: usuarios, config, fichaje, compensaciones.</div>
+      </div>
+    </li>
+    <li data-id="sec02" class="crit">
+      <input type="checkbox" id="sec02">
+      <div>
+        <label class="label" for="sec02"><strong>SEC-02</strong> Usuario normal: URL directa /informes o /config/accesos → 403 o redirect</label>
+        <div class="hint"><span class="tag tag-fe">FE</span> Guards + BE autorización.</div>
+      </div>
+    </li>
+    <li data-id="sec03" class="crit">
+      <input type="checkbox" id="sec03">
+      <div>
+        <label class="label" for="sec03"><strong>SEC-03</strong> Inspector: GET empresa no autorizada → 404/403 sin filtrar por nombre ajeno</label>
+        <div class="hint"><span class="tag tag-sec">SEC</span> No revelar existencia de empresa por mensaje distinto.</div>
+      </div>
+    </li>
+    <li data-id="sec04">
+      <input type="checkbox" id="sec04">
+      <div>
+        <label class="label" for="sec04"><strong>SEC-04</strong> Inspector CSV informes: sin columna nombre; ID estable entre pantalla y CSV</label>
+        <div class="hint"><span class="tag tag-csv">CSV</span> BE-2.5 · Abrir CSV y buscar strings de nombres reales.</div>
+      </div>
+    </li>
+    <li data-id="sec05">
+      <input type="checkbox" id="sec05">
+      <div>
+        <label class="label" for="sec05"><strong>SEC-05</strong> Revocación acceso externo con sesión activa → siguiente request bloqueada</label>
+        <div class="hint"><span class="tag tag-sec">SEC</span> Admin revoca mientras Inspector navega; limpiar contexto empresa.</div>
+      </div>
+    </li>
+    <li data-id="sec06">
+      <input type="checkbox" id="sec06">
+      <div>
+        <label class="label" for="sec06"><strong>SEC-06</strong> Suplantación: no elevar privilegios (suplantar Admin no da permisos Admin al superadmin)</label>
+        <div class="hint"><span class="tag tag-sec">SEC</span> CA-21 ampliado · permisos = usuario destino únicamente.</div>
+      </div>
+    </li>
+    <li data-id="sec07">
+      <input type="checkbox" id="sec07">
+      <div>
+        <label class="label" for="sec07"><strong>SEC-07</strong> Superadmin simulación: mutación vía API → 403 aunque UI esté deshabilitada</label>
+        <div class="hint"><span class="tag tag-api">API</span> BE-0.2 · Forzar POST con token simulación.</div>
+      </div>
+    </li>
+    <li data-id="sec08">
+      <input type="checkbox" id="sec08">
+      <div>
+        <label class="label" for="sec08"><strong>SEC-08</strong> Logs: no PII identificativo Inspector en application logs</label>
+        <div class="hint"><span class="tag tag-be">BE</span> Revisar logback tras export y consultas anonimizadas.</div>
+      </div>
+    </li>
+    <li data-id="sec09">
+      <input type="checkbox" id="sec09">
+      <div>
+        <label class="label" for="sec09"><strong>SEC-09</strong> Token caducado en bootstrap <code>/v1/me</code> → redirect login sin menú parcial</label>
+        <div class="hint"><span class="tag tag-e2e">E2E</span> Simular 401 en interceptor FE.</div>
+      </div>
+    </li>
+    <li data-id="sec10">
+      <input type="checkbox" id="sec10">
+      <div>
+        <label class="label" for="sec10"><strong>SEC-10</strong> Cambio rápido empresa Inspector: respuesta obsoleta no pinta datos</label>
+        <div class="hint"><span class="tag tag-fe">FE</span> Throttle/cancel pending requests al cambiar contexto.</div>
+      </div>
+    </li>
+    <li data-id="sec11">
+      <input type="checkbox" id="sec11">
+      <div>
+        <label class="label" for="sec11"><strong>SEC-11</strong> Export CSV largo + logout → no entregar archivo tras perder sesión</label>
+        <div class="hint"><span class="tag tag-e2e">E2E</span> Latencia artificial en BE-1.4.</div>
+      </div>
+    </li>
+    <li data-id="sec12">
+      <input type="checkbox" id="sec12">
+      <div>
+        <label class="label" for="sec12"><strong>SEC-12</strong> RLPT: manipular query params centro/usuario fuera de ámbito → backend rechaza</label>
+        <div class="hint"><span class="tag tag-api">API</span> BE-0.5 filtrado por empresa activa.</div>
+      </div>
+    </li>
+  </ul>
+</section>
+
+<!-- API VALIDACIONES -->
+<section>
+  <h2>Validaciones API (V) <span class="section-count" data-section="val"></span></h2>
+  <ul>
+    <li data-id="v01"><input type="checkbox" id="v01"><div><label class="label" for="v01"><strong>V-01</strong> Sin JWT → 401 en endpoints Fase II</label></div></li>
+    <li data-id="v02"><input type="checkbox" id="v02"><div><label class="label" for="v02"><strong>V-02</strong> Informes: rango fechas invertido → 400</label><div class="hint"><span class="tag tag-api">API</span> fechaDesde &gt; fechaHasta</div></div></li>
+    <li data-id="v03"><input type="checkbox" id="v03"><div><label class="label" for="v03"><strong>V-03</strong> Informes export sin datos → 204/422 + sin body CSV</label><div class="hint">CA-08</div></div></li>
+    <li data-id="v04"><input type="checkbox" id="v04"><div><label class="label" for="v04"><strong>V-04</strong> Paginación: page/size negativos o size &gt; máximo → 400 o clamp</label></div></li>
+    <li data-id="v05"><input type="checkbox" id="v05"><div><label class="label" for="v05"><strong>V-05</strong> Accesos externos: email inválido → 400</label></div></li>
+    <li data-id="v06"><input type="checkbox" id="v06"><div><label class="label" for="v06"><strong>V-06</strong> Accesos externos: doble POST mismo email → idempotencia o 409</label></div></li>
+    <li data-id="v07"><input type="checkbox" id="v07"><div><label class="label" for="v07"><strong>V-07</strong> Suplantación: usuario destino inactivo/baja → 409</label></div></li>
+    <li data-id="v08"><input type="checkbox" id="v08"><div><label class="label" for="v08"><strong>V-08</strong> Inspector sin empresas asignadas → listado vacío, no error 500</label></div></li>
+  </ul>
+</section>
+
+<!-- REGRESION FASE I -->
+<section>
+  <h2>Regresión Fase I (REG) <span class="section-desc-inline">No romper lo ya entregado</span><span class="section-count" data-section="reg"></span></h2>
+  <ul>
+    <li data-id="reg01"><input type="checkbox" id="reg01"><div><label class="label" for="reg01"><strong>REG-01</strong> Admin: CRUD usuarios, config 5 pestañas, KPIs usuarios — sin cambios comportamiento</label><div class="hint"><span class="tag tag-reg">REG</span></div></div></li>
+    <li data-id="reg02"><input type="checkbox" id="reg02"><div><label class="label" for="reg02"><strong>REG-02</strong> Usuario: fichaje vivo/diferido, mi perfil, historial export CSV Fase I</label></div></li>
+    <li data-id="reg03"><input type="checkbox" id="reg03"><div><label class="label" for="reg03"><strong>REG-03</strong> Superadmin: listado empresas + simulación lectura (banner) — igual Fase I</label></div></li>
+    <li data-id="reg04"><input type="checkbox" id="reg04"><div><label class="label" for="reg04"><strong>REG-04</strong> Referente: permisos parciales usuarios asignados intactos</label></div></li>
+    <li data-id="reg05"><input type="checkbox" id="reg05"><div><label class="label" for="reg05"><strong>REG-05</strong> Compensaciones: cálculo balance Informes = mismo motor Fase I (BE-1.3)</label></div></li>
+    <li data-id="reg06"><input type="checkbox" id="reg06"><div><label class="label" for="reg06"><strong>REG-06</strong> i18n ES/EN/GL/EU/CA: nuevos textos Fase II traducidos (FE-0.3)</label></div></li>
+    <li data-id="reg07"><input type="checkbox" id="reg07"><div><label class="label" for="reg07"><strong>REG-07</strong> Export historial ficha usuario (Fase I) sigue funcionando para Admin/Usuario</label></div></li>
+    <li data-id="reg08"><input type="checkbox" id="reg08"><div><label class="label" for="reg08"><strong>REG-08</strong> Multi-empresa superadmin: selector contexto no roto por roles nuevos</label></div></li>
+  </ul>
+</section>
+
+<!-- GOLDEN CSV -->
+<section>
+  <h2>Golden CSV (GOLD) — requiere dataset UAT <span class="section-count" data-section="gold"></span></h2>
+  <ul>
+    <li data-id="gold01" class="crit">
+      <input type="checkbox" id="gold01">
+      <div>
+        <label class="label" for="gold01"><strong>GOLD-01</strong> Informe tabla Admin: filas y totales = expected UAT</label>
+        <div class="hint"><span class="tag tag-pend">Pendiente negocio</span><span class="tag tag-csv">CSV</span> QA-5.3 · Comparar hash/filas con golden file.</div>
+      </div>
+    </li>
+    <li data-id="gold02" class="crit">
+      <input type="checkbox" id="gold02">
+      <div>
+        <label class="label" for="gold02"><strong>GOLD-02</strong> Informe simple: una fila usuario+día; horas HH:MM correctas</label>
+        <div class="hint"><span class="tag tag-csv">CSV</span> BE-1.5</div>
+      </div>
+    </li>
+    <li data-id="gold03" class="crit">
+      <input type="checkbox" id="gold03">
+      <div>
+        <label class="label" for="gold03"><strong>GOLD-03</strong> Informe detallado: tramos/paradas; tramo abierto manejado</label>
+        <div class="hint"><span class="tag tag-csv">CSV</span> BE-1.6</div>
+      </div>
+    </li>
+    <li data-id="gold04">
+      <input type="checkbox" id="gold04">
+      <div>
+        <label class="label" for="gold04"><strong>GOLD-04</strong> Informe Inspector anonimizado: sin PII; columnas expected</label>
+        <div class="hint"><span class="tag tag-sec">SEC</span> BE-2.5</div>
+      </div>
+    </li>
+    <li data-id="gold05">
+      <input type="checkbox" id="gold05">
+      <div>
+        <label class="label" for="gold05"><strong>GOLD-05</strong> KPIs Inspector vs expected UAT por periodo</label>
+        <div class="hint"><span class="tag tag-pend">UAT</span> QA-5.4 · CA-25</div>
+      </div>
+    </li>
+    <li data-id="gold06">
+      <input type="checkbox" id="gold06">
+      <div>
+        <label class="label" for="gold06"><strong>GOLD-06</strong> Compensaciones columna Informes = balance ficha usuario mismo periodo</label>
+        <div class="hint"><span class="tag tag-be">BE</span> Coherencia BE-1.3 + BE-1.1</div>
+      </div>
+    </li>
+  </ul>
+</section>
+
+<!-- NOTAS -->
+<section>
+  <h2>Notas de sesión · evidencias · incidencias</h2>
+  <div style="padding: 1rem;">
+    <label for="sessionNotes">Entorno (DEV/DEMO), usuarios de prueba, rmIds/empresaId, capturas, bugs JIRA…</label>
+    <textarea id="sessionNotes" placeholder="Ej: DEMO 2026-07-06 — Inspector test@itss.gob.es — CA-13 OK tras BE-2.2 — JIRA RH-142 pendiente SEC-03…"></textarea>
+  </div>
+</section>
+
+<footer>
+  Progreso en localStorage (<code>qa_registro_horario_fase2_v1</code>) · Babooni · Registro Horario Fase II · Jul 2026
+</footer>
+
+<script>
+  const STORAGE_KEY = 'qa_registro_horario_fase2_v1';
+
+  function loadState() {
+    try { return JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); }
+    catch { return {}; }
+  }
+
+  function saveState(state) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  }
+
+  const state = loadState();
+  const checkboxes = document.querySelectorAll('input[type="checkbox"]');
+  const notes = document.getElementById('sessionNotes');
+  const tester = document.getElementById('testerName');
+
+  checkboxes.forEach(cb => {
+    if (state.checked && state.checked[cb.id]) cb.checked = true;
+    cb.addEventListener('change', () => {
+      if (!state.checked) state.checked = {};
+      state.checked[cb.id] = cb.checked;
+      saveState(state);
+      updateUI();
+    });
+  });
+
+  if (state.notes) notes.value = state.notes;
+  if (state.tester) tester.value = state.tester;
+
+  notes.addEventListener('input', () => {
+    state.notes = notes.value;
+    saveState(state);
+  });
+  tester.addEventListener('input', () => {
+    state.tester = tester.value;
+    saveState(state);
+  });
+
+  function updateUI() {
+    const total = checkboxes.length;
+    const done = [...checkboxes].filter(c => c.checked).length;
+    const pct = total ? Math.round((done / total) * 100) : 0;
+    document.getElementById('progressFill').style.width = pct + '%';
+    document.getElementById('progressText').textContent =
+      done + ' / ' + total + ' completados (' + pct + '%)';
+
+    document.querySelectorAll('li[data-id]').forEach(li => {
+      const cb = li.querySelector('input[type="checkbox"]');
+      li.classList.toggle('done', cb && cb.checked);
+    });
+
+    document.querySelectorAll('.section-count').forEach(el => {
+      const section = el.closest('section');
+      const cbs = section.querySelectorAll('input[type="checkbox"]');
+      const d = [...cbs].filter(c => c.checked).length;
+      el.textContent = d + ' / ' + cbs.length;
+    });
+  }
+
+  document.getElementById('btnReset').addEventListener('click', () => {
+    if (!confirm('¿Resetear todo el progreso y las notas?')) return;
+    localStorage.removeItem(STORAGE_KEY);
+    location.reload();
+  });
+
+  document.getElementById('btnExport').addEventListener('click', () => {
+    const exportData = {
+      project: 'Registro Horario Fase II',
+      exportedAt: new Date().toISOString(),
+      tester: tester.value,
+      notes: notes.value,
+      completed: [...checkboxes].filter(c => c.checked).map(c => c.id),
+      total: checkboxes.length,
+      percent: Math.round(([...checkboxes].filter(c => c.checked).length / checkboxes.length) * 100)
+    };
+    const blob = new Blob([JSON.stringify(exportData, null, 2)], { type: 'application/json' });
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(blob);
+    a.download = 'qa-registro-horario-fase2-' + new Date().toISOString().slice(0, 10) + '.json';
+    a.click();
+  });
+
+  updateUI();
+</script>
+
+</body>
+</html>

@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="es"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Información a solicitar a negocio - Registro Horario Fase II</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#0a0a0a;--black-soft:#1a1a1a;--black-deep:#050505;--black-light:#2a2a2a;
+  --red:#e60000;--red-light:#ff0000;--red-dark:#b30000;--red-pale:#fdecec;--red-bg:#fef5f5;
+  --gold:#f4b900;--gold-light:#fff8e1;--gold-dark:#c49500;
+  --bg:#ffffff;--bg-alt:#f6f6f7;--bg-card:#ffffff;--bg-dark:#111111;
+  --border:#e2e2e2;--border-light:#ededed;--border-dark:#2a2a2a;
+  --text:#0a0a0a;--text-secondary:#4a4a4a;--text-muted:#8a8a8a;
+  --green:#1d8a4a;--green-bg:#e6f7ee;--green-border:#b8e6cc;
+  --orange:#d97a1c;--orange-bg:#fef3e2;--orange-border:#fad6a5;
+  --blue:#1d6aa5;--blue-bg:#e6f0f7;--blue-border:#b8d4e6;
+  --shadow-sm:0 1px 3px rgba(0,0,0,0.06);--shadow-md:0 4px 12px rgba(0,0,0,0.10);--shadow-lg:0 8px 30px rgba(0,0,0,0.14);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Montserrat','Segoe UI',-apple-system,BlinkMacSystemFont,sans-serif;background:#d8d8dc;color:var(--text);line-height:1.65;-webkit-font-smoothing:antialiased}
+.page-wrapper{max-width:960px;margin:32px auto;background:var(--bg);border-radius:16px;box-shadow:0 4px 40px rgba(0,0,0,0.18),0 1px 6px rgba(0,0,0,0.08);overflow:hidden}
+.container{max-width:100%;margin:0 auto;padding:0 40px}
+header{background:linear-gradient(135deg,#000000 0%,var(--black) 35%,var(--black-soft) 100%);color:white;padding:48px 0 44px;border-bottom:5px solid var(--red);position:relative;overflow:hidden}
+header::before{content:'';position:absolute;top:-50%;right:-10%;width:500px;height:500px;background:radial-gradient(circle,rgba(230,0,0,0.18) 0%,transparent 70%);border-radius:50%}
+header::after{content:'';position:absolute;bottom:-60%;left:-5%;width:400px;height:400px;background:radial-gradient(circle,rgba(255,255,255,0.04) 0%,transparent 70%);border-radius:50%}
+header .container{display:flex;justify-content:space-between;align-items:flex-start;position:relative;z-index:1;gap:24px}
+.header-logo{margin-bottom:18px}
+.header-logo svg{display:block;height:60px;width:auto}
+.header-left h1{font-size:28px;font-weight:800;letter-spacing:-0.5px;margin-bottom:6px;line-height:1.2}
+.header-left h1 .red{color:var(--red-light)}
+.header-left p{color:rgba(255,255,255,0.65);font-size:11px;font-weight:400}
+.header-badge{background:linear-gradient(135deg,var(--red) 0%,var(--red-dark) 100%);color:white;font-size:9px;font-weight:600;padding:7px 14px;border-radius:6px;text-align:center;line-height:1.4;box-shadow:0 4px 15px rgba(230,0,0,0.45);text-transform:uppercase;letter-spacing:0.5px;flex-shrink:0}
+.header-badge span{display:block;font-size:16px;font-weight:800;letter-spacing:-0.3px;text-transform:none}
+nav{background:var(--black);border-bottom:1px solid var(--border-dark);position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,0.20)}
+nav .container{display:flex;align-items:stretch;gap:0;overflow-x:auto;scrollbar-width:none}
+nav .container::-webkit-scrollbar{display:none}
+.nav-logo{display:flex;align-items:center;padding:0 18px 0 0;margin-right:4px;border-right:1px solid var(--border-dark);flex-shrink:0}
+.nav-logo svg{display:block;height:26px;width:auto}
+nav a{flex:1;text-align:center;color:rgba(255,255,255,0.65);text-decoration:none;font-size:11px;font-weight:600;padding:16px 12px;white-space:nowrap;border-bottom:3px solid transparent;transition:all .25s ease;text-transform:uppercase;letter-spacing:0.6px;display:flex;align-items:center;justify-content:center;min-width:0}
+nav a:hover{color:white;border-bottom-color:var(--red);background:rgba(230,0,0,0.10)}
+section{padding:44px 0;background:var(--bg)}
+section.alt{background:var(--bg-alt)}
+.section-header{display:flex;align-items:center;gap:14px;margin-bottom:8px}
+.section-number{background:linear-gradient(135deg,var(--black) 0%,var(--black-soft) 100%);color:white;font-size:14px;font-weight:700;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 2px 8px rgba(0,0,0,0.25);position:relative}
+.section-number::after{content:'';position:absolute;inset:-3px;border-radius:50%;border:2px solid var(--red);opacity:0.25}
+.section-header h2{font-size:22px;font-weight:800;color:var(--black);letter-spacing:-0.3px}
+.section-header h2 .red{color:var(--red)}
+.section-desc{color:var(--text-secondary);font-size:14px;font-weight:400;margin-bottom:0;max-width:850px;padding-left:52px}
+.collapsible-section .section-toggle{width:100%;text-align:left;background:transparent;border:none;cursor:pointer;padding:0;margin-bottom:20px;font:inherit;color:inherit}
+.collapsible-section .section-toggle:hover .section-header h2{color:var(--red)}
+.collapsible-section .section-toggle:focus-visible{outline:2px solid var(--red);outline-offset:4px;border-radius:8px}
+.section-toggle-top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;width:100%}
+.toggle-chevron{flex-shrink:0;width:34px;height:34px;border-radius:50%;background:var(--bg-alt);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;line-height:1;color:var(--text-muted);transition:background .2s ease,border-color .2s ease,color .2s ease;margin-top:2px}
+.toggle-chevron::before{content:'+'}
+.collapsible-section.is-open .toggle-chevron{background:var(--red-bg);border-color:#f5b8b8;color:var(--red-dark)}
+.collapsible-section.is-open .toggle-chevron::before{content:'-'}
+.collapsible-section .section-body{display:none}
+.collapsible-section.is-open .section-body{display:block}
+.section-body-inner{overflow:visible}
+.collapsible-section.is-open .section-desc{margin-bottom:8px}
+.collapsible-section:not(.is-open){padding-bottom:28px}
+.card{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:24px 28px;margin-bottom:16px;box-shadow:var(--shadow-sm);transition:box-shadow .25s ease,transform .25s ease,border-color .25s ease}
+.card:hover{box-shadow:var(--shadow-md);transform:translateY(-1px);border-color:var(--black-light)}
+.card h3{font-size:16px;font-weight:700;color:var(--text);margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.card h3 .step-num{background:var(--black);color:white;font-size:11px;font-weight:800;padding:4px 12px;border-radius:20px;letter-spacing:0.3px}
+.card h3 .step-num.q{background:var(--red)}
+.card p,.card li{font-size:13.5px;color:var(--text-secondary);line-height:1.7}
+.card ul{padding-left:20px;margin-top:6px}
+.card li{margin-bottom:4px}
+.card .ask{margin-top:12px;padding:12px 16px;background:var(--red-bg);border-left:4px solid var(--red);border-radius:6px;font-size:13px;color:var(--black)}
+.card .ask strong{color:var(--red-dark)}
+.card.dark{background:var(--black);color:white;border-color:var(--black-light)}
+.card.dark h3{color:white}
+.card.dark p,.card.dark li{color:rgba(255,255,255,0.75)}
+.alert{border-radius:10px;padding:18px 22px;margin:16px 0;font-size:13.5px;box-shadow:var(--shadow-sm)}
+.alert h4{font-size:14px;font-weight:700;margin-bottom:6px}
+.alert p,.alert li{line-height:1.7}
+.alert ul{padding-left:20px;margin-top:4px}
+.alert-black{background:var(--bg-alt);border-left:5px solid var(--black)}
+.alert-black h4{color:var(--black)}
+.alert-red{background:var(--red-bg);border-left:5px solid var(--red)}
+.alert-red h4{color:var(--red-dark)}
+.alert-orange{background:var(--orange-bg);border-left:5px solid var(--orange)}
+.alert-orange h4{color:var(--orange)}
+.alert-green{background:var(--green-bg);border-left:5px solid var(--green)}
+.alert-green h4{color:var(--green)}
+.alert-blue{background:var(--blue-bg);border-left:5px solid var(--blue)}
+.alert-blue h4{color:var(--blue)}
+.alert-gold{background:var(--gold-light);border-left:5px solid var(--gold)}
+.alert-gold h4{color:var(--gold-dark)}
+.separator{border:none;height:2px;background:linear-gradient(90deg,transparent,var(--red),var(--black),var(--red),transparent);margin:0;opacity:0.4}
+.checklist{list-style:none;padding:0}
+.checklist li{padding:10px 0 10px 32px;position:relative;font-size:13.5px;color:var(--text-secondary);border-bottom:1px solid var(--border-light);transition:background .15s}
+.checklist li:hover{background:var(--bg-alt)}
+.checklist li:last-child{border-bottom:none}
+.checklist li::before{content:'[ ]';position:absolute;left:0;top:10px;font-size:12px;color:var(--red);font-weight:700;font-family:monospace}
+footer{padding:36px 0 28px;text-align:center;background:linear-gradient(135deg,var(--black-deep) 0%,var(--black) 100%);color:rgba(255,255,255,0.6)}
+footer .footer-logo svg{display:block;height:36px;width:auto;margin:0 auto 14px}
+footer p{font-size:12px;line-height:1.6;max-width:600px;margin:0 auto}
+footer strong{color:var(--red-light)}
+footer .footer-contact{margin-top:14px;display:flex;justify-content:center;gap:18px;flex-wrap:wrap;font-size:11px;color:rgba(255,255,255,0.50)}
+footer .footer-contact a{color:rgba(255,255,255,0.65);text-decoration:none;transition:color .2s}
+footer .footer-contact a:hover{color:var(--red-light)}
+
+/* AMPLIACION INFORMES CODEX */
+.data-table{width:100%;border-collapse:collapse;margin:14px 0;font-size:12.5px;line-height:1.45;background:#fff;border-radius:8px;overflow:hidden;box-shadow:var(--shadow-sm)}
+.data-table th,.data-table td{border:1px solid var(--border);padding:9px 10px;vertical-align:top;text-align:left}
+.data-table th{background:var(--black);color:#fff;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.35px}
+.data-table tr:nth-child(even) td{background:var(--bg-alt)}
+.meta-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin:14px 0}
+.meta-item{background:var(--bg-alt);border:1px solid var(--border);border-radius:8px;padding:12px 14px;font-size:12.5px;color:var(--text-secondary)}
+.meta-item strong{display:block;font-size:10px;text-transform:uppercase;color:var(--text-muted);letter-spacing:.65px;margin-bottom:4px}
+.card .decision-meta{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 12px}
+.badge-chip{display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:4px 9px;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.35px;border:1px solid var(--border);background:var(--bg-alt);color:var(--text-secondary)}
+.badge-chip.blocker{background:var(--red-bg);border-color:#f5b8b8;color:var(--red-dark)}
+.badge-chip.high{background:var(--orange-bg);border-color:var(--orange-border);color:var(--orange)}
+.badge-chip.tech{background:var(--blue-bg);border-color:var(--blue-border);color:var(--blue)}
+.badge-chip.qa{background:var(--green-bg);border-color:var(--green-border);color:var(--green)}
+.card h4.inline-title{font-size:13px;color:var(--black);margin:12px 0 4px;font-weight:800}
+.compact-list li{margin-bottom:2px}
+
+@media (max-width:1024px){.page-wrapper{margin:16px;border-radius:12px}}
+@media (max-width:700px){.page-wrapper{margin:0;border-radius:0}.container{padding:0 20px}header{padding:36px 0 32px}.header-left h1{font-size:22px}.section-desc{padding-left:0}}
+@media print{body{background:white;padding-bottom:0}.page-wrapper{margin:0;box-shadow:none;border-radius:0}header{border-radius:0;-webkit-print-color-adjust:exact;print-color-adjust:exact}footer{border-radius:0}nav{display:none}.edit-bar{display:none}section{page-break-inside:avoid}.card:hover{transform:none;box-shadow:none}.collapsible-section .section-body{display:block!important}.toggle-chevron{display:none}.collapsible-card>.card-body{display:block!important}.card-chevron{display:none}}
+</style>
+</head>
+<body class="">
+<div class="page-wrapper" id="docContent">
+
+<header>
+  <div class="container">
+    <div class="header-left">
+      <div class="header-logo">
+        <svg viewBox="0 0 848 199.39" xmlns="http://www.w3.org/2000/svg">
+          <path fill="#ffffff" d="M22.89,28.62V0H0V109.7H114.47V28.62Zm68.68,41V85.85H22.89V53.42H91.57Z"></path>
+          <path fill="#ffffff" d="M297.61,28.62V0H274.72V109.7H389.18V28.62Zm68.68,41V85.85H297.61V53.42h68.68Z"></path>
+          <path fill="#ffffff" d="M137.36,28.62v24.8h45.79c45.11,0,45.78,0,45.78,1.91s-.67,1.9-45.78,1.9H137.36V109.7H251.82V28.62Zm57.23,57.23c-33.67,0-34.34,0-34.34-1.91S160.92,82,194.59,82s34.34,0,34.34,1.91S228.26,85.85,194.59,85.85Z"></path>
+          <path fill="#ff0000" d="M412.08,28.62V109.7H526.54V28.62Zm91.57,41V85.85H435V53.42h68.68Z"></path>
+          <path fill="#ff0000" d="M549.44,28.62V109.7H663.9V28.62Zm91.57,41V85.85H572.33V53.42H641Z"></path>
+          <polygon fill="#ffffff" points="686.79 69.16 686.79 109.7 709.69 109.7 709.69 53.42 778.37 53.42 778.37 109.7 801.26 109.7 801.26 28.62 686.79 28.62 686.79 69.16"></polygon>
+          <polygon fill="#ffffff" points="824.15 69.16 824.15 109.7 847.05 109.7 847.05 28.62 824.15 28.62 824.15 69.16"></polygon>
+          <path fill="#ffffff" d="M470.26,146.9v32.43h7.63l.1-14.59c0-16,.86-19.94,5-23,3.91-2.86,12.11-2.77,15.36.28l2.48,2.29v35h7.63V161.4c0-15.07-.29-18.32-1.72-21.08-2.29-4.58-5.91-7-11.54-7.54-6.58-.57-11,.38-14.4,3.24l-2.87,2.48v-24h-7.63Z"></path>
+          <polygon fill="#ffffff" points="627.65 146.9 627.65 179.33 635.28 179.33 635.28 114.47 627.65 114.47 627.65 146.9"></polygon>
+          <path fill="#ffffff" d="M749,117.52c-1.62,1.62-1.43,7,.19,8.39,4,3.25,8.77-2.1,6.48-7.15a4.18,4.18,0,0,0-6.67-1.24"></path>
+          <polygon fill="#ffffff" points="327.18 122.1 327.18 125.91 346.26 125.91 346.26 179.33 353.89 179.33 353.89 125.91 372.97 125.91 372.97 118.28 327.18 118.28 327.18 122.1"></polygon>
+          <path fill="#ffffff" d="M417.8,158.34v-5.53c0-7.63-3.53-14.59-9-17.84S396,131.73,390,134.78h0a18.21,18.21,0,0,0-7,6.78c-2.48,3.91-3,5.72-3.24,13-.29,5.15,0,9.73.76,11.92,1.52,4.68,6.29,9.92,11,12,4.48,2.1,15.26,2.39,20.51.57,2.95-1,3.34-1.62,3.62-4.77.19-1.9.1-3.53-.19-3.53s-3,.67-6,1.44a45.43,45.43,0,0,1-8.39,1.43c-6.49,0-13.83-6.59-13.83-12.5v-2.77Zm-30.72-6.67.67-2.67a11.55,11.55,0,0,1,6.49-8.3c3.91-1.72,5.72-1.72,9.73-.1,3.43,1.43,4.67,3.15,5.72,7.92l.67,3.15Z"></path>
+          <path fill="#ffffff" d="M437.83,134.69a19.47,19.47,0,0,0-7.06,6.87c-2.48,3.91-2.95,5.72-3.24,13-.86,17.36,5.91,25.66,20.79,25.75,8,0,10.88-1.43,11.26-5.62.29-3.15.29-3.25-2.86-2.58-11.93,2.48-16.6,1.24-19.75-5.06-2.67-5.15-2.76-15.83-.19-20.89,3-5.81,7.25-7,19.08-5.72,1.81.19,2.48-.28,3.24-2.38,1.34-4-.09-4.77-9.06-5.25-7-.29-8.39-.1-12.21,1.91"></path>
+          <path fill="#ffffff" d="M536.56,133.83a15.15,15.15,0,0,0-4.2,2.86c-1.81,2.29-3,2-3-.76,0-2.1-.38-2.39-3.33-2.39h-3.34v45.79h7.63l.09-14.59c0-16,.86-19.94,5-23,3.91-2.86,12.12-2.77,15.36.28l2.48,2.29v35h7.63V161.4c0-19.65-.67-22.42-6-26.33-3.34-2.48-14-3.15-18.31-1.24"></path>
+          <path fill="#ffffff" d="M605.43,135.64c-5.34-3.53-15.55-4.1-21.46-1-7,3.53-10.78,10.78-10.78,20.89,0,9.06,1.43,13.74,5.91,18.6,4.68,5.06,8.68,6.49,16.6,6,8.11-.47,12.78-3.62,16.31-10.87C617.64,157.77,614.49,141.65,605.43,135.64Zm-12.88,37.58c-8.2-1-11.64-6.2-11.64-17.36,0-11.35,5.15-17.17,14.22-16.12a20,20,0,0,1,6.29,1.82c3.53,2.29,5.25,7.34,5.25,15.07C606.67,168.36,601.61,174.37,592.55,173.22Z"></path>
+          <path fill="#ffffff" d="M679.83,135.64c-5.34-3.53-15.55-4.1-21.46-1-7,3.53-10.78,10.78-10.78,20.89,0,9.06,1.43,13.74,5.91,18.6,4.68,5.06,8.68,6.49,16.6,6,8.11-.47,12.78-3.62,16.31-10.87C692,157.77,688.89,141.65,679.83,135.64ZM667,173.22c-8.2-1-11.63-6.2-11.63-17.36,0-11.35,5.15-17.17,14.21-16.12a20,20,0,0,1,6.29,1.82c3.53,2.29,5.25,7.34,5.25,15.07C681.07,168.36,676,174.37,667,173.22Z"></path>
+          <path fill="#ffffff" d="M735.16,139.65c3.53-.86,5.34-3.44,3.43-5.15-.38-.38-6.77-1-14.12-1.34-12-.57-13.73-.38-17.45,1.34h0c-8.68,3.91-10.59,18.6-3.25,25.08,1.91,1.72,1.91,1.82.1,3.63-2,2-2.58,8.87-.76,9.92.57.38-.58,2-2.77,3.91-7.25,6.2-6,15.83,2.67,20.13,5.15,2.67,16.12,3,23.56.76,8.87-2.67,13.55-10.87,10.68-19-2.19-6.2-5-7.54-17.36-8.3-5.91-.38-10.77-.67-10.87-.76a5.53,5.53,0,0,1-.29-2.48c0-3,2.48-4.3,8.21-4.3a23.4,23.4,0,0,0,8.77-2c6.58-3.24,9.45-11.64,6.49-19.08C731.72,141,732.49,140.32,735.16,139.65Zm-6,39.58c2,1.72,1.9,7.06-.1,8.88-4.67,4-14.31,5.62-20.79,3.43s-7.25-10-1.15-12.78C711,177,726.86,177.33,729.15,179.23ZM724,154.34c-3.72,3.91-13.93,3.43-16.22-.77-2.39-4.57-.29-11.54,4.2-13.44,3.53-1.53,9.44-.29,11.73,2.48C726.57,145.85,726.67,151.48,724,154.34Z"></path>
+          <path fill="#ffffff" d="M807,158.34v-5.53c0-7.63-3.53-14.59-9-17.84s-12.88-3.24-18.79-.19h0a18.16,18.16,0,0,0-7,6.78c-2.48,3.91-3,5.72-3.24,13-.29,5.15,0,9.73.76,11.92,1.53,4.68,6.3,9.92,11,12,4.48,2.1,15.26,2.39,20.51.57,3-1,3.34-1.62,3.62-4.77.2-1.9.1-3.53-.19-3.53s-3,.67-6,1.44a45.29,45.29,0,0,1-8.39,1.43c-6.49,0-13.83-6.59-13.83-12.5v-2.77Zm-30.71-6.67.67-2.67a11.51,11.51,0,0,1,6.48-8.3c3.91-1.72,5.73-1.72,9.73-.1,3.44,1.43,4.68,3.15,5.73,7.92l.66,3.15Z"></path>
+          <path fill="#ffffff" d="M823.68,133.92c-5.15,2.29-7.63,5.92-7.63,11.07,0,6.2,3.24,9.54,13.16,13.55,11.35,4.67,14.31,8.1,10.3,12.11-3.53,3.53-13.64,3.34-22.32-.38-1.53-.67-1.72-.29-1.43,3.43s.57,4.29,3.62,5.34c4.58,1.53,16.6,1.53,20.32-.09a12.64,12.64,0,0,0,8.3-12.21c0-4.39-.38-5.25-3.62-8.3-2.2-2.1-6.49-4.48-11-6.2-4-1.43-7.92-3.43-8.68-4.29-4.77-5.25,1.52-9.64,11.35-7.92a43.75,43.75,0,0,1,7.25,1.62c1.14.38,1.9-.28,2.76-2.38.67-1.72.86-3.25.38-3.72-3.24-3-17.55-3.91-22.79-1.63"></path>
+          <polygon fill="#ffffff" points="747.84 156.44 747.84 179.33 755.47 179.33 755.47 133.54 747.84 133.54 747.84 156.44"></polygon>
+        </svg>
+      </div>
+      <h1>Información a solicitar a <span class="red">negocio</span> - Registro Horario Fase II</h1>
+      <p>Rediseño del sistema de Registro Horario - Fase II (Módulo de Informes, Rol Inspector/a, Rol RLPT y Accesos externos)</p>
+      <p style="color:rgba(255,255,255,0.72);font-size:11px;margin-top:10px;max-width:580px;line-height:1.5">Decisiones funcionales pendientes de cerrar con negocio. Complementado con los informes Codex 01-04 de decisiones, backlog y QA.</p>
+    </div>
+    <div class="header-badge">
+      Cierre de alcance<span>Negocio</span>
+    </div>
+  </div>
+</header>
+
+<nav id="mainNav">
+  <div class="container">
+    <div class="nav-logo" aria-hidden="true">
+      <svg viewBox="0 0 848 199.39" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#ffffff" d="M22.89,28.62V0H0V109.7H114.47V28.62Zm68.68,41V85.85H22.89V53.42H91.57Z"></path>
+        <path fill="#ffffff" d="M297.61,28.62V0H274.72V109.7H389.18V28.62Zm68.68,41V85.85H297.61V53.42h68.68Z"></path>
+        <path fill="#ffffff" d="M137.36,28.62v24.8h45.79c45.11,0,45.78,0,45.78,1.91s-.67,1.9-45.78,1.9H137.36V109.7H251.82V28.62Zm57.23,57.23c-33.67,0-34.34,0-34.34-1.91S160.92,82,194.59,82s34.34,0,34.34,1.91S228.26,85.85,194.59,85.85Z"></path>
+        <path fill="#ff0000" d="M412.08,28.62V109.7H526.54V28.62Zm91.57,41V85.85H435V53.42h68.68Z"></path>
+        <path fill="#ff0000" d="M549.44,28.62V109.7H663.9V28.62Zm91.57,41V85.85H572.33V53.42H641Z"></path>
+        <polygon fill="#ffffff" points="686.79 69.16 686.79 109.7 709.69 109.7 709.69 53.42 778.37 53.42 778.37 109.7 801.26 109.7 801.26 28.62 686.79 28.62 686.79 69.16"></polygon>
+        <polygon fill="#ffffff" points="824.15 69.16 824.15 109.7 847.05 109.7 847.05 28.62 824.15 28.62 824.15 69.16"></polygon>
+      </svg>
+    </div>
+    <a href="#contexto">Contexto</a>
+    <a href="#decisiones">Decisiones</a>
+    <a href="#informes">Informes/UAT</a>
+    <a href="#plan-uat">Cierre</a>
+    <a href="#checklist">Checklist</a>
+  </div>
+</nav>
+
+<!-- CONTEXTO AMPLIADO -->
+
+<section id="contexto" class="collapsible-section is-open">
+  <div class="container">
+    <button type="button" class="section-toggle" aria-expanded="true" aria-controls="contexto-body">
+      <div class="section-toggle-top">
+        <div class="section-header">
+          <div class="section-number">1</div>
+          <h2>Contexto ejecutivo y <span class="red">alcance Fase II</span></h2>
+        </div>
+        <span class="toggle-chevron" aria-hidden="true"></span>
+      </div>
+      <p class="section-desc">Resumen ampliado con los informes Codex: alcance, decisiones pendientes y principales riesgos de negocio antes de cerrar Fase II.</p>
+    </button>
+    <div id="contexto-body" class="section-body">
+      <div class="section-body-inner">
+
+    <div class="alert alert-red">
+      <h4>Conclusión principal</h4>
+      <p>La Fase II no debe cerrarse como alcance definitivo sin resolver decisiones funcionales y técnicas. No es una ampliación simple de pantallas: introduce reglas transversales de seguridad, nuevos roles, acceso externo, anonimato, informes Excel y suplantación.</p>
+    </div>
+    <div class="meta-grid">
+      <div class="meta-item"><strong>Estado actual</strong>Alcance no cerrable con seguridad hasta responder los bloqueantes.</div>
+      <div class="meta-item"><strong>Condición previa</strong>No calcular esfuerzo ni compromiso hasta tener respuestas verificables.</div>
+      <div class="meta-item"><strong>Uso del documento</strong>Recoger acuerdos, responsables, criterios de aceptación y dataset UAT.</div>
+      <div class="meta-item"><strong>Riesgo principal</strong>Permisos, anonimato, informes, históricos y dataset UAT incompletos.</div>
+    </div>
+    <div class="card">
+      <h3>Bloques de alcance</h3>
+      <table class="data-table">
+        <thead><tr><th>Bloque</th><th>Decisión que debe quedar cerrada</th></tr></thead>
+        <tbody>
+          <tr><td>Módulo de Informes</td><td>Filtros, tabla, paginación, XLSX tabla/simple/detallado, columnas, fechas, volumen y variantes por rol.</td></tr>
+          <tr><td>Inspector/a</td><td>Acceso externo, empresas autorizadas, solo lectura, anonimato, KPIs, ficha de consulta e informes anonimizados.</td></tr>
+          <tr><td>RLPT</td><td>Naturaleza del rol, ámbito, privacidad, herencia de perfil Usuario y permisos de Informes.</td></tr>
+          <tr><td>Accesos externos</td><td>Alta, invitación, caducidad, revocación, duplicados, multiempresa e integración identidad/email.</td></tr>
+          <tr><td>Superadmin</td><td>Modo simulación reforzado, posible suplantación, escritura permitida o no y auditoría.</td></tr>
+          <tr><td>QA/UAT</td><td>Dataset oficial con resultados esperados para permisos, cálculos, anonimato y Excel.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="alert alert-green">
+      <h4>Lo que ya no debe tratarse como bloqueante</h4>
+      <ul><li>El comportamiento de importación CSV actual ya está implementado y probado; se mantiene como regresión QA.</li><li>La UX de simulación existente ya deshabilita acciones en muchas pantallas; falta consistencia y defensa backend en lo nuevo.</li><li>Existe base técnica para roles externos; la duda real es si se adopta como modelo oficial de Inspector/RLPT y con qué alcance.</li></ul>
+    </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="separator">
+
+<!-- DECISIONES NEGOCIO -->
+
+<section id="decisiones" class="collapsible-section">
+  <div class="container">
+    <button type="button" class="section-toggle" aria-expanded="false" aria-controls="decisiones-body">
+      <div class="section-toggle-top">
+        <div class="section-header">
+          <div class="section-number">2</div>
+          <h2>Decisiones de <span class="red">negocio y seguridad</span></h2>
+        </div>
+        <span class="toggle-chevron" aria-hidden="true"></span>
+      </div>
+      <p class="section-desc">Preguntas bloqueantes que negocio, producto y seguridad deben cerrar antes de definir tareas verificables.</p>
+    </button>
+    <div id="decisiones-body" class="section-body">
+      <div class="section-body-inner">
+<div class="card collapsible-card">
+      <button type="button" class="card-toggle" aria-expanded="false" aria-controls="card-d01-body"><h3><span class="step-num q">D01</span> Matriz final de permisos por rol</h3><span class="card-chevron" aria-hidden="true"></span></button><div id="card-d01-body" class="card-body"><div class="card-body-inner">
+      <div class="decision-meta"><span class="badge-chip blocker">Bloqueante</span><span class="badge-chip">Roles y permisos</span></div>
+      <ul><li>Debe quedar definida por rol, módulo, acción, empresa activa, modo simulación y acceso por URL directa.</li><li>Afecta a Admin, Usuario, Referente, Superadmin, Inspector/a y RLPT.</li></ul>
+      <div class="ask"><strong>Pregunta exacta:</strong> ¿cuál es la matriz final de permisos para cada rol y escenario?</div>
+      <div class="answer-block">
+        <span class="answer-label">Respuesta / cierre</span>
+        <div class="answer" data-placeholder="Matriz aprobada, excepciones y responsable…"><span data-path-to-node="4,1,1,0"><span class="citation-103">* </span><b data-path-to-node="4,1,1,0" data-index-in-node="13"><span class="citation-103">Admin:</span></b><span class="citation-103"> Acceso total con permisos de escritura y configuración (Inicio, Registro jornada, Mi perfil, Usuarios, Ayuda, Configuración)</span></span><span data-path-to-node="4,1,1,1"><span class="citation-103 citation-end-103"><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="1"><!----></sup></source-footnote></span></span><span data-path-to-node="4,1,1,2">. </span><span data-path-to-node="4,1,1,3"><span class="citation-102"></span></span><span data-path-to-node="4,1,1,4">En Fase II, lee y exporta el módulo de Informes.</span><div><span data-path-to-node="4,1,2,0,1,0"><b data-path-to-node="4,1,2,0,1,0" data-index-in-node="0"><span class="citation-101">Usuario:</span></b><span class="citation-101"> Acceso básico (Inicio, Registro jornada, Mi perfil, Ayuda)</span></span><span data-path-to-node="4,1,2,0,1,1"><span class="citation-101 citation-end-101"><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="3"><!----></sup></source-footnote></span></span><span data-path-to-node="4,1,2,0,1,2">. </span><span data-path-to-node="4,1,2,0,1,3"><span class="citation-100"></span></span><span data-path-to-node="4,1,2,0,1,4">No edita datos personales excepto "Persona de referencia"</span><span data-path-to-node="4,1,2,0,1,5"><span class="citation-100 citation-end-100"><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="4"><!----></sup></source-footnote></span></span><span data-path-to-node="4,1,2,0,1,6">. </span><span data-path-to-node="4,1,2,0,1,7"><span class="citation-99"></span></span><span data-path-to-node="4,1,2,0,1,8"><span class="citation-99">Puede editar su planificación de calendario </span><b data-path-to-node="4,1,2,0,1,8" data-index-in-node="44"><span class="citation-99">solo</span></b><span class="citation-99"> si el Admin activa el permiso global o individual</span></span><span data-path-to-node="4,1,2,0,1,9"><span class="citation-99 citation-end-99"><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="5"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="5"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="5"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="5"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="5"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="5"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="5"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="5"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="5"><!----></sup></source-footnote></span></span><span data-path-to-node="4,1,2,0,1,10">.</span></div><div><sources-carousel-inline ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2457827821=""></sources-carousel-inline><span data-path-to-node="4,1,2,1,1,0"><b data-path-to-node="4,1,2,1,1,0" data-index-in-node="0"><span class="citation-98">Superadmin:</span></b><span class="citation-98"> Ve las mismas pantallas que el Admin pero en </span><b data-path-to-node="4,1,2,1,1,0" data-index-in-node="57"><span class="citation-98">modo simulación</span></b><span class="citation-98"> (lectura estricta)</span></span><span data-path-to-node="4,1,2,1,1,1"><span class="citation-98 citation-end-98"><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="6"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="6"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="6"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="6"><!----></sup></source-footnote></span></span><span data-path-to-node="4,1,2,1,1,2">. </span><span data-path-to-node="4,1,2,1,1,3"><span class="citation-97"></span></span><span data-path-to-node="4,1,2,1,1,4">No realiza ningún tipo de cambio en fichajes, contraseñas, usuarios ni configuraciones</span><span data-path-to-node="4,1,2,1,1,5"><span class="citation-97 citation-end-97"><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="7"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="7"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="7"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="7"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="7"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="7"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="7"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="7"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="7"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="7"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="7"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="7"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="7"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="7"><!----></sup></source-footnote></span></span><span data-path-to-node="4,1,2,1,1,6">. </span><span data-path-to-node="4,1,2,1,1,7"><span class="citation-96"></span></span><span data-path-to-node="4,1,2,1,1,8">Puede "Suplantar usuario" para ver la interfaz exacta del Rol Usuario (con los permisos de ese usuario específico)</span><span data-path-to-node="4,1,2,1,1,9"><span class="citation-96 citation-end-96"><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="8"><!----></sup></source-footnote></span></span><span data-path-to-node="4,1,2,1,1,10">.</span><sources-carousel-inline ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2457827821=""></sources-carousel-inline><br><span data-path-to-node="4,1,1,5"><span class="citation-102 citation-end-102"><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="2"><!----></sup></source-footnote></span></span><span data-path-to-node="4,1,1,6"></span><div><span data-path-to-node="4,1,1,4"><span data-path-to-node="4,1,2,2,1,0"><b data-path-to-node="4,1,2,2,1,0" data-index-in-node="0"><span class="citation-95">Inspector/a:</span></b><span class="citation-95"> Acceso exclusivo de </span><b data-path-to-node="4,1,2,2,1,0" data-index-in-node="33"><span class="citation-95">solo lectura y datos anonimizados (inicialmente)</span></b><span class="citation-95">&nbsp;(módulos Empresas, Usuarios e Informes)</span></span><span data-path-to-node="4,1,2,2,1,1"><span class="citation-95 citation-end-95"><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="9"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="9"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="9"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="9"><!----></sup></source-footnote></span></span><span data-path-to-node="4,1,2,2,1,2">. </span><span data-path-to-node="4,1,2,2,1,3"><span class="citation-94"></span></span><span data-path-to-node="4,1,2,2,1,4"><span class="citation-94">No modifica absolutamente nada</span></span><span data-path-to-node="4,1,2,2,1,5"><span class="citation-94 citation-end-94"><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="10"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="10"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="10"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="10"><!----></sup></source-footnote></span></span><span data-path-to-node="4,1,2,2,1,6">.</span></span></div></div><div><span data-path-to-node="4,1,1,4"><span data-path-to-node="4,1,2,2,1,6"><span data-path-to-node="4,1,2,3,1,0"><b data-path-to-node="4,1,2,3,1,0" data-index-in-node="0"><span class="citation-93">RLPT:</span></b><span class="citation-93"> Hereda la interfaz del Perfil Usuario e integra la consulta y exportación del nuevo módulo de Informes</span></span><span data-path-to-node="4,1,2,3,1,1"><span class="citation-93 citation-end-93"><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="11"><!----></sup></source-footnote></span></span><span data-path-to-node="4,1,2,3,1,2">. </span><span data-path-to-node="4,1,2,3,1,3"><span class="citation-92"></span></span><span data-path-to-node="4,1,2,3,1,4"><span class="citation-92">No modifica datos de la plantilla ni compensaciones manuales.</span></span><span data-path-to-node="4,1,2,3,1,5"><span class="citation-92 citation-end-92"><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="12"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="12"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="12"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="12"><!----></sup></source-footnote></span></span><span data-path-to-node="4,1,2,3,1,6"></span></span></span></div></div>
+      </div>
+    </div></div></div>
+<div class="card collapsible-card">
+      <button type="button" class="card-toggle" aria-expanded="false" aria-controls="card-d02-body"><h3><span class="step-num q">D02</span> Identidad de Inspector/a y RLPT</h3><span class="card-chevron" aria-hidden="true"></span></button><div id="card-d02-body" class="card-body"><div class="card-body-inner">
+      <div class="decision-meta"><span class="badge-chip blocker">Bloqueante</span><span class="badge-chip">Accesos externos</span></div>
+      <ul><li>Hay que decidir si Inspector/a y RLPT son usuarios internos, accesos externos, roles Keycloak con ámbito o una combinación.</li><li>Condiciona alta, login, revocación, multiempresa y respuesta de <code>/v1/me</code>.</li></ul>
+      <div class="ask"><strong>Pregunta exacta:</strong> ¿qué naturaleza funcional tiene cada rol y quién gestiona su acceso?</div>
+      <div class="answer-block">
+        <span class="answer-label">Respuesta / cierre</span>
+        <div class="answer" data-placeholder="Modelo funcional aprobado…"><span data-path-to-node="6,1,1,0">Son accesos externos de consulta</span><span data-path-to-node="6,1,1,1"><span class="citation-91 citation-end-91"><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="13"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="13"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="13"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="13"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="13"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="13"><!----></sup></source-footnote></span></span><span data-path-to-node="6,1,1,2">. </span><span data-path-to-node="6,1,1,3"><span class="citation-90"></span></span><span data-path-to-node="6,1,1,4"><span class="citation-90">Su alta, visualización y revocación (eliminación) se gestionan directamente por el </span><b data-path-to-node="6,1,1,4" data-index-in-node="83"><span class="citation-90">Rol Administrador/a</span></b><span class="citation-90"> de la empresa desde la pestaña </span><b data-path-to-node="6,1,1,4" data-index-in-node="134"><span class="citation-90">Configuración &gt; Accesos externos</span></b></span><span data-path-to-node="6,1,1,5"><span class="citation-90 citation-end-90"><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="14"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="14"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="14"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="14"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="14"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="14"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="14"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="14"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="14"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="14"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="14"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="14"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="14"><!----></sup></source-footnote></span></span><span data-path-to-node="6,1,1,6">.</span></div>
+      </div>
+    </div></div></div>
+<div class="card collapsible-card">
+      <button type="button" class="card-toggle" aria-expanded="false" aria-controls="card-d03-body"><h3><span class="step-num q">D03</span> Anonimización, identificador y textos sensibles</h3><span class="card-chevron" aria-hidden="true"></span></button><div id="card-d03-body" class="card-body"><div class="card-body-inner">
+      <div class="decision-meta"><span class="badge-chip blocker">Bloqueante</span><span class="badge-chip">Privacidad</span></div>
+      <ul><li>Incluye campos visibles, campos ocultos, identificador anónimo estable/reversible, comentarios, observaciones y descripciones de compensaciones.</li><li>Debe aplicar a API, pantalla, Excel, logs y auditoría; anonimizar solo el nombre no evita fugas en textos libres.</li></ul>
+      <div class="ask"><strong>Preguntas exactas:</strong> ¿qué campos se ocultan, transforman o muestran al Inspector/a? ¿Qué ocurre con comentarios sensibles? ¿El identificador anónimo debe ser estable por empresa?</div>
+      <div class="answer-block">
+        <span class="answer-label">Respuesta / cierre</span>
+        <div class="answer" data-placeholder="Reglas de anonimización y privacidad…"><span data-path-to-node="8,1,1,0"><span class="citation-89">* </span><b data-path-to-node="8,1,1,0" data-index-in-node="13"><span class="citation-89">Campos ocultos/transformados:</span></b><span class="citation-89"> En la ficha de usuario para el Inspector/a se </span><b data-path-to-node="8,1,1,0" data-index-in-node="89"><span class="citation-89">difuminan/anonimizan</span></b><span class="citation-89"> el </span><i data-path-to-node="8,1,1,0" data-index-in-node="113"><span class="citation-89">Nombre</span></i><span class="citation-89"> y los </span><i data-path-to-node="8,1,1,0" data-index-in-node="126"><span class="citation-89">Apellidos</span></i></span><span data-path-to-node="8,1,1,1"><span class="citation-89 citation-end-89"><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="15"><!----></sup></source-footnote></span></span><span data-path-to-node="8,1,1,2">. </span><span data-path-to-node="8,1,1,3"><span class="citation-88"></span></span><span data-path-to-node="8,1,1,4"><span class="citation-88">El campo </span><i data-path-to-node="8,1,1,4" data-index-in-node="9"><span class="citation-88">ID Persona</span></i><span class="citation-88"> se muestra en texto plano (ej. PT-0005 o EMP-001) para permitir el seguimiento analítico sin revelar la identidad</span></span><span data-path-to-node="8,1,1,5"><span class="citation-88 citation-end-88"><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="16"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="16"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="16"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="16"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="16"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="16"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="16"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="16"><!----></sup></source-footnote></span></span><span data-path-to-node="8,1,1,6">.</span><div><span data-path-to-node="8,1,1,6"><span data-path-to-node="8,1,2,0,1,0"><b data-path-to-node="8,1,2,0,1,0" data-index-in-node="0"><span class="citation-87">Textos libres/comentarios:</span></b><span class="citation-87"> Las tablas de "Movimientos del año" y "Compensaciones manuales" muestran la descripción y comentarios estándar del periodo de forma pública en modo lectura</span></span><span data-path-to-node="8,1,2,0,1,1"><span class="citation-87 citation-end-87"><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="17"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="17"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="17"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="17"><!----></sup></source-footnote></span></span><span data-path-to-node="8,1,2,0,1,2">.</span></span></div><div><span data-path-to-node="8,1,1,6"><span data-path-to-node="8,1,2,0,1,2"><span data-path-to-node="8,1,2,1,1,0"><b data-path-to-node="8,1,2,1,1,0" data-index-in-node="0"><span class="citation-86">Estabilidad:</span></b><span class="citation-86"> El identificador (ID Persona) es el dato técnico estable asignado al empleado dentro de la organización</span></span><span data-path-to-node="8,1,2,1,1,1"><span class="citation-86 citation-end-86"><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="18"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="18"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="18"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="18"><!----></sup></source-footnote></span></span><span data-path-to-node="8,1,2,1,1,2">. Este dato permitirá que el Inspector/a pueda identificar si lo requiere a la persona trabajadora en caso de requerírselo a la empresa ya que cada ID va vinculado a una persona trabajadora y preferimos inicialmente anonimizar datos hasta ver que dice la normativa al respecto.</span><sources-carousel-inline ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2457827821=""></sources-carousel-inline></span></span></div></div>
+      </div>
+    </div></div></div>
+<div class="card collapsible-card">
+      <button type="button" class="card-toggle" aria-expanded="false" aria-controls="card-d06-body"><h3><span class="step-num q">D06</span> Ciclo de vida, revocación y duplicados de accesos externos</h3><span class="card-chevron" aria-hidden="true"></span></button><div id="card-d06-body" class="card-body"><div class="card-body-inner">
+      <div class="decision-meta"><span class="badge-chip blocker">Bloqueante</span><span class="badge-chip">Accesos externos</span></div>
+      <ul><li>Estados posibles: invitado, activo, caducado, revocado, bloqueado, reenviado.</li><li>Hay que decidir si la revocación corta sesiones y descargas en curso, y si un email puede ser trabajador, Inspector/a, RLPT o multiempresa.</li></ul>
+      <div class="ask"><strong>Preguntas exactas:</strong> ¿qué estados existen? ¿La revocación es inmediata? ¿Cómo se tratan duplicados y multiempresa?</div>
+      <div class="answer-block">
+        <span class="answer-label">Respuesta / cierre</span>
+        <div class="answer" data-placeholder="Estados, caducidad, revocación y duplicados…"><span data-path-to-node="10,1,1,0"><span class="citation-85">* </span><b data-path-to-node="10,1,1,0" data-index-in-node="13"><span class="citation-85">Estados:</span></b><span class="citation-85"> Se definen dos estados básicos en el listado de control: Activo (una vez creado el acceso en la tabla) </span></span><span data-path-to-node="10,1,1,1"><span class="citation-85 citation-end-85"><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="19"><!----></sup></source-footnote></span></span><span data-path-to-node="10,1,1,2"><span class="citation-84"></span></span><span data-path-to-node="10,1,1,3">y No Activo equivalente a Revocado/Eliminado</span><span data-path-to-node="10,1,1,4"><span class="citation-84 citation-end-84"><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="20"><!----></sup></source-footnote></span></span><span data-path-to-node="10,1,1,5">.</span><div><b data-path-to-node="10,1,1,0" data-index-in-node="13">Revocación:</b><span class="citation-85">&nbsp;La eliminación es definitiva tras la confirmación del modal, eliminado de forma inmediata todos los accesos del usuario externo.</span></div><div><b data-path-to-node="10,1,1,0" data-index-in-node="13">Duplicados/Multiempresa:&nbsp;</b>El Inspector/a inicia sesión con el email único: inspector@itss.gob.es y visualiza en su pantalla principal un listado de todas las empresas asignadas a las que está autorizado/a a "Acceder".</div></div>
+      </div>
+    </div></div></div>
+<div class="card collapsible-card">
+      <button type="button" class="card-toggle" aria-expanded="false" aria-controls="card-d09-body"><h3><span class="step-num q">D09</span> Estado sin empresa y KPIs del Inspector/a</h3><span class="card-chevron" aria-hidden="true"></span></button><div id="card-d09-body" class="card-body"><div class="card-body-inner">
+      <div class="decision-meta"><span class="badge-chip blocker">Bloqueante</span><span class="badge-chip">Inspector/a</span></div>
+      <ul><li>El Inspector/a puede tener acceso vigente sin empresa seleccionada o sin empresas asignadas.</li><li>Los KPIs deben definir día computable, registro correcto, registro incompleto y sin registro.</li></ul>
+      <div class="ask"><strong>Preguntas exactas:</strong> ¿qué ve antes de elegir empresa? ¿Qué cuenta como día que debía registrarse? ¿Cómo computan festivos, vacaciones, jornada parcial y ausencias?</div>
+      <div class="answer-block">
+        <span class="answer-label">Respuesta / cierre</span>
+        <div class="answer" data-placeholder="Reglas de estado inicial y KPIs…"><span data-path-to-node="12,1,1,0,1,0"><b data-path-to-node="12,1,1,0,1,0" data-index-in-node="0"><span class="citation-80">Antes de elegir:</span></b><span class="citation-80"> Visualiza el módulo central "Empresas" con el literal "Sin empresa seleccionada" en la barra superior</span></span><span data-path-to-node="12,1,1,0,1,1"><span class="citation-80 citation-end-80"><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="24"><!----></sup></source-footnote></span></span><span data-path-to-node="12,1,1,0,1,2">. </span><span data-path-to-node="12,1,1,0,1,3"><span class="citation-79"></span></span><span data-path-to-node="12,1,1,0,1,4">El menú lateral se limita a "Empresas" y "Configuración"</span><span data-path-to-node="12,1,1,0,1,5"><span class="citation-79 citation-end-79"><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="25"><!----></sup></source-footnote></span></span><span data-path-to-node="12,1,1,0,1,6">.</span><div><br><div><b data-path-to-node="12,1,1,1,1,0" data-index-in-node="0">KPI "Personas Trabajadoras":&nbsp;</b>Muestra el volumen total de la plantilla.<br><div><span data-path-to-node="12,1,1,0,1,6"><span data-path-to-node="12,1,1,1,1,0"><b data-path-to-node="12,1,1,1,1,0" data-index-in-node="0"><span class="citation-78">KPI "Sin registro":</span></b><span class="citation-78"> Cuenta a los trabajadores que debían registrar jornada en el periodo filtrado (según sus horas teóricas y planificación) y no lo hicieron</span></span><span data-path-to-node="12,1,1,1,1,1"><span class="citation-78 citation-end-78"><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="26"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="26"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="26"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="26"><!----></sup></source-footnote></span></span><span data-path-to-node="12,1,1,1,1,2">. </span><span data-path-to-node="12,1,1,1,1,3"><span class="citation-77"></span></span><span data-path-to-node="12,1,1,1,1,4"><span class="citation-77">En días festivos y de vacaciones </span><b data-path-to-node="12,1,1,1,1,4" data-index-in-node="33"><span class="citation-77">no se espera</span></b><span class="citation-77"> que se registren horas de trabajo (salvo que esté activo el parámetro de permitir horas en festivos)</span></span><span data-path-to-node="12,1,1,1,1,5"><span class="citation-77 citation-end-77"><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="27"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="27"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="27"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="27"><!----></sup></source-footnote></span></span><span data-path-to-node="12,1,1,1,1,6"></span></span></div><div><span data-path-to-node="12,1,1,0,1,6"><span data-path-to-node="12,1,1,1,1,4"><span class="citation-77"><b data-path-to-node="12,1,1,1,1,0" data-index-in-node="0"><span class="citation-78">KPI "Registro Correcto":&nbsp;</span></b></span></span></span>Cuenta a los trabajadores que realizan fichajes diarios conformes y validados. Y muestra todos los fichajes realizados correctamente según el filtro aplicado el cual puede ser: Hoy, Semana Actual, Mes Actual y Personalizado.</div><div><b data-path-to-node="12,1,1,1,1,0" data-index-in-node="0">KPI "Registro Incompleto":&nbsp;</b>Muestra concretamente los registros que no se han cerrado durante la jornada. Pueden varias según filtro aplicado.</div></div></div></div>
+      </div>
+    </div></div></div>
+<div class="card collapsible-card">
+      <button type="button" class="card-toggle" aria-expanded="false" aria-controls="card-d11-body"><h3><span class="step-num q">D11</span> Naturaleza, ámbito y privacidad del RLPT</h3><span class="card-chevron" aria-hidden="true"></span></button><div id="card-d11-body" class="card-body"><div class="card-body-inner">
+      <div class="decision-meta"><span class="badge-chip blocker">Bloqueante</span><span class="badge-chip">RLPT</span></div>
+      <ul><li>Debe cerrarse si RLPT ficha como trabajador, es externo de consulta o perfil híbrido.</li><li>Debe definirse si ve toda la plantilla o un ámbito, y si los datos son reales o anonimizados.</li></ul>
+      <div class="ask"><strong>Preguntas exactas:</strong> ¿qué recorrido conserva del perfil Usuario? ¿Qué datos puede consultar y exportar?</div>
+      <div class="answer-block">
+        <span class="answer-label">Respuesta / cierre</span>
+        <div class="answer" data-placeholder="Definición RLPT aprobada…"><span data-path-to-node="14,1,1,0">El RLPT conserva toda su operativa personal de fichaje e historial como empleado (Rol Usuario)</span><span data-path-to-node="14,1,1,1"><span class="citation-76 citation-end-76"><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="28"><!----></sup></source-footnote></span></span><span data-path-to-node="14,1,1,2">. </span><span data-path-to-node="14,1,1,3"><span class="citation-75"></span></span><span data-path-to-node="14,1,1,4"><span class="citation-75">La única adición a su menú es el </span><b data-path-to-node="14,1,1,4" data-index-in-node="33"><span class="citation-75">Módulo de Informes</span></b><span class="citation-75">, desde donde puede consultar, filtrar y descargar en Excel la información real (no anonimizada) de los registros horarios de toda la plantilla para cumplir con su función de supervisión legal</span></span><span data-path-to-node="14,1,1,5"><span class="citation-75 citation-end-75"><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="29"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="29"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="29"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="29"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="29"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="29"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="29"><!----></sup></source-footnote></span></span><span data-path-to-node="14,1,1,6">.</span></div>
+      </div>
+    </div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="separator">
+
+<!-- INFORMES Y UAT -->
+
+<section id="informes" class="collapsible-section is-open">
+  <div class="container">
+    <button type="button" class="section-toggle" aria-expanded="true" aria-controls="informes-body">
+      <div class="section-toggle-top">
+        <div class="section-header">
+          <div class="section-number">3</div>
+          <h2>Informes, datos y <span class="red">UAT</span></h2>
+        </div>
+        <span class="toggle-chevron" aria-hidden="true"></span>
+      </div>
+      <p class="section-desc">Decisiones específicas de cálculo, exportación, históricos y aceptación funcional de los informes.</p>
+    </button>
+    <div id="informes-body" class="section-body">
+      <div class="section-body-inner">
+<div class="card collapsible-card">
+      <button type="button" class="card-toggle" aria-expanded="false" aria-controls="card-d13-body"><h3><span class="step-num q">D13</span> Variantes por rol y columnas finales XLSX</h3><span class="card-chevron" aria-hidden="true"></span></button><div id="card-d13-body" class="card-body"><div class="card-body-inner">
+      <div class="decision-meta"><span class="badge-chip blocker">Bloqueante</span><span class="badge-chip">Informes</span></div>
+      <ul><li>Admin, RLPT e Inspector/a pueden necesitar filtros, columnas y exportaciones distintas.</li><li>Los formatos tabla, simple diario y detallado por tramos necesitan columnas definitivas por rol.</li></ul>
+      <div class="ask"><strong>Preguntas exactas:</strong> ¿se confirma una pantalla común o variantes por rol? ¿Cuáles son las columnas definitivas de cada formato?</div>
+      <div class="answer-block">
+        <span class="answer-label">Respuesta / cierre</span>
+        <div class="answer" data-placeholder="Contrato funcional de informes…"><span data-path-to-node="18,1,1,0">Comparten un módulo de informes unificado (Admin, RLPT e Inspector/a)</span><span data-path-to-node="18,1,1,1"><span class="citation-74 citation-end-74"><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="30"><!----></sup></source-footnote></span></span><span data-path-to-node="18,1,1,2">. Las columnas del Excel (.xlsx) son:</span><div><br></div><div>Informe de tabla: ID del usuario, Usuario anonimizado para inspector en un principio hasta que la normativa esclarezca esto), Centro de trabajo, Puesto de trabajo, Horas totales, Compensaciones.&nbsp;&nbsp;</div><div><br></div><div>Informe simple: ID del usuario, Usuario (anonimizado para inspector en un principio hasta que la normativa esclarezca esto), Centro De Trabajo, Puesto de trabajo, Fecha, Horas totales.</div><div><br></div><div>Informe detallado: ID del usuario, Usuario (solo para Admin/RLPT y anonimizado para inspector en un principio hasta que la normativa esclarezca esto), Fecha, Tipo de tramo/parada, Hora de inicio, Hora de fin, Duración del tramo.</div></div>
+      </div>
+    </div></div></div>
+<div class="card collapsible-card">
+      <button type="button" class="card-toggle" aria-expanded="false" aria-controls="card-d15-body"><h3><span class="step-num q">D15</span> Reglas de fechas, días incluidos y tramos problemáticos</h3><span class="card-chevron" aria-hidden="true"></span></button><div id="card-d15-body" class="card-body"><div class="card-body-inner">
+      <div class="decision-meta"><span class="badge-chip blocker">Bloqueante</span><span class="badge-chip">Cálculos</span></div>
+      <ul><li>Hay que fijar rangos inclusivos, zona horaria, futuro, fines de semana, festivos y cambios de mes/año.</li><li>El informe simple debe aclarar días sin registro, vacaciones, bajas y fines de semana.</li><li>El informe detallado debe definir tramos abiertos, solapados, fin anterior a inicio y cruces de medianoche.</li></ul>
+      <div class="ask"><strong>Preguntas exactas:</strong> ¿qué días se incluyen? ¿Qué incidencias se exportan y cómo se muestran sin romper el Excel?</div>
+      <div class="answer-block">
+        <span class="answer-label">Respuesta / cierre</span>
+        <div class="answer" data-placeholder="Reglas de fechas, días y tramos…"><span data-path-to-node="20,1,1,0">Se incluyen estrictamente los días comprendidos en el filtro temporal (Hoy, Semana actual, Mes actual o Personalizado)</span><span data-path-to-node="20,1,1,1"><span class="citation-70 citation-end-70"><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="34"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="34"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="34"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="34"><!----></sup></source-footnote></span></span><span data-path-to-node="20,1,1,2">. </span><span data-path-to-node="20,1,1,3"><span class="citation-69"></span></span><span data-path-to-node="20,1,1,4"><span class="citation-69">Las horas trabajadas y las duraciones de las pausas se exportan siempre calculadas en </span><b data-path-to-node="20,1,1,4" data-index-in-node="86"><span class="citation-69">formato sexagesimal (HH:MM)</span></b></span><span data-path-to-node="20,1,1,5"><span class="citation-69 citation-end-69"><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="35"><!----></sup></source-footnote></span></span><span data-path-to-node="20,1,1,6">. </span><span data-path-to-node="20,1,1,7"><span class="citation-68"></span></span><span data-path-to-node="20,1,1,8">Los tramos cerrados y validados conforman el tiempo efectivo; las pausas se desglosan explícitamente en el informe detallado bajo su tipo (ej. descanso, comida)</span><span data-path-to-node="20,1,1,9"><span class="citation-68 citation-end-68"><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="36"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="36"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="36"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="36"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="36"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="36"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="36"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="36"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="36"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="36"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="36"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="36"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="36"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="36"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="36"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="36"><!----></sup></source-footnote></span></span><span data-path-to-node="20,1,1,10"></span></div>
+      </div>
+    </div></div></div>
+<div class="card collapsible-card">
+      <button type="button" class="card-toggle" aria-expanded="false" aria-controls="card-d18-body"><h3><span class="step-num q">D18</span> Horas ordinarias, extraordinarias, volumen y SLA</h3><span class="card-chevron" aria-hidden="true"></span></button><div id="card-d18-body" class="card-body"><div class="card-body-inner">
+      <div class="decision-meta"><span class="badge-chip blocker">Bloqueante</span><span class="badge-chip">Informes</span></div>
+      <ul><li>Separar ordinarias/extraordinarias implica reglas nuevas sobre jornada teórica.</li><li>Debe definirse rango máximo exportable, volumen esperado y tiempo máximo aceptable.</li></ul>
+      <div class="ask"><strong>Preguntas exactas:</strong> ¿se separan horas ordinarias y extraordinarias? ¿Cuál es la regla? ¿Qué límite de exportación y SLA se aceptan?</div>
+      <div class="answer-block">
+        <span class="answer-label">Respuesta / cierre</span>
+        <div class="answer" data-placeholder="Reglas de horas y volumen…"><span data-path-to-node="22,1,1,0"><span class="citation-202">El sistema calcula las </span><b data-path-to-node="22,1,1,0" data-index-in-node="34"><span class="citation-202">Horas totales</span></b><span class="citation-202"> acumuladas reales del periodo y el </span><b data-path-to-node="22,1,1,0" data-index-in-node="83"><span class="citation-202">Balance de compensaciones</span></b><span class="citation-202"> (horas a favor o en contra en base a la diferencia entre el registro real y las horas teóricas diarias configuradas)</span></span><span data-path-to-node="22,1,1,1"><span class="citation-202 citation-end-202"><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="37"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="37"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="37"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="37"><!----></sup></source-footnote></span></span><span data-path-to-node="22,1,1,2">. </span><span data-path-to-node="22,1,1,3"><span class="citation-201"></span></span><span data-path-to-node="22,1,1,4"><span class="citation-201">La regla crítica de exportación dictamina que si no hay datos reales que cumplan con los filtros en pantalla, no se genera el archivo y se lanza un aviso </span><i data-path-to-node="22,1,1,4" data-index-in-node="154"><span class="citation-201">toast</span></i><span class="citation-201"> de alerta</span></span><span data-path-to-node="22,1,1,5"><span class="citation-201 citation-end-201"><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="38"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="38"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="38"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="38"><!----></sup></source-footnote></span></span><span data-path-to-node="22,1,1,6">.</span></div>
+      </div>
+    </div></div></div>
+<div class="card collapsible-card">
+      <button type="button" class="card-toggle" aria-expanded="false" aria-controls="card-d20-body"><h3><span class="step-num q">D20</span> Históricos, CSV actuales y cambios pasados</h3><span class="card-chevron" aria-hidden="true"></span></button><div id="card-d20-body" class="card-body"><div class="card-body-inner">
+      <div class="decision-meta"><span class="badge-chip blocker">Bloqueante</span><span class="badge-chip">Datos históricos</span></div>
+      <ul><li>Los datos anteriores a Fase II pueden no tener todos los campos necesarios para informes o anonimato.</li><li>Debe decidirse si Inspector/RLPT pueden acceder a exports CSV actuales o solo al nuevo módulo Informes.</li><li>Cambios pasados de festivos, planificación o configuración pueden recalcular o conservar históricos.</li></ul>
+      <div class="ask"><strong>Preguntas exactas:</strong> ¿qué fallback aplica a datos legacy? ¿Se bloquean exports antiguos? ¿Los cambios pasados recalculan informes?</div>
+      <div class="answer-block">
+        <span class="answer-label">Respuesta / cierre</span>
+        <div class="answer" data-placeholder="Criterio histórico y exports existentes…"><span data-path-to-node="24,1,1,0">Los informes del nuevo módulo se nutren de la base de datos centralizada de fichajes</span><span data-path-to-node="24,1,1,1"><span class="citation-200 citation-end-200"><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="39"><!----></sup></source-footnote></span></span><span data-path-to-node="24,1,1,2">. </span><span data-path-to-node="24,1,1,3"><span class="citation-199"></span></span><span data-path-to-node="24,1,1,4">Las exportaciones heredadas de la Fase I (como el Excel del historial diario o anual) siguen disponibles en las respectivas fichas de perfil si la jornada ha sido finalizada, manteniendo la estructura de 6 columnas de Fase I</span><span data-path-to-node="24,1,1,5"><span class="citation-199 citation-end-199"><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="40"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="40"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="40"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="40"><!----></sup></source-footnote></span></span><span data-path-to-node="24,1,1,6">.</span></div>
+      </div>
+    </div></div></div>
+<div class="card collapsible-card">
+      <button type="button" class="card-toggle" aria-expanded="false" aria-controls="card-d23-body"><h3><span class="step-num q">D23</span> Superadmin, simulación, suplantación y auditoría</h3><span class="card-chevron" aria-hidden="true"></span></button><div id="card-d23-body" class="card-body"><div class="card-body-inner">
+      <div class="decision-meta"><span class="badge-chip blocker">Bloqueante</span><span class="badge-chip">Seguridad</span></div>
+      <ul><li>El modo simulación debe quedar bloqueado también en backend si es solo lectura real.</li><li>La suplantación requiere alcance, roles permitidos, duración, salida, refresh, escritura y auditoría.</li><li>Deben cerrarse eventos auditables: login externo, consulta, apertura ficha, export XLSX, revocación y suplantación.</li></ul>
+      <div class="ask"><strong>Preguntas exactas:</strong> ¿simulación y suplantación permiten escritura? ¿Qué se audita y con qué actor real/objetivo?</div>
+      <div class="answer-block">
+        <span class="answer-label">Respuesta / cierre</span>
+        <div class="answer" data-placeholder="Reglas de superadmin, suplantación y auditoría…"><span data-path-to-node="26,1,1,0"><span class="citation-198"> </span><b data-path-to-node="26,1,1,0" data-index-in-node="13"><span class="citation-198">Modo Simulación:</span></b><span class="citation-198"> Es de </span><b data-path-to-node="26,1,1,0" data-index-in-node="36"><span class="citation-198">estricta solo lectura</span></b><span class="citation-198">; bloquea cualquier botón de creación, edición o guardado tanto en el frontal como en el backend</span></span><span data-path-to-node="26,1,1,1"><span class="citation-198 citation-end-198"><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="41"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="41"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="41"><!----></sup></source-footnote><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="41"><!----></sup></source-footnote></span></span><span data-path-to-node="26,1,1,2">.</span><div><br><div><span data-path-to-node="26,1,1,2"><span data-path-to-node="26,1,2,0,1,0"><b data-path-to-node="26,1,2,0,1,0" data-index-in-node="0"><span class="citation-197">Suplantación ("Suplantar usuario"):</span></b><span class="citation-197"> Transiciona la sesión del Superadmin para adoptar el entorno, vista y permisos del Rol Usuario seleccionado</span></span><span data-path-to-node="26,1,2,0,1,1"><span class="citation-197 citation-end-197"><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="42"><!----></sup></source-footnote></span></span><span data-path-to-node="26,1,2,0,1,2">. </span><span data-path-to-node="26,1,2,0,1,3"><span class="citation-196"></span></span><span data-path-to-node="26,1,2,0,1,4"><span class="citation-196">Se utiliza exclusivamente para comprobar la visualización correcta de la plataforma desde la perspectiva del empleado<span style="font-size: 10.8333px;">.&nbsp;</span></span></span></span>Se audita que el usuario pueda acceder correctamente en todo momento y que puede fichar con normalidad.</div></div></div>
+      </div>
+    </div></div></div>
+<div class="card collapsible-card">
+      <button type="button" class="card-toggle" aria-expanded="false" aria-controls="card-d26-body"><h3><span class="step-num q">D26</span> Exclusiones, fuente de verdad y dataset UAT</h3><span class="card-chevron" aria-hidden="true"></span></button><div id="card-d26-body" class="card-body"><div class="card-body-inner">
+      <div class="decision-meta"><span class="badge-chip blocker">Bloqueante</span><span class="badge-chip qa">UAT</span></div>
+      <ul><li>Debe confirmarse si app móvil e IA quedan fuera de Fase II.</li><li>Si prototipo y funcional contradicen columnas, textos o flujos, debe fijarse qué prevalece.</li><li>Negocio debe aprobar dataset UAT con resultados esperados para permisos, cálculos, anonimato y XLSX.</li></ul>
+      <div class="ask"><strong>Preguntas exactas:</strong> ¿qué queda excluido? ¿Cuál es la fuente de verdad? ¿Puede negocio aprobar dataset UAT antes del cierre?</div>
+      <div class="answer-block">
+        <span class="answer-label">Respuesta / cierre</span>
+        <div class="answer" data-placeholder="Exclusiones, fuente de verdad y dataset…"><span data-path-to-node="28,1,1,0"><span class="citation-195">* </span><b data-path-to-node="28,1,1,0" data-index-in-node="13"><span class="citation-195">Exclusiones:</span></b><span class="citation-195"> La funcionalidad de la página de Ayuda avanzada se pospone explícitamente para la Fase III en los nuevos roles</span></span><span data-path-to-node="28,1,1,1"><span class="citation-195 citation-end-195"><source-footnote ng-version="0.0.0-PLACEHOLDER" _nghost-ng-c2076338531=""><sup _ngcontent-ng-c2076338531="" class="superscript" data-turn-source-index="44"><!----></sup></source-footnote></span></span><span data-path-to-node="28,1,1,2">.</span><div><span data-path-to-node="28,1,1,2"><br></span></div><div><span data-path-to-node="28,1,1,2">*Debemos tener en cuenta que esto es una ampliación de la Fase I la cual de manera extraordinaria estamos avanzando, pero debemos tener en cuenta como mejoras estratégicas y no a largo plazo tanto la APP Móvil e IA las cuales (creo que esto podría comentarse con Proyectos para ver la viabilidad a corto plazo o por lo menos marcarnos unos plazos los cuales no hagan demorarnos mucho ya que desde Dirección nos solicitan avances próximos en estos apartados).</span></div><div><span data-path-to-node="28,1,1,2"><br></span></div><div><span data-path-to-node="28,1,1,2">Si existe cualquier discrepancia o contradicción entre lo que muestra el prototipo visual (pantallas, maquetas, Lovable) y lo redactado en el texto funcional respecto a columnas, textos o flujos, <b data-path-to-node="1,0,0" data-index-in-node="293">siempre prevalece el documento funcional. Aunque los prototipos intentamos que estén relacionados 100% con lo plasmado en el funcional, ante cualquier duda siempre estaremos Negocios y Proyectos detrás para cualquier duda concreta.</b></span></div><div><span data-path-to-node="28,1,1,2"><b data-path-to-node="1,0,0" data-index-in-node="293"><br></b></span></div><div><span data-path-to-node="28,1,1,2"><b data-path-to-node="1,0,0" data-index-in-node="293"><b data-path-to-node="1,1,0" data-index-in-node="28">Sí, es obligatorio.</b> Negocio debe definir y aprobar formalmente un <b data-path-to-node="1,1,0" data-index-in-node="94">dataset de prueba (UAT)</b> que incluya los casos de prueba y los resultados esperados antes del cierre.</b></span></div><div><span data-path-to-node="28,1,1,2"><br></span></div></div>
+      </div>
+    </div></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="separator">
+
+<!-- PLANIFICACION -->
+
+<section id="plan-uat" class="collapsible-section">
+  <div class="container">
+    <button type="button" class="section-toggle" aria-expanded="false" aria-controls="plan-uat-body">
+      <div class="section-toggle-top">
+        <div class="section-header">
+          <div class="section-number">4</div>
+          <h2>Secuencia y <span class="red">criterio de cierre</span></h2>
+        </div>
+        <span class="toggle-chevron" aria-hidden="true"></span>
+      </div>
+      <p class="section-desc">Información extra de cierre y QA para decidir cuándo una respuesta permite convertir una decisión en tarea verificable.</p>
+    </button>
+    <div id="plan-uat-body" class="section-body">
+      <div class="section-body-inner">
+
+    <div class="card">
+      <h3>Secuencia de cierre recomendada</h3>
+      <table class="data-table">
+        <thead><tr><th>Paso</th><th>Objetivo</th><th>Resultado esperado</th></tr></thead>
+        <tbody>
+          <tr><td>1</td><td>Cierre funcional, técnico y de seguridad</td><td>Matriz de permisos, contrato Informes, modelo accesos externos y dataset UAT aprobados.</td></tr>
+          <tr><td>2</td><td>Definición de roles, permisos y accesos externos</td><td>Reglas para <code>/v1/me</code>, rutas, guards, alta, caducidad, duplicados y revocación.</td></tr>
+          <tr><td>3</td><td>Contrato funcional de Informes</td><td>Filtros, columnas, formatos XLSX, variantes por rol, fechas, tramos y casos sin datos.</td></tr>
+          <tr><td>4</td><td>Definición del perfil Inspector/a</td><td>Empresas por ámbito, anonimato, KPIs, ficha read-only, export anónimo y estado sin empresa.</td></tr>
+          <tr><td>5</td><td>Definición de RLPT, Superadmin y suplantación</td><td>Naturaleza del RLPT, simulación reforzada, suplantación si entra, auditoría y UX asociada.</td></tr>
+          <tr><td>6</td><td>Criterios de QA/UAT</td><td>Dataset oficial, pruebas críticas, golden XLSX, criterios de defecto y aceptación.</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="card">
+      <h3>Criterio para cerrar una decisión</h3>
+      <ul class="compact-list"><li>Regla funcional clara.</li><li>Alcance técnico afectado: módulos, APIs, pantallas, exports o datos.</li><li>Caso negativo: sin permiso, sin datos o datos inválidos.</li><li>Datos de prueba necesarios.</li><li>Test recomendado: E2E, integración, unitario, contrato o performance.</li><li>Criterio de aceptación verificable.</li></ul>
+      <div class="answer-block">
+        <span class="answer-label">Notas de priorización / reunión</span>
+        <div class="answer" data-placeholder="Acuerdos, responsables, criterios de cierre y fechas de respuesta…"></div>
+      </div>
+    </div>
+    <div class="alert alert-gold">
+      <h4>Recomendación</h4>
+      <p>No calcular ni comunicar esfuerzo hasta cerrar las respuestas bloqueantes. Cada respuesta debe convertirse en regla verificable, criterio de aceptación y dato de prueba antes de organizar el trabajo.</p>
+    </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="separator">
+
+<!-- CHECKLIST -->
+
+<section id="checklist" class="alt collapsible-section">
+  <div class="container">
+    <button type="button" class="section-toggle" aria-expanded="false" aria-controls="checklist-body">
+      <div class="section-toggle-top">
+        <div class="section-header">
+          <div class="section-number">✓</div>
+          <h2>Checklist de <span class="red">cierre con negocio</span></h2>
+        </div>
+        <span class="toggle-chevron" aria-hidden="true"></span>
+      </div>
+      <p class="section-desc">Lista consolidada de acuerdos que deben quedar respondidos antes de cerrar alcance y planificación.</p>
+    </button>
+    <div id="checklist-body" class="section-body">
+      <div class="section-body-inner">
+
+    <div class="card">
+      <h3>Decisiones bloqueantes consolidadas</h3>
+      <ul class="checklist">
+        <li>D01 - Matriz final de permisos por rol, acción, empresa, simulación y URL directa.</li>
+        <li>D02 - Modelo de identidad de Inspector/a y RLPT.</li>
+        <li>D03-D05 - Campos anonimizados, identificador anónimo y textos libres sensibles.</li>
+        <li>D06-D08 - Estados, caducidad, revocación, duplicados y multiempresa de accesos externos.</li>
+        <li>D09-D10 - Estado sin empresa y reglas exactas de KPIs del Inspector/a.</li>
+        <li>D11-D12 - Naturaleza, ámbito y privacidad del RLPT.</li>
+        <li>D13-D14 - Variantes por rol y columnas finales XLSX.</li>
+        <li>D15-D18 - Fechas, días sin registro, ausencias, tramos e horas ordinarias/extraordinarias.</li>
+        <li>D19 - Volumen máximo exportable y SLA esperado.</li>
+        <li>D20-D22 - Históricos, CSV existentes y cambios de configuración pasada.</li>
+        <li>D23-D25 - Simulación, suplantación y eventos de auditoría.</li>
+        <li>D26-D28 - Exclusiones, fuente de verdad y dataset UAT aprobado.</li>
+      </ul>
+      <div class="checklist-notes">
+        <span class="answer-label">Notas de reunión / acuerdos</span>
+        <div class="answer" data-placeholder="Acuerdos, responsables, fechas…"></div>
+      </div>
+    </div>
+    <div class="alert alert-blue">
+      <h4>Siguiente paso</h4>
+      <p>Convertir cada respuesta en criterio verificable. Cualquier decisión sin respuesta debe quedar como <strong>pendiente de cierre</strong>; no debe convertirse en compromiso.</p>
+    </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-logo">
+      <svg viewBox="0 0 848 199.39" xmlns="http://www.w3.org/2000/svg">
+        <path fill="rgba(255,255,255,0.78)" d="M22.89,28.62V0H0V109.7H114.47V28.62Zm68.68,41V85.85H22.89V53.42H91.57Z"></path>
+        <path fill="rgba(255,255,255,0.78)" d="M297.61,28.62V0H274.72V109.7H389.18V28.62Zm68.68,41V85.85H297.61V53.42h68.68Z"></path>
+        <path fill="rgba(255,255,255,0.78)" d="M137.36,28.62v24.8h45.79c45.11,0,45.78,0,45.78,1.91s-.67,1.9-45.78,1.9H137.36V109.7H251.82V28.62Zm57.23,57.23c-33.67,0-34.34,0-34.34-1.91S160.92,82,194.59,82s34.34,0,34.34,1.91S228.26,85.85,194.59,85.85Z"></path>
+        <path fill="#ff0000" d="M412.08,28.62V109.7H526.54V28.62Zm91.57,41V85.85H435V53.42h68.68Z"></path>
+        <path fill="#ff0000" d="M549.44,28.62V109.7H663.9V28.62Zm91.57,41V85.85H572.33V53.42H641Z"></path>
+        <polygon fill="rgba(255,255,255,0.78)" points="686.79 69.16 686.79 109.7 709.69 109.7 709.69 53.42 778.37 53.42 778.37 109.7 801.26 109.7 801.26 28.62 686.79 28.62 686.79 69.16"></polygon>
+        <polygon fill="rgba(255,255,255,0.78)" points="824.15 69.16 824.15 109.7 847.05 109.7 847.05 28.62 824.15 28.62 824.15 69.16"></polygon>
+      </svg>
+    </div>
+    <p>Información a solicitar a negocio - Registro Horario Fase II - <strong>Babooni Technologies</strong> - Cierre de alcance (junio 2026)</p>
+    <div class="footer-contact">
+      <a href="mailto:info@babooni.com">info@babooni.com</a>
+      <a href="tel:617312356">617 31 23 56</a>
+      <span>C. Alfonso XII, 62 - Retiro - 28014 Madrid</span>
+    </div>
+  </div>
+</footer>
+
+</div>
+
+<script id="collapseScript">
+window.initCollapsibleCards=function(root){
+  var scope=root||document;
+  scope.querySelectorAll('.card').forEach(function(card){
+    if(card.classList.contains('collapsible-card'))return;
+    var chip=card.querySelector(':scope > h3 .step-num.q');
+    if(!chip)return;
+    var header=card.querySelector(':scope > h3');
+    if(!header)return;
+    var chipId=chip.textContent.trim().toLowerCase();
+    var bodyId='card-'+chipId+'-body';
+    card.classList.add('collapsible-card');
+    var toggle=document.createElement('button');
+    toggle.type='button';
+    toggle.className='card-toggle';
+    toggle.setAttribute('aria-expanded','false');
+    toggle.setAttribute('aria-controls',bodyId);
+    var chevron=document.createElement('span');
+    chevron.className='card-chevron';
+    chevron.setAttribute('aria-hidden','true');
+    card.insertBefore(toggle,header);
+    toggle.appendChild(header);
+    toggle.appendChild(chevron);
+    var body=document.createElement('div');
+    body.id=bodyId;
+    body.className='card-body';
+    var inner=document.createElement('div');
+    inner.className='card-body-inner';
+    while(toggle.nextSibling){inner.appendChild(toggle.nextSibling);}
+    body.appendChild(inner);
+    card.appendChild(body);
+  });
+};
+window.closeAllCards=function(root){
+  var scope=root||document;
+  scope.querySelectorAll('.collapsible-card').forEach(function(card){
+    card.classList.remove('is-open');
+    var btn=card.querySelector('.card-toggle');
+    if(btn)btn.setAttribute('aria-expanded','false');
+  });
+};
+window.closeAllSections=function(root){
+  var scope=root||document;
+  scope.querySelectorAll('.collapsible-section').forEach(function(section){
+    section.classList.remove('is-open');
+    var btn=section.querySelector('.section-toggle');
+    if(btn)btn.setAttribute('aria-expanded','false');
+  });
+};
+window.openSectionFromHash=function(){
+  if(!location.hash)return;
+  var target=document.querySelector(location.hash);
+  if(!target||!target.classList.contains('collapsible-section'))return;
+  target.classList.add('is-open');
+  var toggle=target.querySelector('.section-toggle');
+  if(toggle)toggle.setAttribute('aria-expanded','true');
+};
+document.addEventListener('click',function(e){var btn=e.target.closest('.section-toggle');if(!btn)return;var section=btn.closest('.collapsible-section');if(!section)return;var open=section.classList.toggle('is-open');btn.setAttribute('aria-expanded',open?'true':'false');});
+document.addEventListener('click',function(e){var btn=e.target.closest('.card-toggle');if(!btn)return;var card=btn.closest('.collapsible-card');if(!card)return;var open=card.classList.toggle('is-open');btn.setAttribute('aria-expanded',open?'true':'false');});
+document.addEventListener('click',function(e){var link=e.target.closest('nav a[href^="#"]');if(!link)return;var id=link.getAttribute('href').slice(1);var section=document.getElementById(id);if(!section||!section.classList.contains('collapsible-section'))return;section.classList.add('is-open');var btn=section.querySelector('.section-toggle');if(btn)btn.setAttribute('aria-expanded','true');});
+var docRoot=document.getElementById('docContent');
+if(docRoot){initCollapsibleCards(docRoot);closeAllSections(docRoot);closeAllCards(docRoot);openSectionFromHash();}
+</script>
+
+
+
+
+</body></html>
