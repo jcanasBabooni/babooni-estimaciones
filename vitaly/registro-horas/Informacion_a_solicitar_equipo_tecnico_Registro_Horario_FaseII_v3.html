@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Información a solicitar al equipo técnico - Registro Horario Fase II (editable ampliado)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#0a0a0a;--black-soft:#1a1a1a;--black-deep:#050505;--black-light:#2a2a2a;
+  --red:#e60000;--red-light:#ff0000;--red-dark:#b30000;--red-pale:#fdecec;--red-bg:#fef5f5;
+  --gold:#f4b900;--gold-light:#fff8e1;--gold-dark:#c49500;
+  --bg:#ffffff;--bg-alt:#f6f6f7;--bg-card:#ffffff;--bg-dark:#111111;
+  --border:#e2e2e2;--border-light:#ededed;--border-dark:#2a2a2a;
+  --text:#0a0a0a;--text-secondary:#4a4a4a;--text-muted:#8a8a8a;
+  --green:#1d8a4a;--green-bg:#e6f7ee;--green-border:#b8e6cc;
+  --orange:#d97a1c;--orange-bg:#fef3e2;--orange-border:#fad6a5;
+  --blue:#1d6aa5;--blue-bg:#e6f0f7;--blue-border:#b8d4e6;
+  --shadow-sm:0 1px 3px rgba(0,0,0,0.06);--shadow-md:0 4px 12px rgba(0,0,0,0.10);--shadow-lg:0 8px 30px rgba(0,0,0,0.14);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Montserrat','Segoe UI',-apple-system,BlinkMacSystemFont,sans-serif;background:#d8d8dc;color:var(--text);line-height:1.65;-webkit-font-smoothing:antialiased}
+.page-wrapper{max-width:960px;margin:32px auto;background:var(--bg);border-radius:16px;box-shadow:0 4px 40px rgba(0,0,0,0.18),0 1px 6px rgba(0,0,0,0.08);overflow:hidden}
+.container{max-width:100%;margin:0 auto;padding:0 40px}
+header{background:linear-gradient(135deg,#000000 0%,var(--black) 35%,var(--black-soft) 100%);color:white;padding:48px 0 44px;border-bottom:5px solid var(--red);position:relative;overflow:hidden}
+header::before{content:'';position:absolute;top:-50%;right:-10%;width:500px;height:500px;background:radial-gradient(circle,rgba(230,0,0,0.18) 0%,transparent 70%);border-radius:50%}
+header::after{content:'';position:absolute;bottom:-60%;left:-5%;width:400px;height:400px;background:radial-gradient(circle,rgba(255,255,255,0.04) 0%,transparent 70%);border-radius:50%}
+header .container{display:flex;justify-content:space-between;align-items:flex-start;position:relative;z-index:1;gap:24px}
+.header-logo{margin-bottom:18px}
+.header-logo svg{display:block;height:60px;width:auto}
+.header-left h1{font-size:28px;font-weight:800;letter-spacing:-0.5px;margin-bottom:6px;line-height:1.2}
+.header-left h1 .red{color:var(--red-light)}
+.header-left p{color:rgba(255,255,255,0.65);font-size:11px;font-weight:400}
+.header-badge{background:linear-gradient(135deg,var(--red) 0%,var(--red-dark) 100%);color:white;font-size:9px;font-weight:600;padding:7px 14px;border-radius:6px;text-align:center;line-height:1.4;box-shadow:0 4px 15px rgba(230,0,0,0.45);text-transform:uppercase;letter-spacing:0.5px;flex-shrink:0}
+.header-badge span{display:block;font-size:16px;font-weight:800;letter-spacing:-0.3px;text-transform:none}
+nav{background:var(--black);border-bottom:1px solid var(--border-dark);position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,0.20)}
+nav .container{display:flex;align-items:stretch;gap:0;overflow-x:auto;scrollbar-width:none}
+nav .container::-webkit-scrollbar{display:none}
+.nav-logo{display:flex;align-items:center;padding:0 18px 0 0;margin-right:4px;border-right:1px solid var(--border-dark);flex-shrink:0}
+.nav-logo svg{display:block;height:26px;width:auto}
+nav a{flex:1;text-align:center;color:rgba(255,255,255,0.65);text-decoration:none;font-size:11px;font-weight:600;padding:16px 12px;white-space:nowrap;border-bottom:3px solid transparent;transition:all .25s ease;text-transform:uppercase;letter-spacing:0.6px;display:flex;align-items:center;justify-content:center;min-width:0}
+nav a:hover{color:white;border-bottom-color:var(--red);background:rgba(230,0,0,0.10)}
+section{padding:44px 0;background:var(--bg)}
+section.alt{background:var(--bg-alt)}
+.section-header{display:flex;align-items:center;gap:14px;margin-bottom:8px}
+.section-number{background:linear-gradient(135deg,var(--black) 0%,var(--black-soft) 100%);color:white;font-size:14px;font-weight:700;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 2px 8px rgba(0,0,0,0.25);position:relative}
+.section-number::after{content:'';position:absolute;inset:-3px;border-radius:50%;border:2px solid var(--red);opacity:0.25}
+.section-header h2{font-size:22px;font-weight:800;color:var(--black);letter-spacing:-0.3px}
+.section-header h2 .red{color:var(--red)}
+.section-desc{color:var(--text-secondary);font-size:14px;font-weight:400;margin-bottom:0;max-width:850px;padding-left:52px}
+.collapsible-section .section-toggle{width:100%;text-align:left;background:transparent;border:none;cursor:pointer;padding:0;margin-bottom:20px;font:inherit;color:inherit}
+.collapsible-section .section-toggle:hover .section-header h2{color:var(--red)}
+.collapsible-section .section-toggle:focus-visible{outline:2px solid var(--red);outline-offset:4px;border-radius:8px}
+.section-toggle-top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;width:100%}
+.toggle-chevron{flex-shrink:0;width:34px;height:34px;border-radius:50%;background:var(--bg-alt);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;line-height:1;color:var(--text-muted);transition:background .2s ease,border-color .2s ease,color .2s ease;margin-top:2px}
+.toggle-chevron::before{content:'+'}
+.collapsible-section.is-open .toggle-chevron{background:var(--red-bg);border-color:#f5b8b8;color:var(--red-dark)}
+.collapsible-section.is-open .toggle-chevron::before{content:'-'}
+.collapsible-section .section-body{display:none}
+.collapsible-section.is-open .section-body{display:block}
+.section-body-inner{overflow:visible}
+.collapsible-section.is-open .section-desc{margin-bottom:8px}
+.collapsible-section:not(.is-open){padding-bottom:28px}
+.card{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:24px 28px;margin-bottom:16px;box-shadow:var(--shadow-sm);transition:box-shadow .25s ease,transform .25s ease,border-color .25s ease}
+.card:hover{box-shadow:var(--shadow-md);transform:translateY(-1px);border-color:var(--black-light)}
+.card h3{font-size:16px;font-weight:700;color:var(--text);margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.card h3 .step-num{background:var(--black);color:white;font-size:11px;font-weight:800;padding:4px 12px;border-radius:20px;letter-spacing:0.3px}
+.card h3 .step-num.q{background:var(--red)}
+.card p,.card li{font-size:13.5px;color:var(--text-secondary);line-height:1.7}
+.card ul{padding-left:20px;margin-top:6px}
+.card li{margin-bottom:4px}
+.card code{background:var(--bg-alt);border:1px solid var(--border);border-radius:4px;padding:1px 6px;font-size:12px;color:var(--red-dark)}
+.card .ask{margin-top:12px;padding:12px 16px;background:var(--red-bg);border-left:4px solid var(--red);border-radius:6px;font-size:13px;color:var(--black)}
+.card .ask strong{color:var(--red-dark)}
+.card.dark{background:var(--black);color:white;border-color:var(--black-light)}
+.card.dark h3{color:white}
+.card.dark p,.card.dark li{color:rgba(255,255,255,0.75)}
+.alert{border-radius:10px;padding:18px 22px;margin:16px 0;font-size:13.5px;box-shadow:var(--shadow-sm)}
+.alert h4{font-size:14px;font-weight:700;margin-bottom:6px}
+.alert p,.alert li{line-height:1.7}
+.alert ul{padding-left:20px;margin-top:4px}
+.alert-black{background:var(--bg-alt);border-left:5px solid var(--black)}
+.alert-black h4{color:var(--black)}
+.alert-red{background:var(--red-bg);border-left:5px solid var(--red)}
+.alert-red h4{color:var(--red-dark)}
+.alert-orange{background:var(--orange-bg);border-left:5px solid var(--orange)}
+.alert-orange h4{color:var(--orange)}
+.alert-green{background:var(--green-bg);border-left:5px solid var(--green)}
+.alert-green h4{color:var(--green)}
+.alert-blue{background:var(--blue-bg);border-left:5px solid var(--blue)}
+.alert-blue h4{color:var(--blue)}
+.alert-gold{background:var(--gold-light);border-left:5px solid var(--gold)}
+.alert-gold h4{color:var(--gold-dark)}
+.separator{border:none;height:2px;background:linear-gradient(90deg,transparent,var(--red),var(--black),var(--red),transparent);margin:0;opacity:0.4}
+.checklist{list-style:none;padding:0}
+.checklist li{padding:10px 0 10px 32px;position:relative;font-size:13.5px;color:var(--text-secondary);border-bottom:1px solid var(--border-light);transition:background .15s}
+.checklist li:hover{background:var(--bg-alt)}
+.checklist li:last-child{border-bottom:none}
+.checklist li::before{content:'[ ]';position:absolute;left:0;top:10px;font-size:12px;color:var(--red);font-weight:700;font-family:monospace}
+footer{padding:36px 0 28px;text-align:center;background:linear-gradient(135deg,var(--black-deep) 0%,var(--black) 100%);color:rgba(255,255,255,0.6)}
+footer .footer-logo svg{display:block;height:36px;width:auto;margin:0 auto 14px}
+footer p{font-size:12px;line-height:1.6;max-width:600px;margin:0 auto}
+footer strong{color:var(--red-light)}
+footer .footer-contact{margin-top:14px;display:flex;justify-content:center;gap:18px;flex-wrap:wrap;font-size:11px;color:rgba(255,255,255,0.50)}
+footer .footer-contact a{color:rgba(255,255,255,0.65);text-decoration:none;transition:color .2s}
+footer .footer-contact a:hover{color:var(--red-light)}
+
+/* AMPLIACION INFORMES CODEX */
+.data-table{width:100%;border-collapse:collapse;margin:14px 0;font-size:12.5px;line-height:1.45;background:#fff;border-radius:8px;overflow:hidden;box-shadow:var(--shadow-sm)}
+.data-table th,.data-table td{border:1px solid var(--border);padding:9px 10px;vertical-align:top;text-align:left}
+.data-table th{background:var(--black);color:#fff;font-weight:700;font-size:11px;text-transform:uppercase;letter-spacing:.35px}
+.data-table tr:nth-child(even) td{background:var(--bg-alt)}
+.meta-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:10px;margin:14px 0}
+.meta-item{background:var(--bg-alt);border:1px solid var(--border);border-radius:8px;padding:12px 14px;font-size:12.5px;color:var(--text-secondary)}
+.meta-item strong{display:block;font-size:10px;text-transform:uppercase;color:var(--text-muted);letter-spacing:.65px;margin-bottom:4px}
+.card .decision-meta{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0 12px}
+.badge-chip{display:inline-flex;align-items:center;gap:5px;border-radius:999px;padding:4px 9px;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.35px;border:1px solid var(--border);background:var(--bg-alt);color:var(--text-secondary)}
+.badge-chip.blocker{background:var(--red-bg);border-color:#f5b8b8;color:var(--red-dark)}
+.badge-chip.high{background:var(--orange-bg);border-color:var(--orange-border);color:var(--orange)}
+.badge-chip.tech{background:var(--blue-bg);border-color:var(--blue-border);color:var(--blue)}
+.badge-chip.qa{background:var(--green-bg);border-color:var(--green-border);color:var(--green)}
+.card h4.inline-title{font-size:13px;color:var(--black);margin:12px 0 4px;font-weight:800}
+.compact-list li{margin-bottom:2px}
+
+@media (max-width:1024px){.page-wrapper{margin:16px;border-radius:12px}}
+@media (max-width:700px){.page-wrapper{margin:0;border-radius:0}.container{padding:0 20px}header{padding:36px 0 32px}.header-left h1{font-size:22px}.section-desc{padding-left:0}}
+/* EDIT TOOLBAR */
+body{padding-bottom:76px}
+.edit-bar{position:fixed;bottom:0;left:0;right:0;z-index:200;background:rgba(255,255,255,.97);backdrop-filter:blur(10px);border-top:1px solid var(--border);padding:12px 20px;display:flex;align-items:center;gap:10px;flex-wrap:wrap;box-shadow:0 -8px 24px rgba(0,0,0,.10)}
+.edit-bar .hint{font-size:11px;color:var(--text-muted);margin-right:auto;font-weight:500}
+.edit-bar .status{font-size:11px;color:var(--green);min-width:130px;font-weight:600}
+.edit-bar button{font:inherit;font-size:11px;font-weight:700;cursor:pointer;padding:9px 16px;border-radius:8px;border:1px solid var(--border);background:#fff;color:var(--black);transition:all .15s}
+.edit-bar button:hover{border-color:var(--red);background:var(--red-bg)}
+.edit-bar button.primary{background:var(--red-bg);border-color:#f5b8b8;color:var(--red-dark)}
+.edit-bar button.primary.on{background:var(--red);border-color:var(--red);color:#fff}
+.edit-bar button.danger{color:var(--red-dark);border-color:var(--red-pale);background:var(--red-bg)}
+body.editing .edit-bar{border-top-color:var(--red)}
+body.editing [data-edit]{outline:1px dashed rgba(230,0,0,.45);outline-offset:3px;border-radius:4px;cursor:text}
+body.editing [data-edit]:focus{outline:2px solid var(--red);background:rgba(230,0,0,.06)}
+.answer-block{margin-top:16px;padding-top:14px;border-top:1px dashed var(--border)}
+.answer-label{display:block;font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.8px;color:var(--red-dark);margin-bottom:8px}
+.answer{min-height:64px;padding:12px 14px;border-radius:8px;background:#fff;border:1px solid var(--border);font-size:13px;color:var(--text);line-height:1.55;box-shadow:inset 0 1px 3px rgba(0,0,0,.04)}
+.answer:empty::before{content:attr(data-placeholder);color:var(--text-muted);font-style:italic}
+body:not(.editing) .answer{cursor:default}
+body.editing .answer:empty{min-height:72px}
+.checklist-notes{margin-top:16px}
+/* COLLAPSIBLE CARDS (chips D/T) */
+.collapsible-card{padding:0;overflow:hidden}
+.collapsible-card .card-toggle{width:100%;display:flex;align-items:center;justify-content:space-between;gap:12px;background:transparent;border:none;cursor:pointer;padding:24px 28px;font:inherit;color:inherit;text-align:left;border-radius:12px}
+.collapsible-card .card-toggle:hover h3{color:var(--red)}
+.collapsible-card .card-toggle:focus-visible{outline:2px solid var(--red);outline-offset:-2px}
+.collapsible-card .card-toggle h3{margin-bottom:0;flex:1;min-width:0}
+.card-chevron{flex-shrink:0;width:28px;height:28px;border-radius:50%;background:var(--bg-alt);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:700;line-height:1;color:var(--text-muted);transition:background .2s ease,border-color .2s ease,color .2s ease}
+.card-chevron::before{content:'+'}
+.collapsible-card.is-open .card-chevron{background:var(--red-bg);border-color:#f5b8b8;color:var(--red-dark)}
+.collapsible-card.is-open .card-chevron::before{content:'-'}
+.collapsible-card>.card-body{display:none}
+.collapsible-card.is-open>.card-body{display:block}
+.collapsible-card .card-body-inner{padding:0 28px 24px}
+@media print{body{background:white;padding-bottom:0}.page-wrapper{margin:0;box-shadow:none;border-radius:0}header{border-radius:0;-webkit-print-color-adjust:exact;print-color-adjust:exact}footer{border-radius:0}nav{display:none}.edit-bar{display:none}section{page-break-inside:avoid}.card:hover{transform:none;box-shadow:none}.collapsible-section .section-body{display:block!important}.toggle-chevron{display:none}.collapsible-card>.card-body{display:block!important}.card-chevron{display:none}}
+</style>
+</head>
+<body>
+<div class="page-wrapper" id="docContent">
+
+<header>
+  <div class="container">
+    <div class="header-left">
+      <div class="header-logo">
+        <svg viewBox="0 0 848 199.39" xmlns="http://www.w3.org/2000/svg">
+          <path fill="#ffffff" d="M22.89,28.62V0H0V109.7H114.47V28.62Zm68.68,41V85.85H22.89V53.42H91.57Z"/>
+          <path fill="#ffffff" d="M297.61,28.62V0H274.72V109.7H389.18V28.62Zm68.68,41V85.85H297.61V53.42h68.68Z"/>
+          <path fill="#ffffff" d="M137.36,28.62v24.8h45.79c45.11,0,45.78,0,45.78,1.91s-.67,1.9-45.78,1.9H137.36V109.7H251.82V28.62Zm57.23,57.23c-33.67,0-34.34,0-34.34-1.91S160.92,82,194.59,82s34.34,0,34.34,1.91S228.26,85.85,194.59,85.85Z"/>
+          <path fill="#ff0000" d="M412.08,28.62V109.7H526.54V28.62Zm91.57,41V85.85H435V53.42h68.68Z"/>
+          <path fill="#ff0000" d="M549.44,28.62V109.7H663.9V28.62Zm91.57,41V85.85H572.33V53.42H641Z"/>
+          <polygon fill="#ffffff" points="686.79 69.16 686.79 109.7 709.69 109.7 709.69 53.42 778.37 53.42 778.37 109.7 801.26 109.7 801.26 28.62 686.79 28.62 686.79 69.16"/>
+          <polygon fill="#ffffff" points="824.15 69.16 824.15 109.7 847.05 109.7 847.05 28.62 824.15 28.62 824.15 69.16"/>
+          <path fill="#ffffff" d="M470.26,146.9v32.43h7.63l.1-14.59c0-16,.86-19.94,5-23,3.91-2.86,12.11-2.77,15.36.28l2.48,2.29v35h7.63V161.4c0-15.07-.29-18.32-1.72-21.08-2.29-4.58-5.91-7-11.54-7.54-6.58-.57-11,.38-14.4,3.24l-2.87,2.48v-24h-7.63Z"/>
+          <polygon fill="#ffffff" points="627.65 146.9 627.65 179.33 635.28 179.33 635.28 114.47 627.65 114.47 627.65 146.9"/>
+          <path fill="#ffffff" d="M749,117.52c-1.62,1.62-1.43,7,.19,8.39,4,3.25,8.77-2.1,6.48-7.15a4.18,4.18,0,0,0-6.67-1.24"/>
+          <polygon fill="#ffffff" points="327.18 122.1 327.18 125.91 346.26 125.91 346.26 179.33 353.89 179.33 353.89 125.91 372.97 125.91 372.97 118.28 327.18 118.28 327.18 122.1"/>
+          <path fill="#ffffff" d="M417.8,158.34v-5.53c0-7.63-3.53-14.59-9-17.84S396,131.73,390,134.78h0a18.21,18.21,0,0,0-7,6.78c-2.48,3.91-3,5.72-3.24,13-.29,5.15,0,9.73.76,11.92,1.52,4.68,6.29,9.92,11,12,4.48,2.1,15.26,2.39,20.51.57,2.95-1,3.34-1.62,3.62-4.77.19-1.9.1-3.53-.19-3.53s-3,.67-6,1.44a45.43,45.43,0,0,1-8.39,1.43c-6.49,0-13.83-6.59-13.83-12.5v-2.77Zm-30.72-6.67.67-2.67a11.55,11.55,0,0,1,6.49-8.3c3.91-1.72,5.72-1.72,9.73-.1,3.43,1.43,4.67,3.15,5.72,7.92l.67,3.15Z"/>
+          <path fill="#ffffff" d="M437.83,134.69a19.47,19.47,0,0,0-7.06,6.87c-2.48,3.91-2.95,5.72-3.24,13-.86,17.36,5.91,25.66,20.79,25.75,8,0,10.88-1.43,11.26-5.62.29-3.15.29-3.25-2.86-2.58-11.93,2.48-16.6,1.24-19.75-5.06-2.67-5.15-2.76-15.83-.19-20.89,3-5.81,7.25-7,19.08-5.72,1.81.19,2.48-.28,3.24-2.38,1.34-4-.09-4.77-9.06-5.25-7-.29-8.39-.1-12.21,1.91"/>
+          <path fill="#ffffff" d="M536.56,133.83a15.15,15.15,0,0,0-4.2,2.86c-1.81,2.29-3,2-3-.76,0-2.1-.38-2.39-3.33-2.39h-3.34v45.79h7.63l.09-14.59c0-16,.86-19.94,5-23,3.91-2.86,12.12-2.77,15.36.28l2.48,2.29v35h7.63V161.4c0-19.65-.67-22.42-6-26.33-3.34-2.48-14-3.15-18.31-1.24"/>
+          <path fill="#ffffff" d="M605.43,135.64c-5.34-3.53-15.55-4.1-21.46-1-7,3.53-10.78,10.78-10.78,20.89,0,9.06,1.43,13.74,5.91,18.6,4.68,5.06,8.68,6.49,16.6,6,8.11-.47,12.78-3.62,16.31-10.87C617.64,157.77,614.49,141.65,605.43,135.64Zm-12.88,37.58c-8.2-1-11.64-6.2-11.64-17.36,0-11.35,5.15-17.17,14.22-16.12a20,20,0,0,1,6.29,1.82c3.53,2.29,5.25,7.34,5.25,15.07C606.67,168.36,601.61,174.37,592.55,173.22Z"/>
+          <path fill="#ffffff" d="M679.83,135.64c-5.34-3.53-15.55-4.1-21.46-1-7,3.53-10.78,10.78-10.78,20.89,0,9.06,1.43,13.74,5.91,18.6,4.68,5.06,8.68,6.49,16.6,6,8.11-.47,12.78-3.62,16.31-10.87C692,157.77,688.89,141.65,679.83,135.64ZM667,173.22c-8.2-1-11.63-6.2-11.63-17.36,0-11.35,5.15-17.17,14.21-16.12a20,20,0,0,1,6.29,1.82c3.53,2.29,5.25,7.34,5.25,15.07C681.07,168.36,676,174.37,667,173.22Z"/>
+          <path fill="#ffffff" d="M735.16,139.65c3.53-.86,5.34-3.44,3.43-5.15-.38-.38-6.77-1-14.12-1.34-12-.57-13.73-.38-17.45,1.34h0c-8.68,3.91-10.59,18.6-3.25,25.08,1.91,1.72,1.91,1.82.1,3.63-2,2-2.58,8.87-.76,9.92.57.38-.58,2-2.77,3.91-7.25,6.2-6,15.83,2.67,20.13,5.15,2.67,16.12,3,23.56.76,8.87-2.67,13.55-10.87,10.68-19-2.19-6.2-5-7.54-17.36-8.3-5.91-.38-10.77-.67-10.87-.76a5.53,5.53,0,0,1-.29-2.48c0-3,2.48-4.3,8.21-4.3a23.4,23.4,0,0,0,8.77-2c6.58-3.24,9.45-11.64,6.49-19.08C731.72,141,732.49,140.32,735.16,139.65Zm-6,39.58c2,1.72,1.9,7.06-.1,8.88-4.67,4-14.31,5.62-20.79,3.43s-7.25-10-1.15-12.78C711,177,726.86,177.33,729.15,179.23ZM724,154.34c-3.72,3.91-13.93,3.43-16.22-.77-2.39-4.57-.29-11.54,4.2-13.44,3.53-1.53,9.44-.29,11.73,2.48C726.57,145.85,726.67,151.48,724,154.34Z"/>
+          <path fill="#ffffff" d="M807,158.34v-5.53c0-7.63-3.53-14.59-9-17.84s-12.88-3.24-18.79-.19h0a18.16,18.16,0,0,0-7,6.78c-2.48,3.91-3,5.72-3.24,13-.29,5.15,0,9.73.76,11.92,1.53,4.68,6.3,9.92,11,12,4.48,2.1,15.26,2.39,20.51.57,3-1,3.34-1.62,3.62-4.77.2-1.9.1-3.53-.19-3.53s-3,.67-6,1.44a45.29,45.29,0,0,1-8.39,1.43c-6.49,0-13.83-6.59-13.83-12.5v-2.77Zm-30.71-6.67.67-2.67a11.51,11.51,0,0,1,6.48-8.3c3.91-1.72,5.73-1.72,9.73-.1,3.44,1.43,4.68,3.15,5.73,7.92l.66,3.15Z"/>
+          <path fill="#ffffff" d="M823.68,133.92c-5.15,2.29-7.63,5.92-7.63,11.07,0,6.2,3.24,9.54,13.16,13.55,11.35,4.67,14.31,8.1,10.3,12.11-3.53,3.53-13.64,3.34-22.32-.38-1.53-.67-1.72-.29-1.43,3.43s.57,4.29,3.62,5.34c4.58,1.53,16.6,1.53,20.32-.09a12.64,12.64,0,0,0,8.3-12.21c0-4.39-.38-5.25-3.62-8.3-2.2-2.1-6.49-4.48-11-6.2-4-1.43-7.92-3.43-8.68-4.29-4.77-5.25,1.52-9.64,11.35-7.92a43.75,43.75,0,0,1,7.25,1.62c1.14.38,1.9-.28,2.76-2.38.67-1.72.86-3.25.38-3.72-3.24-3-17.55-3.91-22.79-1.63"/>
+          <polygon fill="#ffffff" points="747.84 156.44 747.84 179.33 755.47 179.33 755.47 133.54 747.84 133.54 747.84 156.44"/>
+        </svg>
+      </div>
+      <h1>Información a solicitar al <span class="red">equipo técnico</span> - Registro Horario Fase II</h1>
+      <p>Rediseño del sistema de Registro Horario - Fase II (Módulo de Informes, Rol Inspector/a, Rol RLPT y Accesos externos)</p>
+      <p style="color:rgba(255,255,255,0.72);font-size:11px;margin-top:10px;max-width:580px;line-height:1.5">Cuestiones técnicas a validar con el equipo técnico. Complementado con los informes Codex 01-04: decisiones bloqueantes, backlog y QA.</p>
+    </div>
+    <div class="header-badge">
+      Cierre técnico<span>Equipo técnico</span>
+    </div>
+  </div>
+</header>
+
+<nav id="mainNav">
+  <div class="container">
+    <div class="nav-logo" aria-hidden="true">
+      <svg viewBox="0 0 848 199.39" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#ffffff" d="M22.89,28.62V0H0V109.7H114.47V28.62Zm68.68,41V85.85H22.89V53.42H91.57Z"/>
+        <path fill="#ffffff" d="M297.61,28.62V0H274.72V109.7H389.18V28.62Zm68.68,41V85.85H297.61V53.42h68.68Z"/>
+        <path fill="#ffffff" d="M137.36,28.62v24.8h45.79c45.11,0,45.78,0,45.78,1.91s-.67,1.9-45.78,1.9H137.36V109.7H251.82V28.62Zm57.23,57.23c-33.67,0-34.34,0-34.34-1.91S160.92,82,194.59,82s34.34,0,34.34,1.91S228.26,85.85,194.59,85.85Z"/>
+        <path fill="#ff0000" d="M412.08,28.62V109.7H526.54V28.62Zm91.57,41V85.85H435V53.42h68.68Z"/>
+        <path fill="#ff0000" d="M549.44,28.62V109.7H663.9V28.62Zm91.57,41V85.85H572.33V53.42H641Z"/>
+        <polygon fill="#ffffff" points="686.79 69.16 686.79 109.7 709.69 109.7 709.69 53.42 778.37 53.42 778.37 109.7 801.26 109.7 801.26 28.62 686.79 28.62 686.79 69.16"/>
+        <polygon fill="#ffffff" points="824.15 69.16 824.15 109.7 847.05 109.7 847.05 28.62 824.15 28.62 824.15 69.16"/>
+      </svg>
+    </div>
+    <a href="#contexto">Contexto</a>
+    <a href="#repos">Repos</a>
+    <a href="#arquitectura">Arquitectura</a>
+    <a href="#backlog">Backlog</a>
+    <a href="#qa">QA</a>
+    <a href="#checklist">Checklist</a>
+  </div>
+</nav>
+
+<!-- CONTEXTO TECNICO AMPLIADO -->
+
+<section id="contexto" class="collapsible-section">
+  <div class="container">
+    <button type="button" class="section-toggle" aria-expanded="false" aria-controls="contexto-body">
+      <div class="section-toggle-top">
+        <div class="section-header">
+          <div class="section-number">1</div>
+          <h2>Contexto técnico y <span class="red">premisas de cierre</span></h2>
+        </div>
+        <span class="toggle-chevron" aria-hidden="true"></span>
+      </div>
+      <p class="section-desc">Resumen técnico ampliado con estado real, decisiones pendientes y límites de lo ya reutilizable.</p>
+    </button>
+    <div id="contexto-body" class="section-body">
+      <div class="section-body-inner">
+
+    <div class="alert alert-red"><h4>Lectura técnica principal</h4><p>La base de Fase I es aprovechable, pero Fase II toca permisos, APIs, modelos frontend, cálculos, históricos, exportaciones, auditoría, datos de prueba y E2E. El riesgo no está en crear pantallas aisladas, sino en cerrar reglas transversales tarde.</p></div>
+    <div class="meta-grid">
+      <div class="meta-item"><strong>Condición previa</strong>No calcular esfuerzo hasta cerrar decisiones funcionales y técnicas.</div>
+      <div class="meta-item"><strong>Riesgo de cierre</strong>Privacidad, históricos, permisos y rendimiento pueden cambiar el alcance.</div>
+      <div class="meta-item"><strong>Stack observado</strong>Angular 20 + Keycloak; Java 17 + Spring Boot 3.2 + PostgreSQL.</div>
+      <div class="meta-item"><strong>Diseño UX/UI</strong>Aportado por Vitaly; este documento acota implementación e integración.</div>
+    </div>
+    <div class="card">
+      <h3>Áreas técnicas condicionadas</h3>
+      <table class="data-table"><thead><tr><th>Bloque</th><th>Qué debe cerrarse antes de planificar</th><th>Riesgo dominante</th></tr></thead><tbody>
+        <tr><td>Cierre funcional/técnico</td><td>Decisiones bloqueantes, criterios de aceptación y datos de prueba.</td><td>Trabajar con reglas asumidas.</td></tr>
+        <tr><td>Roles, permisos y accesos externos</td><td>Modelo identidad, read-only, revocación, duplicados y multiempresa.</td><td>Rehacer seguridad y modelo de datos.</td></tr>
+        <tr><td>Informes Admin/RLPT</td><td>Columnas, filtros, XLSX, fechas, tramos y variantes por rol.</td><td>Rehacer contratos y golden files.</td></tr>
+        <tr><td>Inspector/a</td><td>Anonimato, ámbito multiempresa, KPIs, ficha read-only y export anónimo.</td><td>Fuga de datos o permisos cruzados.</td></tr>
+        <tr><td>RLPT + Superadmin/suplantación</td><td>Naturaleza del rol, sesión, escritura, salida segura y auditoría.</td><td>Escalada de permisos o trazabilidad insuficiente.</td></tr>
+        <tr><td>QA/UAT</td><td>Dataset oficial, E2E críticos, golden XLSX, performance y clasificación de hallazgos.</td><td>UAT no concluyente.</td></tr>
+      </tbody></table>
+    </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="separator">
+
+<!-- REPOS -->
+
+<section id="repos" class="collapsible-section">
+  <div class="container">
+    <button type="button" class="section-toggle" aria-expanded="false" aria-controls="repos-body">
+      <div class="section-toggle-top">
+        <div class="section-header">
+          <div class="section-number">2</div>
+          <h2>Estado de repos y <span class="red">reutilización</span></h2>
+        </div>
+        <span class="toggle-chevron" aria-hidden="true"></span>
+      </div>
+      <p class="section-desc">Resumen del punto de partida técnico detectado en Fase I.</p>
+    </button>
+    <div id="repos-body" class="section-body">
+      <div class="section-body-inner">
+
+    <div class="card">
+      <h3>Mapa técnico de reutilización</h3>
+      <table class="data-table"><thead><tr><th>Área</th><th>Estado actual</th><th>Lectura para Fase II</th></tr></thead><tbody>
+        <tr><td>Usuarios y empresas</td><td>CRUD, listado, detalle, resumen e importación CSV.</td><td>Reutilizable con permisos nuevos, DTOs anónimos y ámbito externo.</td></tr>
+        <tr><td>Fichajes e historial</td><td>Fichaje, histórico mensual y export CSV.</td><td>Base para Informes, pero falta XLSX y reglas de tramos problemáticos.</td></tr>
+        <tr><td>Compensaciones</td><td>Movimientos, resumen, manuales y CSV.</td><td>Riesgo por comentarios/descripciones sensibles.</td></tr>
+        <tr><td>Planificación/calendario</td><td>Configuración y planificación con auditoría.</td><td>Afecta cálculos, festivos, ausencias e históricos.</td></tr>
+        <tr><td>Seguridad</td><td>Checks actuales y soporte técnico para roles externos.</td><td>Falta matriz Inspector/RLPT y bloqueo read-only global.</td></tr>
+        <tr><td>Auditoría</td><td>Infraestructura y eventos actuales.</td><td>Faltan eventos Fase II: acceso externo, export XLSX, consulta anónima y suplantación.</td></tr>
+        <tr><td>Exportaciones</td><td>CSV existentes.</td><td>Falta motor XLSX y contratos por rol.</td></tr>
+      </tbody></table>
+    </div>
+    <div class="alert alert-gold"><h4>Hallazgos transversales</h4><ul><li>Frontend llama a <code>resumen-registros/detalle</code> pero backend no lo implementa.</li><li><code>codigoEmpleado</code> existe en backend, no en dominio <code>Usuario</code> frontend.</li><li>CSV exporta observaciones/descripciones/comentarios.</li><li><code>requireAnyActiveCompanyMembership</code> bloquea estado Inspector/a sin empresa.</li></ul></div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="separator">
+
+<!-- DECISIONES TECNICAS -->
+
+<section id="arquitectura" class="collapsible-section">
+  <div class="container">
+    <button type="button" class="section-toggle" aria-expanded="false" aria-controls="arquitectura-body">
+      <div class="section-toggle-top">
+        <div class="section-header">
+          <div class="section-number">3</div>
+          <h2>Decisiones <span class="red">técnicas</span></h2>
+        </div>
+        <span class="toggle-chevron" aria-hidden="true"></span>
+      </div>
+      <p class="section-desc">Preguntas técnicas ampliadas a validar con backend, frontend, arquitectura, seguridad e integraciones.</p>
+    </button>
+    <div id="arquitectura-body" class="section-body">
+      <div class="section-body-inner">
+<div class="card">
+      <h3><span class="step-num q">T1</span> Roles, permisos y modo solo lectura transversal</h3>
+      <div class="decision-meta"><span class="badge-chip blocker">Alta criticidad</span><span class="badge-chip tech">Backend + Frontend</span></div>
+      <ul><li>No hay matriz centralizada: autorización en <code>CurrentUserAccessService</code> y permisos frontend.</li><li>El frontend solo reconoce roles de navegación <code>superadmin</code>, <code>admin</code> y <code>usuario</code>.</li><li>El modo simulación deshabilita UI, pero no existe bloqueo global backend por rol solo lectura.</li></ul>
+      <div class="ask"><strong>Validar:</strong> modelo de permisos, interceptor backend para escritura, generalización de <code>modoSimulacion</code> y ruta de incorporación Inspector/RLPT.</div>
+      <div class="answer-block">
+        <span class="answer-label">Respuesta / cierre</span>
+        <div class="answer" data-edit data-placeholder="Decisión técnica sobre permisos…"></div>
+      </div>
+    </div>
+<div class="card">
+      <h3><span class="step-num q">T2</span> Modelo técnico de identidad y accesos externos</h3>
+      <div class="decision-meta"><span class="badge-chip blocker">Bloqueante</span><span class="badge-chip tech">Datos + Keycloak</span></div>
+      <ul><li>Opciones: extender <code>appuser_empresa</code>, crear tabla <code>acceso_externo</code>, roles Keycloak + ámbito BD, o combinación.</li><li>El alta debe cubrir estados, caducidad, revocación, duplicados, multiempresa y fallos Keycloak/email.</li></ul>
+      <div class="ask"><strong>Validar:</strong> entidad definitiva, índices, relación externo-empresa, invalidación de sesión y comportamiento si email/Keycloak falla.</div>
+      <div class="answer-block">
+        <span class="answer-label">Respuesta / cierre</span>
+        <div class="answer" data-edit data-placeholder="Modelo de datos e integración…"></div>
+      </div>
+    </div>
+<div class="card">
+      <h3><span class="step-num q">T3</span> Anonimización en backend y contratos DTO</h3>
+      <div class="decision-meta"><span class="badge-chip blocker">Privacidad</span><span class="badge-chip tech">API Contract</span></div>
+      <ul><li>Actualmente no hay anonimización en backend ni frontend.</li><li>La capa recomendada es backend: DTOs/mappers específicos por rol para evitar que PII salga del servidor.</li><li><code>codigoEmpleado</code> existe en backend como candidato, pero no está mapeado en el dominio frontend.</li></ul>
+      <div class="ask"><strong>Validar:</strong> identificador anónimo, DTOs por rol, sanitización de subobjetos, comentarios y pruebas anti-fuga.</div>
+      <div class="answer-block">
+        <span class="answer-label">Respuesta / cierre</span>
+        <div class="answer" data-edit data-placeholder="Arquitectura de anonimización…"></div>
+      </div>
+    </div>
+<div class="card">
+      <h3><span class="step-num q">T4</span> Multiempresa del Inspector/a y estado sin empresa</h3>
+      <div class="decision-meta"><span class="badge-chip high">Alto</span><span class="badge-chip tech">Routing + Contexto</span></div>
+      <ul><li>El patrón multiempresa del superadmin es reutilizable parcialmente: selector, contexto y flujo de empresas.</li><li><code>GET /v1/empresas</code> actual exige superadmin y devuelve todo; Inspector/a necesita endpoint de ámbito.</li><li><code>requireAnyActiveCompanyMembership</code> bloquea escenarios sin empresa.</li></ul>
+      <div class="ask"><strong>Validar:</strong> endpoint de empresas autorizadas, pantalla inicial sin empresa, limpieza de contexto revocado y no revelar empresas ajenas.</div>
+      <div class="answer-block">
+        <span class="answer-label">Respuesta / cierre</span>
+        <div class="answer" data-edit data-placeholder="Decisión sobre navegación multiempresa…"></div>
+      </div>
+    </div>
+<div class="card">
+      <h3><span class="step-num q">T5</span> Motor XLSX, consultas de Informes y golden files</h3>
+      <div class="decision-meta"><span class="badge-chip blocker">Bloqueante</span><span class="badge-chip tech">Informes</span></div>
+      <ul><li>Fase I exporta CSV; Fase II requiere XLSX tabla, simple diario y detallado por tramos.</li><li>Debe haber contrato de columnas por rol, filtros, paginación/export completo, formato de fechas/duraciones y metadatos.</li><li>Los golden files deben validar columnas, datos, formatos y ausencia de PII.</li></ul>
+      <div class="ask"><strong>Validar:</strong> librería/servicio XLSX, límites, streaming/job si aplica, contratos API y lectura automatizada de XLSX en tests.</div>
+      <div class="answer-block">
+        <span class="answer-label">Respuesta / cierre</span>
+        <div class="answer" data-edit data-placeholder="Diseño técnico de informes y XLSX…"></div>
+      </div>
+    </div>
+<div class="card">
+      <h3><span class="step-num q">T6</span> Fechas, históricos, planificación y cálculos</h3>
+      <div class="decision-meta"><span class="badge-chip high">Alto</span><span class="badge-chip tech">Cálculo backend</span></div>
+      <ul><li>Hay que cubrir zona Atlantic/Canary, cruces de medianoche, cambio de año, festivos, vacaciones, bajas, planificación pasada y datos legacy incompletos.</li><li>Los cálculos no conviene cubrirlos solo con E2E; requieren unitarios/integración backend.</li></ul>
+      <div class="ask"><strong>Validar:</strong> servicios de cálculo reutilizables, fallback legacy, congelación/recalculo histórico y fixtures con resultados esperados.</div>
+      <div class="answer-block">
+        <span class="answer-label">Respuesta / cierre</span>
+        <div class="answer" data-edit data-placeholder="Criterio técnico de cálculo/históricos…"></div>
+      </div>
+    </div>
+<div class="card">
+      <h3><span class="step-num q">T7</span> Superadmin, simulación, suplantación y auditoría</h3>
+      <div class="decision-meta"><span class="badge-chip blocker">Seguridad</span><span class="badge-chip tech">Auditoría</span></div>
+      <ul><li>La simulación actual se apoya mucho en frontend; Fase II exige defensa backend para mutaciones.</li><li>La suplantación requiere actor real, usuario objetivo, permisos efectivos, persistencia tras refresh, salida segura y auditoría doble.</li></ul>
+      <div class="ask"><strong>Validar:</strong> modelo de sesión, banner/contexto FE, bloqueo de escritura, eventos auditables y trazabilidad actor real/objetivo.</div>
+      <div class="answer-block">
+        <span class="answer-label">Respuesta / cierre</span>
+        <div class="answer" data-edit data-placeholder="Diseño de simulación/suplantación…"></div>
+      </div>
+    </div>
+<div class="card">
+      <h3><span class="step-num q">T8</span> Sesión, concurrencia, revocación y operaciones largas</h3>
+      <div class="decision-meta"><span class="badge-chip high">Alto</span><span class="badge-chip tech">Robustez</span></div>
+      <ul><li>Casos críticos: logout durante export, token caducado cargando <code>/v1/me</code>, revocación con sesión activa, cambio rápido de empresa y doble click en alta/export.</li><li>Debe evitarse pintar respuestas obsoletas o descargar archivos tras perder permiso.</li></ul>
+      <div class="ask"><strong>Validar:</strong> idempotencia, cancelación/invalidación, control por request, limpieza de estado frontend y errores consistentes.</div>
+      <div class="answer-block">
+        <span class="answer-label">Respuesta / cierre</span>
+        <div class="answer" data-edit data-placeholder="Reglas técnicas de sesión/concurrencia…"></div>
+      </div>
+    </div>
+<div class="card">
+      <h3><span class="step-num q">T9</span> Dataset UAT, automatización y criterios de aceptación</h3>
+      <div class="decision-meta"><span class="badge-chip qa">QA</span><span class="badge-chip tech">Tests</span></div>
+      <ul><li>El dataset debe incluir roles, empresas, ámbitos, fichajes problemáticos, fechas límite, comentarios con PII, integración Keycloak/email y exports.</li><li>E2E debe ser crítico y acotado; cálculos, permisos backend, anonimización, XLSX, logs y performance necesitan tests de integración/contrato.</li></ul>
+      <div class="ask"><strong>Validar:</strong> fixtures oficiales, golden XLSX, specs Playwright críticas y criterios de defecto/aclaración/cambio de alcance.</div>
+      <div class="answer-block">
+        <span class="answer-label">Respuesta / cierre</span>
+        <div class="answer" data-edit data-placeholder="Estrategia QA acordada…"></div>
+      </div>
+    </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="separator">
+
+<!-- BACKLOG -->
+
+<section id="backlog" class="collapsible-section">
+  <div class="container">
+    <button type="button" class="section-toggle" aria-expanded="false" aria-controls="backlog-body">
+      <div class="section-toggle-top">
+        <div class="section-header">
+          <div class="section-number">4</div>
+          <h2>Secuencia técnica y <span class="red">dependencias</span></h2>
+        </div>
+        <span class="toggle-chevron" aria-hidden="true"></span>
+      </div>
+      <p class="section-desc">Secuencia técnica orientativa, tareas condicionadas y dependencias que bloquean implementación fiable.</p>
+    </button>
+    <div id="backlog-body" class="section-body">
+      <div class="section-body-inner">
+
+    <div class="card">
+      <h3>Bloques técnicos condicionados</h3>
+      <table class="data-table"><thead><tr><th>Bloque</th><th>Trabajo a preparar</th><th>Salida verificable</th></tr></thead><tbody>
+        <tr><td>Cierre</td><td>Arquitectura de permisos/accesos, diseño FE y criterios QA.</td><td>Definición técnica aprobada, matriz permisos, contrato Informes y dataset.</td></tr>
+        <tr><td>Seguridad</td><td>Roles, permisos, accesos externos y read-only backend.</td><td>APIs/guards/rutas y CRUD acceso externo con tests de seguridad.</td></tr>
+        <tr><td>Informes</td><td>Backend Informes, XLSX tabla/simple/detallado, pantalla FE y contratos.</td><td>Informes filtrables/exportables y golden XLSX.</td></tr>
+        <tr><td>Inspector/a</td><td>Endpoints anónimos, KPIs, experiencia Inspector y anti-fuga.</td><td>Inspector navega sin escritura ni PII no autorizada.</td></tr>
+        <tr><td>RLPT y Superadmin</td><td>RLPT, suplantación, simulación, i18n y estados.</td><td>Recorridos cerrados según decisiones de negocio y seguridad.</td></tr>
+        <tr><td>QA/UAT</td><td>E2E críticos, performance, hardening y cierre UAT.</td><td>Suite crítica estable, límites validados y aceptación funcional.</td></tr>
+      </tbody></table>
+    </div>
+    <div class="card">
+      <h3>Dependencias críticas</h3>
+      <ul class="checklist"><li>Matriz de permisos: bloquea BE, FE, rutas, tests negativos y E2E.</li><li>Modelo accesos externos: bloquea BD, Keycloak/email, revocación y multiempresa.</li><li>Contrato Informes: bloquea endpoints, XLSX, columnas, filtros y golden files.</li><li>Anonimización: bloquea DTOs, UI, exports, logs y auditoría.</li><li>Dataset UAT: bloquea cálculos, KPIs, XLSX, pruebas anti-fuga y performance.</li><li>Suplantación y volumen/SLA: pendientes de cierre antes de convertirlos en compromiso técnico.</li></ul>
+      <div class="answer-block">
+        <span class="answer-label">Notas técnicas de cierre</span>
+        <div class="answer" data-edit data-placeholder="Riesgos, responsables, tareas condicionadas…"></div>
+      </div>
+    </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="separator">
+
+<!-- QA -->
+
+<section id="qa" class="collapsible-section">
+  <div class="container">
+    <button type="button" class="section-toggle" aria-expanded="false" aria-controls="qa-body">
+      <div class="section-toggle-top">
+        <div class="section-header">
+          <div class="section-number">5</div>
+          <h2>QA técnico y <span class="red">automatización</span></h2>
+        </div>
+        <span class="toggle-chevron" aria-hidden="true"></span>
+      </div>
+      <p class="section-desc">Estrategia QA derivada del informe de casuísticas críticas y tests recomendados.</p>
+    </button>
+    <div id="qa-body" class="section-body">
+      <div class="section-body-inner">
+
+    <div class="card">
+      <h3>Specs E2E críticas recomendadas</h3>
+      <table class="data-table"><thead><tr><th>Spec</th><th>Rol</th><th>Qué valida</th></tr></thead><tbody>
+        <tr><td><code>auth-permisos.spec.ts</code></td><td>Todos</td><td>Login, menú, URL directa, refresh, 403 y no pintar datos antiguos.</td></tr>
+        <tr><td><code>empresa-contexto.spec.ts</code></td><td>Multiempresa/Inspector</td><td>Selección, cambio rápido, revocación y no mezcla de datos.</td></tr>
+        <tr><td><code>accesos-externos.spec.ts</code></td><td>Admin</td><td>Alta, duplicado, revocación, caducidad y fallo Keycloak/email.</td></tr>
+        <tr><td><code>informes-*.spec.ts</code></td><td>Admin/RLPT/Inspector</td><td>Tabla, simple, detallado, filtros, paginación, exports y tramos problemáticos.</td></tr>
+        <tr><td><code>inspector-privacidad.spec.ts</code></td><td>Inspector</td><td>Empresas, listado, ficha y XLSX sin PII no autorizada.</td></tr>
+        <tr><td><code>rlpt-ambito.spec.ts</code></td><td>RLPT</td><td>Menú, informes, rutas heredadas y rechazo fuera de ámbito.</td></tr>
+        <tr><td><code>superadmin-simulacion.spec.ts</code></td><td>Superadmin</td><td>Mutaciones UI/API bloqueadas y contexto limpio.</td></tr>
+        <tr><td><code>sesion-export.spec.ts</code></td><td>Admin/Inspector</td><td>No descarga tras logout, caducidad o revocación.</td></tr>
+      </tbody></table>
+    </div>
+    <div class="alert alert-blue"><h4>No cubrir solo con E2E</h4><ul><li>Cálculo de horas, festivos, vacaciones, planificación y cruces de año: unit/integration backend.</li><li>Anonimización de DTOs y permisos backend por endpoint: contrato/integración de seguridad.</li><li>XLSX: integración leyendo archivos generados y golden files.</li><li>Concurrencia, logs, auditoría y performance: integración/performance.</li></ul></div>
+    <div class="card">
+      <h3>Dataset UAT mínimo</h3>
+      <ul class="compact-list"><li>Empresas normales, vacías, inactivas y multiempresa.</li><li>Roles Admin, Usuario, Referente si aplica, Superadmin, Inspector/a y RLPT.</li><li>Usuarios activos, baja, sin planificación, sin registros, centro/puesto único y fuera de ámbito.</li><li>Fichajes completos, abiertos, solapados, cruce de medianoche y fecha futura rechazada.</li><li>Fechas de hoy, pasado, futuro, fin de semana, festivo y cambio de mes/año en zona Atlantic/Canary.</li><li>Comentarios con PII, compensaciones sensibles, Keycloak OK/KO, email KO y acceso revocado con sesión activa.</li></ul>
+      <div class="answer-block">
+        <span class="answer-label">Notas QA / dataset</span>
+        <div class="answer" data-edit data-placeholder="Datos oficiales, resultados esperados y golden files…"></div>
+      </div>
+    </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="separator">
+
+<!-- CHECKLIST -->
+
+<section id="checklist" class="alt collapsible-section">
+  <div class="container">
+    <button type="button" class="section-toggle" aria-expanded="false" aria-controls="checklist-body">
+      <div class="section-toggle-top">
+        <div class="section-header">
+          <div class="section-number">✓</div>
+          <h2>Checklist de <span class="red">validación técnica</span></h2>
+        </div>
+        <span class="toggle-chevron" aria-hidden="true"></span>
+      </div>
+      <p class="section-desc">Puntos que deben quedar cerrados para implementar sin asumir reglas.</p>
+    </button>
+    <div id="checklist-body" class="section-body">
+      <div class="section-body-inner">
+
+    <div class="card">
+      <h3>Checklist técnico consolidado</h3>
+      <ul class="checklist"><li>Modelo de permisos y roles Fase II aprobado en backend y frontend.</li><li>Bloqueo read-only backend definido para Inspector/a y simulación/suplantación.</li><li>Modelo de datos de accesos externos y relación externo-empresa cerrado.</li><li>Integración Keycloak/email con fallos parciales, reintentos o rollback definidos.</li><li>DTOs anonimizados por rol y pruebas anti-fuga en API/UI/XLSX/logs/auditoría.</li><li>Endpoint de empresas autorizadas para Inspector/a y estado sin empresa implementable.</li><li>Motor XLSX seleccionado con contratos, límites, golden files y formato por rol.</li><li>Fallback legacy para históricos y reglas de recalculo/congelación aprobadas.</li><li>Suplantación con actor real, objetivo, refresh, salida y auditoría cerradas si entra en alcance.</li><li>Dataset UAT oficial disponible antes de automatización E2E masiva.</li></ul>
+      <div class="checklist-notes"><span class="answer-label">Notas de validación / acuerdos</span><div class="answer" data-edit data-placeholder="Acuerdos, responsables, fechas…"></div></div>
+    </div>
+    <div class="alert alert-gold"><h4>Siguiente paso</h4><p>Usar este HTML como documento de reunión técnica. Los puntos sin respuesta deben permanecer como <strong>pendientes de cierre</strong>; no deben convertirse en compromiso técnico.</p></div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-logo">
+      <svg viewBox="0 0 848 199.39" xmlns="http://www.w3.org/2000/svg">
+        <path fill="rgba(255,255,255,0.78)" d="M22.89,28.62V0H0V109.7H114.47V28.62Zm68.68,41V85.85H22.89V53.42H91.57Z"/>
+        <path fill="rgba(255,255,255,0.78)" d="M297.61,28.62V0H274.72V109.7H389.18V28.62Zm68.68,41V85.85H297.61V53.42h68.68Z"/>
+        <path fill="rgba(255,255,255,0.78)" d="M137.36,28.62v24.8h45.79c45.11,0,45.78,0,45.78,1.91s-.67,1.9-45.78,1.9H137.36V109.7H251.82V28.62Zm57.23,57.23c-33.67,0-34.34,0-34.34-1.91S160.92,82,194.59,82s34.34,0,34.34,1.91S228.26,85.85,194.59,85.85Z"/>
+        <path fill="#ff0000" d="M412.08,28.62V109.7H526.54V28.62Zm91.57,41V85.85H435V53.42h68.68Z"/>
+        <path fill="#ff0000" d="M549.44,28.62V109.7H663.9V28.62Zm91.57,41V85.85H572.33V53.42H641Z"/>
+        <polygon fill="rgba(255,255,255,0.78)" points="686.79 69.16 686.79 109.7 709.69 109.7 709.69 53.42 778.37 53.42 778.37 109.7 801.26 109.7 801.26 28.62 686.79 28.62 686.79 69.16"/>
+        <polygon fill="rgba(255,255,255,0.78)" points="824.15 69.16 824.15 109.7 847.05 109.7 847.05 28.62 824.15 28.62 824.15 69.16"/>
+      </svg>
+    </div>
+    <p>Información a solicitar al equipo técnico - Registro Horario Fase II - <strong>Babooni Technologies</strong> - Cierre técnico (junio 2026)</p>
+    <div class="footer-contact">
+      <a href="mailto:info@babooni.com">info@babooni.com</a>
+      <a href="tel:617312356">617 31 23 56</a>
+      <span>C. Alfonso XII, 62 - Retiro - 28014 Madrid</span>
+    </div>
+  </div>
+</footer>
+
+</div>
+
+<script id="collapseScript">
+window.initCollapsibleCards=function(root){
+  var scope=root||document;
+  scope.querySelectorAll('.card').forEach(function(card){
+    if(card.classList.contains('collapsible-card'))return;
+    var chip=card.querySelector(':scope > h3 .step-num.q');
+    if(!chip)return;
+    var header=card.querySelector(':scope > h3');
+    if(!header)return;
+    var chipId=chip.textContent.trim().toLowerCase();
+    var bodyId='card-'+chipId+'-body';
+    card.classList.add('collapsible-card');
+    var toggle=document.createElement('button');
+    toggle.type='button';
+    toggle.className='card-toggle';
+    toggle.setAttribute('aria-expanded','false');
+    toggle.setAttribute('aria-controls',bodyId);
+    var chevron=document.createElement('span');
+    chevron.className='card-chevron';
+    chevron.setAttribute('aria-hidden','true');
+    card.insertBefore(toggle,header);
+    toggle.appendChild(header);
+    toggle.appendChild(chevron);
+    var body=document.createElement('div');
+    body.id=bodyId;
+    body.className='card-body';
+    var inner=document.createElement('div');
+    inner.className='card-body-inner';
+    while(toggle.nextSibling){inner.appendChild(toggle.nextSibling);}
+    body.appendChild(inner);
+    card.appendChild(body);
+  });
+};
+window.closeAllCards=function(root){
+  var scope=root||document;
+  scope.querySelectorAll('.collapsible-card').forEach(function(card){
+    card.classList.remove('is-open');
+    var btn=card.querySelector('.card-toggle');
+    if(btn)btn.setAttribute('aria-expanded','false');
+  });
+};
+window.closeAllSections=function(root){
+  var scope=root||document;
+  scope.querySelectorAll('.collapsible-section').forEach(function(section){
+    section.classList.remove('is-open');
+    var btn=section.querySelector('.section-toggle');
+    if(btn)btn.setAttribute('aria-expanded','false');
+  });
+};
+window.openSectionFromHash=function(){
+  if(!location.hash)return;
+  var target=document.querySelector(location.hash);
+  if(!target||!target.classList.contains('collapsible-section'))return;
+  target.classList.add('is-open');
+  var toggle=target.querySelector('.section-toggle');
+  if(toggle)toggle.setAttribute('aria-expanded','true');
+};
+document.addEventListener('click',function(e){var btn=e.target.closest('.section-toggle');if(!btn)return;var section=btn.closest('.collapsible-section');if(!section)return;var open=section.classList.toggle('is-open');btn.setAttribute('aria-expanded',open?'true':'false');});
+document.addEventListener('click',function(e){var btn=e.target.closest('.card-toggle');if(!btn)return;var card=btn.closest('.collapsible-card');if(!card)return;var open=card.classList.toggle('is-open');btn.setAttribute('aria-expanded',open?'true':'false');});
+document.addEventListener('click',function(e){var link=e.target.closest('nav a[href^="#"]');if(!link)return;var id=link.getAttribute('href').slice(1);var section=document.getElementById(id);if(!section||!section.classList.contains('collapsible-section'))return;section.classList.add('is-open');var btn=section.querySelector('.section-toggle');if(btn)btn.setAttribute('aria-expanded','true');});
+var docRoot=document.getElementById('docContent');
+if(docRoot){initCollapsibleCards(docRoot);closeAllSections(docRoot);closeAllCards(docRoot);openSectionFromHash();}
+</script>
+<div class="edit-bar" id="editBar">
+  <span class="hint">Versión editable · Activa modo edición para rellenar respuestas</span>
+  <span class="status" id="saveStatus"></span>
+  <button type="button" class="primary" id="btnEdit">Modo edición</button>
+  <button type="button" id="btnSave">Guardar</button>
+  <button type="button" id="btnDownload">Descargar HTML</button>
+  <button type="button" class="danger" id="btnRestore">Restaurar original</button>
+</div>
+<script id="editScript">
+(function(){
+  var STORAGE_KEY='rh-fase2-tecnico-editable-v3-ampliado';
+  var DOWNLOAD_NAME='Informacion_a_solicitar_equipo_tecnico_Registro_Horario_FaseII_mejorado.html';
+  var TITLE_CLEAN='Información a solicitar al equipo técnico - Registro Horario Fase II';
+  var doc=document.getElementById('docContent');
+  var statusEl=document.getElementById('saveStatus');
+  var btnEdit=document.getElementById('btnEdit');
+  var btnSave=document.getElementById('btnSave');
+  var btnDownload=document.getElementById('btnDownload');
+  var btnRestore=document.getElementById('btnRestore');
+  var originalHTML=doc.innerHTML;
+  var editFields=[];
+  var editing=false;
+  var saveTimer;
+  function flash(msg,color){statusEl.textContent=msg;statusEl.style.color=color||'var(--green)';clearTimeout(flash._t);flash._t=setTimeout(function(){statusEl.textContent='';},2800);}
+  function bindEditFields(){editFields=doc.querySelectorAll('[data-edit]');editFields.forEach(function(el){el.addEventListener('click',function(e){if(editing)e.stopPropagation();});el.addEventListener('mousedown',function(e){if(editing)e.stopPropagation();});el.addEventListener('input',scheduleSave);});}
+  function scheduleSave(){clearTimeout(saveTimer);saveTimer=setTimeout(function(){localStorage.setItem(STORAGE_KEY,doc.innerHTML);flash('Autoguardado');},800);}
+  function persist(){localStorage.setItem(STORAGE_KEY,doc.innerHTML);flash('Guardado en el navegador');}
+  function setEditing(on){editing=on;document.body.classList.toggle('editing',on);btnEdit.textContent=on?'Salir edición':'Modo edición';btnEdit.classList.toggle('on',on);editFields.forEach(function(el){el.contentEditable=on?'true':'false';el.spellcheck=on;});if(!on)persist();}
+  bindEditFields();
+  if(window.closeAllSections)window.closeAllSections(doc);
+  if(window.closeAllCards)window.closeAllCards(doc);
+  var saved=localStorage.getItem(STORAGE_KEY);
+  if(saved){doc.innerHTML=saved;bindEditFields();if(window.initCollapsibleCards)window.initCollapsibleCards(doc);if(window.closeAllSections)window.closeAllSections(doc);if(window.closeAllCards)window.closeAllCards(doc);if(window.openSectionFromHash)window.openSectionFromHash();flash('Borrador cargado','var(--blue)');}
+  btnEdit.addEventListener('click',function(){setEditing(!editing);});
+  btnSave.addEventListener('click',persist);
+  btnRestore.addEventListener('click',function(){if(!confirm('¿Restaurar el contenido original? Se perderán los cambios guardados.'))return;doc.innerHTML=originalHTML;localStorage.removeItem(STORAGE_KEY);setEditing(false);bindEditFields();if(window.initCollapsibleCards)window.initCollapsibleCards(doc);if(window.closeAllSections)window.closeAllSections(doc);if(window.closeAllCards)window.closeAllCards(doc);if(window.openSectionFromHash)window.openSectionFromHash();flash('Contenido restaurado','var(--blue)');});
+  btnDownload.addEventListener('click',function(){var clone=document.documentElement.cloneNode(true);clone.querySelector('#docContent').innerHTML=doc.innerHTML;clone.querySelectorAll('[data-edit]').forEach(function(el){el.removeAttribute('data-edit');el.removeAttribute('contenteditable');el.removeAttribute('spellcheck');});var bar=clone.querySelector('#editBar');if(bar)bar.remove();var es=clone.querySelector('#editScript');if(es)es.remove();clone.querySelector('body').classList.remove('editing');var title=clone.querySelector('title');if(title)title.textContent=TITLE_CLEAN;var style=clone.querySelector('style');if(style)style.textContent=style.textContent.replace(/\/\* EDIT TOOLBAR \*\/[\s\S]*?(?=@media print)/,'');var html='<!DOCTYPE html>\n'+clone.outerHTML;var blob=new Blob([html],{type:'text/html;charset=utf-8'});var a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=DOWNLOAD_NAME;a.click();URL.revokeObjectURL(a.href);flash('HTML descargado');});
+  document.addEventListener('keydown',function(e){if((e.ctrlKey||e.metaKey)&&e.key==='s'){e.preventDefault();persist();}});
+})();
+</script>
+</body>
+</html>

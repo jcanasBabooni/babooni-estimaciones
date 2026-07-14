@@ -1,0 +1,747 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Estimacion Minerva - Justificante de Asistencia</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#0a0a0a;--black-soft:#1a1a1a;--black-deep:#050505;--black-light:#2a2a2a;
+  --red:#e60000;--red-light:#ff0000;--red-dark:#b30000;--red-pale:#fdecec;--red-bg:#fef5f5;
+  --gold:#f4b900;--gold-light:#fff8e1;--gold-dark:#c49500;
+  --bg:#ffffff;--bg-alt:#f6f6f7;--bg-card:#ffffff;--bg-dark:#111111;
+  --border:#e2e2e2;--border-light:#ededed;--border-dark:#2a2a2a;
+  --text:#0a0a0a;--text-secondary:#4a4a4a;--text-muted:#8a8a8a;
+  --green:#1d8a4a;--green-bg:#e6f7ee;--green-border:#b8e6cc;
+  --orange:#d97a1c;--orange-bg:#fef3e2;--orange-border:#fad6a5;
+  --blue:#1d6aa5;--blue-bg:#e6f0f7;--blue-border:#b8d4e6;
+  --shadow-sm:0 1px 3px rgba(0,0,0,0.06);--shadow-md:0 4px 12px rgba(0,0,0,0.10);--shadow-lg:0 8px 30px rgba(0,0,0,0.14);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Montserrat','Segoe UI',-apple-system,BlinkMacSystemFont,sans-serif;background:#d8d8dc;color:var(--text);line-height:1.65;-webkit-font-smoothing:antialiased}
+.page-wrapper{max-width:960px;margin:32px auto;background:var(--bg);border-radius:16px;box-shadow:0 4px 40px rgba(0,0,0,0.18),0 1px 6px rgba(0,0,0,0.08);overflow:visible}
+.container{max-width:100%;margin:0 auto;padding:0 40px}
+header{background:linear-gradient(135deg,#000000 0%,var(--black) 35%,var(--black-soft) 100%);color:white;padding:48px 0 44px;border-bottom:5px solid var(--red);position:relative;overflow:hidden;border-radius:16px 16px 0 0}
+header::before{content:'';position:absolute;top:-50%;right:-10%;width:500px;height:500px;background:radial-gradient(circle,rgba(230,0,0,0.18) 0%,transparent 70%);border-radius:50%}
+header::after{content:'';position:absolute;bottom:-60%;left:-5%;width:400px;height:400px;background:radial-gradient(circle,rgba(255,255,255,0.04) 0%,transparent 70%);border-radius:50%}
+header .container{display:flex;justify-content:space-between;align-items:flex-start;position:relative;z-index:1;gap:24px}
+.header-logo{margin-bottom:18px}
+.header-logo svg{display:block;height:60px;width:auto}
+.header-left h1{font-size:28px;font-weight:800;letter-spacing:-0.5px;margin-bottom:6px;line-height:1.2}
+.header-left h1 .red{color:var(--red-light)}
+.header-left p{color:rgba(255,255,255,0.65);font-size:11px;font-weight:400}
+.header-badge{background:linear-gradient(135deg,var(--red) 0%,var(--red-dark) 100%);color:white;font-size:9px;font-weight:600;padding:7px 14px;border-radius:6px;text-align:center;line-height:1.4;box-shadow:0 4px 15px rgba(230,0,0,0.45);text-transform:uppercase;letter-spacing:0.5px;flex-shrink:0}
+.header-badge span{display:block;font-size:16px;font-weight:800;letter-spacing:-0.3px;text-transform:none}
+nav{background:var(--black);border-bottom:1px solid var(--border-dark);position:-webkit-sticky;position:sticky;top:0;z-index:200;box-shadow:0 2px 12px rgba(0,0,0,0.20)}
+nav .container{display:flex;align-items:stretch;gap:0;width:100%}
+.nav-logo{display:flex;align-items:center;padding-right:12px;margin-right:0;border-right:1px solid var(--border-dark);flex:0 0 auto}
+.nav-logo svg{display:block;height:24px;width:auto}
+nav a{flex:1;text-align:center;color:rgba(255,255,255,0.65);text-decoration:none;font-size:10px;font-weight:600;padding:14px 4px;white-space:nowrap;border-bottom:3px solid transparent;transition:all .25s ease;text-transform:uppercase;letter-spacing:0.4px;display:flex;align-items:center;justify-content:center;min-width:0}
+nav a:hover{color:white;border-bottom-color:var(--red);background:rgba(230,0,0,0.10)}
+section{padding:44px 0;background:var(--bg)}
+section.alt{background:var(--bg-alt)}
+.section-header{display:flex;align-items:center;gap:14px;margin-bottom:8px}
+.section-number{background:linear-gradient(135deg,var(--black) 0%,var(--black-soft) 100%);color:white;font-size:14px;font-weight:700;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 2px 8px rgba(0,0,0,0.25);position:relative}
+.section-number::after{content:'';position:absolute;inset:-3px;border-radius:50%;border:2px solid var(--red);opacity:0.25}
+.section-header h2{font-size:22px;font-weight:800;color:var(--black);letter-spacing:-0.3px}
+.section-header h2 .red{color:var(--red)}
+.section-desc{color:var(--text-secondary);font-size:14px;font-weight:400;margin-bottom:0;max-width:850px;padding-left:52px}
+.collapsible-section .section-toggle{width:100%;text-align:left;background:transparent;border:none;cursor:pointer;padding:0;margin-bottom:20px;font:inherit;color:inherit}
+.collapsible-section .section-toggle:hover .section-header h2{color:var(--red)}
+.collapsible-section .section-toggle:focus-visible{outline:2px solid var(--red);outline-offset:4px;border-radius:8px}
+.section-toggle-top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;width:100%}
+.toggle-chevron{flex-shrink:0;width:34px;height:34px;border-radius:50%;background:var(--bg-alt);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;line-height:1;color:var(--text-muted);transition:background .2s ease,border-color .2s ease,color .2s ease;margin-top:2px}
+.toggle-chevron::before{content:'+'}
+.collapsible-section.is-open .toggle-chevron{background:var(--red-bg);border-color:#f5b8b8;color:var(--red-dark)}
+.collapsible-section.is-open .toggle-chevron::before{content:'-'}
+.section-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s ease}
+.collapsible-section.is-open .section-body{grid-template-rows:1fr}
+.section-body-inner{overflow:hidden;min-height:0}
+.collapsible-section.is-open .section-desc{margin-bottom:8px}
+.collapsible-section:not(.is-open){padding-bottom:28px}
+.card{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:24px 28px;margin-bottom:16px;box-shadow:var(--shadow-sm);transition:box-shadow .25s ease,transform .25s ease,border-color .25s ease}
+.card:hover{box-shadow:var(--shadow-md);transform:translateY(-1px);border-color:var(--black-light)}
+.card h3{font-size:16px;font-weight:700;color:var(--text);margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.card h3 .step-num{background:var(--black);color:white;font-size:11px;font-weight:800;padding:4px 12px;border-radius:20px;letter-spacing:0.3px}
+.card h3 .step-icon{font-size:18px}
+.card p,.card li{font-size:13.5px;color:var(--text-secondary);line-height:1.7}
+.card ul{padding-left:20px;margin-top:6px}
+.card li{margin-bottom:4px}
+.card.dark{background:var(--black);color:white;border-color:var(--black-light)}
+.card.dark h3{color:white}
+.card.dark p,.card.dark li{color:rgba(255,255,255,0.75)}
+.timeline{position:relative;padding-left:32px}
+.timeline::before{content:'';position:absolute;left:13px;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--black) 0%,var(--red) 50%,var(--border) 100%);border-radius:2px}
+.timeline-item{position:relative;margin-bottom:24px;padding:16px 20px;background:var(--bg-card);border-radius:10px;border:1px solid var(--border-light);box-shadow:var(--shadow-sm);transition:box-shadow .2s,transform .2s}
+.timeline-item:hover{box-shadow:var(--shadow-md);transform:translateX(4px)}
+.timeline-item::before{content:'';position:absolute;left:-25px;top:18px;width:14px;height:14px;border-radius:50%;border:3px solid var(--black);background:white;z-index:1}
+.timeline-item.urgent::before{background:var(--red);border-color:var(--red);box-shadow:0 0 0 4px rgba(230,0,0,0.25)}
+.timeline-item.essential::before{background:var(--black);border-color:var(--black);box-shadow:0 0 0 4px rgba(0,0,0,0.15)}
+.timeline-date{font-size:11px;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:0.6px;margin-bottom:4px}
+.timeline-title{font-size:15px;font-weight:700;color:var(--text);margin-bottom:4px}
+.timeline-desc{font-size:13px;color:var(--text-secondary);font-weight:400}
+.alert{border-radius:10px;padding:18px 22px;margin:16px 0;font-size:13.5px;box-shadow:var(--shadow-sm)}
+.alert h4{font-size:14px;font-weight:700;margin-bottom:6px}
+.alert p,.alert li{line-height:1.7}
+.alert ul{padding-left:20px;margin-top:4px}
+.alert-black{background:var(--bg-alt);border-left:5px solid var(--black)}
+.alert-black h4{color:var(--black)}
+.alert-red{background:var(--red-bg);border-left:5px solid var(--red)}
+.alert-red h4{color:var(--red-dark)}
+.alert-orange{background:var(--orange-bg);border-left:5px solid var(--orange)}
+.alert-orange h4{color:var(--orange)}
+.alert-green{background:var(--green-bg);border-left:5px solid var(--green)}
+.alert-green h4{color:var(--green)}
+.alert-gold{background:var(--gold-light);border-left:5px solid var(--gold)}
+.alert-gold h4{color:var(--gold-dark)}
+.table-wrapper{overflow-x:auto;margin:16px 0;border:1px solid var(--border);border-radius:10px;box-shadow:var(--shadow-sm)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+thead{background:linear-gradient(135deg,var(--black) 0%,var(--black-soft) 100%);color:white}
+th{padding:12px 16px;text-align:left;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:0.5px}
+td{padding:11px 16px;border-bottom:1px solid var(--border-light);vertical-align:top}
+tr:last-child td{border-bottom:none}
+tr:nth-child(even){background:var(--bg-alt)}
+tr:hover{background:var(--red-bg)}
+.tag{display:inline-block;font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;letter-spacing:0.3px;white-space:nowrap}
+.tag-critical{background:var(--red-bg);color:var(--red-dark);border:1px solid #f5b8b8}
+.tag-fe{background:var(--blue-bg);color:var(--blue);border:1px solid var(--blue-border)}
+.tag-be{background:var(--orange-bg);color:var(--orange);border:1px solid var(--orange-border)}
+.kpi-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:24px}
+.kpi{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;overflow:hidden;min-width:0;padding:20px;text-align:center;box-shadow:var(--shadow-sm);transition:box-shadow .25s ease,transform .25s ease;position:relative}
+.kpi:hover{box-shadow:var(--shadow-md);transform:translateY(-2px)}
+.kpi::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--black),var(--red),var(--black))}
+.kpi.dark{background:var(--black);color:white;border-color:var(--black-light)}
+.kpi.dark .kpi-label{color:rgba(255,255,255,0.55)}
+.kpi.dark .kpi-sub{color:rgba(255,255,255,0.65)}
+.kpi-label{font-size:9px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.6px;margin-bottom:4px;font-weight:600}
+.kpi-value{font-size:28px;font-weight:800;overflow-wrap:break-word;word-break:break-word;line-height:1.1;color:var(--black)}
+.kpi.accent .kpi-value{color:var(--red)}
+.kpi.dark .kpi-value{color:white}
+.kpi-sub{font-size:10px;color:var(--text-secondary);margin-top:5px;font-weight:500}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.three-col{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media (max-width:800px){.two-col,.three-col{grid-template-columns:1fr}}
+.impact-block{background:var(--bg-card);border:1px solid var(--border);border-radius:10px;margin-bottom:12px;overflow:hidden;transition:all .25s ease}
+.impact-block:hover{box-shadow:var(--shadow-md);border-color:var(--black-light)}
+.impact-head{background:var(--black);color:white;padding:12px 20px;display:flex;align-items:center;gap:12px}
+.impact-head .impact-icon{font-size:18px;font-weight:800}
+.impact-head h4{font-size:14px;font-weight:700;margin:0;letter-spacing:-0.2px}
+.impact-body{display:grid;grid-template-columns:1fr 1fr}
+@media (max-width:700px){.impact-body{grid-template-columns:1fr}}
+.impact-cell{padding:14px 20px;font-size:13px;color:var(--text-secondary);line-height:1.6}
+.impact-cell.bad{background:var(--bg-alt);border-right:1px solid var(--border)}
+@media (max-width:700px){.impact-cell.bad{border-right:none;border-bottom:1px solid var(--border)}}
+.impact-cell strong{display:block;font-size:11px;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px}
+.impact-cell.bad strong{color:var(--red-dark)}
+.impact-cell.good strong{color:var(--green)}
+.separator{border:none;height:2px;background:linear-gradient(90deg,transparent,var(--red),var(--black),var(--red),transparent);margin:0;opacity:0.4}
+.checklist{list-style:none;padding:0}
+.checklist li{padding:10px 0 10px 32px;position:relative;font-size:13.5px;color:var(--text-secondary);border-bottom:1px solid var(--border-light);transition:background .15s}
+.checklist li:hover{background:var(--bg-alt)}
+.checklist li:last-child{border-bottom:none}
+.checklist li::before{content:'[ ]';position:absolute;left:0;top:10px;font-size:12px;color:var(--red);font-weight:700;font-family:monospace}
+.checklist li.done{color:var(--green)}
+.checklist li.done::before{content:'[x]';color:var(--green)}
+.checklist li.partial{color:var(--orange)}
+.checklist li.partial::before{content:'[~]';color:var(--orange)}
+.phase{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:22px 24px;position:relative;transition:all .25s ease}
+.phase:hover{box-shadow:var(--shadow-lg);transform:translateY(-3px)}
+.phase-number{position:absolute;top:-16px;left:22px;width:40px;height:40px;border-radius:10px;background:var(--black);color:white;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;box-shadow:var(--shadow-md)}
+.phase.urgent .phase-number{background:var(--red)}
+.phase-tag{display:inline-block;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-muted);margin:14px 0 6px}
+.phase.urgent .phase-tag{color:var(--red)}
+.phase h3{font-size:16px;font-weight:800;color:var(--black);margin-bottom:12px;letter-spacing:-0.2px}
+.phase ul{list-style:none;padding:0}
+.phase li{font-size:12.5px;padding:7px 0 7px 18px;border-bottom:1px dashed var(--border-light);position:relative;color:var(--text)}
+.phase li:last-child{border-bottom:none}
+.phase li::before{content:'>';position:absolute;left:0;color:var(--red);font-weight:700}
+footer{padding:36px 0 28px;text-align:center;background:linear-gradient(135deg,var(--black-deep) 0%,var(--black) 100%);color:rgba(255,255,255,0.6);border-radius:0 0 16px 16px}
+footer .footer-logo svg{display:block;height:36px;width:auto;margin:0 auto 14px}
+footer p{font-size:12px;line-height:1.6;max-width:600px;margin:0 auto}
+footer strong{color:var(--red-light)}
+footer .footer-contact{margin-top:14px;display:flex;justify-content:center;gap:18px;flex-wrap:wrap;font-size:11px;color:rgba(255,255,255,0.50)}
+footer .footer-contact a{color:rgba(255,255,255,0.65);text-decoration:none;transition:color .2s}
+footer .footer-contact a:hover{color:var(--red-light)}
+@media (max-width:1024px){.page-wrapper{margin:16px;border-radius:12px}.kpi-grid{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:700px){.page-wrapper{margin:0;border-radius:0}.container{padding:0 20px}.kpi-grid{grid-template-columns:repeat(2,1fr)}header{padding:36px 0 32px}.header-left h1{font-size:22px}.section-desc{padding-left:0}nav .container{overflow-x:auto;scrollbar-width:none}nav a{flex:1 0 auto;font-size:9px;padding:12px 6px}}
+@media print{body{background:white}.page-wrapper{margin:0;box-shadow:none;border-radius:0}header{border-radius:0;-webkit-print-color-adjust:exact;print-color-adjust:exact}footer{border-radius:0}nav{display:none}section{page-break-inside:avoid}.card:hover,.kpi:hover,.timeline-item:hover{transform:none;box-shadow:none}.collapsible-section .section-body{grid-template-rows:1fr!important}.toggle-chevron{display:none}}
+</style>
+</head>
+<body>
+<div class="page-wrapper">
+
+<header>
+  <div class="container">
+    <div class="header-left">
+      <div class="header-logo">
+        <svg viewBox="0 0 848 199.39" xmlns="http://www.w3.org/2000/svg">
+          <path fill="#ffffff" d="M22.89,28.62V0H0V109.7H114.47V28.62Zm68.68,41V85.85H22.89V53.42H91.57Z"/>
+          <path fill="#ffffff" d="M297.61,28.62V0H274.72V109.7H389.18V28.62Zm68.68,41V85.85H297.61V53.42h68.68Z"/>
+          <path fill="#ffffff" d="M137.36,28.62v24.8h45.79c45.11,0,45.78,0,45.78,1.91s-.67,1.9-45.78,1.9H137.36V109.7H251.82V28.62Zm57.23,57.23c-33.67,0-34.34,0-34.34-1.91S160.92,82,194.59,82s34.34,0,34.34,1.91S228.26,85.85,194.59,85.85Z"/>
+          <path fill="#ff0000" d="M412.08,28.62V109.7H526.54V28.62Zm91.57,41V85.85H435V53.42h68.68Z"/>
+          <path fill="#ff0000" d="M549.44,28.62V109.7H663.9V28.62Zm91.57,41V85.85H572.33V53.42H641Z"/>
+          <polygon fill="#ffffff" points="686.79 69.16 686.79 109.7 709.69 109.7 709.69 53.42 778.37 53.42 778.37 109.7 801.26 109.7 801.26 28.62 686.79 28.62 686.79 69.16"/>
+          <polygon fill="#ffffff" points="824.15 69.16 824.15 109.7 847.05 109.7 847.05 28.62 824.15 28.62 824.15 69.16"/>
+          <path fill="#ffffff" d="M470.26,146.9v32.43h7.63l.1-14.59c0-16,.86-19.94,5-23,3.91-2.86,12.11-2.77,15.36.28l2.48,2.29v35h7.63V161.4c0-15.07-.29-18.32-1.72-21.08-2.29-4.58-5.91-7-11.54-7.54-6.58-.57-11,.38-14.4,3.24l-2.87,2.48v-24h-7.63Z"/>
+          <polygon fill="#ffffff" points="627.65 146.9 627.65 179.33 635.28 179.33 635.28 114.47 627.65 114.47 627.65 146.9"/>
+          <path fill="#ffffff" d="M749,117.52c-1.62,1.62-1.43,7,.19,8.39,4,3.25,8.77-2.1,6.48-7.15a4.18,4.18,0,0,0-6.67-1.24"/>
+          <polygon fill="#ffffff" points="327.18 122.1 327.18 125.91 346.26 125.91 346.26 179.33 353.89 179.33 353.89 125.91 372.97 125.91 372.97 118.28 327.18 118.28 327.18 122.1"/>
+          <path fill="#ffffff" d="M417.8,158.34v-5.53c0-7.63-3.53-14.59-9-17.84S396,131.73,390,134.78h0a18.21,18.21,0,0,0-7,6.78c-2.48,3.91-3,5.72-3.24,13-.29,5.15,0,9.73.76,11.92,1.52,4.68,6.29,9.92,11,12,4.48,2.1,15.26,2.39,20.51.57,2.95-1,3.34-1.62,3.62-4.77.19-1.9.1-3.53-.19-3.53s-3,.67-6,1.44a45.43,45.43,0,0,1-8.39,1.43c-6.49,0-13.83-6.59-13.83-12.5v-2.77Zm-30.72-6.67.67-2.67a11.55,11.55,0,0,1,6.49-8.3c3.91-1.72,5.72-1.72,9.73-.1,3.43,1.43,4.67,3.15,5.72,7.92l.67,3.15Z"/>
+          <path fill="#ffffff" d="M437.83,134.69a19.47,19.47,0,0,0-7.06,6.87c-2.48,3.91-2.95,5.72-3.24,13-.86,17.36,5.91,25.66,20.79,25.75,8,0,10.88-1.43,11.26-5.62.29-3.15.29-3.25-2.86-2.58-11.93,2.48-16.6,1.24-19.75-5.06-2.67-5.15-2.76-15.83-.19-20.89,3-5.81,7.25-7,19.08-5.72,1.81.19,2.48-.28,3.24-2.38,1.34-4-.09-4.77-9.06-5.25-7-.29-8.39-.1-12.21,1.91"/>
+          <path fill="#ffffff" d="M536.56,133.83a15.15,15.15,0,0,0-4.2,2.86c-1.81,2.29-3,2-3-.76,0-2.1-.38-2.39-3.33-2.39h-3.34v45.79h7.63l.09-14.59c0-16,.86-19.94,5-23,3.91-2.86,12.12-2.77,15.36.28l2.48,2.29v35h7.63V161.4c0-19.65-.67-22.42-6-26.33-3.34-2.48-14-3.15-18.31-1.24"/>
+          <path fill="#ffffff" d="M605.43,135.64c-5.34-3.53-15.55-4.1-21.46-1-7,3.53-10.78,10.78-10.78,20.89,0,9.06,1.43,13.74,5.91,18.6,4.68,5.06,8.68,6.49,16.6,6,8.11-.47,12.78-3.62,16.31-10.87C617.64,157.77,614.49,141.65,605.43,135.64Zm-12.88,37.58c-8.2-1-11.64-6.2-11.64-17.36,0-11.35,5.15-17.17,14.22-16.12a20,20,0,0,1,6.29,1.82c3.53,2.29,5.25,7.34,5.25,15.07C606.67,168.36,601.61,174.37,592.55,173.22Z"/>
+          <path fill="#ffffff" d="M679.83,135.64c-5.34-3.53-15.55-4.1-21.46-1-7,3.53-10.78,10.78-10.78,20.89,0,9.06,1.43,13.74,5.91,18.6,4.68,5.06,8.68,6.49,16.6,6,8.11-.47,12.78-3.62,16.31-10.87C692,157.77,688.89,141.65,679.83,135.64ZM667,173.22c-8.2-1-11.63-6.2-11.63-17.36,0-11.35,5.15-17.17,14.21-16.12a20,20,0,0,1,6.29,1.82c3.53,2.29,5.25,7.34,5.25,15.07C681.07,168.36,676,174.37,667,173.22Z"/>
+          <path fill="#ffffff" d="M735.16,139.65c3.53-.86,5.34-3.44,3.43-5.15-.38-.38-6.77-1-14.12-1.34-12-.57-13.73-.38-17.45,1.34h0c-8.68,3.91-10.59,18.6-3.25,25.08,1.91,1.72,1.91,1.82.1,3.63-2,2-2.58,8.87-.76,9.92.57.38-.58,2-2.77,3.91-7.25,6.2-6,15.83,2.67,20.13,5.15,2.67,16.12,3,23.56.76,8.87-2.67,13.55-10.87,10.68-19-2.19-6.2-5-7.54-17.36-8.3-5.91-.38-10.77-.67-10.87-.76a5.53,5.53,0,0,1-.29-2.48c0-3,2.48-4.3,8.21-4.3a23.4,23.4,0,0,0,8.77-2c6.58-3.24,9.45-11.64,6.49-19.08C731.72,141,732.49,140.32,735.16,139.65Zm-6,39.58c2,1.72,1.9,7.06-.1,8.88-4.67,4-14.31,5.62-20.79,3.43s-7.25-10-1.15-12.78C711,177,726.86,177.33,729.15,179.23ZM724,154.34c-3.72,3.91-13.93,3.43-16.22-.77-2.39-4.57-.29-11.54,4.2-13.44,3.53-1.53,9.44-.29,11.73,2.48C726.57,145.85,726.67,151.48,724,154.34Z"/>
+          <path fill="#ffffff" d="M807,158.34v-5.53c0-7.63-3.53-14.59-9-17.84s-12.88-3.24-18.79-.19h0a18.16,18.16,0,0,0-7,6.78c-2.48,3.91-3,5.72-3.24,13-.29,5.15,0,9.73.76,11.92,1.53,4.68,6.3,9.92,11,12,4.48,2.1,15.26,2.39,20.51.57,3-1,3.34-1.62,3.62-4.77.2-1.9.1-3.53-.19-3.53s-3,.67-6,1.44a45.29,45.29,0,0,1-8.39,1.43c-6.49,0-13.83-6.59-13.83-12.5v-2.77Zm-30.71-6.67.67-2.67a11.51,11.51,0,0,1,6.48-8.3c3.91-1.72,5.73-1.72,9.73-.1,3.44,1.43,4.68,3.15,5.73,7.92l.66,3.15Z"/>
+          <path fill="#ffffff" d="M823.68,133.92c-5.15,2.29-7.63,5.92-7.63,11.07,0,6.2,3.24,9.54,13.16,13.55,11.35,4.67,14.31,8.1,10.3,12.11-3.53,3.53-13.64,3.34-22.32-.38-1.53-.67-1.72-.29-1.43,3.43s.57,4.29,3.62,5.34c4.58,1.53,16.6,1.53,20.32-.09a12.64,12.64,0,0,0,8.3-12.21c0-4.39-.38-5.25-3.62-8.3-2.2-2.1-6.49-4.48-11-6.2-4-1.43-7.92-3.43-8.68-4.29-4.77-5.25,1.52-9.64,11.35-7.92a43.75,43.75,0,0,1,7.25,1.62c1.14.38,1.9-.28,2.76-2.38.67-1.72.86-3.25.38-3.72-3.24-3-17.55-3.91-22.79-1.63"/>
+          <polygon fill="#ffffff" points="747.84 156.44 747.84 179.33 755.47 179.33 755.47 133.54 747.84 133.54 747.84 156.44"/>
+        </svg>
+      </div>
+      <h1>Estimacion <span class="red">MINERVA</span> - Justificante de Asistencia</h1>
+      <p>Evolutivo Vigilancia de la Salud - RF v.2 (11/06/2026) - Babooni Technologies</p>
+      <p style="color:rgba(255,255,255,0.72);font-size:11px;margin-top:10px;max-width:560px;line-height:1.5">Estimacion revisada tras RF v.2: generacion en caliente, bloque en Ver citas (solo Examen de Salud), nuevo formato PDF y adaptacion de Historial Medico. Sin persistencia documental, log ni Acercate Empresas.</p>
+    </div>
+    <div class="header-badge">
+      Estimacion v.2<span>207 horas</span>
+    </div>
+  </div>
+</header>
+
+<nav id="mainNav">
+  <div class="container">
+    <div class="nav-logo" aria-hidden="true">
+      <svg viewBox="0 0 848 199.39" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#ffffff" d="M22.89,28.62V0H0V109.7H114.47V28.62Zm68.68,41V85.85H22.89V53.42H91.57Z"/>
+        <path fill="#ffffff" d="M297.61,28.62V0H274.72V109.7H389.18V28.62Zm68.68,41V85.85H297.61V53.42h68.68Z"/>
+        <path fill="#ffffff" d="M137.36,28.62v24.8h45.79c45.11,0,45.78,0,45.78,1.91s-.67,1.9-45.78,1.9H137.36V109.7H251.82V28.62Zm57.23,57.23c-33.67,0-34.34,0-34.34-1.91S160.92,82,194.59,82s34.34,0,34.34,1.91S228.26,85.85,194.59,85.85Z"/>
+        <path fill="#ff0000" d="M412.08,28.62V109.7H526.54V28.62Zm91.57,41V85.85H435V53.42h68.68Z"/>
+        <path fill="#ff0000" d="M549.44,28.62V109.7H663.9V28.62Zm91.57,41V85.85H572.33V53.42H641Z"/>
+        <polygon fill="#ffffff" points="686.79 69.16 686.79 109.7 709.69 109.7 709.69 53.42 778.37 53.42 778.37 109.7 801.26 109.7 801.26 28.62 686.79 28.62 686.79 69.16"/>
+        <polygon fill="#ffffff" points="824.15 69.16 824.15 109.7 847.05 109.7 847.05 28.62 824.15 28.62 824.15 69.16"/>
+      </svg>
+    </div>
+    <a href="#contexto">Contexto</a>
+    <a href="#asunciones">Asunciones</a>
+    <a href="#backend">Tareas BE</a>
+    <a href="#frontend">Tareas FE</a>
+    <a href="#cronograma">Cronograma</a>
+    <a href="#impacto">Reparto</a>
+    <a href="#riesgos">Riesgos</a>
+    <a href="#checklist">Checklist</a>
+  </div>
+</nav>
+
+<!-- CONTEXTO -->
+<section id="contexto" class="collapsible-section is-open">
+  <div class="container">
+    <button type="button" class="section-toggle" aria-expanded="true" aria-controls="contexto-body">
+      <div class="section-toggle-top">
+        <div class="section-header">
+          <div class="section-number">.</div>
+          <h2>Contexto del <span class="red">Evolutivo</span></h2>
+        </div>
+        <span class="toggle-chevron" aria-hidden="true"></span>
+      </div>
+      <p class="section-desc">Integrar la emision del justificante en Ver citas (solo actividad Examen de Salud), antes del boton de admision, con edicion de horas, generacion PDF en caliente con Thymeleaf, envio multicanal (Mail / SMS / Papel) y nuevo formato tambien en Historial Medico.</p>
+    </button>
+    <div id="contexto-body" class="section-body">
+      <div class="section-body-inner">
+    <div class="kpi-grid">
+      <div class="kpi accent">
+        <div class="kpi-label">Total horas</div>
+        <div class="kpi-value">207</div>
+        <div class="kpi-sub">BE 123h + FE 84h</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Recursos</div>
+        <div class="kpi-value">2</div>
+        <div class="kpi-sub">1 Frontend + 1 Backend</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Sprints</div>
+        <div class="kpi-value">1</div>
+        <div class="kpi-sub">+ cierre sem 3</div>
+      </div>
+      <div class="kpi">
+        <div class="kpi-label">Calendario</div>
+        <div class="kpi-value">3</div>
+        <div class="kpi-sub">Semanas (+ Sprint 0)</div>
+      </div>
+      <div class="kpi dark">
+        <div class="kpi-label">Criterios aceptacion</div>
+        <div class="kpi-value">13</div>
+        <div class="kpi-sub">CA-01 a CA-13 (RF v.2)</div>
+      </div>
+    </div>
+
+    <div class="alert alert-red">
+      <h4>Alcance acordado (RF v.2 · 11/06/2026)</h4>
+      <ul>
+        <li><strong>Entra:</strong> bloque justificante en modal Ver citas <strong>antes del boton de admision</strong>, solo actividad <strong>Examen de Salud</strong>; edicion de horas; canales Papel/SMS/Mail; boton <strong>Enviar justificante</strong>; PDF en caliente con Thymeleaf (nuevo formato); acceso Historial Medico con mismo formato (CA-11).</li>
+        <li><strong>No entra:</strong> guardado documental persistente, versiones, log del reconocimiento, Acercate Empresas (CA-13), WhatsApp, cambios en admision/consentimiento, actividades distintas de Examen de Salud.</li>
+      </ul>
+    </div>
+
+    <div class="alert alert-black">
+      <h4>Objetivo del evolutivo (RF v.2)</h4>
+      <p>Emitir el justificante de forma rapida desde Ver citas, integrado en la ventana de verificacion/admision, manteniendo la <strong>generacion en caliente</strong>. No se guarda el PDF, no hay versiones ni registro en el log. El acceso desde Historial Medico se mantiene con el <strong>nuevo formato definitivo</strong>.</p>
+    </div>
+
+    <div class="alert alert-green">
+      <h4>Cambio respecto a estimacion v.1 (245 h)</h4>
+      <ul>
+        <li><strong>Eliminado del alcance (-44 h vs v.1):</strong> persistencia documental (BE-02, BE-05), log reconocimiento (BE-09), aviso version previa (FE-06), integracion rrmm-backend para log; BE-13 Jacoco/Pitest reducido a 4 h.</li>
+        <li><strong>Anadido:</strong> adaptacion Historial Medico legacy a nuevo formato Thymeleaf (BE-17, CA-11).</li>
+        <li><strong>Arquitectura Minerva:</strong> <code>planificacion-backend</code> + <code>vit-vs-planificacion-front</code> (modal <code>consentimiento-cita-modal</code>); motor PDF <code>ThymeleafReportServiceImpl</code> + OpenHTMLtoPDF.</li>
+        <li><strong>Legacy (CA-11):</strong> <code>eanaliticas</code> mantiene JSP y endpoints actuales; <strong>delega la generacion PDF</strong> a <code>planificacion-backend</code> (motor Thymeleaf unico). Portar logica de horas/datos desde legacy (~40–50%). Sin Thymeleaf embebido en el WAR.</li>
+        <li><strong>Comunicaciones:</strong> reutilizar circuito consentimiento (email/SMS) via <code>communication-api</code> / <code>SmsServiceImpl</code>.</li>
+      </ul>
+    </div>
+
+    <div class="alert alert-blue">
+      <h4>Arquitectura Historial Medico (CA-11) — delegacion</h4>
+      <p><code>planificacion-backend</code> concentra plantilla Thymeleaf, OpenHTMLtoPDF y logica de horas/datos (portada desde <code>JustificanteReconocimientoManager</code>). <code>eanaliticas</code> conserva JSP, <code>JustificanteController</code> y envio mail; sustituye ODT/JOOReports/OpenOffice por llamada HTTP al motor unico. Sin embeber Thymeleaf en el WAR legacy (Java 8 / Spring 3.2).</p>
+
+    <div class="alert alert-gold">
+      <h4>Metodologia aplicada (plantilla_estimaciones.md)</h4>
+      <ul>
+        <li>Equipo: 1 BE + 1 FE · Sprint 2 semanas · Factor productividad 80% (64 h efectivas/recurso/sprint → <strong>128 h equipo/sprint</strong>)</li>
+        <li>207 h ≈ <strong>1,6 sprints</strong> de capacidad → calendario <strong>3 semanas</strong>: 1 sprint desarrollo E2E (sem 1–2) + cierre compacto (sem 3)</li>
+        <li>Dentro del limite recomendado: 207 h &lt; 256 h (capacidad 4 sem) · 1 sprint + cierre &lt; 4 sprints</li>
+        <li>Reduccion de 44 h respecto a v.1 (245 h) por alcance RF v.2 y ajuste BE-13</li>
+        <li>Buffer ~15% incorporado en tareas criticas (PDF, SMS, delegacion HM)</li>
+      </ul>
+    </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="separator">
+
+<!-- ASUNCIONES -->
+<section id="asunciones" class="alt collapsible-section">
+  <div class="container">
+    <button type="button" class="section-toggle" aria-expanded="false" aria-controls="asunciones-body">
+      <div class="section-toggle-top">
+        <div class="section-header">
+          <div class="section-number">1</div>
+          <h2>Asunciones de la <span class="red">estimacion</span></h2>
+        </div>
+        <span class="toggle-chevron" aria-hidden="true"></span>
+      </div>
+      <p class="section-desc">Premisas sobre las que se construye la estimacion. Las respuestas del equipo tecnico de Vítaly pueden ajustar las horas de los bloques criticos.</p>
+    </button>
+    <div id="asunciones-body" class="section-body">
+      <div class="section-body-inner">
+    <div class="two-col">
+      <div class="card">
+        <h3><span class="step-icon">[+]</span> Lo que asumimos</h3>
+        <ul>
+          <li>2 recursos Senior con conocimiento previo de MINERVA</li>
+          <li>Repos objetivo: <strong>planificacion-backend</strong>, <strong>vit-vs-planificacion-front</strong>, adaptacion en <strong>eanaliticas</strong> (Historial Medico) y <strong>communication-api</strong> (email/SMS)</li>
+          <li><strong>Motor PDF unico</strong> en <code>planificacion-backend</code> (<code>ThymeleafReportServiceImpl</code> + OpenHTMLtoPDF); <code>eanaliticas</code> actua como adaptador HTTP (CA-11), sin ODT/JOOReports/OpenOffice para justificante</li>
+          <li>Logica de horas y datos del reconocimiento <strong>portada desde legacy</strong> (~40–50% reutilizable como referencia SQL/Java, no como libreria compartida)</li>
+          <li>Generacion PDF en caliente — sin tabla <code>INF4_RM_JUSTIFICANTES</code> ni repositorio documental</li>
+          <li>Actividad <strong>Examen de Salud</strong> identificable en datos de cita/ruta para mostrar u ocultar bloque (CA-10)</li>
+          <li>Circuito de comunicaciones del <strong>consentimiento informado</strong> reutilizable para Mail y SMS</li>
+          <li>BD Oracle (<code>VS_2007</code>, <code>VIG_SALUD</code>) solo lectura para precarga de horas — sin DDL nuevo</li>
+          <li>QA externo dedicado <strong>fuera</strong> del estimado; solo soporte al plan de pruebas</li>
+          <li>Buffer del ~15% en tareas criticas (BE-04, BE-08, BE-17)</li>
+        </ul>
+      </div>
+      <div class="card dark">
+        <h3 style="color:white"><span class="step-icon">[!]</span> Lo que NO incluye</h3>
+        <ul>
+          <li>Guardado documental, versiones ni consulta posterior del PDF</li>
+          <li>Log del reconocimiento ni trazabilidad de edicion de horas (CA-13 negativo)</li>
+          <li>Acercate Empresas (CA-13 negativo)</li>
+          <li>WhatsApp como canal de envio</li>
+          <li>Justificantes para actividades distintas de Examen de Salud</li>
+          <li>Modificaciones del proceso de admision o consentimiento</li>
+          <li>Datos clinicos, aptitud o resultados en el PDF (CA-12)</li>
+          <li>QA externo completo ni automatizacion E2E ajena al equipo</li>
+          <li>Migracion o saneamiento de justificantes historicos sin PDF</li>
+        </ul>
+      </div>
+    </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="separator">
+
+<!-- BACKEND -->
+<section id="backend" class="collapsible-section">
+  <div class="container">
+    <button type="button" class="section-toggle" aria-expanded="false" aria-controls="backend-body">
+      <div class="section-toggle-top">
+        <div class="section-header">
+          <div class="section-number">2</div>
+          <h2>Tareas <span class="red">Backend</span> - 123 h</h2>
+        </div>
+        <span class="toggle-chevron" aria-hidden="true"></span>
+      </div>
+      <p class="section-desc">APIs de precarga y generacion en caliente, PDF Thymeleaf (Minerva + Historial Medico), integraciones Mail/SMS, validaciones, pruebas y despliegue. Sin persistencia documental ni log.</p>
+    </button>
+    <div id="backend-body" class="section-body">
+      <div class="section-body-inner">
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:90px;white-space:nowrap">ID</th>
+            <th>Tarea</th>
+            <th style="text-align:center">Tipo</th>
+            <th style="text-align:center">Horas</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td style="white-space:nowrap"><strong>BE-01</strong></td><td>Analisis tecnico, diseno de solucion, contratos API Minerva + endpoint PDF HM (delegacion eanaliticas) y filtro Examen de Salud</td><td style="text-align:center"><span class="tag tag-be">Diseno</span></td><td style="text-align:center"><strong>8</strong></td></tr>
+          <tr><td style="white-space:nowrap"><strong>BE-03</strong></td><td>API precarga de horas (admision, cierre medico/enfermeria — hora mas tardia CA-03)</td><td style="text-align:center"><span class="tag tag-be">API</span></td><td style="text-align:center"><strong>6</strong></td></tr>
+          <tr><td style="white-space:nowrap"><strong>BE-04</strong></td><td><strong>Motor PDF unico con Thymeleaf</strong> (plantilla multiidioma, portacion logica horas/datos desde legacy, horas editables en Minerva, endpoint reutilizable por HM — CA-05/12)</td><td style="text-align:center"><span class="tag tag-critical">Critico</span></td><td style="text-align:center"><strong>18</strong></td></tr>
+          <tr><td style="white-space:nowrap"><strong>BE-17</strong></td><td><strong>Adaptador Historial Medico</strong> (<code>eanaliticas</code>): delegacion a <code>planificacion-backend</code> en <code>JustificanteController</code>; mantiene JSP, mail y visibilidad; elimina ODT/JOOReports; auth W2W y regresion HM (CA-11)</td><td style="text-align:center"><span class="tag tag-critical">Critico</span></td><td style="text-align:center"><strong>16</strong></td></tr>
+          <tr><td style="white-space:nowrap"><strong>BE-06</strong></td><td>API generar / enviar en caliente (validaciones horas, respuesta stream o adjunto — sin persistencia)</td><td style="text-align:center"><span class="tag tag-be">API</span></td><td style="text-align:center"><strong>8</strong></td></tr>
+          <tr><td style="white-space:nowrap"><strong>BE-07</strong></td><td>Integracion <strong>Mail</strong> (reutilizar circuito consentimiento, adjunto PDF en caliente — CA-07)</td><td style="text-align:center"><span class="tag tag-be">Comms</span></td><td style="text-align:center"><strong>10</strong></td></tr>
+          <tr><td style="white-space:nowrap"><strong>BE-08</strong></td><td>Integracion <strong>SMS</strong> con enlace de descarga temporal (token, caducidad — CA-08)</td><td style="text-align:center"><span class="tag tag-critical">Critico</span></td><td style="text-align:center"><strong>10</strong></td></tr>
+          <tr><td style="white-space:nowrap"><strong>BE-10</strong></td><td>Validaciones de negocio y seguridad (enlaces SMS temporales, CA-12)</td><td style="text-align:center"><span class="tag tag-be">Seguridad</span></td><td style="text-align:center"><strong>5</strong></td></tr>
+          <tr><td style="white-space:nowrap"><strong>BE-11</strong></td><td>Pruebas unitarias e integracion (PDF, comunicaciones, validaciones horas)</td><td style="text-align:center"><span class="tag tag-be">Testing</span></td><td style="text-align:center"><strong>7</strong></td></tr>
+          <tr><td style="white-space:nowrap"><strong>BE-12</strong></td><td>Soporte plan de pruebas (CA-01..CA-13 backend) y correccion de defectos</td><td style="text-align:center"><span class="tag tag-be">QA</span></td><td style="text-align:center"><strong>5</strong></td></tr>
+          <tr><td style="white-space:nowrap"><strong>BE-13</strong></td><td>Configuracion y reporte de <strong>cobertura con Jacoco</strong> + <strong>mutation testing con Pitest</strong></td><td style="text-align:center"><span class="tag tag-be">Calidad</span></td><td style="text-align:center"><strong>4</strong></td></tr>
+          <tr><td style="white-space:nowrap"><strong>BE-14</strong></td><td>Documentacion tecnica y handover (servicios, contratos, configuracion)</td><td style="text-align:center"><span class="tag tag-be">Doc</span></td><td style="text-align:center"><strong>3</strong></td></tr>
+          <tr><td style="white-space:nowrap"><strong>BE-15</strong></td><td>Creacion de MR + despliegue a entorno <strong>DEMO</strong> y verificacion</td><td style="text-align:center"><span class="tag tag-be">Deploy</span></td><td style="text-align:center"><strong>3</strong></td></tr>
+          <tr><td style="white-space:nowrap"><strong>BE-16</strong></td><td><strong>Plan de accion a Produccion + implementacion</strong> (parte BE: pasos, ventana, rollback, MR a master, despliegue PRO)</td><td style="text-align:center"><span class="tag tag-critical">Critico</span></td><td style="text-align:center"><strong>10</strong></td></tr>
+          <tr><td colspan="3" style="text-align:right"><strong>Subtotal desarrollo BE</strong></td><td style="text-align:center"><strong>113</strong></td></tr>
+          <tr><td colspan="3" style="text-align:right">Coordinacion, refinamientos, demos, UAT (BE)</td><td style="text-align:center">10</td></tr>
+          <tr style="background:var(--black);color:white"><td colspan="3" style="text-align:right;color:white"><strong>TOTAL BACKEND</strong></td><td style="text-align:center;color:var(--red-light)"><strong>123 h</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="alert alert-orange">
+      <h4>Tareas mas sensibles (BE)</h4>
+      <p><strong>BE-17</strong> (adaptador legacy + auth W2W + regresion HM) y <strong>BE-08</strong> (SMS) concentran el riesgo de calendario en el sprint 1. <strong>BE-04</strong> motor PDF unico en planificacion-backend.</p>
+    </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="separator">
+
+<!-- FRONTEND -->
+<section id="frontend" class="alt collapsible-section">
+  <div class="container">
+    <button type="button" class="section-toggle" aria-expanded="false" aria-controls="frontend-body">
+      <div class="section-toggle-top">
+        <div class="section-header">
+          <div class="section-number">3</div>
+          <h2>Tareas <span class="red">Frontend</span> - 84 h</h2>
+        </div>
+        <span class="toggle-chevron" aria-hidden="true"></span>
+      </div>
+      <p class="section-desc">Bloque justificante en modal Ver citas (antes de admision, solo Examen de Salud), edicion de horas, selector de canal, boton Enviar justificante y validaciones UX.</p>
+    </button>
+    <div id="frontend-body" class="section-body">
+      <div class="section-body-inner">
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th style="width:90px;white-space:nowrap">ID</th>
+            <th>Tarea</th>
+            <th style="text-align:center">Tipo</th>
+            <th style="text-align:center">Horas</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td style="white-space:nowrap"><strong>FE-01</strong></td><td>Analisis tecnico, revision simulacion RF v.2 y plan de componentes en modal admision</td><td style="text-align:center"><span class="tag tag-fe">Diseno</span></td><td style="text-align:center"><strong>7</strong></td></tr>
+          <tr><td style="white-space:nowrap"><strong>FE-02</strong></td><td>Bloque justificante <strong>antes del boton de admision</strong>, visible solo Examen de Salud (CA-01/CA-10)</td><td style="text-align:center"><span class="tag tag-fe">UI</span></td><td style="text-align:center"><strong>10</strong></td></tr>
+          <tr><td style="white-space:nowrap"><strong>FE-03</strong></td><td>Campos hora entrada y hora fin con precarga automatica y edicion manual (CA-02/03/04/05)</td><td style="text-align:center"><span class="tag tag-fe">UI</span></td><td style="text-align:center"><strong>8</strong></td></tr>
+          <tr><td style="white-space:nowrap"><strong>FE-04</strong></td><td>Selector de canal (Mail / SMS / Papel-PDF) y validaciones de contacto bloqueantes (CA-07/08)</td><td style="text-align:center"><span class="tag tag-fe">Validacion</span></td><td style="text-align:center"><strong>6</strong></td></tr>
+          <tr><td style="white-space:nowrap"><strong>FE-05</strong></td><td>Flujo <strong>Enviar justificante</strong> con estados carga/error/exito (CA-06/07/08/09)</td><td style="text-align:center"><span class="tag tag-critical">Critico</span></td><td style="text-align:center"><strong>10</strong></td></tr>
+          <tr><td style="white-space:nowrap"><strong>FE-07</strong></td><td>Validaciones UX alineadas con RF 7.3 (HH:MM, hora fin &gt;= entrada, mensajes bloqueantes)</td><td style="text-align:center"><span class="tag tag-fe">Validacion</span></td><td style="text-align:center"><strong>6</strong></td></tr>
+          <tr><td style="white-space:nowrap"><strong>FE-08</strong></td><td>i18n de mensajes, accesibilidad y pulido UI del bloque</td><td style="text-align:center"><span class="tag tag-fe">Calidad</span></td><td style="text-align:center"><strong>5</strong></td></tr>
+          <tr><td style="white-space:nowrap"><strong>FE-09</strong></td><td><strong>Tests unitarios con Karma + Jasmine</strong> (bloque justificante, validaciones, flujos)</td><td style="text-align:center"><span class="tag tag-fe">Testing</span></td><td style="text-align:center"><strong>5</strong></td></tr>
+          <tr><td style="white-space:nowrap"><strong>FE-10</strong></td><td>Soporte plan de pruebas (CA-01..CA-13 frontend) y correccion de defectos</td><td style="text-align:center"><span class="tag tag-fe">QA</span></td><td style="text-align:center"><strong>4</strong></td></tr>
+          <tr><td style="white-space:nowrap"><strong>FE-11</strong></td><td>Creacion de MR + despliegue a entorno <strong>DEMO</strong> y verificacion</td><td style="text-align:center"><span class="tag tag-fe">Deploy</span></td><td style="text-align:center"><strong>3</strong></td></tr>
+          <tr><td style="white-space:nowrap"><strong>FE-12</strong></td><td><strong>Plan de accion a Produccion + implementacion</strong> (parte FE: pasos, ventana, rollback, MR a master, despliegue PRO)</td><td style="text-align:center"><span class="tag tag-critical">Critico</span></td><td style="text-align:center"><strong>10</strong></td></tr>
+          <tr><td colspan="3" style="text-align:right"><strong>Subtotal desarrollo FE</strong></td><td style="text-align:center"><strong>74</strong></td></tr>
+          <tr><td colspan="3" style="text-align:right">Coordinacion, refinamientos, demos, UAT (FE)</td><td style="text-align:center">10</td></tr>
+          <tr style="background:var(--black);color:white"><td colspan="3" style="text-align:right;color:white"><strong>TOTAL FRONTEND</strong></td><td style="text-align:center;color:var(--red-light)"><strong>84 h</strong></td></tr>
+        </tbody>
+      </table>
+    </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="separator">
+
+<!-- CRONOGRAMA -->
+<section id="cronograma" class="collapsible-section">
+  <div class="container">
+    <button type="button" class="section-toggle" aria-expanded="false" aria-controls="cronograma-body">
+      <div class="section-toggle-top">
+        <div class="section-header">
+          <div class="section-number">4</div>
+          <h2>Cronograma <span class="red">3 semanas</span></h2>
+        </div>
+        <span class="toggle-chevron" aria-hidden="true"></span>
+      </div>
+      <p class="section-desc">1 sprint de 2 semanas con desarrollo completo y flujo E2E en DEMO (sem 1–2) + 1 semana de cierre compacto (sem 3: calidad, UAT y plan a PRO). Sprint 0 previo para respuestas del equipo tecnico.</p>
+    </button>
+    <div id="cronograma-body" class="section-body">
+      <div class="section-body-inner">
+    <div class="two-col" style="margin-top:32px">
+      <div class="phase urgent">
+        <div class="phase-number">1</div>
+        <div class="phase-tag">Sprint 1 — Semanas 1-2</div>
+        <h3>Desarrollo E2E en DEMO</h3>
+        <ul>
+          <li>FE: bloque justificante, precarga/edición horas, selector canal, flujo Enviar justificante, validaciones UX</li>
+          <li>BE: APIs precarga y generar/enviar, motor PDF unico (BE-04), delegacion HM (BE-17), Mail, SMS, validaciones</li>
+          <li>BE+FE: MR + despliegue a DEMO al cierre del sprint</li>
+          <li>Hito: flujo completo <strong>CA-01..CA-13</strong> en DEMO (incl. CA-11 Historial Medico)</li>
+        </ul>
+        <p style="margin-top:12px;font-size:12px;color:var(--text-muted)"><strong>~128 h</strong> capacidad equipo · <strong>~134 h</strong> desarrollo planificado (BE+FE sin cierre; sprint ajustado)</p>
+      </div>
+
+      <div class="phase">
+        <div class="phase-number">2</div>
+        <div class="phase-tag">Semana 3 — Cierre</div>
+        <h3>Calidad, UAT y plan a PRO</h3>
+        <ul>
+          <li>FE: Karma + Jasmine, i18n, a11y, pulido</li>
+          <li>BE: unitarias/integracion, Jacoco + Pitest, documentacion</li>
+          <li>BE+FE: soporte UAT, correccion defectos, bateria CA en DEMO</li>
+          <li>BE+FE: plan de accion a PRO + implementacion</li>
+          <li>Hito: pase a PRO con plan firmado</li>
+        </ul>
+        <p style="margin-top:12px;font-size:12px;color:var(--text-muted)"><strong>~64 h</strong> capacidad equipo · <strong>~73 h</strong> planificadas (tests, QA, PRO, coordinacion residual)</p>
+      </div>
+    </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="separator">
+
+<!-- IMPACTO -->
+<section id="impacto" class="alt collapsible-section">
+  <div class="container">
+    <button type="button" class="section-toggle" aria-expanded="false" aria-controls="impacto-body">
+      <div class="section-toggle-top">
+        <div class="section-header">
+          <div class="section-number">5</div>
+          <h2>Reparto de <span class="red">responsabilidades</span></h2>
+        </div>
+        <span class="toggle-chevron" aria-hidden="true"></span>
+      </div>
+      <p class="section-desc">Que hace cada recurso y donde colaboran.</p>
+    </button>
+    <div id="impacto-body" class="section-body">
+      <div class="section-body-inner">
+    <div class="impact-block">
+      <div class="impact-head">
+        <span class="impact-icon">BE</span>
+        <h4>Recurso Backend - 123 h</h4>
+      </div>
+      <div class="impact-body">
+        <div class="impact-cell bad">
+          <strong>Responsable de</strong>
+          APIs, motor PDF unico en planificacion-backend (Minerva + delegacion HM), adaptador eanaliticas (CA-11), integraciones Mail/SMS, validaciones, pruebas Jacoco/Pitest, soporte CA backend, despliegues y plan PRO.
+        </div>
+        <div class="impact-cell good">
+          <strong>Entregables</strong>
+          Servicios productivos, contratos OpenAPI, plantilla PDF definitiva, enlace SMS temporal, suite de tests, documentacion tecnica, MRs y despliegues DEMO/PRO.
+        </div>
+      </div>
+    </div>
+
+    <div class="impact-block">
+      <div class="impact-head">
+        <span class="impact-icon">FE</span>
+        <h4>Recurso Frontend - 84 h</h4>
+      </div>
+      <div class="impact-body">
+        <div class="impact-cell bad">
+          <strong>Responsable de</strong>
+          Bloque justificante (antes admision, solo Examen de Salud), edicion de horas, selector canal, boton Enviar justificante, validaciones UX, tests Karma + Jasmine, soporte CA frontend, despliegues y plan PRO.
+        </div>
+        <div class="impact-cell good">
+          <strong>Entregables</strong>
+          Bloque UI integrado en Ver citas, validaciones alineadas al RF v.2, suite Karma + Jasmine, soporte CA-01..CA-13 (parte FE), MRs y despliegues DEMO/PRO.
+        </div>
+      </div>
+    </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="separator">
+
+<!-- RIESGOS -->
+<section id="riesgos" class="collapsible-section">
+  <div class="container">
+    <button type="button" class="section-toggle" aria-expanded="false" aria-controls="riesgos-body">
+      <div class="section-toggle-top">
+        <div class="section-header">
+          <div class="section-number">6</div>
+          <h2>Riesgos y <span class="red">supuestos</span></h2>
+        </div>
+        <span class="toggle-chevron" aria-hidden="true"></span>
+      </div>
+      <p class="section-desc">Variables que pueden mover la estimacion. Respuestas Vítaly parciales recibidas 11/06/2026.</p>
+    </button>
+    <div id="riesgos-body" class="section-body">
+      <div class="section-body-inner">
+    <div class="table-wrapper">
+      <table>
+        <thead>
+          <tr>
+            <th>Riesgo</th>
+            <th>Impacto estimado</th>
+            <th>Mitigacion</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td>Identificador actividad Examen de Salud no claro en datos de cita</td><td>+2 a +4 h FE/BE</td><td>Sin respuesta Vítaly (11/06) — escalar antes de FE-02</td></tr>
+          <tr><td>Circuito SMS no reutilizable del consentimiento</td><td>Riesgo mitigado</td><td>Consentimiento usa exevi; justificante debe usar <code>SmsServiceImpl</code> (sms-api) + enlace temporal</td></tr>
+          <tr><td>Autenticacion o red entre WAR eanaliticas y planificacion-backend</td><td>Incluido en BE-17 (16 h)</td><td>Spike auth en BE-01; endpoint interno JWT/API-Key; pruebas regresion descarga y envio mail</td></tr>
+          <tr><td>Discrepancia logica horas legacy (3 vs 5 casos SQL)</td><td>+2 a +4 h BE-04</td><td>Vítaly no entiende la pregunta — reformular y portar 3 ramas + extraccion previa (estado 33 confirmado)</td></tr>
+          <tr><td>Enlace SMS temporal sin mecanismo existente</td><td>+4 a +6 h BE-08</td><td>Evaluar token en memoria/cache vs fichero temporal con TTL</td></tr>
+          <tr><td>Acceso repos / entornos retrasado</td><td>Retraso arranque</td><td>Sprint 0 extendido; repos identificados pero acceso pendiente</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="alert alert-gold">
+      <h4>Nota sobre precision</h4>
+      <p>Estimacion v.2.1 (11/06/2026): arquitectura HM por delegacion. BE-17 a <strong>16 h</strong> (adaptador legacy, auth W2W, regresion CA-11). Total <strong>207 h</strong>. Revisar <strong>BE-08</strong> (SMS) en Sprint 0.</p>
+    </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<hr class="separator">
+
+<!-- CHECKLIST -->
+<section id="checklist" class="alt collapsible-section">
+  <div class="container">
+    <button type="button" class="section-toggle" aria-expanded="false" aria-controls="checklist-body">
+      <div class="section-toggle-top">
+        <div class="section-header">
+          <div class="section-number">v</div>
+          <h2>Checklist de <span class="red">arranque y entrega</span></h2>
+        </div>
+        <span class="toggle-chevron" aria-hidden="true"></span>
+      </div>
+      <p class="section-desc">Lista operativa alineada con el documento de informacion a solicitar al equipo tecnico.</p>
+    </button>
+    <div id="checklist-body" class="section-body">
+      <div class="section-body-inner">
+    <div class="two-col">
+      <div class="card">
+        <h3>Antes de arrancar (Sprint 0)</h3>
+        <ul class="checklist">
+          <li class="partial">Respuestas equipo tecnico Vítaly recibidas (11/06) — pendientes: CA-10, auth W2W, hora entrada 3/5 casos, fr/de negocio</li>
+          <li class="done">Contratos API precarga/enviar/pdf HM validados (OK Vítaly)</li>
+          <li class="done">Query PDF localidad/centro/direccion confirmada</li>
+          <li class="done">Arquitectura HM por delegacion a planificacion-backend acordada (sin Thymeleaf en eanaliticas)</li>
+          <li class="done">Grado de reutilizacion confirmado (~40–50% logica horas/datos legacy a portar)</li>
+          <li class="partial">Circuito Mail/SMS del consentimiento validado (logica OK; endpoints pendientes)</li>
+          <li class="done">RF v.2 recibido — sin DDL ni log requeridos</li>
+          <li class="done">Repos FE y BE en workspace (vit-vs-planificacion-front, planificacion-backend, eanaliticas)</li>
+          <li>Entorno DEMO con datos de prueba (citas Examen de Salud)</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Sprint 1 — Semanas 1-2 (desarrollo E2E)</h3>
+        <ul class="checklist">
+          <li>Motor PDF unico (BE-04) y delegacion HM (BE-17) operativos</li>
+          <li>Contratos API publicados (precarga, generar/enviar, pdf HM)</li>
+          <li>Bloque justificante visible antes de admision en DEMO (CA-01/10)</li>
+          <li>Precarga y edicion de horas operativas (CA-02/03/04/05)</li>
+          <li>Envio Mail y SMS operativos (CA-07/08)</li>
+          <li>Historial Medico con nuevo formato via delegacion (CA-11)</li>
+          <li>Flujo E2E CA-01..CA-13 en DEMO aprobado por negocio</li>
+          <li>MR + despliegue DEMO verificado</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Semana 3 — Cierre</h3>
+        <ul class="checklist">
+          <li>Karma + Jasmine verdes en pipeline FE</li>
+          <li>Unitarias/integracion BE verdes</li>
+          <li>Jacoco y Pitest sobre umbral acordado</li>
+          <li>Bateria CA-01..CA-13 verde en DEMO</li>
+          <li>Plan de accion a PRO ejecutado y verificado</li>
+        </ul>
+      </div>
+    </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-logo">
+      <svg viewBox="0 0 848 199.39" xmlns="http://www.w3.org/2000/svg">
+        <path fill="rgba(255,255,255,0.78)" d="M22.89,28.62V0H0V109.7H114.47V28.62Zm68.68,41V85.85H22.89V53.42H91.57Z"/>
+        <path fill="rgba(255,255,255,0.78)" d="M297.61,28.62V0H274.72V109.7H389.18V28.62Zm68.68,41V85.85H297.61V53.42h68.68Z"/>
+        <path fill="rgba(255,255,255,0.78)" d="M137.36,28.62v24.8h45.79c45.11,0,45.78,0,45.78,1.91s-.67,1.9-45.78,1.9H137.36V109.7H251.82V28.62Zm57.23,57.23c-33.67,0-34.34,0-34.34-1.91S160.92,82,194.59,82s34.34,0,34.34,1.91S228.26,85.85,194.59,85.85Z"/>
+        <path fill="#ff0000" d="M412.08,28.62V109.7H526.54V28.62Zm91.57,41V85.85H435V53.42h68.68Z"/>
+        <path fill="#ff0000" d="M549.44,28.62V109.7H663.9V28.62Zm91.57,41V85.85H572.33V53.42H641Z"/>
+        <polygon fill="rgba(255,255,255,0.78)" points="686.79 69.16 686.79 109.7 709.69 109.7 709.69 53.42 778.37 53.42 778.37 109.7 801.26 109.7 801.26 28.62 686.79 28.62 686.79 69.16"/>
+        <polygon fill="rgba(255,255,255,0.78)" points="824.15 69.16 824.15 109.7 847.05 109.7 847.05 28.62 824.15 28.62 824.15 69.16"/>
+      </svg>
+    </div>
+    <p>Estimacion MINERVA - Justificante de Asistencia al Examen de Salud - <strong>Babooni Technologies</strong> - RF v.2 - 207 horas / 2 recursos / 3 semanas (+ Sprint 0)</p>
+    <div class="footer-contact">
+      <a href="mailto:info@babooni.com">info@babooni.com</a>
+      <a href="tel:617312356">617 31 23 56</a>
+      <span>C. Alfonso XII, 62 - Retiro - 28014 Madrid</span>
+    </div>
+  </div>
+</footer>
+
+</div>
+<script>
+document.querySelectorAll('.collapsible-section .section-toggle').forEach(function(btn) {
+  var section = btn.closest('.collapsible-section');
+  btn.addEventListener('click', function() {
+    var open = section.classList.toggle('is-open');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+});
+document.querySelectorAll('nav a[href^="#"]').forEach(function(link) {
+  link.addEventListener('click', function() {
+    var id = link.getAttribute('href').slice(1);
+    var section = document.getElementById(id);
+    if (!section || !section.classList.contains('collapsible-section')) return;
+    section.classList.add('is-open');
+    var btn = section.querySelector('.section-toggle');
+    if (btn) btn.setAttribute('aria-expanded', 'true');
+  });
+});
+if (location.hash) {
+  var target = document.querySelector(location.hash);
+  if (target && target.classList.contains('collapsible-section')) {
+    target.classList.add('is-open');
+    var toggle = target.querySelector('.section-toggle');
+    if (toggle) toggle.setAttribute('aria-expanded', 'true');
+  }
+}
+</script>
+</body>
+</html>

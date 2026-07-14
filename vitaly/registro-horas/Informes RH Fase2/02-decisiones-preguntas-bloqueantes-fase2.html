@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Decisiones y preguntas bloqueantes - Registro Horario Fase II</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>:root{--black:#0a0a0a;--black-soft:#1a1a1a;--red:#e60000;--red-light:#ff1a1a;--red-dark:#a90000;--red-bg:#fff1f1;--gold:#f4b900;--gold-bg:#fff8dd;--blue:#1d6aa5;--blue-bg:#eaf3fb;--green:#1d8a4a;--green-bg:#e9f8ef;--orange:#d97a1c;--orange-bg:#fff1df;--bg:#fff;--alt:#f6f6f7;--border:#dedee2;--text:#111;--muted:#555;--shadow:0 8px 35px rgba(0,0,0,.18)}*{box-sizing:border-box}body{margin:0;background:#d8d8dc;color:var(--text);font-family:Montserrat,Segoe UI,Arial,sans-serif;line-height:1.58;-webkit-font-smoothing:antialiased}.page-wrapper{max-width:1120px;margin:28px auto;background:#fff;border-radius:16px;box-shadow:var(--shadow);overflow:hidden}.container{padding:0 44px}header{background:linear-gradient(135deg,#000,#171717);color:white;border-bottom:5px solid var(--red);padding:44px 0;position:relative;overflow:hidden}header:before{content:'';position:absolute;top:-180px;right:-130px;width:430px;height:430px;background:radial-gradient(circle,rgba(230,0,0,.18),transparent 70%);border-radius:50%}header .container{position:relative;display:flex;justify-content:space-between;gap:24px}.brand{font-size:12px;text-transform:uppercase;letter-spacing:1.1px;color:#bbb;font-weight:800}.title{font-size:30px;line-height:1.16;margin:10px 0 8px;font-weight:800;letter-spacing:-.4px}.title span{color:var(--red-light)}.subtitle{max-width:820px;color:#ddd;font-size:14px}.header-badge{align-self:flex-start;background:linear-gradient(135deg,var(--red),var(--red-dark));border-radius:8px;padding:9px 14px;font-size:10px;font-weight:800;text-transform:uppercase;letter-spacing:.5px;box-shadow:0 4px 15px rgba(230,0,0,.35)}.header-badge span{display:block;font-size:16px;text-transform:none}.meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}.pill{display:inline-flex;align-items:center;border-radius:999px;padding:6px 12px;font-size:11px;font-weight:800;background:#242428;color:#fff}.pill.red{background:var(--red)}nav{position:sticky;top:0;background:#0a0a0a;z-index:5;border-bottom:1px solid #2a2a2a;box-shadow:0 2px 12px rgba(0,0,0,.2)}nav .container{display:flex;overflow:auto;padding:0 24px}nav a{color:#ddd;text-decoration:none;padding:14px 15px;font-size:11px;font-weight:800;text-transform:uppercase;border-bottom:3px solid transparent;white-space:nowrap}nav a:hover{border-bottom-color:var(--red);color:white;background:#171717}section{padding:38px 0;border-bottom:1px solid var(--border);background:#fff}section.alt{background:var(--alt)}.section-header{display:flex;align-items:center;gap:14px;margin-bottom:14px}.section-number{background:linear-gradient(135deg,#000,#222);color:white;font-size:14px;font-weight:800;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 8px rgba(0,0,0,.25);border:2px solid rgba(230,0,0,.35);flex-shrink:0}h2{font-size:22px;margin:0;font-weight:800;letter-spacing:-.2px}h3{font-size:16px;margin:20px 0 10px;font-weight:800;color:#111}.lead{font-size:14px;color:var(--muted);max-width:900px}p{font-size:13.5px;margin:8px 0;color:#333}ul,ol{margin:8px 0 16px 24px;padding:0}li{margin:4px 0;font-size:13.5px;color:#333}code{background:#fff;border:1px solid #ccc;border-radius:4px;padding:1px 5px;font-size:12px;color:var(--red-dark)}.table-wrap{width:100%;overflow:auto;margin:14px 0 22px;border-radius:10px;border:1px solid var(--border);background:#fff;box-shadow:0 1px 4px rgba(0,0,0,.04)}table{border-collapse:collapse;width:100%;font-size:12.2px;background:#fff;min-width:760px}th,td{border:1px solid var(--border);padding:8px 9px;vertical-align:top}th{background:#111;color:#fff;text-align:left;font-weight:800}tr:nth-child(even) td{background:#fafafa}td:first-child{font-weight:600}.separator{border:none;height:2px;background:linear-gradient(90deg,transparent,var(--red),#111,var(--red),transparent);opacity:.35;margin:0}.foot{background:#111;color:#ccc;text-align:center;padding:26px 44px;font-size:12px}.foot strong{color:var(--red-light)}.edit-bar{position:fixed;bottom:0;left:0;right:0;z-index:20;background:rgba(255,255,255,.97);backdrop-filter:blur(10px);border-top:1px solid var(--border);padding:12px 20px;display:flex;align-items:center;gap:10px;box-shadow:0 -8px 24px rgba(0,0,0,.10)}.edit-bar .hint{font-size:11px;color:var(--muted);margin-right:auto;font-weight:600}.edit-bar button{font:inherit;font-size:11px;font-weight:800;cursor:pointer;padding:9px 14px;border-radius:8px;border:1px solid var(--border);background:#fff;color:#111}.edit-bar button:hover{border-color:var(--red);background:var(--red-bg)}.edit-bar button.primary.on{background:var(--red);border-color:var(--red);color:#fff}body{padding-bottom:72px}body.editing main{outline:3px solid rgba(230,0,0,.18);outline-offset:-3px}a{color:#124b76}@media(max-width:760px){.page-wrapper{margin:0;border-radius:0}.container{padding:0 22px}header .container{display:block}.title{font-size:24px}.header-badge{display:inline-block;margin-top:16px}nav .container{padding:0}table{min-width:720px}}</style>
+</head>
+<body>
+<div class="page-wrapper">
+<header><div class="container"><div><div class="brand">Registro Horario Fase II</div><div class="title">Decisiones y preguntas bloqueantes <span>decisiones</span></div><p class="subtitle">Version HTML de la matriz de decisiones y preguntas bloqueantes para cierre funcional, tecnico y de seguridad.</p><div class="meta"><span class="pill red">Fecha: 2026-06-23</span><span class="pill">Uso: refinamiento negocio / tecnico</span><span class="pill">Fuente: 4 informes finales</span></div></div><div class="header-badge">Informe<span>Bloqueantes</span></div></div></header>
+<nav><div class="container"><a href="#1-criterio-de-clasificacion">Criterio de clasificacion</a>
+<a href="#2-decisiones-bloqueantes-principales">Decisiones bloqueantes principales</a>
+<a href="#3-decisiones-de-prioridad-alta">Decisiones de prioridad alta</a>
+<a href="#4-preguntas-eliminadas-o-reformuladas-tras-revisar-codigo">Preguntas eliminadas o reformuladas tras revisar codigo</a>
+<a href="#5-agrupacion-para-reuniones-de-cierre">Agrupacion para reuniones de cierre</a>
+<a href="#6-criterio-para-cerrar-una-decision">Criterio para cerrar una decision</a>
+<a href="#7-resultado-esperado-de-este-informe">Resultado esperado de este informe</a></div></nav>
+<main id="document-content">
+<p># 02 - Decisiones y preguntas bloqueantes - Registro Horario Fase II</p>
+<p class="lead"><strong>Fecha:</strong> 2026-06-23</p>
+<p class="lead"><strong>Proyecto:</strong> Registro Horario - Fase II</p>
+<p class="lead"><strong>Audiencia:</strong> negocio, Product Owner, arquitectura, seguridad, backend, frontend y QA.</p>
+<p class="lead"><strong>Objetivo:</strong> concentrar las decisiones que deben resolverse antes de estimar cerrado o desarrollar sin inventar reglas.</p>
+<hr class="separator">
+<section id="1-criterio-de-clasificacion" class=""><div class="container">
+<div class="section-header"><div class="section-number">1</div><h2>1. Criterio de clasificacion</h2></div>
+<div class="table-wrap"><table>
+<thead><tr><th>Prioridad</th><th>Significado</th></tr></thead>
+<tbody>
+<tr><td>Bloqueante</td><td>Sin respuesta no se puede estimar, implementar o probar con seguridad.</td></tr>
+<tr><td>Alta</td><td>Se puede avanzar parcialmente, pero con alto riesgo de retrabajo.</td></tr>
+<tr><td>Media</td><td>Afecta UX, QA, mensajes, datos de prueba o casos secundarios.</td></tr>
+<tr><td>Baja</td><td>Mejora definicion, pero no condiciona el nucleo.</td></tr>
+</tbody></table></div>
+<p>Regla de trabajo: si una decision afecta modelo de datos, permisos, API, calculos, exportaciones, tests E2E, datos existentes o seguridad, debe resolverse antes de cerrar el alcance.</p>
+<hr class="separator">
+</div></section>
+<section id="2-decisiones-bloqueantes-principales" class="alt"><div class="container">
+<div class="section-header"><div class="section-number">2</div><h2>2. Decisiones bloqueantes principales</h2></div>
+<div class="table-wrap"><table>
+<thead><tr><th>ID</th><th>Prioridad</th><th>Modulo</th><th>Decision necesaria</th><th>Pregunta exacta</th><th>Que desbloquea</th><th>Que se rompe si no se responde</th></tr></thead>
+<tbody>
+<tr><td>D01</td><td>Bloqueante</td><td>Roles y permisos</td><td>Matriz final de permisos por rol, modulo, accion, empresa activa, modo simulacion y URL directa.</td><td>Cual es la matriz final de permisos para Admin, Usuario, Referente, Superadmin, Inspector y RLPT?</td><td>Guards frontend, autorizacion backend, menus, rutas, datos UAT y tests negativos.</td><td>Rehacer permisos, pantallas, endpoints y E2E.</td></tr>
+<tr><td>D02</td><td>Bloqueante</td><td>Accesos externos</td><td>Modelo de identidad de Inspector/RLPT.</td><td>Inspector y RLPT son usuarios internos, accesos externos, roles Keycloak con ambito o una combinacion?</td><td>Modelo BD, Keycloak, <code>/v1/me</code>, selector de empresa y revocacion.</td><td>Rehacer migraciones, login, contratos API y pantallas.</td></tr>
+<tr><td>D03</td><td>Bloqueante</td><td>Inspector</td><td>Campos anonimizados.</td><td>Que campos exactos se ocultan, transforman o muestran para Inspector en API, pantalla, Excel, logs y auditoria?</td><td>DTOs, mappers, UI, XLSX, logs, auditoria y tests anti-fuga.</td><td>Fuga de datos o retrabajo transversal.</td></tr>
+<tr><td>D04</td><td>Bloqueante</td><td>Inspector</td><td>Identificador anonimo.</td><td>El identificador anonimo debe ser estable, reversible o distinto por empresa?</td><td>Listado, ficha, paginacion, export y trazabilidad anonima.</td><td>Pantalla y Excel no cuadran, o se rompe anonimato.</td></tr>
+<tr><td>D05</td><td>Bloqueante</td><td>Inspector</td><td>Textos libres y comentarios sensibles.</td><td>Que se hace con observaciones de fichajes, historicos y compensaciones: ocultar, vaciar, resumir o mostrar?</td><td>Sanitizacion, columnas Excel, ficha e historicos.</td><td>Fuga de PII por comentarios aunque el nombre este oculto.</td></tr>
+<tr><td>D06</td><td>Bloqueante</td><td>Accesos externos</td><td>Ciclo de vida del acceso.</td><td>Que estados existen: invitado, activo, caducado, revocado, bloqueado, reenviado?</td><td>Estados BD, acciones UI, mensajes, auditoria y E2E.</td><td>Revocacion, reenvio o caducidad implementados con reglas incorrectas.</td></tr>
+<tr><td>D07</td><td>Bloqueante</td><td>Accesos externos</td><td>Revocacion con sesion activa.</td><td>La revocacion corta inmediatamente sesiones y descargas en curso o solo bloquea nuevos logins?</td><td>Validacion por request, invalidacion de sesion, cancelacion de descarga y tests.</td><td>Usuario revocado puede seguir consultando o exportando.</td></tr>
+<tr><td>D08</td><td>Bloqueante</td><td>Accesos externos</td><td>Duplicados y multiempresa.</td><td>Un mismo email puede ser trabajador, Inspector/RLPT y/o estar vinculado a varias empresas?</td><td>Indices, validaciones, 409, reenvio y asignacion multiempresa.</td><td>Identidades ambiguas y permisos cruzados.</td></tr>
+<tr><td>D09</td><td>Bloqueante</td><td>Inspector</td><td>Estado sin empresa seleccionada.</td><td>Que ve un Inspector sin empresa seleccionada y que endpoints puede usar antes de elegir empresa?</td><td><code>/v1/me</code>, selector, pantalla inicial, guards y routing.</td><td>Mezcla de datos o bloqueo antes de poder seleccionar empresa.</td></tr>
+<tr><td>D10</td><td>Bloqueante</td><td>Inspector</td><td>KPIs de control.</td><td>Que cuenta como registro correcto, incompleto, sin registro y dia computable?</td><td>Formulas, queries, fixtures, dataset UAT y assertions.</td><td>Indicadores no cuadran con Informes, Historial o Dashboard.</td></tr>
+<tr><td>D11</td><td>Bloqueante</td><td>RLPT</td><td>Naturaleza del rol.</td><td>El RLPT es trabajador que ficha, externo de consulta o perfil hibrido?</td><td>Login, dashboard, registro vivo/diferido, historial, permisos y rutas.</td><td>Implementar el rol opuesto al esperado por negocio.</td></tr>
+<tr><td>D12</td><td>Bloqueante</td><td>RLPT</td><td>Ambito y privacidad.</td><td>RLPT ve toda la plantilla o un ambito; datos reales o anonimizados?</td><td>Queries, filtros, exports, DTOs por rol y tests negativos.</td><td>Acceso a datos no permitidos o informes incompletos.</td></tr>
+<tr><td>D13</td><td>Bloqueante</td><td>Informes</td><td>Variantes por rol.</td><td>Admin, RLPT e Inspector comparten filtros, columnas y exports o hay variantes por rol?</td><td>Diseno UI, DTOs, endpoints, columnas y E2E.</td><td>Construir una pantalla unica y tener que partirla.</td></tr>
+<tr><td>D14</td><td>Bloqueante</td><td>Informes</td><td>Columnas finales XLSX.</td><td>Cuales son las columnas definitivas por tipo de informe y rol?</td><td>Tabla, Excel, contrato API, golden files y UAT.</td><td>Cambios tardios rompen exportaciones y tests.</td></tr>
+<tr><td>D15</td><td>Bloqueante</td><td>Informes</td><td>Reglas de fechas.</td><td>Rangos inclusivos? Zona horaria? Futuro? Fines de semana? Festivos? Cambio de mes/anio?</td><td>Datepickers, query params, backend date handling y tests limite.</td><td>Off-by-one, diferencias por zona horaria y calculos contradictorios.</td></tr>
+<tr><td>D16</td><td>Bloqueante</td><td>Informes</td><td>Dias sin registro y ausencias.</td><td>El informe simple incluye dias sin registro, festivos, vacaciones, bajas, fines de semana y futuro?</td><td>Algoritmo diario, volumen, XLSX y datos esperados.</td><td>Excel aparentemente incompleto o inflado.</td></tr>
+<tr><td>D17</td><td>Bloqueante</td><td>Informes</td><td>Tramos problematicos.</td><td>Como se exportan tramos abiertos, solapados, fin anterior a inicio y cruces de medianoche?</td><td>Validadores, fallback, incidencias, mensajes y tests legacy.</td><td>Exportaciones con 500 o evidencias incorrectas.</td></tr>
+<tr><td>D18</td><td>Bloqueante</td><td>Informes</td><td>Horas ordinarias/extra.</td><td>Debe separarse ordinaria y extraordinaria? Cual es la regla?</td><td>Calculo de jornada teorica, columnas, exports y dashboard relacionado.</td><td>Reabrir servicios de calculo durante UAT.</td></tr>
+<tr><td>D19</td><td>Bloqueante</td><td>Informes</td><td>Volumen y SLA.</td><td>Cual es el rango maximo exportable y tiempo maximo esperado?</td><td>Indices, streaming, jobs, timeouts, limites y mensajes.</td><td>Solucion funcionalmente correcta pero inviable en produccion.</td></tr>
+<tr><td>D20</td><td>Bloqueante</td><td>Datos historicos</td><td>Fallback legacy.</td><td>Como deben comportarse informes y anonimato con datos historicos anteriores a Fase II?</td><td>Migraciones, validadores, fallback y fixtures legacy.</td><td>Pasar en dev y fallar con datos reales.</td></tr>
+<tr><td>D21</td><td>Bloqueante</td><td>Exportaciones existentes</td><td>Alcance de anonimato en CSV actuales.</td><td>Inspector/RLPT pueden acceder a exports actuales de historial/compensaciones o solo al nuevo modulo Informes?</td><td>Bloqueo/anonimizacion de endpoints existentes y tests anti-fuga.</td><td>Proteger Informes nuevo pero filtrar datos por exports antiguos.</td></tr>
+<tr><td>D22</td><td>Bloqueante</td><td>Configuracion</td><td>Cambios pasados y sesiones abiertas.</td><td>Modificar festivos, planificacion o configuracion pasada recalcula informes o conserva historico?</td><td>Recalculo, cache, auditoria, validacion server-side y mensajes.</td><td>Informes antiguos y nuevos dan resultados distintos sin explicacion.</td></tr>
+<tr><td>D23</td><td>Bloqueante</td><td>Superadmin</td><td>Solo lectura backend en simulacion.</td><td>Todas las mutaciones quedan bloqueadas en backend cuando el superadmin simula?</td><td>Interceptor/anotaciones, tests API y regresion de mutaciones.</td><td>Cambios reales mediante llamada directa a API.</td></tr>
+<tr><td>D24</td><td>Bloqueante</td><td>Suplantacion</td><td>Alcance, duracion, salida y auditoria.</td><td>La suplantacion permite escritura? A que roles? Persiste tras refresh? Que audita?</td><td>Modelo de sesion, banner, salida segura, auditoria y permisos.</td><td>Operar como otro usuario sin trazabilidad o sin salida clara.</td></tr>
+<tr><td>D25</td><td>Bloqueante</td><td>Auditoria</td><td>Eventos nuevos.</td><td>Que eventos se auditan: login externo, consulta, apertura ficha, export XLSX, revocacion, suplantacion?</td><td>Tabla/eventos de auditoria, payloads, logs y pruebas.</td><td>Falta evidencia de accesos y descargas sensibles.</td></tr>
+<tr><td>D26</td><td>Bloqueante</td><td>Alcance</td><td>Exclusiones.</td><td>Confirmamos que app movil e IA quedan fuera de Fase II?</td><td>Alcance estimable y defensa ante cambios tardios.</td><td>La estimacion queda invalidada si entran durante desarrollo.</td></tr>
+<tr><td>D27</td><td>Bloqueante</td><td>Fuente de verdad</td><td>Documento vs prototipo.</td><td>Si prototipo y funcional contradicen columnas, textos o flujos, cual prevalece?</td><td>Criterios de aceptacion y resolucion de dudas.</td><td>UAT rechaza una implementacion tecnicamente correcta.</td></tr>
+<tr><td>D28</td><td>Bloqueante</td><td>QA/UAT</td><td>Dataset oficial.</td><td>Puede negocio aprobar dataset UAT con resultados esperados para permisos, calculos, anonimato y XLSX?</td><td>Seeds, Playwright, golden XLSX, tests backend y cierre UAT.</td><td>QA discute resultados caso por caso.</td></tr>
+</tbody></table></div>
+<hr class="separator">
+</div></section>
+<section id="3-decisiones-de-prioridad-alta" class=""><div class="container">
+<div class="section-header"><div class="section-number">3</div><h2>3. Decisiones de prioridad alta</h2></div>
+<div class="table-wrap"><table>
+<thead><tr><th>ID</th><th>Modulo</th><th>Pregunta</th><th>Por que importa</th><th>Riesgo</th></tr></thead>
+<tbody>
+<tr><td>A01</td><td>Inspector</td><td>Debe ver trabajadores dados de baja, sin registros, sin planificacion o sin compensaciones?</td><td>Afecta totales, listados, fichas y exports.</td><td>KPIs no coinciden con expectativas.</td></tr>
+<tr><td>A02</td><td>Informes</td><td>Que filtros exactos existen, periodo por defecto, orden inicial, tamanio pagina y comportamiento al cambiar filtros?</td><td>Necesario para UX y E2E estables.</td><td>Paginacion incoherente y pruebas fragiles.</td></tr>
+<tr><td>A03</td><td>Informes</td><td>Cuando no hay datos, se impide generar archivo y que mensaje se muestra?</td><td>Afecta UI, backend y tests negativos.</td><td>Exceles vacios o comportamientos distintos por rol.</td></tr>
+<tr><td>A04</td><td>Informes</td><td>Nombre del archivo, formato de fecha/hora/duracion, idioma, pestanias y metadatos XLSX?</td><td>Detalles de aceptacion del entregable.</td><td>Rehacer exports por formato al final.</td></tr>
+<tr><td>A05</td><td>Informes</td><td>Se cancelan exports en curso al cambiar filtros, lanzar otro export o cerrar sesion?</td><td>Evita descargas obsoletas.</td><td>Descargar datos que no corresponden a la pantalla actual.</td></tr>
+<tr><td>A06</td><td>Configuracion</td><td>Centro y puesto son visibles para Inspector aunque puedan identificar indirectamente?</td><td>Riesgo de reidentificacion por baja cardinalidad.</td><td>Anonimato insuficiente.</td></tr>
+<tr><td>A07</td><td>Configuracion</td><td>Cambios de parametros se aplican al abrir pantalla o al guardar?</td><td>Define validacion backend.</td><td>Usuarios guardan acciones ya prohibidas.</td></tr>
+<tr><td>A08</td><td>Usuarios/CSV</td><td>CSV puede crear RLPT/Inspector/accesos externos o solo trabajadores?</td><td>Afecta flujo existente y duplicados.</td><td>Crear roles externos por un canal no previsto.</td></tr>
+<tr><td>A09</td><td>Sesion</td><td>Que ocurre si caduca sesion durante consulta, guardado, cambio empresa o descarga?</td><td>Seguridad y UX transversal.</td><td>Datos sensibles visibles o descargas tras logout.</td></tr>
+<tr><td>A10</td><td>Concurrencia</td><td>Se requiere idempotencia/bloqueo para altas, fichajes, exports y cambio de empresa?</td><td>Evita duplicados y mezcla de contexto.</td><td>Doble fichaje, doble acceso o datos de otra empresa.</td></tr>
+<tr><td>A11</td><td>UX</td><td>Textos para sin datos, sin permisos, revocado, sin empresa, timeout y error servicio?</td><td>Forma parte de la prueba funcional.</td><td>UAT falla por mensajes ambiguos.</td></tr>
+<tr><td>A12</td><td>Logs</td><td>Que datos personales pueden aparecer en logs, auditoria y errores tecnicos?</td><td>Privacidad fuera de UI.</td><td>Fuga por trazas tecnicas.</td></tr>
+</tbody></table></div>
+<hr class="separator">
+</div></section>
+<section id="4-preguntas-eliminadas-o-reformuladas-tras-revisar-codigo" class="alt"><div class="container">
+<div class="section-header"><div class="section-number">4</div><h2>4. Preguntas eliminadas o reformuladas tras revisar codigo</h2></div>
+<div class="table-wrap"><table>
+<thead><tr><th>Area</th><th>Decision actual</th><th>Tratamiento recomendado</th></tr></thead>
+<tbody>
+<tr><td>CSV parcial/atomico</td><td>El comportamiento del CSV actual ya esta implementado y probado.</td><td>Eliminar como bloqueante. Convertir en regresion QA.</td></tr>
+<tr><td>UX simulacion actual</td><td>El frontend ya deshabilita muchas acciones en pantallas existentes.</td><td>No usar como bloqueante general. Mantener criterio de consistencia para pantallas nuevas.</td></tr>
+<tr><td>Roles externos</td><td>Hay infraestructura tecnica, pero no modelo funcional Inspector/RLPT.</td><td>Reformular: negocio debe confirmar si se adopta esa infraestructura y con que alcance.</td></tr>
+<tr><td>Exportaciones CSV actuales</td><td>Existen exports CSV, pero no son XLSX ni anonimos.</td><td>Reformular: decidir si los nuevos roles pueden acceder o si se bloquean.</td></tr>
+<tr><td>Auditoria</td><td>Hay framework actual.</td><td>Reformular: definir eventos Fase II concretos.</td></tr>
+<tr><td>Password externos</td><td>Existe cambio de password de usuario autenticado.</td><td>Reformular: externos cambian password en app o proveedor identidad?</td></tr>
+</tbody></table></div>
+<hr class="separator">
+</div></section>
+<section id="5-agrupacion-para-reuniones-de-cierre" class=""><div class="container">
+<div class="section-header"><div class="section-number">5</div><h2>5. Agrupacion para reuniones de cierre</h2></div>
+<h3>Reunion 1: negocio y seguridad</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Tema</th><th>Decisiones</th></tr></thead>
+<tbody>
+<tr><td>Matriz de permisos</td><td>D01, D23</td></tr>
+<tr><td>Inspector</td><td>D03, D04, D05, D09, D10</td></tr>
+<tr><td>RLPT</td><td>D11, D12</td></tr>
+<tr><td>Privacidad</td><td>D03, D05, D21, D25</td></tr>
+<tr><td>Suplantacion</td><td>D24</td></tr>
+</tbody></table></div>
+<h3>Reunion 2: producto e informes</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Tema</th><th>Decisiones</th></tr></thead>
+<tbody>
+<tr><td>Alcance Informes</td><td>D13, D14</td></tr>
+<tr><td>Fechas y calculos</td><td>D15, D16, D17, D18</td></tr>
+<tr><td>Exportaciones</td><td>D19, D21</td></tr>
+<tr><td>Fuente de verdad</td><td>D27</td></tr>
+</tbody></table></div>
+<h3>Reunion 3: arquitectura e integraciones</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Tema</th><th>Decisiones</th></tr></thead>
+<tbody>
+<tr><td>Accesos externos</td><td>D02, D06, D07, D08</td></tr>
+<tr><td>Keycloak/email</td><td>D06, D07, D08</td></tr>
+<tr><td>Datos historicos</td><td>D20, D22</td></tr>
+<tr><td>Rendimiento</td><td>D19</td></tr>
+</tbody></table></div>
+<h3>Reunion 4: QA/UAT</h3>
+<div class="table-wrap"><table>
+<thead><tr><th>Tema</th><th>Decisiones</th></tr></thead>
+<tbody>
+<tr><td>Dataset oficial</td><td>D28</td></tr>
+<tr><td>Criterios de aceptacion</td><td>D10, D14, D15, D16, D17</td></tr>
+<tr><td>Clasificacion de hallazgos</td><td>Defecto vs aclaracion vs cambio de alcance.</td></tr>
+</tbody></table></div>
+<hr class="separator">
+</div></section>
+<section id="6-criterio-para-cerrar-una-decision" class="alt"><div class="container">
+<div class="section-header"><div class="section-number">6</div><h2>6. Criterio para cerrar una decision</h2></div>
+<p>Una decision se considera cerrada solo si deja definidos estos puntos:</p>
+<div class="table-wrap"><table>
+<thead><tr><th>Punto</th><th>Necesario</th></tr></thead>
+<tbody>
+<tr><td>Regla funcional</td><td>Que debe pasar desde el punto de vista de negocio.</td></tr>
+<tr><td>Alcance tecnico</td><td>Que modulos, APIs, pantallas, exports o datos afecta.</td></tr>
+<tr><td>Caso negativo</td><td>Que debe pasar si el usuario no tiene permiso, no hay datos o hay datos invalidos.</td></tr>
+<tr><td>Datos de prueba</td><td>Que dataset permite comprobarlo.</td></tr>
+<tr><td>Test recomendado</td><td>E2E, integracion, unitario, contrato o performance.</td></tr>
+<tr><td>Criterio de aceptacion</td><td>Como sabremos que esta bien implementado.</td></tr>
+</tbody></table></div>
+<hr class="separator">
+</div></section>
+<section id="7-resultado-esperado-de-este-informe" class=""><div class="container">
+<div class="section-header"><div class="section-number">7</div><h2>7. Resultado esperado de este informe</h2></div>
+<p>Este documento debe usarse para reducir incertidumbre antes de estimar cerrado. Si una decision sigue sin respuesta, la tarea asociada debe quedar como <strong>No estimable todavia</strong> o estimarse con contingencia explicita.</p>
+</div></section>
+
+</main>
+<footer class="foot">Registro Horario Fase II · <strong>Version HTML generada desde 02-decisiones-preguntas-bloqueantes-fase2.md</strong></footer>
+</div>
+<div class="edit-bar"><span class="hint">Herramientas: activar edicion para ajustes manuales, imprimir o guardar desde el navegador.</span><button class="primary" id="editBtn" type="button">Editar</button><button type="button" onclick="window.print()">Imprimir / PDF</button></div>
+<script>const btn=document.getElementById('editBtn');const main=document.getElementById('document-content');btn.addEventListener('click',()=>{const on=!document.body.classList.contains('editing');document.body.classList.toggle('editing',on);main.contentEditable=on?'true':'false';btn.classList.toggle('on',on);btn.textContent=on?'Editando':'Editar';});</script>
+</body>
+</html>
