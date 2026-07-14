@@ -301,6 +301,7 @@ Mismo texto i18n en ambos sitios: clave `cambioPuesto.aviso.analiticaComunicadaN
 | **403** | Sin permiso o RM no pendiente | Ver tabla abajo | Cerrar modal / ocultar acción |
 | **409** | RL BLOQUEAR en CONFIRMAR | Mensaje RL del BE | Error; no reintentar a ciegas |
 | **502** | Fallo puestos-back / rrmm-utils | Mensaje integración | Error técnico |
+| **500** | Error JDBC no traducido (BUG-05) | Ver § Errores 500 enmascarados | Leer `details` en body; no confundir con cita |
 | **501** | P1 no disponible (solo dev) | Motor dry-run no disponible | Solo entornos sin P1 |
 | **401** | JWT inválido/ausente | — | Renovar sesión |
 | **400** | Body mal formado | — | Revisar payload |
@@ -339,6 +340,26 @@ Mismo texto i18n en ambos sitios: clave `cambioPuesto.aviso.analiticaComunicadaN
 | No se ha podido calcular el impacto propuesto del cambio de puesto. | SIMULAR — fallo rrmm-utils |
 | No se ha podido aplicar la nueva configuración de protocolos del cambio de puesto. | CONFIRMAR — fallo applier |
 | No se ha podido consultar el catálogo de puestos. | Fallo puestos-back |
+
+### Errores 500 enmascarados (BUG-05 dev)
+
+Algunos fallos JDBC en rrmm-backend devuelven **500** con cuerpo distinto de `RestApiError`:
+
+```json
+{
+  "message": "Error al acceder a las observaciones de la cita",
+  "details": "Incorrect result size: expected 1, actual 5288"
+}
+```
+
+| Campo | Uso FE / QA |
+|-------|-------------|
+| `message` | **Ignorar** para diagnóstico — texto fijo incorrecto (handler global de citas) |
+| `details` | **Pista real** del error (SQL, ORA-*, IncorrectResultSize…) |
+
+El modal actual (`mostrarErrorApi`) solo muestra `customMessage` → cae al texto genérico *No se han podido aplicar los cambios de puesto*. **Mejora pendiente FE:** mostrar `details` o `message` cuando no haya `customMessage`.
+
+Caso conocido **corregido en BE (14-jul-2026):** CONFIRMAR con cambio de cliente/centro y centro origen con `RM_CEN_ID` ambiguo (ej. **1** repetido en miles de filas GC). Fix: `getNombreCentro(clienteMp2, centroMp2)` al construir `RM_MOVIDO`. E2E: rmId **2980099**, cli **9422**, cen **1**.
 
 ---
 
@@ -466,7 +487,8 @@ Mismo texto i18n en ambos sitios: clave `cambioPuesto.aviso.analiticaComunicadaN
 |----|---------------|
 | BUG-01 Vitaly | CONFIRMAR puede devolver 502 tras actualizar parcialmente — mostrar error, refrescar ficha |
 | BUG-03 Vitaly | 502 en algunos clientes sin ACP — error integración |
-| BUG-05 dev | Mensaje enmascarado (*observaciones de la cita*) en algunos 500 — mirar logs BE |
+| BUG-05 dev | HTTP 500 con `message` fijo *observaciones de la cita* — leer **`details`** en Network; no es fallo de cita ni del modal |
+| RM_MOVIDO lookup | CONFIRMAR al cambiar cli/cen: corregido en BE 14-jul-2026 (`getNombreCentro` con cliente+centro MP2) |
 
 ---
 
@@ -517,4 +539,4 @@ Mismo texto i18n en ambos sitios: clave `cambioPuesto.aviso.analiticaComunicadaN
 
 ---
 
-*Última actualización: 2026-07-10 — Flag `showAnaliticaComunicadaNuevosParametros` en displays ficha (CU-11 persistente post-CONFIRMAR).*
+*Última actualización: 2026-07-14 — Errores 500 BUG-05 (`details` vs `customMessage`); fix `RM_MOVIDO` / getNombreCentro (rmId 2980099).*

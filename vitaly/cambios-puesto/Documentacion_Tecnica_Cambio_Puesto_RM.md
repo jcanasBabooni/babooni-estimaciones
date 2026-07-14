@@ -3,7 +3,10 @@
 **Evolutivo:** Cambio de puesto desde ficha de RM pendiente con recálculo de protocolos  
 **Referencia funcional:** RF v.6 (`funcional/RF_MINERVA_cambio_puesto_reconocimiento_y_protocolos_v6.md`)  
 **Rama de desarrollo:** `feature/Cambio-puesto-sprint-1`  
-**Última revisión:** Julio 2026
+**Última revisión:** 14 julio 2026  
+
+> **Fuente de verdad:** `rrmm-backend/src/main/resources/documentation/cambios-puesto/00-documentacion-tecnica-cambio-puesto.md`  
+> Este fichero es copia de trabajo en estimaciones; ante discrepancia, prevalece el del repo de código.
 
 ---
 
@@ -256,6 +259,8 @@ com.preving.restapi.rrmm/
 | `isCentroEnVersion1` | `GC2006_RELEASE.PC_CENTROS` | Bloqueo centros V1 |
 | `tieneComunicacionLabActiva` | `VS_2007.EA_LAB_COM` | Aviso laboratorio (CA-15) |
 | `updateInfRmCambioPuesto` | `VIG_SALUD.INF_RM` | Destino puesto/cli/cen, `RM_MOVIDO` |
+| `getNombreCliente` | `GC2006_RELEASE.PC_CLIENTES` | Nombre cliente origen (`ID_IN_MP2`) para `RM_MOVIDO` |
+| `getNombreCentro` | `PC_CENTROS` + `PC_CLIENTES` | Nombre centro origen (**cliente MP2 + centro MP2**) para `RM_MOVIDO` |
 | `updateInfRmConfiguracionProtocolos` | `VIG_SALUD.INF_RM` | ACP, periodicidad, fecha próximo RM |
 | `getRlPrincipalActivaById` | `PPT_CEN_TRA` + `PREVENCION.ER_*` | OK técnico |
 | `getImpacto*ByRmId` | `INF3_RM_*` | Snapshot diff SIMULAR |
@@ -687,6 +692,15 @@ Incidencias **fuera del alcance** de este evolutivo, pendientes del equipo del a
 | BUG-01 | Multi-PVS en `getCentroClienteMp2` → 502 | `incidencias-vitaly-bugs.md` |
 | BUG-02 | Protocolos huérfanos (workaround temporal en reconciliación) | `vitaly-bug-protocolos-huerfanos.md` |
 | BUG-03 | Cliente sin ACP → 502/NPE en applier | `incidencias-vitaly-bugs.md` |
+
+### 10.1 Infraestructura rrmm-backend
+
+Ver detalle en `rrmm-backend/.../00-documentacion-tecnica-cambio-puesto.md` §10.1:
+
+| ID | Estado |
+|----|--------|
+| BUG-05 | Handler global enmascara DataAccessException — leer `details` |
+| RM_MOVIDO / getNombreCentro | **Corregido 14-jul-2026** (rmId E2E 2980099) |
 
 ---
 

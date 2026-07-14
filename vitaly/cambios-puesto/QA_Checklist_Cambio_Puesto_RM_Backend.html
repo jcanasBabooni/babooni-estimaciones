@@ -113,6 +113,8 @@
     .label strong { color: var(--accent); }
     .hint { font-size: .8rem; color: var(--muted); margin-top: .25rem; }
     .tag-ok { color: var(--ok); font-weight: 600; font-size: .75rem; }
+    .tag-flag { color: #c2410c; font-weight: 600; font-size: .75rem; }
+    .tag-config { color: var(--accent); font-weight: 600; font-size: .75rem; }
     notes textarea {
       width: 100%; min-height: 80px; margin-top: .5rem;
       padding: .5rem; border: 1px solid var(--border);
@@ -128,7 +130,7 @@
 
 <header>
   <h1>Checklist QA Backend — Cambio de puesto RM</h1>
-  <p class="subtitle">rrmm-backend · puestos-back · rrmm-utils · API + BD (sin pruebas de frontend)</p>
+  <p class="subtitle">rrmm-backend · puestos-back · rrmm-utils · API + BD (sin pruebas de frontend) · <strong>OK técnico opt-in</strong>: <code>validar-ok-tecnico-rl=false</code> (default, legacy CA-16)</p>
   <div class="toolbar">
     <div class="progress-wrap">
       <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
@@ -243,7 +245,8 @@
     <li data-id="v02"><input type="checkbox" id="v02" checked><div><label class="label" for="v02"><span class="repo repo-be">BE</span><strong>V02 / CA-02</strong> RM no pendiente → 403</label><div class="hint"><span class="tag-ok">✓</span> Validado usuario · 403 · «ya no está pendiente» · log V02_RM_PENDIENTE KO</div></div></li>
     <li data-id="v03"><input type="checkbox" id="v03" checked><div><label class="label" for="v03"><span class="repo repo-be">BE</span><strong>V03</strong> Centro sin contrato PVS → bloqueo</label><div class="hint"><span class="tag-ok">✓</span> 422 · customMessage «no tiene contrato PVS activo» · code 1001 · 12:14</div></div></li>
     <li data-id="v05"><input type="checkbox" id="v05" checked><div><label class="label" for="v05"><span class="repo repo-be">BE</span><strong>V05</strong> Sin JWT → 401</label><div class="hint"><span class="tag-ok">✓</span> PUT cambiar-puesto sin Authorization · 12:00:09</div></div></li>
-    <li data-id="v06"><input type="checkbox" id="v06" checked><div><label class="label" for="v06"><span class="repo repo-be">BE</span><span class="repo repo-pb">PB</span><strong>V06 OK técnico</strong> → 409, no muta RL</label><div class="hint"><span class="tag-ok">✓ pb-oktec</span> rlId=<strong>1154</strong> cli/cen 211/1 · puesto centro 635830 · OK_TECNICO=1 · PT contratada · 409 · RL sin cambios · 13:26</div></div></li>
+    <li data-id="v06-default"><input type="checkbox" id="v06-default" checked><div><label class="label" for="v06-default"><span class="repo repo-be">BE</span><span class="repo repo-pb">PB</span><strong>V06 OK técnico OFF (default)</strong> — no bloquea aunque puesto centro + OK + PT</label><div class="hint"><span class="tag-config">DEFAULT</span> <span class="tag-ok">✓ unit</span> · <code>validar-ok-tecnico-rl=false</code> en BE+PB · <code>CambioPuestoRlExecutorTest</code> · <code>PuestoManagerTest.cambiarPuestoRl_okTecnicoConValidacionDesactivada_noBloquea</code> · alineado legacy <code>cambiarRm.do</code></div></div></li>
+    <li data-id="v06"><input type="checkbox" id="v06" checked><div><label class="label" for="v06"><span class="repo repo-be">BE</span><span class="repo repo-pb">PB</span><strong>V06 OK técnico ON (opt-in)</strong> → 409/422, no muta RL</label><div class="hint"><span class="tag-flag">OPT-IN</span> <span class="tag-ok">✓ pb-oktec</span> · requiere <code>validar-ok-tecnico-rl=true</code> en BE y PB · evidencia E2E 2026-07-07: rlId=<strong>1154</strong> cli/cen 211/1 · puesto 635830 · OK_TECNICO=1 · PT · 409 · RL intacta</div></div></li>
     <li data-id="v07-conc"><input type="checkbox" id="v07-conc" checked><div><label class="label" for="v07-conc"><span class="repo repo-be">BE</span><strong>V07</strong> RM deja pendiente mid-flight → 403</label><div class="hint"><span class="tag-ok">✓ Aceptado</span> · unit test <code>confirmar_revalidaPendienteAntesDeMutar</code> · V02 inicial OK + revalidación KO → 403 · E2E manual no ejecutado (candidatos OK técnico)</div></div></li>
     <li data-id="v08"><input type="checkbox" id="v08" checked><div><label class="label" for="v08"><span class="repo repo-be">BE</span><strong>V08 / CA-04-05</strong> GET clientes (&lt;3 chars / ≥3 / CIF)</label><div class="hint"><span class="tag-ok">✓</span> q=ab→422 · q=pre→200 · CIF→200</div></div></li>
     <li data-id="v09"><input type="checkbox" id="v09" checked><div><label class="label" for="v09"><span class="repo repo-be">BE</span><strong>V09</strong> GET centros — clienteId inválido → 422</label><div class="hint"><span class="tag-ok">✓</span> clienteId=0→422 · clienteId=234783→200</div></div></li>
@@ -313,7 +316,7 @@
     <li data-id="pb-cambiar"><input type="checkbox" id="pb-cambiar" checked><div><label class="label" for="pb-cambiar"><span class="repo repo-pb">PB</span>POST /puestos/{rlId}/cambiar-puesto — EDITAR</label><div class="hint"><span class="tag-ok">✓</span></div></div></li>
     <li data-id="pb-crear"><input type="checkbox" id="pb-crear" checked><div><label class="label" for="pb-crear"><span class="repo repo-pb">PB</span>POST cambiar-puesto — CREAR</label><div class="hint"><span class="tag-ok">✓ rlId=4782283 → newRlId=4782284</span> · baja+alta · accion=CREADA · clienteOverride=null</div></div></li>
     <li data-id="pb-solo-adic"><input type="checkbox" id="pb-solo-adic" checked><div><label class="label" for="pb-solo-adic"><span class="repo repo-pb">PB</span>POST cambiar-puesto — soloAdicionales=true</label><div class="hint"><span class="tag-ok">✓ rlId=4782422</span> · soloAdicionales accion=EDITADA adicionales=1 · 11:36:19</div></div></li>
-    <li data-id="pb-oktec"><input type="checkbox" id="pb-oktec" checked><div><label class="label" for="pb-oktec"><span class="repo repo-pb">PB</span>POST cambiar-puesto — OK técnico → 409</label><div class="hint"><span class="tag-ok">✓ rlId=1154</span> · 409 · error «Puesto con OK técnico…» · log PuestosController rechazado · PPT_CEN_TRA intacta</div></div></li>
+    <li data-id="pb-oktec"><input type="checkbox" id="pb-oktec" checked><div><label class="label" for="pb-oktec"><span class="repo repo-pb">PB</span>POST cambiar-puesto — OK técnico ON (opt-in) → 409</label><div class="hint"><span class="tag-flag">OPT-IN</span> <span class="tag-ok">✓ rlId=1154</span> · flag <code>cambioRm.validar-ok-tecnico-rl=true</code> · 409 «Puesto con OK técnico…» · PPT_CEN_TRA intacta · E2E 2026-07-07</div></div></li>
     <li data-id="pb-catalogo"><input type="checkbox" id="pb-catalogo" checked><div><label class="label" for="pb-catalogo"><span class="repo repo-pb">PB</span>GET /puestos/catalogo-cambio-rm/{cli}/{cen}</label><div class="hint"><span class="tag-ok">✓ V10</span> proxy BE → 234783/370960 rmId=12341907 · catálogo prevención/vigilancia/estándar</div></div></li>
   </ul>
 </section>
@@ -344,13 +347,28 @@
 <section>
   <h2>Notas</h2>
   <div style="padding: 1rem;">
-    <textarea id="sessionNotes" placeholder="rmIds, incidencias, resultados SQL…">2026-07-07 CHECKLIST BACKEND CERRADO (44/44) — decisión usuario
+    <textarea id="sessionNotes" placeholder="rmIds, incidencias, resultados SQL…">2026-07-14 FIX RM_MOVIDO / getNombreCentro (rrmm-backend)
+- Síntoma: CONFIRMAR 500 BUG-05 · details «Incorrect result size: expected 1, actual 5288»
+- Causa: getNombreCentro solo por ID_IN_MP2; RM_CEN_ID=1 → 5288 filas en PC_CENTROS
+- Fix: getNombreCentro(clienteMp2, centroMp2) join PC_CLIENTES · FETCH FIRST 1 ROW ONLY
+- E2E rmId=2980099 · origen cli/cen 9422/1 · cambio cli+centro+puesto destino
+- SIMULAR OK / CONFIRMAR fallaba en persistirDestinoAntesApplier (antes del UPDATE INF_RM)
+- Doc: 00-documentacion-tecnica-cambio-puesto.md §5.4 §10.1 · Guia_FE § Errores 500 BUG-05
+
+2026-07-14 V06 OK técnico — alineación legacy CA-16 (decisión negocio)
+- Default producción/demo: validar-ok-tecnico-rl=false en rrmm-backend (cambio-puesto.*) y puestos-back (cambioRm.*)
+- limitePuestosTrabajoVersion1=300000 en ambos servicios
+- Caso E2E v06/pb-oktec (rlId=1154 → 409) válido solo con flag=true (opt-in regla moverTrabajadores)
+- Nuevo ítem checklist v06-default: unit tests BE+PB confirman que con flag=false no bloquea
+- Doc técnica: rrmm-backend/.../00-documentacion-tecnica-cambio-puesto.md §1.1 y §5.5
+
+2026-07-07 CHECKLIST BACKEND CERRADO (44/44) — decisión usuario
 - V07 concurrencia: aceptado por cobertura unitaria BE-10 (CambioPuestoServiceImplTest confirmar_revalidaPendienteAntesDeMutar)
 - E2E carrera mid-flight no reproducida: candidatos RM con RL editable escasos; intento bloqueado por V06 OK técnico (422)
 - Validaciones API V01–V06 + V08–V10 + V13: cerradas E2E o por evidencia acumulada
 - Pendiente fuera checklist: BUG-01 ASOCIAR E2E · CA-14 fuerte · commit fix ORA-00932
 
-2026-07-07 V06 + pb-oktec — rlId=1154
+2026-07-07 V06 + pb-oktec — rlId=1154 (con validación OK técnico activa en ese momento)
 - POST puestos-back/puestos/1154/cambiar-puesto → 409 Conflict
 - Body: { rlId: 1154, error: «Puesto con OK técnico; no se puede cambiar la relación laboral.» }
 - Log puestos-back 13:26:05 WARN cambiarPuestoRl rlId=1154 rechazado
@@ -403,6 +421,15 @@
 
 == BUG-05 (rrmm-backend) ==
 - CitasObservacionesExceptionHandler enmascara cualquier DataAccessException como «observaciones de la cita»
+- Respuesta: { message: fijo, details: ex.getMessage() } — NO usa customMessage RestApiError
+- FE muestra texto genérico; QA debe leer details en Network o logs [cambio-puesto]
+- Ejemplo corregido 2026-07-14: details «Incorrect result size…5288» → getNombreCentro sin filtro cliente (rmId 2980099, cen origen 1)
+
+== FIX RM_MOVIDO getNombreCentro (rrmm-backend) — 2026-07-14 ==
+- CONFIRMAR cambio cli/cen: RM_MOVIDO = nombreClienteOrigen;nombreCentroOrigen
+- getNombreCentro(clienteId, centroId) join PC_CENTROS+PC_CLIENTES (ID_IN_MP2 no único global en centros)
+- Unit: CambioPuestoDaoImplTest (9422/1) · CambioPuestoConfirmarTxServiceTest
+- Pendiente re-test E2E rmId=2980099 tras reinicio BE
 
 == BUG ORA-00932 (rrmm-backend) — FIX LOCAL 2026-07-07 ==
 - updateInfRmConfiguracionProtocolos: CASE WHEN + bind null → ORA-00932 en periodicidad
@@ -482,13 +509,13 @@
   </div>
 </section>
 
-<footer>Revisión 13 · 44/44 · Progreso embebido en <code>qa-embedded-state</code> + caché localStorage · Jul 2026</footer>
+<footer>Revisión 14 · 45/45 · Progreso embebido en <code>qa-embedded-state</code> + caché localStorage · Jul 2026</footer>
 
 <!-- Estado persistido en el archivo: al abrir sin localStorage se restaura desde aquí -->
 <script type="application/json" id="qa-embedded-state">
 {
-  "revision": 13,
-  "updatedAt": "2026-07-07",
+  "revision": 14,
+  "updatedAt": "2026-07-14",
   "tester": "",
   "checked": [
     "rl-editar", "rl-solo-adic", "rl-crear", "rl-asociar",
@@ -497,7 +524,7 @@
     "conf-persiste", "conf-revalida", "conf-fecha-prox",
     "ca14", "ca17",
     "ca15", "cu11",
-    "v01", "v02", "v03", "v05", "v06", "v07-conc", "v08", "v09", "v10",
+    "v01", "v02", "v03", "v05", "v06-default", "v06", "v07-conc", "v08", "v09", "v10",
     "v13-acl", "v13-acl-simular",
     "ep-put", "ep-cli", "ep-cen", "ep-puestos",
     "pb-cambiar", "pb-crear", "pb-solo-adic", "pb-oktec", "pb-catalogo",
