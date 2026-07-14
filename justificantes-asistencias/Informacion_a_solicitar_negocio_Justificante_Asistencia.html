@@ -1,0 +1,652 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Informacion a solicitar a negocio - Justificante de Asistencia MINERVA</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#0a0a0a;--black-soft:#1a1a1a;--black-deep:#050505;--black-light:#2a2a2a;
+  --red:#e60000;--red-light:#ff0000;--red-dark:#b30000;--red-pale:#fdecec;--red-bg:#fef5f5;
+  --gold:#f4b900;--gold-light:#fff8e1;--gold-dark:#c49500;
+  --bg:#ffffff;--bg-alt:#f6f6f7;--bg-card:#ffffff;
+  --border:#e2e2e2;--border-light:#ededed;--border-dark:#2a2a2a;
+  --text:#0a0a0a;--text-secondary:#4a4a4a;--text-muted:#8a8a8a;
+  --green:#1d8a4a;--green-bg:#e6f7ee;
+  --orange:#d97a1c;--orange-bg:#fef3e2;
+  --blue:#1d6aa5;--blue-bg:#e6f0f7;
+  --shadow-sm:0 1px 3px rgba(0,0,0,0.06);--shadow-md:0 4px 12px rgba(0,0,0,0.10);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Montserrat','Segoe UI',-apple-system,BlinkMacSystemFont,sans-serif;background:#d8d8dc;color:var(--text);line-height:1.65;-webkit-font-smoothing:antialiased}
+.page-wrapper{max-width:960px;margin:32px auto;background:var(--bg);border-radius:16px;box-shadow:0 4px 40px rgba(0,0,0,0.18),0 1px 6px rgba(0,0,0,0.08);overflow:visible}
+.container{max-width:100%;margin:0 auto;padding:0 40px}
+header{background:linear-gradient(135deg,#000000 0%,var(--black) 35%,var(--black-soft) 100%);color:white;padding:48px 0 44px;border-bottom:5px solid var(--red);position:relative;overflow:hidden;border-radius:16px 16px 0 0}
+header::before{content:'';position:absolute;top:-50%;right:-10%;width:500px;height:500px;background:radial-gradient(circle,rgba(230,0,0,0.18) 0%,transparent 70%);border-radius:50%}
+header::after{content:'';position:absolute;bottom:-60%;left:-5%;width:400px;height:400px;background:radial-gradient(circle,rgba(255,255,255,0.04) 0%,transparent 70%);border-radius:50%}
+header .container{display:flex;justify-content:space-between;align-items:flex-start;position:relative;z-index:1;gap:24px}
+.header-logo{margin-bottom:18px}
+.header-logo svg{display:block;height:60px;width:auto}
+.header-left h1{font-size:28px;font-weight:800;letter-spacing:-0.5px;margin-bottom:6px;line-height:1.2}
+.header-left h1 .red{color:var(--red-light)}
+.header-left p{color:rgba(255,255,255,0.65);font-size:11px;font-weight:400}
+.header-badge{background:linear-gradient(135deg,var(--gold-dark) 0%,var(--gold) 100%);color:var(--black);font-size:9px;font-weight:600;padding:7px 14px;border-radius:6px;text-align:center;line-height:1.4;box-shadow:0 4px 15px rgba(244,185,0,0.35);text-transform:uppercase;letter-spacing:0.5px;flex-shrink:0}
+.header-badge span{display:block;font-size:16px;font-weight:800;letter-spacing:-0.3px;text-transform:none}
+nav{background:var(--black);border-bottom:1px solid var(--border-dark);position:-webkit-sticky;position:sticky;top:0;z-index:200;box-shadow:0 2px 12px rgba(0,0,0,0.20)}
+nav .container{display:flex;align-items:stretch;gap:0;width:100%}
+.nav-logo{display:flex;align-items:center;padding:0 12px 0 0;margin-right:0;border-right:1px solid var(--border-dark);flex:0 0 auto}
+.nav-logo svg{display:block;height:24px;width:auto}
+nav a{flex:1;text-align:center;color:rgba(255,255,255,0.65);text-decoration:none;font-size:10px;font-weight:600;padding:14px 2px;white-space:nowrap;border-bottom:3px solid transparent;transition:all .25s ease;text-transform:uppercase;letter-spacing:0.3px;display:flex;align-items:center;justify-content:center;min-width:0}
+nav a:hover{color:white;border-bottom-color:var(--red);background:rgba(230,0,0,0.10)}
+section{padding:44px 0;background:var(--bg)}
+section.alt{background:var(--bg-alt)}
+.section-header{display:flex;align-items:center;gap:14px;margin-bottom:8px}
+.section-number{background:linear-gradient(135deg,var(--black) 0%,var(--black-soft) 100%);color:white;font-size:14px;font-weight:700;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 2px 8px rgba(0,0,0,0.25);position:relative}
+.section-number::after{content:'';position:absolute;inset:-3px;border-radius:50%;border:2px solid var(--red);opacity:0.25}
+.section-header h2{font-size:22px;font-weight:800;color:var(--black);letter-spacing:-0.3px}
+.section-header h2 .red{color:var(--red)}
+.section-desc{color:var(--text-secondary);font-size:14px;font-weight:400;margin-bottom:0;max-width:850px;padding-left:52px}
+.collapsible-section .section-toggle{width:100%;text-align:left;background:transparent;border:none;cursor:pointer;padding:0;margin-bottom:20px;font:inherit;color:inherit}
+.collapsible-section .section-toggle:hover .section-header h2{color:var(--red)}
+.section-toggle-top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;width:100%}
+.toggle-chevron{flex-shrink:0;width:34px;height:34px;border-radius:50%;background:var(--bg-alt);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;line-height:1;color:var(--text-muted);transition:background .2s ease,border-color .2s ease,color .2s ease;margin-top:2px}
+.toggle-chevron::before{content:'+'}
+.collapsible-section.is-open .toggle-chevron{background:var(--red-bg);border-color:#f5b8b8;color:var(--red-dark)}
+.collapsible-section.is-open .toggle-chevron::before{content:'-'}
+.section-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s ease}
+.collapsible-section.is-open .section-body{grid-template-rows:1fr}
+.section-body-inner{overflow:hidden;min-height:0}
+.card{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:24px 28px;margin-bottom:16px;box-shadow:var(--shadow-sm)}
+.card h3{font-size:16px;font-weight:700;color:var(--text);margin-bottom:12px;display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.card h3 .step-num{background:var(--black);color:white;font-size:11px;font-weight:800;padding:4px 12px;border-radius:20px}
+.card p,.card li{font-size:13.5px;color:var(--text-secondary);line-height:1.7}
+.card ul{padding-left:20px;margin-top:6px}
+.card li{margin-bottom:4px}
+.alert{border-radius:10px;padding:18px 22px;margin:16px 0;font-size:13.5px;box-shadow:var(--shadow-sm)}
+.alert h4{font-size:14px;font-weight:700;margin-bottom:6px}
+.alert p,.alert li{line-height:1.7}
+.alert ul{padding-left:20px;margin-top:4px}
+.alert-black{background:var(--bg-alt);border-left:5px solid var(--black)}
+.alert-red{background:var(--red-bg);border-left:5px solid var(--red)}
+.alert-gold{background:var(--gold-light);border-left:5px solid var(--gold)}
+.alert-blue{background:var(--blue-bg);border-left:5px solid var(--blue)}
+.tag{display:inline-block;font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;letter-spacing:0.3px;white-space:nowrap;margin-left:6px}
+.tag-critical{background:var(--red-bg);color:var(--red-dark);border:1px solid #f5b8b8}
+.separator{border:none;height:2px;background:linear-gradient(90deg,transparent,var(--red),var(--black),var(--red),transparent);margin:0;opacity:0.4}
+.checklist{list-style:none;padding:0}
+.checklist li{padding:10px 0 10px 32px;position:relative;font-size:13.5px;color:var(--text-secondary);border-bottom:1px solid var(--border-light)}
+.checklist li::before{content:'[ ]';position:absolute;left:0;top:10px;font-size:12px;color:var(--red);font-weight:700;font-family:monospace}
+footer{padding:36px 0 28px;text-align:center;background:linear-gradient(135deg,var(--black-deep) 0%,var(--black) 100%);color:rgba(255,255,255,0.6);border-radius:0 0 16px 16px}
+footer .footer-logo svg{display:block;height:36px;width:auto;margin:0 auto 14px}
+footer p{font-size:12px;line-height:1.6;max-width:600px;margin:0 auto}
+footer strong{color:var(--red-light)}
+footer .footer-contact{margin-top:14px;display:flex;justify-content:center;gap:18px;flex-wrap:wrap;font-size:11px;color:rgba(255,255,255,0.50)}
+footer .footer-contact a{color:rgba(255,255,255,0.65);text-decoration:none;transition:color .2s}
+footer .footer-contact a:hover{color:var(--red-light)}
+@media (max-width:700px){.page-wrapper{margin:0;border-radius:0}.container{padding:0 20px}.section-desc{padding-left:0}nav .container{overflow-x:auto}nav a{flex:1 0 auto;font-size:9px}}
+@media print{nav{display:none}.collapsible-section .section-body{grid-template-rows:1fr!important}.toggle-chevron{display:none}}
+</style>
+</head>
+<body>
+<div class="page-wrapper">
+
+<header>
+  <div class="container">
+    <div class="header-left">
+      <div class="header-logo">
+        <svg viewBox="0 0 848 199.39" xmlns="http://www.w3.org/2000/svg">
+          <path fill="#ffffff" d="M22.89,28.62V0H0V109.7H114.47V28.62Zm68.68,41V85.85H22.89V53.42H91.57Z"/>
+          <path fill="#ffffff" d="M297.61,28.62V0H274.72V109.7H389.18V28.62Zm68.68,41V85.85H297.61V53.42h68.68Z"/>
+          <path fill="#ffffff" d="M137.36,28.62v24.8h45.79c45.11,0,45.78,0,45.78,1.91s-.67,1.9-45.78,1.9H137.36V109.7H251.82V28.62Zm57.23,57.23c-33.67,0-34.34,0-34.34-1.91S160.92,82,194.59,82s34.34,0,34.34,1.91S228.26,85.85,194.59,85.85Z"/>
+          <path fill="#ff0000" d="M412.08,28.62V109.7H526.54V28.62Zm91.57,41V85.85H435V53.42h68.68Z"/>
+          <path fill="#ff0000" d="M549.44,28.62V109.7H663.9V28.62Zm91.57,41V85.85H572.33V53.42H641Z"/>
+          <polygon fill="#ffffff" points="686.79 69.16 686.79 109.7 709.69 109.7 709.69 53.42 778.37 53.42 778.37 109.7 801.26 109.7 801.26 28.62 686.79 28.62 686.79 69.16"/>
+          <polygon fill="#ffffff" points="824.15 69.16 824.15 109.7 847.05 109.7 847.05 28.62 824.15 28.62 824.15 69.16"/>
+          <path fill="#ffffff" d="M470.26,146.9v32.43h7.63l.1-14.59c0-16,.86-19.94,5-23,3.91-2.86,12.11-2.77,15.36.28l2.48,2.29v35h7.63V161.4c0-15.07-.29-18.32-1.72-21.08-2.29-4.58-5.91-7-11.54-7.54-6.58-.57-11,.38-14.4,3.24l-2.87,2.48v-24h-7.63Z"/>
+          <polygon fill="#ffffff" points="627.65 146.9 627.65 179.33 635.28 179.33 635.28 114.47 627.65 114.47 627.65 146.9"/>
+          <path fill="#ffffff" d="M749,117.52c-1.62,1.62-1.43,7,.19,8.39,4,3.25,8.77-2.1,6.48-7.15a4.18,4.18,0,0,0-6.67-1.24"/>
+          <polygon fill="#ffffff" points="327.18 122.1 327.18 125.91 346.26 125.91 346.26 179.33 353.89 179.33 353.89 125.91 372.97 125.91 372.97 118.28 327.18 118.28 327.18 122.1"/>
+          <path fill="#ffffff" d="M417.8,158.34v-5.53c0-7.63-3.53-14.59-9-17.84S396,131.73,390,134.78h0a18.21,18.21,0,0,0-7,6.78c-2.48,3.91-3,5.72-3.24,13-.29,5.15,0,9.73.76,11.92,1.52,4.68,6.29,9.92,11,12,4.48,2.1,15.26,2.39,20.51.57,2.95-1,3.34-1.62,3.62-4.77.19-1.9.1-3.53-.19-3.53s-3,.67-6,1.44a45.43,45.43,0,0,1-8.39,1.43c-6.49,0-13.83-6.59-13.83-12.5v-2.77Zm-30.72-6.67.67-2.67a11.55,11.55,0,0,1,6.49-8.3c3.91-1.72,5.72-1.72,9.73-.1,3.43,1.43,4.67,3.15,5.72,7.92l.67,3.15Z"/>
+          <path fill="#ffffff" d="M437.83,134.69a19.47,19.47,0,0,0-7.06,6.87c-2.48,3.91-2.95,5.72-3.24,13-.86,17.36,5.91,25.66,20.79,25.75,8,0,10.88-1.43,11.26-5.62.29-3.15.29-3.25-2.86-2.58-11.93,2.48-16.6,1.24-19.75-5.06-2.67-5.15-2.76-15.83-.19-20.89,3-5.81,7.25-7,19.08-5.72,1.81.19,2.48-.28,3.24-2.38,1.34-4-.09-4.77-9.06-5.25-7-.29-8.39-.1-12.21,1.91"/>
+          <path fill="#ffffff" d="M536.56,133.83a15.15,15.15,0,0,0-4.2,2.86c-1.81,2.29-3,2-3-.76,0-2.1-.38-2.39-3.33-2.39h-3.34v45.79h7.63l.09-14.59c0-16,.86-19.94,5-23,3.91-2.86,12.12-2.77,15.36.28l2.48,2.29v35h7.63V161.4c0-19.65-.67-22.42-6-26.33-3.34-2.48-14-3.15-18.31-1.24"/>
+          <path fill="#ffffff" d="M605.43,135.64c-5.34-3.53-15.55-4.1-21.46-1-7,3.53-10.78,10.78-10.78,20.89,0,9.06,1.43,13.74,5.91,18.6,4.68,5.06,8.68,6.49,16.6,6,8.11-.47,12.78-3.62,16.31-10.87C617.64,157.77,614.49,141.65,605.43,135.64Zm-12.88,37.58c-8.2-1-11.64-6.2-11.64-17.36,0-11.35,5.15-17.17,14.22-16.12a20,20,0,0,1,6.29,1.82c3.53,2.29,5.25,7.34,5.25,15.07C606.67,168.36,601.61,174.37,592.55,173.22Z"/>
+          <path fill="#ffffff" d="M679.83,135.64c-5.34-3.53-15.55-4.1-21.46-1-7,3.53-10.78,10.78-10.78,20.89,0,9.06,1.43,13.74,5.91,18.6,4.68,5.06,8.68,6.49,16.6,6,8.11-.47,12.78-3.62,16.31-10.87C692,157.77,688.89,141.65,679.83,135.64ZM667,173.22c-8.2-1-11.63-6.2-11.63-17.36,0-11.35,5.15-17.17,14.21-16.12a20,20,0,0,1,6.29,1.82c3.53,2.29,5.25,7.34,5.25,15.07C681.07,168.36,676,174.37,667,173.22Z"/>
+          <path fill="#ffffff" d="M735.16,139.65c3.53-.86,5.34-3.44,3.43-5.15-.38-.38-6.77-1-14.12-1.34-12-.57-13.73-.38-17.45,1.34h0c-8.68,3.91-10.59,18.6-3.25,25.08,1.91,1.72,1.91,1.82.1,3.63-2,2-2.58,8.87-.76,9.92.57.38-.58,2-2.77,3.91-7.25,6.2-6,15.83,2.67,20.13,5.15,2.67,16.12,3,23.56.76,8.87-2.67,13.55-10.87,10.68-19-2.19-6.2-5-7.54-17.36-8.3-5.91-.38-10.77-.67-10.87-.76a5.53,5.53,0,0,1-.29-2.48c0-3,2.48-4.3,8.21-4.3a23.4,23.4,0,0,0,8.77-2c6.58-3.24,9.45-11.64,6.49-19.08C731.72,141,732.49,140.32,735.16,139.65Zm-6,39.58c2,1.72,1.9,7.06-.1,8.88-4.67,4-14.31,5.62-20.79,3.43s-7.25-10-1.15-12.78C711,177,726.86,177.33,729.15,179.23ZM724,154.34c-3.72,3.91-13.93,3.43-16.22-.77-2.39-4.57-.29-11.54,4.2-13.44,3.53-1.53,9.44-.29,11.73,2.48C726.57,145.85,726.67,151.48,724,154.34Z"/>
+          <path fill="#ffffff" d="M807,158.34v-5.53c0-7.63-3.53-14.59-9-17.84s-12.88-3.24-18.79-.19h0a18.16,18.16,0,0,0-7,6.78c-2.48,3.91-3,5.72-3.24,13-.29,5.15,0,9.73.76,11.92,1.53,4.68,6.3,9.92,11,12,4.48,2.1,15.26,2.39,20.51.57,3-1,3.34-1.62,3.62-4.77.2-1.9.1-3.53-.19-3.53s-3,.67-6,1.44a45.29,45.29,0,0,1-8.39,1.43c-6.49,0-13.83-6.59-13.83-12.5v-2.77Zm-30.71-6.67.67-2.67a11.51,11.51,0,0,1,6.48-8.3c3.91-1.72,5.73-1.72,9.73-.1,3.44,1.43,4.68,3.15,5.73,7.92l.66,3.15Z"/>
+          <path fill="#ffffff" d="M823.68,133.92c-5.15,2.29-7.63,5.92-7.63,11.07,0,6.2,3.24,9.54,13.16,13.55,11.35,4.67,14.31,8.1,10.3,12.11-3.53,3.53-13.64,3.34-22.32-.38-1.53-.67-1.72-.29-1.43,3.43s.57,4.29,3.62,5.34c4.58,1.53,16.6,1.53,20.32-.09a12.64,12.64,0,0,0,8.3-12.21c0-4.39-.38-5.25-3.62-8.3-2.2-2.1-6.49-4.48-11-6.2-4-1.43-7.92-3.43-8.68-4.29-4.77-5.25,1.52-9.64,11.35-7.92a43.75,43.75,0,0,1,7.25,1.62c1.14.38,1.9-.28,2.76-2.38.67-1.72.86-3.25.38-3.72-3.24-3-17.55-3.91-22.79-1.63"/>
+          <polygon fill="#ffffff" points="747.84 156.44 747.84 179.33 755.47 179.33 755.47 133.54 747.84 133.54 747.84 156.44"/>
+        </svg>
+      </div>
+      <h1>Informacion a solicitar a <span class="red">negocio</span></h1>
+      <p>Evolutivo MINERVA - Justificante de asistencia al examen de salud - RF v.2 (11/06/2026)</p>
+      <p style="color:rgba(255,255,255,0.72);font-size:11px;margin-top:10px;max-width:560px;line-height:1.5">Dudas funcionales, reglas de negocio y decisiones de producto que deben cerrarse con el area de negocio / vigilancia de la salud antes de estimar en firme y arrancar el desarrollo.</p>
+    </div>
+    <div class="header-badge">
+      Validacion funcional<span>Negocio / PM</span>
+    </div>
+  </div>
+</header>
+
+<nav id="mainNav">
+  <div class="container">
+    <div class="nav-logo" aria-hidden="true">
+      <svg viewBox="0 0 848 199.39" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#ffffff" d="M22.89,28.62V0H0V109.7H114.47V28.62Zm68.68,41V85.85H22.89V53.42H91.57Z"/>
+        <path fill="#ffffff" d="M297.61,28.62V0H274.72V109.7H389.18V28.62Zm68.68,41V85.85H297.61V53.42h68.68Z"/>
+        <path fill="#ffffff" d="M137.36,28.62v24.8h45.79c45.11,0,45.78,0,45.78,1.91s-.67,1.9-45.78,1.9H137.36V109.7H251.82V28.62Zm57.23,57.23c-33.67,0-34.34,0-34.34-1.91S160.92,82,194.59,82s34.34,0,34.34,1.91S228.26,85.85,194.59,85.85Z"/>
+        <path fill="#ff0000" d="M412.08,28.62V109.7H526.54V28.62Zm91.57,41V85.85H435V53.42h68.68Z"/>
+        <path fill="#ff0000" d="M549.44,28.62V109.7H663.9V28.62Zm91.57,41V85.85H572.33V53.42H641Z"/>
+        <polygon fill="#ffffff" points="686.79 69.16 686.79 109.7 709.69 109.7 709.69 53.42 778.37 53.42 778.37 109.7 801.26 109.7 801.26 28.62 686.79 28.62 686.79 69.16"/>
+        <polygon fill="#ffffff" points="824.15 69.16 824.15 109.7 847.05 109.7 847.05 28.62 824.15 28.62 824.15 69.16"/>
+      </svg>
+    </div>
+    <a href="#intro">Intro</a>
+    <a href="#alcance">Alcance</a>
+    <a href="#decisiones">Decisiones</a>
+    <a href="#contenido">Contenido</a>
+    <a href="#horas">Horas</a>
+    <a href="#canales">Canales</a>
+    <a href="#versionado">Versiones</a>
+    <a href="#log">Log</a>
+    <a href="#permisos">Permisos</a>
+    <a href="#estados">Estados</a>
+    <a href="#checklist">Checklist</a>
+  </div>
+</nav>
+
+<section id="intro" class="collapsible-section is-open">
+  <div class="container">
+    <button type="button" class="section-toggle" aria-expanded="true" aria-controls="intro-body">
+      <div class="section-toggle-top">
+        <div class="section-header"><div class="section-number">.</div><h2>Por que necesitamos respuesta de <span class="red">negocio</span></h2></div>
+        <span class="toggle-chevron" aria-hidden="true"></span>
+      </div>
+      <p class="section-desc">Muchas dudas del RF no son tecnicas: son reglas operativas, textos, permisos y politicas que solo negocio puede validar. Sin ellas, desarrollo y estimacion quedan abiertos.</p>
+    </button>
+    <div id="intro-body" class="section-body"><div class="section-body-inner">
+      <div class="alert alert-black">
+        <h4>Como usar este documento</h4>
+        <p>Dirigido a <strong>producto, negocio y vigilancia de la salud</strong>. Recoge decisiones funcionales derivadas del RF v.2 y de los CA aplicables (CA-01 a CA-13). Las preguntas de implementacion (APIs, servicios, actividad Examen de Salud) estan en el documento complementario para el <strong>equipo tecnico</strong>.</p>
+      </div>
+      <div class="alert alert-blue">
+        <h4>Documento complementario</h4>
+        <p>Las dudas tecnicas pendientes (2a ronda) estan en <strong>Informacion_a_solicitar_equipo_tecnico_Justificante_Asistencia_v2.html</strong>. Ambos documentos deben cerrarse antes del arranque.</p>
+      </div>
+    </div></div>
+  </div>
+</section>
+
+<hr class="separator">
+
+<section id="alcance" class="alt collapsible-section is-open">
+  <div class="container">
+    <button type="button" class="section-toggle" aria-expanded="true" aria-controls="alcance-body">
+      <div class="section-toggle-top">
+        <div class="section-header"><div class="section-number">1</div><h2>Alcance funcional <span class="red">v.2</span></h2></div>
+        <span class="toggle-chevron" aria-hidden="true"></span>
+      </div>
+      <p class="section-desc">Confirmar con negocio que el alcance acordado para la primera version es correcto y no hay expectativas fuera del RF.</p>
+    </button>
+    <div id="alcance-body" class="section-body"><div class="section-body-inner">
+      <div class="card">
+        <h3><span class="step-num">1.1</span> Que entra en v.2</h3>
+        <ul>
+          <li>Bloque justificante en <strong>Ver citas</strong> (modal verificacion/admision), <strong>antes del boton de admision</strong></li>
+          <li>Solo actividad <strong>Examen de Salud</strong> (CA-10 negativo para otras actividades)</li>
+          <li>Edicion de hora de entrada y hora de fin antes de enviar</li>
+          <li>Tres canales: <strong>Mail, SMS y Papel/PDF</strong> — boton <strong>Enviar justificante</strong></li>
+          <li>PDF generado <strong>en caliente</strong> con nuevo formato definitivo (Thymeleaf)</li>
+          <li>Acceso Historial Medico mantenido con el mismo nuevo formato (CA-11)</li>
+          <li>Documento en idioma de la ficha del trabajador (multiidioma)</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="step-num">1.2</span> Que queda fuera de v.2</h3>
+        <ul>
+          <li>Guardado documental persistente del PDF</li>
+          <li>Versiones e historico de justificantes</li>
+          <li>Log del reconocimiento (CA-13 negativo)</li>
+          <li>Visibilidad en <strong>Acercate Empresas</strong> (CA-13 negativo)</li>
+          <li>WhatsApp u otros canales adicionales</li>
+          <li>Justificantes para actividades distintas de Examen de Salud</li>
+          <li>Cambios en flujo de admision o consentimiento informado</li>
+          <li>Datos clinicos en el PDF (CA-12)</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="step-num">1.3</span> Coexistencia con Historial Medico</h3>
+        <ul>
+          <li>El circuito actual (Ficha trabajador &gt; Historial medico &gt; Justificante) <strong>se mantiene</strong></li>
+          <li>El cambio es solo el <strong>nuevo formato PDF</strong> (CA-11), sin persistencia ni log adicional</li>
+          <li>Comunicacion a usuarios sobre la nueva ubicacion principal en Ver citas (opcional negocio)</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="step-num">1.4</span> Criterio actividad Examen de Salud <span class="tag tag-critical">CA-10</span></h3>
+        <ul>
+          <li>Confirmar como identifica el sistema la actividad <strong>Examen de Salud</strong> en Ver citas (tipo actividad, codigo, nombre)</li>
+          <li>Comportamiento esperado si la actividad cambia de nombre en configuracion de rutas</li>
+        </ul>
+      </div>
+    </div></div>
+  </div>
+</section>
+
+<hr class="separator">
+
+<section id="decisiones" class="collapsible-section">
+  <div class="container">
+    <button type="button" class="section-toggle" aria-expanded="false" aria-controls="decisiones-body">
+      <div class="section-toggle-top">
+        <div class="section-header"><div class="section-number">2</div><h2>Decisiones pendientes del <span class="red">RF</span></h2></div>
+        <span class="toggle-chevron" aria-hidden="true"></span>
+      </div>
+      <p class="section-desc">El RF deja abierto el comportamiento de ciertos elementos de UI y de gestion documental. Negocio debe decidir antes del desarrollo.</p>
+    </button>
+    <div id="decisiones-body" class="section-body"><div class="section-body-inner">
+      <div class="card">
+        <h3><span class="step-num">2.1</span> Boton de accion — CERRADO en RF v.2</h3>
+        <p>Literal acordado: <strong>Enviar justificante</strong>. Para Papel/PDF genera el documento para imprimir o descargar. Para Mail/SMS genera y envia en caliente.</p>
+      </div>
+      <div class="card">
+        <h3><span class="step-num">2.2</span> Modelo documental definitivo</h3>
+        <ul>
+          <li>Confirmar que el <a href="https://docs.google.com/document/d/1pFpqiqHDNxXkMMg19LSHOo76ncgZpSkeE3gvBkV_7Y4/edit?usp=sharing" target="_blank" rel="noopener">documento de referencia de negocio</a> es la plantilla vigente aprobada</li>
+          <li>Cambios de redaccion, campos o disposicion respecto al modelo actual en produccion</li>
+          <li>Responsable de validacion final del PDF antes del pase a PRO</li>
+        </ul>
+      </div>
+    </div></div>
+  </div>
+</section>
+
+<hr class="separator">
+
+<section id="contenido" class="alt collapsible-section">
+  <div class="container">
+    <button type="button" class="section-toggle" aria-expanded="false" aria-controls="contenido-body">
+      <div class="section-toggle-top">
+        <div class="section-header"><div class="section-number">3</div><h2>Contenido del <span class="red">justificante</span></h2></div>
+        <span class="toggle-chevron" aria-hidden="true"></span>
+      </div>
+      <p class="section-desc">Los 10 datos minimos del RF y que significado de negocio debe tener cada uno. Negocio valida el contenido; el origen en sistema (tabla/campo) lo responde el equipo tecnico.</p>
+    </button>
+    <div id="contenido-body" class="section-body"><div class="section-body-inner">
+      <div class="card">
+        <h3><span class="step-num">3.1</span> Datos obligatorios del PDF</h3>
+        <ul>
+          <li><strong>Localidad:</strong> del centro sanitario o de otra fuente (configuracion documental)</li>
+          <li><strong>Fecha de emision:</strong> fecha del dia de generacion o otra regla</li>
+          <li><strong>Nombre, apellidos, DNI/NIE/Pasaporte</strong> de la persona trabajadora</li>
+          <li><strong>Empresa</strong> asociada al reconocimiento</li>
+          <li><strong>Fecha de asistencia:</strong> fecha de cita o de reconocimiento (cual prevalece)</li>
+          <li><strong>Centro sanitario y direccion completa</strong></li>
+          <li><strong>Hora de entrada y hora de salida</strong> (ver seccion 4)</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="step-num">3.2</span> Exclusion de datos clinicos <span class="tag tag-critical">CA-14</span></h3>
+        <ul>
+          <li>Confirmar listado de datos que <strong>nunca</strong> deben aparecer: aptitud, resultados analiticos, restricciones, valoraciones sanitarias, etc.</li>
+          <li>Validacion de negocio del PDF de ejemplo antes de UAT</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="step-num">3.3</span> Multiidioma</h3>
+        <ul>
+          <li>Catalogo de <strong>idiomas soportados</strong> en Minerva para este documento en v.1: confirmar si entran solo <strong>es, ca, eu, en, gl</strong> (patron actual citas) o tambien <strong>fr</strong> y <strong>de</strong> (como el ODT legacy en produccion)</li>
+          <li>Idioma por defecto si la ficha del trabajador no tiene idioma o no hay plantilla</li>
+          <li>Responsable de validar textos legales / formales en cada idioma</li>
+        </ul>
+      </div>
+    </div></div>
+  </div>
+</section>
+
+<hr class="separator">
+
+<section id="horas" class="collapsible-section">
+  <div class="container">
+    <button type="button" class="section-toggle" aria-expanded="false" aria-controls="horas-body">
+      <div class="section-toggle-top">
+        <div class="section-header"><div class="section-number">4</div><h2>Reglas de <span class="red">horas</span></h2></div>
+        <span class="toggle-chevron" aria-hidden="true"></span>
+      </div>
+      <p class="section-desc">Reglas operativas de hora de entrada, hora de fin y edicion manual. Son decisiones de negocio que el RF exige en CA-02 a CA-06.</p>
+    </button>
+    <div id="horas-body" class="section-body"><div class="section-body-inner">
+      <div class="card">
+        <h3><span class="step-num">4.1</span> Hora de entrada (admision) <span class="tag tag-critical">CA-02</span></h3>
+        <ul>
+          <li>Que evento de negocio marca la hora de entrada: pulsar admitir, cerrar modal, otro</li>
+          <li>Comportamiento si la persona esta admitida pero no hay hora registrada</li>
+          <li>Si la hora de admision puede modificarse posteriormente y como afecta a un justificante ya generado</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="step-num">4.2</span> Hora de fin (consulta / enfermeria) <span class="tag tag-critical">CA-03 / CA-04</span></h3>
+        <ul>
+          <li>Regla de precedencia si existen cierre medico y cierre de enfermeria: medica, enfermeria, la mas reciente, la mayor, otra</li>
+          <li>Que evento de negocio marca el cierre: boton del sanitario, cambio de estado, firma, otro</li>
+          <li>Casos en los que la consulta no se cerro correctamente: que debe ver el usuario en el bloque justificante</li>
+          <li>Si el bloque debe actualizar la hora fin en tiempo real cuando se cierra la consulta con el modal abierto</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="step-num">4.3</span> Edicion manual <span class="tag tag-critical">CA-05 / CA-06</span></h3>
+        <ul>
+          <li>Quien puede editar horas: solo administrativo de admision, tambien coordinacion, sanitario</li>
+          <li>Las horas editadas aplican solo a la generacion en curso o deben persistir para reaperturas del modal</li>
+          <li>Validacion hora fin &gt;= hora entrada en el mismo dia; que ocurre si el turno cruza medianoche</li>
+          <li>Debe quedar constancia en log de valor anterior y nuevo (CA-11) - confirmar requisito de auditoria</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="step-num">4.4</span> Mensajes al usuario (seccion 7.4 del RF)</h3>
+        <ul>
+          <li>Textos exactos o borrador aprobado de los <strong>avisos bloqueantes</strong> (formato HH:MM, hora fin anterior a entrada, falta email, falta movil, etc.)</li>
+          <li>Tono y nivel de detalle de los mensajes de error vs aviso informativo</li>
+          <li>Responsable de validar textos en todos los idiomas soportados</li>
+        </ul>
+      </div>
+    </div></div>
+  </div>
+</section>
+
+<hr class="separator">
+
+<section id="canales" class="alt collapsible-section">
+  <div class="container">
+    <button type="button" class="section-toggle" aria-expanded="false" aria-controls="canales-body">
+      <div class="section-toggle-top">
+        <div class="section-header"><div class="section-number">5</div><h2>Canales de <span class="red">comunicacion</span></h2></div>
+        <span class="toggle-chevron" aria-hidden="true"></span>
+      </div>
+      <p class="section-desc">Decisiones de negocio sobre email, SMS y papel. El RF indica reutilizar el circuito del consentimiento cuando aplique; negocio define el comportamiento esperado para el usuario.</p>
+    </button>
+    <div id="canales-body" class="section-body"><div class="section-body-inner">
+      <div class="card">
+        <h3><span class="step-num">5.1</span> Canal email <span class="tag tag-critical">CA-07</span></h3>
+        <ul>
+          <li>El PDF va <strong>adjunto</strong> al correo o solo <strong>enlace de descarga</strong></li>
+          <li>Asunto y cuerpo del email: textos propuestos y soporte multiidioma</li>
+          <li>Remitente visible para el trabajador (nombre y direccion)</li>
+          <li>Comportamiento si no hay email en ficha: bloqueo total o posibilidad de informarlo en el modal</li>
+          <li>Que email prevalece si existen varios (personal, laboral, principal)</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="step-num">5.2</span> Canal SMS <span class="tag tag-critical">CA-08</span></h3>
+        <ul>
+          <li>Texto del SMS propuesto (maximo caracteres, variante multiidioma)</li>
+          <li>Caducidad aceptable del enlace de descarga (horas, dias)</li>
+          <li>Comportamiento si no hay movil en ficha: bloqueo o posibilidad de informarlo en el modal</li>
+          <li>Que movil prevalece si existen varios</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="step-num">5.3</span> Canal papel / PDF en pantalla <span class="tag tag-critical">CA-09</span></h3>
+        <ul>
+          <li>Experiencia esperada: abrir en nueva pestana, descarga directa o visor integrado</li>
+          <li>Si la impresion debe quedar registrada en log como accion separada</li>
+          <li>Instrucciones para el usuario administrativo (cuando usar este canal vs email/SMS)</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="step-num">5.4</span> Datos de contacto en sesion</h3>
+        <ul>
+          <li>Si los datos de email/movil editados en el modal de verificacion/admision deben usarse para el envio en la misma sesion</li>
+          <li>Si negocio exige confirmacion adicional antes de enviar a un contacto modificado</li>
+        </ul>
+      </div>
+    </div></div>
+  </div>
+</section>
+
+<hr class="separator">
+
+<section id="versionado" class="collapsible-section">
+  <div class="container">
+    <button type="button" class="section-toggle" aria-expanded="false" aria-controls="versionado-body">
+      <div class="section-toggle-top">
+        <div class="section-header"><div class="section-number">6</div><h2>Documentos y <span class="red">retencion</span></h2></div>
+        <span class="toggle-chevron" aria-hidden="true"></span>
+      </div>
+      <p class="section-desc">Politicas de negocio sobre conservacion, acceso y ciclo de vida del justificante en documentos del reconocimiento.</p>
+    </button>
+    <div id="versionado-body" class="section-body"><div class="section-body-inner">
+      <div class="card">
+        <h3><span class="step-num">6.1</span> Acceso al documento</h3>
+        <ul>
+          <li>Quien puede ver/descargar el justificante desde documentos del reconocimiento (por rol)</li>
+          <li>Si coordinacion, administrativo y sanitario tienen el mismo nivel de acceso</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="step-num">6.2</span> Retencion y cumplimiento</h3>
+        <ul>
+          <li>Politica de retencion del documento (plazo, archivo, borrado)</li>
+          <li>Requisitos RGPD o normativa interna aplicables al justificante de asistencia</li>
+        </ul>
+      </div>
+    </div></div>
+  </div>
+</section>
+
+<hr class="separator">
+
+<section id="log" class="alt collapsible-section">
+  <div class="container">
+    <button type="button" class="section-toggle" aria-expanded="false" aria-controls="log-body">
+      <div class="section-toggle-top">
+        <div class="section-header"><div class="section-number">7</div><h2>Trazabilidad en <span class="red">log</span></h2></div>
+        <span class="toggle-chevron" aria-hidden="true"></span>
+      </div>
+      <p class="section-desc">Requisitos funcionales de auditoria. Negocio define que debe quedar registrado; tecnologia implementa como.</p>
+    </button>
+    <div id="log-body" class="section-body"><div class="section-body-inner">
+      <div class="card">
+        <h3><span class="step-num">7.1</span> Acciones que deben auditarse <span class="tag tag-critical">CA-10 / CA-11 / CA-12</span> <span style="font-size:11px;font-weight:500;color:var(--text-muted)">(fuente para implementacion tecnica)</span></h3>
+        <ul>
+          <li>Generacion de PDF (con y sin edicion previa de horas)</li>
+          <li>Edicion manual de hora entrada y/o hora fin (con valor anterior y nuevo)</li>
+          <li>Regeneracion con justificante previo existente</li>
+          <li>Envio por email (estado: enviado, error)</li>
+          <li>Envio por SMS (estado de entrega si aplica)</li>
+          <li>Descarga / impresion papel-PDF</li>
+          <li>Consulta del documento desde el propio log</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="step-num">7.2</span> Informacion visible en log para el usuario</h3>
+        <ul>
+          <li>Que datos debe ver cada perfil en una linea de log (usuario, fecha, accion, canal, enlace al PDF)</li>
+          <li>Formato de lectura aceptable para auditoria de vigilancia de la salud</li>
+          <li>Si varias versiones: que version debe mostrar el enlace desde cada linea de log</li>
+        </ul>
+      </div>
+    </div></div>
+  </div>
+</section>
+
+<hr class="separator">
+
+<section id="permisos" class="collapsible-section">
+  <div class="container">
+    <button type="button" class="section-toggle" aria-expanded="false" aria-controls="permisos-body">
+      <div class="section-toggle-top">
+        <div class="section-header"><div class="section-number">8</div><h2>Permisos y <span class="red">perfiles</span></h2></div>
+        <span class="toggle-chevron" aria-hidden="true"></span>
+      </div>
+      <p class="section-desc">Matriz funcional de quien puede ver, editar, generar y enviar. Perfiles del RF: administrativo de admision, sanitario y coordinacion.</p>
+    </button>
+    <div id="permisos-body" class="section-body"><div class="section-body-inner">
+      <div class="card">
+        <h3><span class="step-num">8.1</span> Matriz de permisos por perfil</h3>
+        <ul>
+          <li>Ver el bloque justificante en modal de admision</li>
+          <li>Editar hora de entrada y hora de fin</li>
+          <li>Generar PDF</li>
+          <li>Enviar por email, SMS y papel/PDF</li>
+          <li>Consultar log y abrir documento desde log</li>
+          <li>Casos en los que el icono de verificacion/admision no debe mostrarse</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="step-num">8.2</span> Restricciones por estado del reconocimiento</h3>
+        <ul>
+          <li>En que estados del reconocimiento se permite generar / enviar justificante</li>
+          <li>Si se puede generar antes de cerrar la consulta medica (con hora fin manual)</li>
+          <li>Bloqueos por reconocimiento anulado, no presentado u otros supuestos</li>
+        </ul>
+      </div>
+    </div></div>
+  </div>
+</section>
+
+<hr class="separator">
+
+<section id="estados" class="alt collapsible-section">
+  <div class="container">
+    <button type="button" class="section-toggle" aria-expanded="false" aria-controls="estados-body">
+      <div class="section-toggle-top">
+        <div class="section-header"><div class="section-number">9</div><h2>Flujo en <span class="red">Ver citas</span></h2></div>
+        <span class="toggle-chevron" aria-hidden="true"></span>
+      </div>
+      <p class="section-desc">Comportamiento funcional del bloque en el modal de admision. La simulacion del RF es orientativa, no diseno definitivo.</p>
+    </button>
+    <div id="estados-body" class="section-body"><div class="section-body-inner">
+      <div class="card">
+        <h3><span class="step-num">9.1</span> Ubicacion y visibilidad <span class="tag tag-critical">CA-01</span></h3>
+        <ul>
+          <li>Confirmar ubicacion: dentro del icono verificacion/admision, debajo de Admision de la persona</li>
+          <li>El bloque depende de que la persona este admitida o es visible siempre que se abre el modal</li>
+          <li>Orden respecto a otros bloques del modal (consentimiento, datos personales, etc.)</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="step-num">9.2</span> Comportamiento del modal</h3>
+        <ul>
+          <li>Si el usuario cierra el modal sin generar: se pierden las horas editadas o deben conservarse</li>
+          <li>Selector de canal: valores exactos mostrados al usuario (email / SMS / papel-PDF)</li>
+          <li>Estados de carga, exito y error esperados desde el punto de vista de negocio</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3><span class="step-num">9.3</span> Validacion de criterios de aceptacion</h3>
+        <ul>
+          <li>Responsable de validar CA-01 a CA-12 y CA-14 en UAT (CA-13 fuera de alcance)</li>
+          <li>Escenarios de prueba de negocio prioritarios para la demo de cierre de sprint</li>
+          <li>Criterio de aceptacion del pase a PRO</li>
+        </ul>
+      </div>
+    </div></div>
+  </div>
+</section>
+
+<hr class="separator">
+
+<section id="checklist" class="collapsible-section">
+  <div class="container">
+    <button type="button" class="section-toggle" aria-expanded="false" aria-controls="checklist-body">
+      <div class="section-toggle-top">
+        <div class="section-header"><div class="section-number">v</div><h2>Checklist de <span class="red">negocio</span></h2></div>
+        <span class="toggle-chevron" aria-hidden="true"></span>
+      </div>
+      <p class="section-desc">Verificacion funcional antes de estimar en firme o iniciar desarrollo. Complementa la checklist del equipo tecnico.</p>
+    </button>
+    <div id="checklist-body" class="section-body"><div class="section-body-inner">
+      <div class="card">
+        <h3>Alcance y decisiones RF</h3>
+        <ul class="checklist">
+          <li>Alcance v.1 confirmado (entra / no entra / coexistencia Historial Medico)</li>
+          <li>Decision boton principal (Generar / Enviar / dinamico) cerrada</li>
+          <li>Politica de versionado de PDF cerrada</li>
+          <li>Modelo de documento de referencia aprobado</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Contenido, horas y canales</h3>
+        <ul class="checklist">
+          <li>10 datos minimos del PDF validados</li>
+          <li>Exclusion datos clinicos (CA-14) confirmada</li>
+          <li>Reglas hora entrada, hora fin y precedencia documentadas</li>
+          <li>Politica edicion manual y persistencia definida</li>
+          <li>Mensajes seccion 7.4 del RF aprobados</li>
+          <li>Flujos email, SMS y papel/PDF definidos</li>
+          <li>Idiomas soportados y fallback acordados</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Permisos, log y UAT</h3>
+        <ul class="checklist">
+          <li>Matriz de permisos por perfil entregada</li>
+          <li>Estados del reconocimiento que permiten generacion confirmados</li>
+          <li>Requisitos de trazabilidad en log validados</li>
+          <li>Responsable UAT y escenarios de prueba de negocio asignados</li>
+          <li>Criterio de aceptacion pase a PRO acordado</li>
+        </ul>
+      </div>
+      <div class="alert alert-gold">
+        <h4>Siguiente paso</h4>
+        <p>Con esta checklist cerrada, el equipo tecnico puede cerrar las dudas pendientes en <strong>Informacion_a_solicitar_equipo_tecnico_Justificante_Asistencia_v2.html</strong>. Ambas deben estar completas antes del Sprint 0.</p>
+      </div>
+    </div></div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-logo">
+      <svg viewBox="0 0 848 199.39" xmlns="http://www.w3.org/2000/svg">
+        <path fill="rgba(255,255,255,0.78)" d="M22.89,28.62V0H0V109.7H114.47V28.62Zm68.68,41V85.85H22.89V53.42H91.57Z"/>
+        <path fill="rgba(255,255,255,0.78)" d="M297.61,28.62V0H274.72V109.7H389.18V28.62Zm68.68,41V85.85H297.61V53.42h68.68Z"/>
+        <path fill="rgba(255,255,255,0.78)" d="M137.36,28.62v24.8h45.79c45.11,0,45.78,0,45.78,1.91s-.67,1.9-45.78,1.9H137.36V109.7H251.82V28.62Zm57.23,57.23c-33.67,0-34.34,0-34.34-1.91S160.92,82,194.59,82s34.34,0,34.34,1.91S228.26,85.85,194.59,85.85Z"/>
+        <path fill="#ff0000" d="M412.08,28.62V109.7H526.54V28.62Zm91.57,41V85.85H435V53.42h68.68Z"/>
+        <path fill="#ff0000" d="M549.44,28.62V109.7H663.9V28.62Zm91.57,41V85.85H572.33V53.42H641Z"/>
+        <polygon fill="rgba(255,255,255,0.78)" points="686.79 69.16 686.79 109.7 709.69 109.7 709.69 53.42 778.37 53.42 778.37 109.7 801.26 109.7 801.26 28.62 686.79 28.62 686.79 69.16"/>
+        <polygon fill="rgba(255,255,255,0.78)" points="824.15 69.16 824.15 109.7 847.05 109.7 847.05 28.62 824.15 28.62 824.15 69.16"/>
+      </svg>
+    </div>
+    <p>Informacion a solicitar a negocio - Justificante de asistencia MINERVA - <strong>Babooni Technologies</strong></p>
+    <div class="footer-contact">
+      <a href="mailto:info@babooni.com">info@babooni.com</a>
+      <a href="tel:617312356">617 31 23 56</a>
+      <span>C. Alfonso XII, 62 - Retiro - 28014 Madrid</span>
+    </div>
+  </div>
+</footer>
+
+</div>
+<script>
+document.querySelectorAll('.collapsible-section .section-toggle').forEach(function(btn) {
+  var section = btn.closest('.collapsible-section');
+  btn.addEventListener('click', function() {
+    var open = section.classList.toggle('is-open');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+});
+document.querySelectorAll('nav a[href^="#"]').forEach(function(link) {
+  link.addEventListener('click', function() {
+    var id = link.getAttribute('href').slice(1);
+    var section = document.getElementById(id);
+    if (!section || !section.classList.contains('collapsible-section')) return;
+    section.classList.add('is-open');
+    var btn = section.querySelector('.section-toggle');
+    if (btn) btn.setAttribute('aria-expanded', 'true');
+  });
+});
+if (location.hash) {
+  var target = document.querySelector(location.hash);
+  if (target && target.classList.contains('collapsible-section')) {
+    target.classList.add('is-open');
+    var toggle = target.querySelector('.section-toggle');
+    if (toggle) toggle.setAttribute('aria-expanded', 'true');
+  }
+}
+</script>
+</body>
+</html>
