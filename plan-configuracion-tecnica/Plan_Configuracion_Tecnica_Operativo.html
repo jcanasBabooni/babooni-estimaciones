@@ -1,0 +1,1674 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plan Operativo Fase 0 | Babooni</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --black:#0a0a0a; --red:#e60000; --red-light:#ff0000; --gold:#f4b900;
+            --bg:#fff; --bg-alt:#f6f6f7; --border:#e2e2e2; --border-light:#ededed;
+            --text:#0a0a0a; --text-secondary:#4a4a4a; --text-muted:#8a8a8a;
+            --green:#1d8a4a; --green-bg:#e6f7ee; --blue-bg:#e8f1fd;
+        }
+        *{margin:0;padding:0;box-sizing:border-box}
+        body{font-family:'Montserrat',sans-serif;background:#d8d8dc;color:var(--text);line-height:1.6}
+        .page-wrapper{max-width:1280px;margin:24px auto;background:var(--bg-alt);border-radius:16px;box-shadow:0 4px 40px rgba(0,0,0,.18);overflow:visible}
+        .container{max-width:100%;margin:0 auto;padding:0 44px}
+        header{background:linear-gradient(135deg,#000,var(--black));color:#fff;padding:48px 0 44px;border-bottom:5px solid var(--red);border-radius:16px 16px 0 0;overflow:hidden;position:relative}
+        header .container{display:flex;justify-content:space-between;align-items:flex-start;gap:24px;position:relative;z-index:1}
+        .header-logo{margin-bottom:18px}
+        .header-logo svg{display:block;height:42px;width:auto}
+        .header-left h1{font-size:28px;font-weight:800;letter-spacing:-.5px;margin-bottom:6px;line-height:1.2}
+        .header-left h1 .red{color:var(--red-light)}
+        .header-left p{color:rgba(255,255,255,.65);font-size:12px;line-height:1.5}
+        .header-badge{background:linear-gradient(135deg,var(--red) 0%,#b30000 100%);color:#fff;font-size:9px;font-weight:600;padding:7px 14px;border-radius:6px;text-align:center;line-height:1.4;box-shadow:0 4px 15px rgba(230,0,0,.45);text-transform:uppercase;letter-spacing:.5px;flex-shrink:0}
+        .header-badge span{display:block;font-size:16px;font-weight:800;letter-spacing:-.3px;text-transform:none}
+        .meta-bar{background:var(--black);border-bottom:3px solid var(--red);padding:18px 32px;display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+        .meta-chip{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.12);border-radius:10px;padding:12px 14px;border-left:3px solid var(--red)}
+        .meta-label{display:block;font-size:8px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:rgba(255,255,255,.45);margin-bottom:3px}
+        .meta-value{font-size:12px;font-weight:600;color:rgba(255,255,255,.92)}
+        .doc-layout{display:flex;gap:24px;padding:28px 32px 36px;align-items:stretch}
+        .sidebar-col{flex:0 0 240px;width:240px;display:flex;flex-direction:column}
+        .sidebar-sticky{position:sticky;top:20px;align-self:flex-start;width:100%;max-height:calc(100vh - 40px);display:flex;flex-direction:column;z-index:20}
+        .sidebar{background:#fff;border:1px solid var(--border);border-radius:12px;overflow:hidden;display:flex;flex-direction:column;flex:1;min-height:0}
+        .sidebar-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1.2px;color:var(--red);padding:14px 16px 10px;border-bottom:1px solid var(--border-light)}
+        .sidebar-nav{overflow-y:auto;flex:1;min-height:0;padding:6px 0 10px}
+        .sidebar-link{display:flex;align-items:center;gap:10px;padding:9px 14px;text-decoration:none;color:var(--text-secondary);font-size:12px;font-weight:600;border-left:3px solid transparent}
+        .sidebar-link:hover,.sidebar-link.active{background:rgba(230,0,0,.05);color:var(--text);border-left-color:var(--red)}
+        .sidebar-num{width:22px;height:22px;border-radius:6px;background:var(--bg-alt);display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:800;flex-shrink:0}
+        .sidebar-link.active .sidebar-num{background:var(--red);color:#fff}
+        .doc-main{flex:1 1 auto;min-width:0;width:100%}
+        .doc-section{background:#fff;border:1px solid var(--border);border-radius:12px;margin-bottom:14px;scroll-margin-top:24px;box-shadow:0 1px 3px rgba(0,0,0,.06);overflow:hidden}
+        .doc-section-toggle{width:100%;display:block;border:none;background:transparent;cursor:pointer;text-align:left;padding:18px 22px;transition:background .2s ease;border-bottom:1px solid transparent}
+        .doc-section.is-open .doc-section-toggle{border-bottom-color:var(--border-light);background:linear-gradient(180deg,rgba(230,0,0,.03),transparent)}
+        .doc-section-toggle:hover{background:rgba(230,0,0,.04)}
+        .doc-section-toggle .toggle-inner{display:flex;align-items:center;justify-content:space-between;gap:16px}
+        .doc-section-toggle .section-header{margin-bottom:0;flex:1}
+        .doc-section-toggle .section-header h2{font-size:17px}
+        .doc-section-toggle .section-number{width:34px;height:34px;font-size:13px;border-radius:8px}
+        .doc-section-toggle .toggle-icon{width:32px;height:32px;border-radius:50%;background:var(--bg-alt);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform .3s ease,background .2s ease,border-color .2s ease}
+        .doc-section-toggle .toggle-icon::before{content:'';width:8px;height:8px;border-right:2.5px solid var(--red);border-bottom:2.5px solid var(--red);transform:rotate(45deg) translate(-2px,-2px);transition:transform .3s ease,border-color .2s ease}
+        .doc-section.is-open .doc-section-toggle .toggle-icon{background:var(--black);border-color:var(--black)}
+        .doc-section.is-open .doc-section-toggle .toggle-icon::before{border-color:#fff;transform:rotate(-135deg) translate(-1px,-1px)}
+        .doc-section-panel{max-height:0;overflow:hidden;transition:max-height .45s cubic-bezier(.4,0,.2,1)}
+        .doc-section.is-open .doc-section-panel{max-height:20000px}
+        .section-header{display:flex;align-items:center;gap:12px}
+        .section-number{width:32px;height:32px;background:var(--black);color:#fff;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;flex-shrink:0}
+        .section-header h2{font-size:16px;font-weight:700}
+        .section-header h2 .red{color:var(--red)}
+        .section-body{padding:0 22px 28px}
+        .section-desc{font-size:13.5px;color:var(--text-secondary);margin-bottom:18px}
+        .task-card{border:1px solid var(--border);border-radius:10px;margin-bottom:14px;overflow:hidden;scroll-margin-top:24px;background:#fff}
+        .task-card-toggle{width:100%;display:block;border:none;background:transparent;cursor:pointer;text-align:left;padding:14px 16px;transition:background .2s ease;border-bottom:1px solid transparent}
+        .task-card.is-open .task-card-toggle{border-bottom-color:var(--border-light);background:linear-gradient(180deg,rgba(230,0,0,.03),transparent)}
+        .task-card-toggle:hover{background:rgba(230,0,0,.04)}
+        .task-card-toggle .toggle-inner{display:flex;align-items:center;justify-content:space-between;gap:16px}
+        .task-card-toggle .task-head{background:transparent;padding:0;border:none;flex:1;display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin:0;min-width:0}
+        .task-card-panel{max-height:0;overflow:hidden;transition:max-height .45s cubic-bezier(.4,0,.2,1)}
+        .task-card.is-open .task-card-panel{max-height:30000px}
+        .task-card-toggle .toggle-icon{width:32px;height:32px;border-radius:50%;background:var(--bg-alt);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:transform .3s ease,background .2s ease,border-color .2s ease}
+        .task-card-toggle .toggle-icon::before{content:'';width:8px;height:8px;border-right:2.5px solid var(--red);border-bottom:2.5px solid var(--red);transform:rotate(45deg) translate(-2px,-2px);transition:transform .3s ease,border-color .2s ease}
+        .task-card.is-open .task-card-toggle .toggle-icon{background:var(--black);border-color:var(--black)}
+        .task-card.is-open .task-card-toggle .toggle-icon::before{border-color:#fff;transform:rotate(-135deg) translate(-1px,-1px)}
+        .task-head h3{font-size:14px;font-weight:700}
+        .task-tag{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;padding:3px 8px;border-radius:4px;background:var(--blue-bg);color:#1c6fd9}
+        .task-tag.urgent{background:#fdecec;color:var(--red)}
+        .task-body{padding:14px 16px}
+        .task-meta{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px}
+        .task-field label{display:block;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:.6px;color:var(--text-muted);margin-bottom:4px}
+        .task-field input,.task-field select{width:100%;padding:8px 10px;border:1px solid var(--border);border-radius:6px;font-family:inherit;font-size:12px;background:#fff}
+        .task-field input:focus{border-color:var(--red);outline:none}
+        .task-table{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:8px}
+        .task-table th,.task-table td{border:1px solid var(--border-light);padding:8px 10px;text-align:left;vertical-align:top}
+        .task-table th{width:130px;background:var(--bg-alt);font-size:10px;text-transform:uppercase;letter-spacing:.5px;color:var(--text-muted);font-weight:700}
+        .task-table code{font-family:'JetBrains Mono',monospace;font-size:11px;background:var(--bg-alt);padding:1px 5px;border-radius:3px}
+        .task-runbook{margin-top:14px;border-top:1px solid var(--border-light);padding-top:14px}
+        .runbook-title{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.8px;color:var(--red);margin-bottom:12px}
+        .runbook-phase{margin-bottom:14px}
+        .runbook-phase-head{font-size:12px;font-weight:700;background:var(--bg-alt);padding:8px 12px;border-radius:6px;margin-bottom:8px;border-left:3px solid var(--red)}
+        .runbook-steps{margin-left:18px;font-size:12.5px;color:var(--text-secondary);list-style:decimal}
+        .runbook-steps li{margin-bottom:7px;padding-left:4px}
+        .runbook-steps li strong{color:var(--text)}
+        .runbook-steps ul{margin:6px 0 6px 16px;list-style:disc}
+        .code-block{background:#141414;color:#e8e8e8;font-family:'JetBrains Mono',monospace;font-size:10.5px;padding:12px 14px;border-radius:8px;overflow-x:auto;margin:8px 0 10px;line-height:1.55;white-space:pre-wrap;word-break:break-word}
+        .verify-box{background:var(--green-bg);border:1px solid #b8e6cc;border-left:4px solid var(--green);padding:10px 12px;border-radius:6px;font-size:12px;margin-top:12px;color:var(--text-secondary)}
+        .verify-box strong{color:var(--green)}
+        .tip-box{background:var(--blue-bg);border-left:4px solid #1c6fd9;padding:10px 12px;border-radius:6px;font-size:12px;margin:10px 0;color:var(--text-secondary)}
+        .tip-box strong{color:#1c6fd9}
+        .foundation-rule{border:1px solid var(--border);border-left:4px solid var(--red);border-radius:8px;padding:14px 16px;margin-bottom:20px;font-size:12.5px;color:var(--text-secondary);background:#fff}
+        .foundation-rule-title{font-size:11px;font-weight:800;text-transform:uppercase;letter-spacing:.6px;color:var(--red);margin-bottom:8px}
+        .foundation-rule p{margin-bottom:8px}
+        .foundation-rule ul{margin:0 0 0 18px;line-height:1.55}
+        .foundation-rule li{margin-bottom:5px}
+        .foundation-rule li strong{color:var(--text)}
+        .phase-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:16px}
+        .phase{border:1px solid var(--border);border-radius:10px;padding:16px;background:#fff}
+        .phase-tag{font-size:10px;font-weight:700;color:var(--red);text-transform:uppercase;margin-bottom:6px}
+        .phase h3{font-size:14px;margin-bottom:10px}
+        .phase ul{list-style:none;font-size:12.5px;color:var(--text-secondary)}
+        .phase li{padding:4px 0 4px 14px;position:relative;border-bottom:1px solid var(--border-light)}
+        .phase li:last-child{border-bottom:none}
+        .phase li::before{content:'>';position:absolute;left:0;color:var(--red);font-weight:700}
+        .two-col{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+        .card{border:1px solid var(--border);border-radius:10px;padding:16px;background:#fff}
+        .card h3{font-size:14px;margin-bottom:10px;padding-bottom:8px;border-bottom:1px solid var(--border-light)}
+        .checklist{list-style:none}
+        .checklist li{border-bottom:1px solid var(--border-light)}
+        .check-item{display:flex;align-items:flex-start;gap:10px;padding:9px 8px;cursor:pointer}
+        .check-item input{width:16px;height:16px;margin-top:2px;accent-color:var(--red);flex-shrink:0}
+        .check-text{font-size:13px;color:var(--text-secondary)}
+        .check-item:has(input:checked) .check-text{text-decoration:line-through;opacity:.65}
+        .checklist-progress{font-size:11px;font-weight:700;color:var(--text-muted);margin-top:8px}
+        .checklist-progress span{color:var(--red)}
+        .save-toolbar{border-top:1px solid var(--border-light);padding:12px 14px;background:var(--bg-alt);flex-shrink:0}
+        .save-toolbar-label{font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1px;color:var(--text-muted);margin-bottom:8px}
+        .save-btn{display:block;width:100%;padding:8px 10px;margin-bottom:6px;border:1px solid var(--border);border-radius:6px;background:#fff;font-family:inherit;font-size:11px;font-weight:600;cursor:pointer;text-align:left;color:var(--text);transition:border-color .2s,background .2s,color .2s}
+        .save-btn:last-of-type{margin-bottom:0}
+        .save-btn:hover{border-color:var(--red);color:var(--red)}
+        .save-btn.primary{background:var(--black);color:#fff;border-color:var(--black)}
+        .save-btn.primary:hover{background:var(--red);border-color:var(--red);color:#fff}
+        .save-status{font-size:10px;font-weight:600;color:var(--green);margin-top:8px;min-height:14px}
+        .save-status.err{color:var(--red)}
+        .alert{padding:12px 14px;border-radius:8px;font-size:13px;margin-top:14px;border-left:4px solid}
+        .alert-blue{background:var(--blue-bg);border-color:#1c6fd9}
+        footer{padding:36px 0 28px;text-align:center;background:linear-gradient(135deg,#050505 0%,var(--black) 100%);color:rgba(255,255,255,.6);border-radius:0 0 16px 16px}
+        footer .footer-logo svg{display:block;height:36px;width:auto;margin:0 auto 14px}
+        footer p{font-size:12px;line-height:1.6;max-width:640px;margin:0 auto}
+        footer strong{color:var(--red-light)}
+        footer .footer-contact{margin-top:14px;display:flex;justify-content:center;gap:18px;flex-wrap:wrap;font-size:11px;color:rgba(255,255,255,.5)}
+        footer .footer-contact a{color:rgba(255,255,255,.65);text-decoration:none}
+        footer .footer-contact a:hover{color:var(--red-light)}
+        @media(max-width:960px){.doc-layout{flex-direction:column}.sidebar-col{flex:none;width:100%}.phase-grid,.two-col,.task-meta{grid-template-columns:1fr}.sidebar-sticky{position:static;max-height:none}.meta-bar{grid-template-columns:1fr}.container{padding:0 20px}header{padding:36px 0 32px}.header-left h1{font-size:22px}.doc-section-panel,.task-card-panel{max-height:none!important;overflow:visible!important}.doc-section-toggle .toggle-icon,.task-card-toggle .toggle-icon{display:none}}
+    </style>
+</head>
+<body>
+<div class="page-wrapper">
+<header>
+    <div class="container">
+        <div class="header-left">
+            <div class="header-logo">
+                <svg viewBox="0 0 848 199.39" xmlns="http://www.w3.org/2000/svg">
+                    <path fill="#ffffff" d="M22.89,28.62V0H0V109.7H114.47V28.62Zm68.68,41V85.85H22.89V53.42H91.57Z"/>
+                    <path fill="#ffffff" d="M297.61,28.62V0H274.72V109.7H389.18V28.62Zm68.68,41V85.85H297.61V53.42h68.68Z"/>
+                    <path fill="#ffffff" d="M137.36,28.62v24.8h45.79c45.11,0,45.78,0,45.78,1.91s-.67,1.9-45.78,1.9H137.36V109.7H251.82V28.62Zm57.23,57.23c-33.67,0-34.34,0-34.34-1.91S160.92,82,194.59,82s34.34,0,34.34,1.91S228.26,85.85,194.59,85.85Z"/>
+                    <path fill="#ff0000" d="M412.08,28.62V109.7H526.54V28.62Zm91.57,41V85.85H435V53.42h68.68Z"/>
+                    <path fill="#ff0000" d="M549.44,28.62V109.7H663.9V28.62Zm91.57,41V85.85H572.33V53.42H641Z"/>
+                    <polygon fill="#ffffff" points="686.79 69.16 686.79 109.7 709.69 109.7 709.69 53.42 778.37 53.42 778.37 109.7 801.26 109.7 801.26 28.62 686.79 28.62 686.79 69.16"/>
+                    <polygon fill="#ffffff" points="824.15 69.16 824.15 109.7 847.05 109.7 847.05 28.62 824.15 28.62 824.15 69.16"/>
+                    <path fill="#ffffff" d="M470.26,146.9v32.43h7.63l.1-14.59c0-16,.86-19.94,5-23,3.91-2.86,12.11-2.77,15.36.28l2.48,2.29v35h7.63V161.4c0-15.07-.29-18.32-1.72-21.08-2.29-4.58-5.91-7-11.54-7.54-6.58-.57-11,.38-14.4,3.24l-2.87,2.48v-24h-7.63Z"/>
+                    <polygon fill="#ffffff" points="627.65 146.9 627.65 179.33 635.28 179.33 635.28 114.47 627.65 114.47 627.65 146.9"/>
+                    <path fill="#ffffff" d="M749,117.52c-1.62,1.62-1.43,7,.19,8.39,4,3.25,8.77-2.1,6.48-7.15a4.18,4.18,0,0,0-6.67-1.24"/>
+                    <polygon fill="#ffffff" points="327.18 122.1 327.18 125.91 346.26 125.91 346.26 179.33 353.89 179.33 353.89 125.91 372.97 125.91 372.97 118.28 327.18 118.28 327.18 122.1"/>
+                    <path fill="#ffffff" d="M417.8,158.34v-5.53c0-7.63-3.53-14.59-9-17.84S396,131.73,390,134.78h0a18.21,18.21,0,0,0-7,6.78c-2.48,3.91-3,5.72-3.24,13-.29,5.15,0,9.73.76,11.92,1.52,4.68,6.29,9.92,11,12,4.48,2.1,15.26,2.39,20.51.57,2.95-1,3.34-1.62,3.62-4.77.19-1.9.1-3.53-.19-3.53s-3,.67-6,1.44a45.43,45.43,0,0,1-8.39,1.43c-6.49,0-13.83-6.59-13.83-12.5v-2.77Zm-30.72-6.67.67-2.67a11.55,11.55,0,0,1,6.49-8.3c3.91-1.72,5.72-1.72,9.73-.1,3.43,1.43,4.67,3.15,5.72,7.92l.67,3.15Z"/>
+                    <path fill="#ffffff" d="M437.83,134.69a19.47,19.47,0,0,0-7.06,6.87c-2.48,3.91-2.95,5.72-3.24,13-.86,17.36,5.91,25.66,20.79,25.75,8,0,10.88-1.43,11.26-5.62.29-3.15.29-3.25-2.86-2.58-11.93,2.48-16.6,1.24-19.75-5.06-2.67-5.15-2.76-15.83-.19-20.89,3-5.81,7.25-7,19.08-5.72,1.81.19,2.48-.28,3.24-2.38,1.34-4-.09-4.77-9.06-5.25-7-.29-8.39-.1-12.21,1.91"/>
+                    <path fill="#ffffff" d="M536.56,133.83a15.15,15.15,0,0,0-4.2,2.86c-1.81,2.29-3,2-3-.76,0-2.1-.38-2.39-3.33-2.39h-3.34v45.79h7.63l.09-14.59c0-16,.86-19.94,5-23,3.91-2.86,12.12-2.77,15.36.28l2.48,2.29v35h7.63V161.4c0-19.65-.67-22.42-6-26.33-3.34-2.48-14-3.15-18.31-1.24"/>
+                    <path fill="#ffffff" d="M605.43,135.64c-5.34-3.53-15.55-4.1-21.46-1-7,3.53-10.78,10.78-10.78,20.89,0,9.06,1.43,13.74,5.91,18.6,4.68,5.06,8.68,6.49,16.6,6,8.11-.47,12.78-3.62,16.31-10.87C617.64,157.77,614.49,141.65,605.43,135.64Zm-12.88,37.58c-8.2-1-11.64-6.2-11.64-17.36,0-11.35,5.15-17.17,14.22-16.12a20,20,0,0,1,6.29,1.82c3.53,2.29,5.25,7.34,5.25,15.07C606.67,168.36,601.61,174.37,592.55,173.22Z"/>
+                    <path fill="#ffffff" d="M679.83,135.64c-5.34-3.53-15.55-4.1-21.46-1-7,3.53-10.78,10.78-10.78,20.89,0,9.06,1.43,13.74,5.91,18.6,4.68,5.06,8.68,6.49,16.6,6,8.11-.47,12.78-3.62,16.31-10.87C692,157.77,688.89,141.65,679.83,135.64ZM667,173.22c-8.2-1-11.63-6.2-11.63-17.36,0-11.35,5.15-17.17,14.21-16.12a20,20,0,0,1,6.29,1.82c3.53,2.29,5.25,7.34,5.25,15.07C681.07,168.36,676,174.37,667,173.22Z"/>
+                    <path fill="#ffffff" d="M735.16,139.65c3.53-.86,5.34-3.44,3.43-5.15-.38-.38-6.77-1-14.12-1.34-12-.57-13.73-.38-17.45,1.34h0c-8.68,3.91-10.59,18.6-3.25,25.08,1.91,1.72,1.91,1.82.1,3.63-2,2-2.58,8.87-.76,9.92.57.38-.58,2-2.77,3.91-7.25,6.2-6,15.83,2.67,20.13,5.15,2.67,16.12,3,23.56.76,8.87-2.67,13.55-10.87,10.68-19-2.19-6.2-5-7.54-17.36-8.3-5.91-.38-10.77-.67-10.87-.76a5.53,5.53,0,0,1-.29-2.48c0-3,2.48-4.3,8.21-4.3a23.4,23.4,0,0,0,8.77-2c6.58-3.24,9.45-11.64,6.49-19.08C731.72,141,732.49,140.32,735.16,139.65Zm-6,39.58c2,1.72,1.9,7.06-.1,8.88-4.67,4-14.31,5.62-20.79,3.43s-7.25-10-1.15-12.78C711,177,726.86,177.33,729.15,179.23ZM724,154.34c-3.72,3.91-13.93,3.43-16.22-.77-2.39-4.57-.29-11.54,4.2-13.44,3.53-1.53,9.44-.29,11.73,2.48C726.57,145.85,726.67,151.48,724,154.34Z"/>
+                    <path fill="#ffffff" d="M807,158.34v-5.53c0-7.63-3.53-14.59-9-17.84s-12.88-3.24-18.79-.19h0a18.16,18.16,0,0,0-7,6.78c-2.48,3.91-3,5.72-3.24,13-.29,5.15,0,9.73.76,11.92,1.53,4.68,6.3,9.92,11,12,4.48,2.1,15.26,2.39,20.51.57,3-1,3.34-1.62,3.62-4.77.2-1.9.1-3.53-.19-3.53s-3,.67-6,1.44a45.29,45.29,0,0,1-8.39,1.43c-6.49,0-13.83-6.59-13.83-12.5v-2.77Zm-30.71-6.67.67-2.67a11.51,11.51,0,0,1,6.48-8.3c3.91-1.72,5.73-1.72,9.73-.1,3.44,1.43,4.68,3.15,5.73,7.92l.66,3.15Z"/>
+                    <path fill="#ffffff" d="M823.68,133.92c-5.15,2.29-7.63,5.92-7.63,11.07,0,6.2,3.24,9.54,13.16,13.55,11.35,4.67,14.31,8.1,10.3,12.11-3.53,3.53-13.64,3.34-22.32-.38-1.53-.67-1.72-.29-1.43,3.43s.57,4.29,3.62,5.34c4.58,1.53,16.6,1.53,20.32-.09a12.64,12.64,0,0,0,8.3-12.21c0-4.39-.38-5.25-3.62-8.3-2.2-2.1-6.49-4.48-11-6.2-4-1.43-7.92-3.43-8.68-4.29-4.77-5.25,1.52-9.64,11.35-7.92a43.75,43.75,0,0,1,7.25,1.62c1.14.38,1.9-.28,2.76-2.38.67-1.72.86-3.25.38-3.72-3.24-3-17.55-3.91-22.79-1.63"/>
+                    <polygon fill="#ffffff" points="747.84 156.44 747.84 179.33 755.47 179.33 755.47 133.54 747.84 133.54 747.84 156.44"/>
+                </svg>
+            </div>
+            <h1>Plan operativo · <span class="red">Fase 0</span></h1>
+            <p>Desglose técnico · Stack: Java, Node, React, Angular · Activos en ai-foundation · Babooni Technologies</p>
+        </div>
+        <div class="header-badge">
+            Implantación<span>~6 semanas</span>
+        </div>
+    </div>
+</header>
+
+<div class="meta-bar">
+    <div class="meta-chip"><span class="meta-label">Alcance</span><span class="meta-value">Configuración base en ~6 semanas</span></div>
+    <div class="meta-chip"><span class="meta-label">Stack Babooni</span><span class="meta-value">react/ (Node+React) · angular/ (Java+Angular)</span></div>
+    <div class="meta-chip"><span class="meta-label">Repo central</span><span class="meta-value">Babooni-Technologies/ai-foundation</span></div>
+</div>
+
+<div class="doc-layout">
+<aside class="sidebar-col">
+    <div class="sidebar-sticky">
+    <div class="sidebar">
+        <p class="sidebar-label">— Implantación</p>
+        <nav class="sidebar-nav" id="sidebarNav">
+            <a href="#tareas" class="sidebar-link active"><span class="sidebar-num">1</span><span>Tareas técnicas</span></a>
+            <a href="#cronograma" class="sidebar-link"><span class="sidebar-num">2</span><span>Cronograma 6 sem</span></a>
+            <a href="#checklist" class="sidebar-link"><span class="sidebar-num">3</span><span>Checklist</span></a>
+        </nav>
+        <div class="save-toolbar">
+            <p class="save-toolbar-label">Guardar y compartir</p>
+            <button type="button" class="save-btn primary" id="btnSaveHtml">Descargar HTML con datos</button>
+            <p class="save-status" id="saveStatus" role="status"></p>
+        </div>
+    </div>
+    </div>
+</aside>
+
+<main class="doc-main">
+
+<section id="tareas" class="doc-section">
+    <button type="button" class="doc-section-toggle" aria-expanded="false" aria-controls="panel-tareas">
+        <div class="toggle-inner">
+            <div class="section-header">
+                <div class="section-number">1</div>
+                <h2>Tareas técnicas <span class="red">detalladas</span></h2>
+            </div>
+            <span class="toggle-icon" aria-hidden="true"></span>
+        </div>
+    </button>
+    <div id="panel-tareas" class="doc-section-panel">
+    <div class="section-body">
+        <p class="section-desc">Guía paso a paso para implantar la Fase 0. Cada tarea indica qué hacer y dónde dejarlo en el repo.</p>
+
+        <div class="foundation-rule">
+            <p class="foundation-rule-title">Regla · todo va a ai-foundation</p>
+            <p><strong>No confundir repos:</strong> este plan es operativo; el código y plantillas nuevos van en <code>Babooni-Technologies/ai-foundation</code>. Cada entregable dentro del <strong>kit y subcarpeta</strong> que toque — no en repos de producto ni carpetas sueltas.</p>
+            <p><strong>Estructura real del repo:</strong></p>
+            <div class="code-block">ai-foundation/
+├── README.md · CHANGELOG.md · scripts/
+├── react/
+│   ├── front/     ← kit React (frontend)
+│   └── back/      ← kit Node (backend)
+└── angular/
+    ├── front/     ← kit Angular (frontend)
+    └── back/      ← kit Java (backend)</div>
+            <ul>
+                <li><strong>Frontend React</strong> → <code>react/front/</code></li>
+                <li><strong>Backend Node</strong> → <code>react/back/</code></li>
+                <li><strong>Frontend Angular</strong> → <code>angular/front/</code></li>
+                <li><strong>Backend Java</strong> → <code>angular/back/</code></li>
+                <li><strong>Transversal a todos</strong> (ADRs org, quality gate común) → <code>docs/</code> en la raíz de ai-foundation</li>
+            </ul>
+            <p><strong>Mapa de documentación (dónde va cada cosa):</strong></p>
+            <div class="code-block">ai-foundation/docs/                    ← org-wide (ADR, quality-gate, inventarios)
+├── adr/                               ← decisiones transversales
+├── quality-gate.md
+└── shared-deps.md
+
+{kit}/{front|back}/docs/               ← guías del subkit (se copian al repo destino)
+├── gitflow.md · runbook-deploy.md · commit-convention.md · idp.md …
+react/front/docs/design-system-process.md   ← proceso DS (React es fuente visual)
+angular/front/config/design-tokens.css      ← tokens para apps Angular
+
+{kit}/{front|back}/archetype/docs/     ← solo arquetipos (repos nuevos)
+└── architecture.md</div>
+            <p style="margin-top:10px;margin-bottom:0">Los equipos <strong>copian la subcarpeta</strong> correspondiente (<code>react/front/</code>, <code>angular/back/</code>…) a la raíz de su repo — incluida su carpeta <code>docs/</code>. Las tareas de abajo usan rutas <code>{kit}/{front|back}/</code> (<code>react</code> = Node+React · <code>angular</code> = Java+Angular).</p>
+            <p style="margin-top:10px;margin-bottom:0"><strong>Regla piloto Fase 0 — dos pares, en orden:</strong></p>
+            <ul>
+                <li><strong>Piloto 1 (primero):</strong> <code>react/back</code> (Node) + <code>react/front</code> (React)</li>
+                <li><strong>Piloto 2 (segundo):</strong> <code>angular/back</code> (Java) + <code>angular/front</code> (Angular)</li>
+            </ul>
+            <p style="margin-top:6px;margin-bottom:0">Toda prueba piloto (GitFlow, CI, deploy, Sonar, adopción de subkits, arquetipos, IDP, Design System…) se valida en <strong>piloto 1</strong> y se <strong>repite en piloto 2</strong> con el mismo criterio de éxito. Los cuatro stacks siguen en el plan; solo cambia el orden.</p>
+        </div>
+
+        <!-- T01 -->
+        <div class="task-card">
+            <div class="task-head"><h3>T-01 · GitFlow y protección de ramas</h3><span class="task-tag urgent">Sem 1-2</span></div>
+            <div class="task-body">
+                <div class="task-meta">
+                    <div class="task-field"><label>Responsable</label><input type="text" placeholder="Nombre" data-store="t01-resp"></div>
+                    <div class="task-field"><label>Fecha objetivo</label><input type="date" data-store="t01-fecha"></div>
+                </div>
+                <table class="task-table">
+                    <tr><th>Objetivo</th><td>Establecer un flujo Git único en la org: trabajo en ramas <code>feature/*</code>, integración vía PR, ramas protegidas y despliegue solo desde <code>main</code> (tags).</td></tr>
+                    <tr><th>Herramientas</th><td>GitHub org <code>Babooni-Technologies</code> · Git CLI · guía GitFlow en README de cada subkit (<code>react/front</code>, <code>react/back</code>, <code>angular/front</code>, <code>angular/back</code>)</td></tr>
+                    <tr><th>Entorno</th><td>Piloto 1: repos <code>react/back</code> + <code>react/front</code> · Piloto 2: repos <code>angular/back</code> + <code>angular/front</code> · replicar plantilla al resto tras validar ambos</td></tr>
+                </table>
+                <div class="task-runbook">
+                    <div class="runbook-title">Guía paso a paso</div>
+
+                    <div class="runbook-phase">
+                        <div class="runbook-phase-head">A · Definir y crear el modelo de ramas</div>
+                        <ol class="runbook-steps">
+                            <li><strong>Ramas permanentes:</strong> <code>main</code> (producción, siempre desplegable) y <code>develop</code> (integración). Si el repo solo tiene <code>main</code>, créala:
+                                <div class="code-block">git checkout main
+git pull origin main
+git checkout -b develop
+git push -u origin develop</div>
+                            </li>
+                            <li><strong>Rama por defecto en GitHub:</strong> Repo → <em>Settings</em> → <em>General</em> → <em>Default branch</em> → dejar <code>main</code> como producción. <code>develop</code> es la base de features.</li>
+                            <li><strong>Convención de nombres:</strong>
+                                <ul>
+                                    <li><code>feature/JIRA-123-descripcion-corta</code> — nueva funcionalidad</li>
+                                    <li><code>fix/JIRA-456-bug-login</code> — corrección sobre develop</li>
+                                    <li><code>hotfix/JIRA-789-critico</code> — urgente desde <code>main</code></li>
+                                    <li><code>release/1.4.0</code> — preparación de versión (opcional)</li>
+                                </ul>
+                            </li>
+                            <li><strong>Flujo diario del desarrollador:</strong>
+                                <div class="code-block">git checkout develop
+git pull origin develop
+git checkout -b feature/JIRA-123-mi-tarea
+# ... commits ...
+git push -u origin feature/JIRA-123-mi-tarea
+# Abrir PR en GitHub: base = develop, compare = feature/JIRA-123-mi-tarea</div>
+                            </li>
+                            <li><strong>Flujo a producción:</strong> PR <code>develop</code> → <code>main</code> (o release branch) → merge → tag semver → deploy automático (T-03).
+                                <div class="code-block">git checkout main
+git pull origin main
+git merge --no-ff develop
+git tag -a v1.2.0 -m "Release 1.2.0"
+git push origin main --tags</div>
+                            </li>
+                        </ol>
+                    </div>
+
+                    <div class="runbook-phase">
+                        <div class="runbook-phase-head">B · Proteger la rama main en GitHub</div>
+                        <ol class="runbook-steps">
+                            <li>Ir a: <strong>Repo → Settings → Branches</strong> (o <em>Rules → Rulesets</em> si usáis rulesets de org).</li>
+                            <li>Clic en <strong>Add branch protection rule</strong> (o <em>New ruleset</em> → target <code>main</code>).</li>
+                            <li>En <em>Branch name pattern</em>: escribir <code>main</code>.</li>
+                            <li>Activar estas opciones:
+                                <ul>
+                                    <li>☑ <strong>Require a pull request before merging</strong></li>
+                                    <li>☑ Require approvals: <strong>1</strong></li>
+                                    <li>☑ Dismiss stale pull request approvals when new commits are pushed</li>
+                                    <li>☑ <strong>Require status checks to pass before merging</strong> (configurar checks tras T-02: <code>build</code>, <code>test</code>)</li>
+                                    <li>☑ Require branches to be up to date before merging</li>
+                                    <li>☑ <strong>Do not allow bypassing the above settings</strong></li>
+                                    <li>☑ Restrict who can push to matching branches → solo bots/admins si aplica</li>
+                                    <li>☑ <strong>Block force pushes</strong></li>
+                                    <li>☑ <strong>Do not allow deletions</strong></li>
+                                </ul>
+                            </li>
+                            <li>Guardar la regla. Probar: intentar <code>git push origin main</code> directo → debe rechazarse.</li>
+                        </ol>
+                    </div>
+
+                    <div class="runbook-phase">
+                        <div class="runbook-phase-head">C · Proteger develop (reglas más ligeras)</div>
+                        <ol class="runbook-steps">
+                            <li>Repetir en <em>Settings → Branches</em> con pattern <code>develop</code>.</li>
+                            <li>Activar: PR obligatorio + 1 approval + status checks + block force push. No hace falta restringir push tan estricto como en main.</li>
+                        </ol>
+                    </div>
+
+                    <div class="runbook-phase">
+                        <div class="runbook-phase-head">D · Plantilla de PR y flujo en todos los repos</div>
+                        <ol class="runbook-steps">
+                            <li>Crear archivo <code>.github/pull_request_template.md</code> en el repo piloto:
+                                <div class="code-block">## Qué cambia
+- 
+
+## Cómo probar
+1. 
+
+## Checklist
+- [ ] Tests pasan en CI
+- [ ] Sin secretos en el diff
+- [ ] Commits siguen convención (T-05)</div>
+                            </li>
+                            <li>Repo → <em>Settings → General</em> → marcar <strong>Allow squash merging</strong> (recomendado) y desactivar merge commits si queréis historial limpio.</li>
+                            <li>Replicar reglas de protección en el resto de repos: Org → <em>Settings → Rulesets</em> → crear ruleset org-wide para <code>main</code> y aplicarlo a todos los repos activos.</li>
+                        </ol>
+                    </div>
+
+                    <div class="runbook-phase">
+                        <div class="runbook-phase-head">E · Documentar en ai-foundation</div>
+                        <ol class="runbook-steps">
+                            <li>Añadir <code>docs/gitflow.md</code> en cada subkit (<code>react/front/docs/</code>, <code>react/back/docs/</code>, <code>angular/front/docs/</code>, <code>angular/back/docs/</code>) y enlace en el README del subkit. Los repos que ya copiaron el subkit reciben la guía con el próximo sync/PR.</li>
+                            <li>Actualizar tabla de stacks en <code>ai-foundation/README.md</code> (convención de ramas común a Java, Node, React y Angular).</li>
+                            <li>PR de ejemplo: abrir una feature trivial (ej. añadir el enlace al README) y mergear siguiendo el flujo completo como demostración al equipo.</li>
+                        </ol>
+                    </div>
+
+                    <div class="verify-box"><strong>Verificación:</strong> Push directo a <code>main</code> bloqueado · PR requiere 1 review · PR no mergeable si CI falla (tras T-02) · <code>develop</code> existe y está protegida · doc publicada en ai-foundation · al menos 1 PR real mergeado con el flujo.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- T02 -->
+        <div class="task-card">
+            <div class="task-head"><h3>T-02 · Pipeline CI (build + test)</h3><span class="task-tag urgent">Sem 1-2</span></div>
+            <div class="task-body">
+                <div class="task-meta">
+                    <div class="task-field"><label>Responsable</label><input type="text" data-store="t02-resp"></div>
+                    <div class="task-field"><label>Fecha objetivo</label><input type="date" data-store="t02-fecha"></div>
+                </div>
+                <table class="task-table">
+                    <tr><th>Objetivo</th><td>Pipeline en cada PR/push a <code>main</code>. Workflows en <code>react/front</code>, <code>react/back</code>, <code>angular/front</code> y <code>angular/back</code>.</td></tr>
+                    <tr><th>Herramientas</th><td>GitHub Actions · Java 11/17 + Gradle · Node LTS + npm · React (Vite/CRA) · Angular CLI · JUnit / Jest / Karma</td></tr>
+                    <tr><th>Entorno</th><td>Runners hosted GitHub · <strong>Piloto 1:</strong> <code>react/back</code> + <code>react/front</code> (sem 1-2) · <strong>Piloto 2:</strong> <code>angular/back</code> + <code>angular/front</code> (sem 3-4)</td></tr>
+                </table>
+                <div class="task-runbook">
+                    <div class="runbook-title">Guía paso a paso</div>
+
+                    <div class="runbook-phase">
+                        <div class="runbook-phase-head">A · Workflows dentro de cada subkit (no en carpeta suelta)</div>
+                        <ol class="runbook-steps">
+                            <li>Patrón del repo: el CI vive en <code>{kit}/{front|back}/.github/workflows/</code>. Al copiar la subcarpeta al proyecto, el workflow llega a <code>.github/workflows/</code> del repo destino.</li>
+                            <li><strong>React (front)</strong> — <code>react/front/.github/workflows/ci.yml</code> (complementa twin-check CI existente):
+                                <div class="code-block">name: React CI
+on:
+  pull_request: { branches: [main, develop] }
+  push: { branches: [main, develop] }
+jobs:
+  build-and-test:
+    name: build + test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '20', cache: 'npm' }
+      - run: npm ci
+      - run: npm run build
+      - run: npm test -- --watchAll=false --passWithNoTests</div>
+                            </li>
+                            <li><strong>Angular (front)</strong> — <code>angular/front/.github/workflows/ci.yml</code>:
+                                <div class="code-block">name: Angular CI
+on:
+  pull_request: { branches: [main, develop] }
+  push: { branches: [main, develop] }
+jobs:
+  build-and-test:
+    name: build + test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '20', cache: 'npm' }
+      - run: npm ci
+      - run: npm run build -- --configuration=production
+      - run: npm run test -- --watch=false --browsers=ChromeHeadless</div>
+                            </li>
+                            <li><strong>Java (back)</strong> — <code>angular/back/.github/workflows/ci.yml</code>:
+                                <div class="code-block">name: Java CI
+on:
+  pull_request: { branches: [main, develop] }
+  push: { branches: [main, develop] }
+jobs:
+  build-and-test:
+    name: build + test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-java@v4
+        with: { distribution: temurin, java-version: '17', cache: gradle }
+      - run: chmod +x gradlew
+      - run: ./gradlew clean build -x test
+      - run: ./gradlew test</div>
+                            </li>
+                            <li><strong>Node (back)</strong> — <code>react/back/.github/workflows/ci.yml</code>:
+                                <div class="code-block">name: Node CI
+on:
+  pull_request: { branches: [main, develop] }
+  push: { branches: [main, develop] }
+jobs:
+  build-and-test:
+    name: build + test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: '20', cache: 'npm' }
+      - run: npm ci
+      - run: npm run build --if-present
+      - run: npm test -- --passWithNoTests</div>
+                            </li>
+                            <li>Actualizar tabla de stacks en <code>README.md</code> del repo. Adoptar: copiar kit completo al proyecto (no solo el YAML suelto).</li>
+                        </ol>
+                    </div>
+
+                    <div class="runbook-phase">
+                        <div class="runbook-phase-head">B · Instalar CI en repos piloto</div>
+                        <ol class="runbook-steps">
+                            <li><strong>Piloto 1 — Frontend React:</strong> copiar <code>react/front/</code> al repo piloto → PR <code>feature/T-02-ci-frontend</code> → Actions verde.</li>
+                            <li><strong>Piloto 1 — Backend Node:</strong> copiar <code>react/back/</code> al repo piloto API → PR <code>feature/T-02-ci-node</code> → Actions verde.</li>
+                            <li>Si no hay tests, añadir smoke test mínimo antes de exigir CI en branch protection.</li>
+                            <li>Mejoras del piloto 1 → PR de vuelta al subkit en ai-foundation + entrada en <code>CHANGELOG.md</code>.</li>
+                            <li><strong>Piloto 2 — Frontend Angular:</strong> copiar <code>angular/front/</code> al repo piloto → PR <code>feature/T-02-ci-angular</code> → Actions verde.</li>
+                            <li><strong>Piloto 2 — Backend Java:</strong> copiar <code>angular/back/</code> al repo piloto → PR <code>feature/T-02-ci-java</code> → <code>./gradlew test</code> verde.</li>
+                        </ol>
+                    </div>
+
+                    <div class="runbook-phase">
+                        <div class="runbook-phase-head">C · Enlazar CI con branch protection (T-01)</div>
+                        <ol class="runbook-steps">
+                            <li>Ejecutar el workflow al menos 1 vez con éxito en un PR.</li>
+                            <li>Repo → <em>Settings → Branches →</em> editar regla de <code>main</code> y <code>develop</code>.</li>
+                            <li>En <em>Require status checks to pass</em>, buscar y marcar: <strong>build + test</strong> (nombre exacto del job).</li>
+                            <li>Guardar. Verificar: PR con test roto no permite merge; botón Merge deshabilitado.</li>
+                        </ol>
+                    </div>
+
+                    <div class="runbook-phase">
+                        <div class="runbook-phase-head">D · Cache y optimización por stack</div>
+                        <ol class="runbook-steps">
+                            <li>Java: <code>cache: gradle</code> en setup-java · Node/React/Angular: <code>cache: npm</code> en setup-node.</li>
+                            <li>Objetivo: pipeline &lt; 10 min. Tests e2e pesados → job nightly en <code>{kit}/{front|back}/.github/workflows/nightly-e2e.yml</code>.</li>
+                        </ol>
+                    </div>
+
+                    <div class="verify-box"><strong>Verificación:</strong> Workflows en los cuatro subkits · CI verde en piloto 1 (<code>react/back</code> + <code>react/front</code>) y piloto 2 (<code>angular/back</code> + <code>angular/front</code>) · README tabla actualizada · CHANGELOG con versión del subkit.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- T03 -->
+        <div class="task-card">
+            <div class="task-head"><h3>T-03 · Despliegue automático PaaS (piloto)</h3><span class="task-tag urgent">Sem 1-2</span></div>
+            <div class="task-body">
+                <div class="task-meta">
+                    <div class="task-field"><label>Responsable</label><input type="text" data-store="t03-resp"></div>
+                    <div class="task-field"><label>Fecha objetivo</label><input type="date" data-store="t03-fecha"></div>
+                </div>
+                <table class="task-table">
+                    <tr><th>Objetivo</th><td>Deploy automático a <strong>staging</strong> al mergear en <code>main</code>: APIs Java/Node en contenedor · frontends React/Angular como estático.</td></tr>
+                    <tr><th>Prerrequisitos</th><td><strong>T-02</strong> CI verde en repos piloto · cuenta/org PaaS creada · entorno <strong>staging</strong> activo (proyecto + servicios + BD si aplica) · secretos en GitHub/PaaS</td></tr>
+                    <tr><th>Herramientas</th><td>Railway / Render / Fly.io · Docker · workflows deploy en <code>{kit}/{front|back}/.github/workflows/deploy.yml</code></td></tr>
+                    <tr><th>Entorno</th><td><strong>Piloto 1:</strong> staging <code>react/back</code> + <code>react/front</code> (sem 1-2) · <strong>Piloto 2:</strong> staging <code>angular/back</code> + <code>angular/front</code> (sem 3-4) · prod solo tras validar staging + rollback en ambos pilotos</td></tr>
+                </table>
+                <div class="tip-box"><strong>Orden lógico:</strong> primero tener un <em>entorno staging operativo</em> en el PaaS (cuenta, proyecto, BD, variables). Después conectar repos y automatizar el deploy. No al revés.</div>
+                <div class="task-runbook">
+                    <div class="runbook-title">Guía paso a paso (ejemplo Railway — adaptar si usáis Render/Fly)</div>
+
+                    <div class="runbook-phase">
+                        <div class="runbook-phase-head">A · Entorno staging activo en el PaaS (antes de conectar repos)</div>
+                        <ol class="runbook-steps">
+                            <li>Elegir proveedor (Railway / Render / Fly.io) y crear <strong>cuenta de org</strong> Babooni (facturación, acceso del equipo).</li>
+                            <li>Crear <strong>proyecto staging</strong> (ej. <code>babooni-staging</code>) separado de producción futura.</li>
+                            <li>Si la API usa BD: provisionar instancia staging en el PaaS o apuntar a BD demo existente · anotar host, puerto, credenciales.</li>
+                            <li>Definir convención de URLs staging (ej. <code>api-piloto-staging.railway.app</code>, <code>app-piloto-staging.onrender.com</code>).</li>
+                            <li>Crear secretos <strong>antes</strong> del primer deploy:
+                                <ul>
+                                    <li>En PaaS: <code>DB_URL</code>, <code>DB_USER</code>, <code>DB_PASSWORD</code>, <code>PORT</code>, <code>SPRING_PROFILES_ACTIVE=demo</code></li>
+                                    <li>En GitHub (si deploy vía Actions): <code>RAILWAY_TOKEN</code> / equivalente del proveedor</li>
+                                </ul>
+                            </li>
+                            <li>Verificar que el entorno responde: servicio vacío o <code>hello-world</code> desplegado manualmente → URL accesible · DNS/HTTPS OK.</li>
+                            <li>Documentar en <code>{kit}/{front|back}/docs/runbook-deploy.md</code>: URL staging, variables, responsable, enlace al proyecto PaaS.</li>
+                        </ol>
+                    </div>
+
+                    <div class="runbook-phase">
+                        <div class="runbook-phase-head">B · Conectar repos piloto al staging (deploy manual primero)</div>
+                        <ol class="runbook-steps">
+                            <li><strong>Precondición:</strong> T-02 CI verde en el repo piloto (build + test pasan).</li>
+                            <li>PaaS → <strong>New Service</strong> → conectar repo GitHub piloto 1 (<code>react/back</code>, luego <code>react/front</code>).</li>
+                            <li>Rama <code>main</code> como trigger de deploy automático (activar tras el primer deploy manual OK).</li>
+                            <li>Primer deploy <strong>manual</strong> → comprobar health (<code>/health</code>, <code>/actuator/health</code> o ruta propia).</li>
+                            <li>Repetir para piloto 2 (<code>angular/back</code>, <code>angular/front</code>) cuando piloto 1 esté estable.</li>
+                            <li>No commitear <code>.env</code> — añadir a <code>.gitignore</code>.</li>
+                        </ol>
+                    </div>
+
+                    <div class="runbook-phase">
+                        <div class="runbook-phase-head">C · Backend — Node (piloto 1) y Java (piloto 2)</div>
+                        <ol class="runbook-steps">
+                            <li><strong>Piloto 1 — API Node</strong> (<code>react/back</code>): variables ya en PaaS (fase A). Build: <code>npm run build</code> + <code>node dist/main.js</code> · Dockerfile <code>node:20-alpine</code>.</li>
+                            <li><strong>Piloto 2 — API Java</strong> (<code>angular/back</code>): repetir flujo tras validar piloto 1. <code>server.port=${PORT:8080}</code> · Dockerfile o Jib:
+                                <div class="code-block">FROM eclipse-temurin:17-jre-alpine
+WORKDIR /app
+COPY build/libs/*.jar app.jar
+EXPOSE 8080
+ENTRYPOINT ["java","-jar","/app.jar"]</div>
+                            </li>
+                            <li>Plantillas deploy: <code>react/back/.github/workflows/deploy.yml</code> (Node) · <code>angular/back/…</code> (Java) · frontends en fase B.</li>
+                        </ol>
+                    </div>
+
+                    <div class="runbook-phase">
+                        <div class="runbook-phase-head">D · Frontend — React (piloto 1) y Angular (piloto 2)</div>
+                        <ol class="runbook-steps">
+                            <li><strong>Piloto 1 — React</strong> (<code>react/front</code>): build estático <code>npm run build</code> → <code>dist/</code>.</li>
+                            <li><strong>Piloto 2 — Angular</strong> (<code>angular/front</code>): <code>ng build --configuration=production</code> → <code>dist/nombre-app/</code>.</li>
+                            <li>En PaaS (Render Static Site / Railway / Netlify interno): root directory = carpeta de build · SPA fallback <code>/* → index.html</code>.</li>
+                            <li>Variables frontend en PaaS: <code>API_BASE_URL</code> (URL del backend staging de fase B) · <code>IDP_CLIENT_ID</code> si aplica.</li>
+                            <li>Plantilla CI deploy en cada subkit frontend (<code>react/front/.github/workflows/deploy-static.yml</code>, <code>angular/front/…</code>).</li>
+                        </ol>
+                    </div>
+
+                    <div class="runbook-phase">
+                        <div class="runbook-phase-head">E · Deploy desde GitHub Actions (opcional, tras staging manual OK)</div>
+                        <ol class="runbook-steps">
+                            <li>Generar token de deploy en el PaaS (Railway: Project → Settings → Tokens).</li>
+                            <li>GitHub repo → <em>Settings → Secrets → Actions</em> → crear <code>RAILWAY_TOKEN</code> (o equivalente).</li>
+                            <li>Añadir job al workflow, solo en push a <code>main</code> y tras CI verde:
+                                <div class="code-block">deploy:
+  needs: build-and-test
+  if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+  runs-on: ubuntu-latest
+  steps:
+    - uses: actions/checkout@v4
+    - uses: actions/setup-java@v4
+      with: { distribution: temurin, java-version: '17', cache: gradle }
+    - run: ./gradlew bootJar
+    - name: Deploy to Railway
+      uses: berviantoleo/railway-deploy@v1
+      with:
+        railway_token: ${{ secrets.RAILWAY_TOKEN }}
+        service: mi-servicio-piloto</div>
+                            </li>
+                        </ol>
+                    </div>
+
+                    <div class="runbook-phase">
+                        <div class="runbook-phase-head">F · Rollback y criterio de paso a prod</div>
+                        <ol class="runbook-steps">
+                            <li>En el PaaS: <em>Deployments</em> → deploy anterior → <strong>Rollback</strong> · probar en staging.</li>
+                            <li>Actualizar runbook con URL staging, variables y procedimiento de rollback por stack.</li>
+                            <li><strong>Prod:</strong> solo cuando staging piloto 1 (y luego 2) llevan ≥1 semana estable · rollback probado · CI + deploy automático verificados.</li>
+                        </ol>
+                    </div>
+
+                    <div class="verify-box"><strong>Verificación:</strong> Entorno staging activo y documentado · deploy manual OK en piloto 1 (y piloto 2) · health check · rollback probado · merge a <code>main</code> despliega a staging · secretos solo en PaaS/GitHub Secrets.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- T04 -->
+        <div class="task-card">
+            <div class="task-head"><h3>T-04 · SonarQube / SonarCloud + Quality Gate</h3><span class="task-tag">Sem 3-4</span></div>
+            <div class="task-body">
+                <div class="task-meta">
+                    <div class="task-field"><label>Responsable</label><input type="text" data-store="t04-resp"></div>
+                    <div class="task-field"><label>Fecha objetivo</label><input type="date" data-store="t04-fecha"></div>
+                </div>
+                <table class="task-table">
+                    <tr><th>Objetivo</th><td>Análisis estático en CI con Quality Gate común: cobertura ≥70% en código nuevo, 0 vulnerabilidades nuevas, deuda controlada.</td></tr>
+                    <tr><th>Herramientas</th><td>SonarCloud · Gradle (Java) · sonar-scanner (React/Angular/Node) · <code>SONAR_TOKEN</code></td></tr>
+                    <tr><th>Entorno</th><td>SonarCloud org Babooni · <strong>Piloto 1:</strong> <code>react/back</code> + <code>react/front</code> · <strong>Piloto 2:</strong> <code>angular/back</code> + <code>angular/front</code></td></tr>
+                </table>
+                <div class="task-runbook">
+                    <div class="runbook-title">Guía paso a paso</div>
+
+                    <div class="runbook-phase">
+                        <div class="runbook-phase-head">A · Alta en SonarCloud y conexión GitHub</div>
+                        <ol class="runbook-steps">
+                            <li>Ir a <a href="https://sonarcloud.io" target="_blank" rel="noopener">sonarcloud.io</a> → login con cuenta GitHub de la org.</li>
+                            <li><strong>+</strong> → Analyze new project → importar org <code>Babooni-Technologies</code>.</li>
+                            <li>Conectar repos <strong>piloto 1</strong> (<code>react/back</code>, <code>react/front</code>) → Set Up → <strong>GitHub Actions</strong>. Repetir con repos <strong>piloto 2</strong> (<code>angular/back</code>, <code>angular/front</code>) tras validar piloto 1.</li>
+                            <li>Copiar el <code>SONAR_TOKEN</code> que muestra SonarCloud.</li>
+                            <li>GitHub repo → <em>Settings → Secrets → Actions</em> → <code>SONAR_TOKEN</code> = token copiado.</li>
+                            <li>Org GitHub → <em>Settings → Secrets → Actions</em> → mismo secret a nivel org si varios repos lo usarán.</li>
+                        </ol>
+                    </div>
+
+                    <div class="runbook-phase">
+                        <div class="runbook-phase-head">B · Java — Gradle + JaCoCo (piloto 2)</div>
+                        <ol class="runbook-steps">
+                            <li>En <code>build.gradle</code>, añadir plugin:
+                                <div class="code-block">plugins {
+    id 'org.sonarqube' version '5.1.0.4882'
+}
+
+sonar {
+    properties {
+        property 'sonar.projectKey', 'Babooni-Technologies_nombre-repo'
+        property 'sonar.organization', 'babooni-technologies'
+        property 'sonar.host.url', 'https://sonarcloud.io'
+    }
+}</div>
+                            </li>
+                            <li>Generar reporte JaCoCo para cobertura (si no existe):
+                                <div class="code-block">plugins { id 'jacoco' }
+test { finalizedBy jacocoTestReport }
+jacocoTestReport { dependsOn test }</div>
+                            </li>
+                            <li>Local: <code>./gradlew test jacocoTestReport sonar -Dsonar.token=TU_TOKEN</code> para validar antes de CI.</li>
+                            <li>Snippet en subkit Java: <code>angular/back/config/sonar.gradle.snippet</code> (copiar a build.gradle del proyecto).</li>
+                        </ol>
+                    </div>
+
+                    <div class="runbook-phase">
+                        <div class="runbook-phase-head">C · React, Node, Angular — sonar-scanner (piloto 1 y piloto 2)</div>
+                        <ol class="runbook-steps">
+                            <li><strong>Piloto 1:</strong> conectar Sonar en repos <code>react/back</code> y <code>react/front</code>. <strong>Piloto 2:</strong> repetir en <code>angular/back</code> y <code>angular/front</code>.</li>
+                            <li>Crear <code>sonar-project.properties</code> en raíz del repo frontend/API:
+                                <div class="code-block">sonar.projectKey=Babooni-Technologies_nombre-repo
+sonar.organization=babooni-technologies
+sonar.sources=src
+sonar.tests=src
+sonar.javascript.lcov.reportPaths=coverage/lcov.info
+sonar.sourceEncoding=UTF-8</div>
+                            </li>
+                            <li>React/Angular: generar cobertura en CI antes del scan — <code>npm test -- --coverage</code> (Jest/Vitest) o <code>ng test --code-coverage</code>.</li>
+                            <li>Step Sonar en workflow del subkit: <code>{kit}/{front|back}/.github/workflows/sonar.yml</code> o step añadido a <code>ci.yml</code>:
+                                <div class="code-block">- uses: SonarSource/sonarqube-scan-action@v4
+  env:
+    SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}</div>
+                            </li>
+                            <li>ESLint/Prettier ya en <code>react/front/</code> y <code>angular/front/</code>; alinear Sonar con esas configs al copiar el subkit.</li>
+                        </ol>
+                    </div>
+
+                    <div class="runbook-phase">
+                        <div class="runbook-phase-head">D · Step Sonar en GitHub Actions (Java — piloto 2)</div>
+                        <ol class="runbook-steps">
+                            <li>Añadir al workflow <code>ci.yml</code> tras el job de test:
+                                <div class="code-block">- name: SonarCloud Scan
+  env:
+    SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+    GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+  run: ./gradlew jacocoTestReport sonar</div>
+                            </li>
+                            <li>Push → verificar análisis en dashboard SonarCloud del repo.</li>
+                        </ol>
+                    </div>
+
+                    <div class="runbook-phase">
+                        <div class="runbook-phase-head">E · Quality Gate org-wide</div>
+                        <ol class="runbook-steps">
+                            <li>SonarCloud → <em>Quality Gates</em> → duplicar «Sonar way» → nombrar <code>Babooni Standard</code>.</li>
+                            <li>Condiciones mínimas:
+                                <ul>
+                                    <li>Coverage on New Code ≥ <strong>70%</strong></li>
+                                    <li>New Issues (Vulnerabilities) = <strong>0</strong></li>
+                                    <li>Technical Debt Ratio on New Code ≤ <strong>5%</strong></li>
+                                </ul>
+                            </li>
+                            <li><em>Administration → Quality Gate</em> → asignar <code>Babooni Standard</code> como default de la org.</li>
+                            <li>GitHub → branch protection → añadir status check <strong>SonarCloud Code Analysis</strong> como obligatorio.</li>
+                            <li>Publicar criterios en <code>docs/quality-gate.md</code> (raíz ai-foundation; enlazar desde README de cada subkit).</li>
+                        </ol>
+                    </div>
+
+                    <div class="verify-box"><strong>Verificación:</strong> SonarCloud verde en piloto 1 y piloto 2 · QG pasa en PR limpio · PR con vulnerabilidad o cobertura baja bloquea merge · documento quality-gate publicado.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- T05 -->
+        <div class="task-card">
+            <div class="task-head"><h3>T-05 · Convención de commits</h3><span class="task-tag">Sem 3-4</span></div>
+            <div class="task-body">
+                <div class="task-meta">
+                    <div class="task-field"><label>Responsable</label><input type="text" data-store="t05-resp"></div>
+                    <div class="task-field"><label>Fecha objetivo</label><input type="date" data-store="t05-fecha"></div>
+                </div>
+                <table class="task-table">
+                    <tr><th>Objetivo</th><td>Commits legibles y automatizables: Conventional Commits en todos los repos, validados en CI.</td></tr>
+                    <tr><th>Herramientas</th><td><a href="https://iacedo.craft.me/u43GQUGEU8eypJ" target="_blank" rel="noopener">Commit Message Guide</a> · commitlint · GitHub Action</td></tr>
+                    <tr><th>Entorno</th><td>Local (hook opcional) + validación en PR</td></tr>
+                </table>
+                <div class="task-runbook">
+                    <div class="runbook-title">Guía paso a paso</div>
+
+                    <div class="runbook-phase">
+                        <div class="runbook-phase-head">A · Formato Conventional Commits</div>
+                        <ol class="runbook-steps">
+                            <li>Formato: <code>&lt;tipo&gt;(&lt;alcance&gt;): &lt;descripción&gt;</code></li>
+                            <li>Tipos permitidos: <code>feat</code>, <code>fix</code>, <code>docs</code>, <code>style</code>, <code>refactor</code>, <code>test</code>, <code>chore</code>, <code>ci</code>, <code>build</code>, <code>perf</code>.</li>
+                            <li>Ejemplos válidos:
+                                <div class="code-block">feat(auth): add JWT refresh token endpoint
+fix(invoice): correct VAT calculation rounding
+docs(readme): add local setup instructions
+ci(github): add SonarCloud scan step</div>
+                            </li>
+                            <li>Publicar guía en cada subkit: <code>{kit}/{front|back}/docs/commit-convention.md</code> + <code>commitlint.config.js</code> en la raíz del subkit (se copia al proyecto).</li>
+                        </ol>
+                    </div>
+
+                    <div class="runbook-phase">
+                        <div class="runbook-phase-head">B · Validación en CI (recomendado)</div>
+                        <ol class="runbook-steps">
+                            <li>Crear <code>.github/workflows/commitlint.yml</code>:
+                                <div class="code-block">name: Commitlint
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, edited]
+
+jobs:
+  commitlint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with: { fetch-depth: 0 }
+      - uses: wagoid/commitlint-github-action@v6</div>
+                            </li>
+                            <li>Crear <code>commitlint.config.js</code> en raíz:
+                                <div class="code-block">module.exports = {
+  extends: ['@commitlint/config-conventional'],
+  rules: {
+    'subject-case': [0],
+    'header-max-length': [2, 'always', 100]
+  }
+};</div>
+                            </li>
+                            <li>PR con commit mal formado (ej. <code>fixed stuff</code>) → workflow falla → corregir con <code>git commit --amend</code> o rebase.</li>
+                        </ol>
+                    </div>
+
+                    <div class="runbook-phase">
+                        <div class="runbook-phase-head">C · Adopción en repos piloto</div>
+                        <ol class="runbook-steps">
+                            <li><strong>Piloto 1:</strong> activar commitlint en repos <code>react/back</code> y <code>react/front</code>.</li>
+                            <li><strong>Piloto 2:</strong> activar commitlint en repos <code>angular/back</code> y <code>angular/front</code>.</li>
+                            <li>Añadir sección en <code>CONTRIBUTING.md</code> de cada repo con enlace al subkit origen en ai-foundation.</li>
+                            <li>Comunicar al equipo: squash merge usa el título del PR como commit en main — el título del PR también debe seguir la convención.</li>
+                            <li>Plantilla PR (T-01): añadir ítem «Título del PR sigue Conventional Commits».</li>
+                        </ol>
+                    </div>
+
+                    <div class="verify-box"><strong>Verificación:</strong> Doc en ai-foundation · CONTRIBUTING actualizado · Action commitlint verde en PR válido y rojo en inválido · equipo informado.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- T06 -->
+        <div class="task-card">
+            <div class="task-head"><h3>T-06 · Arquetipos por stack + arquitectura + dependencias</h3><span class="task-tag">Sem 3-4</span></div>
+            <div class="task-body">
+                <div class="task-meta">
+                    <div class="task-field"><label>Responsable</label><input type="text" data-store="t06-resp"></div>
+                    <div class="task-field"><label>Fecha objetivo</label><input type="date" data-store="t06-fecha"></div>
+                </div>
+                <table class="task-table">
+                    <tr><th>Objetivo</th><td>Un <strong>arquetipo ejecutable</strong> por tecnología dentro de <code>{kit}/{front|back}/archetype/</code>, más documentación de capas, ADRs transversales y dependencias compartidas.</td></tr>
+                    <tr><th>Herramientas</th><td>Spring Boot / Express o Fastify · Vite · Angular CLI · Gradle/npm · GitHub Template repos · GitHub Packages · ADRs en <code>docs/adr/</code></td></tr>
+                    <tr><th>Entorno</th><td>Arquetipos extraídos de <strong>piloto 1</strong> (<code>react/back</code> + <code>react/front</code>) y <strong>piloto 2</strong> (<code>angular/back</code> + <code>angular/front</code>)</td></tr>
+                </table>
+                <div class="task-runbook">
+                    <div class="runbook-title">Guía paso a paso</div>
+
+                    <div class="runbook-phase">
+                        <div class="runbook-phase-head">A · Kit vs arquetipo (no confundir)</div>
+                        <ol class="runbook-steps">
+                            <li><strong>Subkit</strong> (<code>react/front/</code>, <code>react/back/</code>…): reglas IA, CI, configs — se copia a repos <em>existentes</em>.</li>
+                            <li><strong>Arquetipo</strong> (<code>{kit}/{front|back}/archetype/</code>): proyecto mínimo <em>arrancable</em> — se usa para repos <em>nuevos</em>.</li>
+                            <li>Cada arquetipo incluye: código de ejemplo, test smoke, <code>/health</code>, Dockerfile, workflows del subkit y <code>{kit}/{front|back}/archetype/docs/architecture.md</code>.</li>
+                            <li>Convenciones de capas (documentar en <code>architecture.md</code> de cada kit):
+                                <ul>
+                                    <li><strong>Java:</strong> controller → service → dao · DTOs en API, nunca entidad JPA expuesta.</li>
+                                    <li><strong>Node:</strong> routes → services → repositories · validación en capa de entrada.</li>
+                                    <li><strong>React:</strong> pages → components → hooks → services/api · estado global solo si hace falta.</li>
+                                    <li><strong>Angular:</strong> features → smart/dumb components → services · lazy loading por feature.</li>
+                                </ul>
+                            </li>
+                            <li>ADRs transversales (org-wide) en raíz de ai-foundation:
+                                <div class="code-block">docs/adr/
+├── template.md
+├── 001-capas-vs-microservicios.md
+└── 002-migracion-idp.md</div>
+                            </li>
+                        </ol>
+                    </div>
+
+                    <div class="runbook-phase">
+                        <div class="runbook-phase-head">B · Arquetipos ejecutables (rutas en ai-foundation)</div>
+                        <ol class="runbook-steps">
+                            <li>Mapa de arquetipos por tecnología:
+                                <div class="code-block">react/back/archetype/     ← API Node
+react/front/archetype/    ← app React
+angular/back/archetype/   ← API Java (Spring Boot)
+angular/front/archetype/  ← app Angular</div>
+                            </li>
+                            <li>Estructura común de cada arquetipo:
+                                <div class="code-block">{kit}/{front|back}/archetype/
+├── README.md              ← «Cómo crear repo desde este arquetipo»
+├── docs/architecture.md
+├── src/                   ← código mínimo funcional
+├── tests/                 ← al menos 1 test smoke
+├── Dockerfile
+├── .github/workflows/     ← copiados del subkit (ci.yml, deploy.yml)
+└── .cursor/               ← reglas IA del subkit</div>
+                            </li>
+                            <li><strong>Node (back, piloto 1)</strong> — <code>react/back/archetype/</code> — extraer del piloto T-02/T-03:
+                                <div class="code-block">src/
+├── app.js                 ← bootstrap Express/Fastify
+├── routes/
+│   └── health.routes.js   ← GET /health → 200
+├── services/
+│   └── example.service.js
+├── repositories/            ← vacío o mock de ejemplo
+└── middleware/
+    └── errorHandler.js
+tests/
+└── health.test.js         ← supertest: GET /health</div>
+                            </li>
+                            <li><strong>React (front, piloto 1)</strong> — <code>react/front/archetype/</code> (Vite + TypeScript):
+                                <div class="code-block">src/
+├── main.tsx
+├── App.tsx
+├── pages/
+│   └── HomePage.tsx
+├── components/
+│   └── Layout.tsx
+├── hooks/
+│   └── useHealth.ts
+├── services/
+│   └── api.ts             ← fetch /health
+└── test/
+    └── App.test.tsx</div>
+                            </li>
+                            <li><strong>Angular (front, piloto 2)</strong> — <code>angular/front/archetype/</code>:
+                                <div class="code-block">src/app/
+├── app.config.ts
+├── app.routes.ts          ← lazy load por feature
+├── core/                  ← singletons, interceptors
+├── shared/                ← componentes dumb reutilizables
+└── features/
+    └── home/
+        ├── home.routes.ts
+        ├── pages/home-page/
+        └── services/home.service.ts</div>
+                            </li>
+                            <li><strong>Java (back, piloto 2)</strong> — <code>angular/back/archetype/</code> (Spring Boot 3):
+                                <div class="code-block">src/main/java/com/babooni/app/
+├── Application.java
+├── web/
+│   └── HealthController.java
+├── service/
+│   └── ExampleService.java
+├── dao/
+│   └── ExampleDao.java
+└── domain/
+    └── ExampleEntity.java
+src/test/java/.../
+└── HealthControllerTest.java</div>
+                            </li>
+                            <li>Cada arquetipo debe arrancar en local y pasar CI sin modificar código:
+                                <div class="code-block"># Node (react/back)
+cd react/back/archetype && npm ci && npm test && npm start
+
+# React (react/front)
+cd react/front/archetype && npm ci && npm test && npm run build
+
+# Angular (angular/front)
+cd angular/front/archetype && npm ci && npm test && npm run build
+
+# Java (angular/back)
+cd angular/back/archetype && ./gradlew test bootRun</div>
+                            </li>
+                        </ol>
+                    </div>
+
+                    <div class="runbook-phase">
+                        <div class="runbook-phase-head">C · Publicar como GitHub Template + documentar</div>
+                        <ol class="runbook-steps">
+                            <li>En org <code>Babooni-Technologies</code>, crear repos template (opcional, recomendado):
+                                <ul>
+                                    <li><code>babooni-starter-node</code> · <code>babooni-starter-react</code></li>
+                                    <li><code>babooni-starter-angular</code> · <code>babooni-starter-java</code></li>
+                                </ul>
+                            </li>
+                            <li>Activar <em>Template repository</em> en Settings de cada repo · sincronizar desde <code>ai-foundation/{kit}/{front|back}/archetype/</code> en cada release.</li>
+                            <li>Actualizar <code>README.md</code> de ai-foundation — tabla con columnas Kit · Subcarpeta · Tecnología · Arquetipo:
+                                <div class="code-block"># Opción A: GitHub UI → «Use this template»
+# Opción B: degit / clone
+npx degit Babooni-Technologies/ai-foundation/react/back/archetype mi-api-node
+cd mi-api-node && npm ci && git init</div>
+                            </li>
+                            <li>Regla de equipo: <strong>repo nuevo = crear desde arquetipo</strong> · repo existente = copiar kit (T-07), no mezclar.</li>
+                        </ol>
+                    </div>
+
+                    <div class="runbook-phase">
+                        <div class="runbook-phase-head">D · ADR de criterios arquitectónicos</div>
+                        <ol class="runbook-steps">
+                            <li>Plantilla ADR en <code>docs/adr/template.md</code>:
+                                <div class="code-block"># ADR-NNN: Título
+## Estado: Propuesto | Aceptado | Obsoleto
+## Contexto
+## Decisión
+## Consecuencias
+## Alternativas descartadas</div>
+                            </li>
+                            <li>Redactar <code>001-capas-vs-microservicios.md</code>: cuándo monolito modular, cuándo extraer microservicio (criterio: equipo autónomo + datos propios + SLA distinto).</li>
+                            <li>Redactar <code>docs/adr/solid-checklist.md</code> (raíz ai-foundation): 1 línea por principio con ejemplo del codebase Babooni.</li>
+                        </ol>
+                    </div>
+
+                    <div class="runbook-phase">
+                        <div class="runbook-phase-head">E · Centralizar dependencias compartidas</div>
+                        <ol class="runbook-steps">
+                            <li>Identificar libs duplicadas (ej. <code>commons-preving</code>, utilidades JWT, DTOs comunes).</li>
+                            <li>Repo único (existente o nuevo) con versionado semver: tags <code>v1.2.0</code> en cada release.</li>
+                            <li>Publicar en GitHub Packages — en <code>build.gradle</code> del consumidor:
+                                <div class="code-block">repositories {
+    maven {
+        url = uri("https://maven.pkg.github.com/Babooni-Technologies/COMMONS_REPO")
+        credentials {
+            username = project.findProperty("gpr.user") ?: System.getenv("GITHUB_ACTOR")
+            password = project.findProperty("gpr.key") ?: System.getenv("GITHUB_TOKEN")
+        }
+    }
+}
+dependencies {
+    implementation 'com.babooni:commons-preving:1.2.0'
+}</div>
+                            </li>
+                            <li>Documentar releases en <code>docs/shared-deps.md</code> (enlazado desde README).</li>
+                        </ol>
+                    </div>
+
+                    <div class="verify-box"><strong>Verificación:</strong> Arquetipos piloto 1 (<code>react/back/archetype</code> + <code>react/front/archetype</code>) y piloto 2 (<code>angular/back/archetype</code> + <code>angular/front/archetype</code>) · cada arquetipo pasa <code>test</code> + CI · README con tabla kit/subcarpeta · 1 repo creado desde template por piloto · ADR-001 publicado.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- T07 -->
+        <div class="task-card">
+            <div class="task-head"><h3>T-07 · Adopción ai-foundation (tests + activos)</h3><span class="task-tag">Sem 1-6</span></div>
+            <div class="task-body">
+                <div class="task-meta">
+                    <div class="task-field"><label>Responsable</label><input type="text" data-store="t07-resp"></div>
+                    <div class="task-field"><label>Fecha objetivo</label><input type="date" data-store="t07-fecha"></div>
+                </div>
+                <table class="task-table">
+                    <tr><th>Objetivo</th><td>Repo único de activos por subkit (<code>react/front</code>, <code>react/back</code>, etc.): tests, CI, configs, prompts. Adopción en al menos 1 par front+back.</td></tr>
+                    <tr><th>Herramientas</th><td>GitHub <code>Babooni-Technologies/ai-foundation</code> · PR reviews · Markdown</td></tr>
+                    <tr><th>Entorno</th><td>Repo central · copia/adaptación en proyectos destino</td></tr>
+                </table>
+                <div class="task-runbook">
+                    <div class="runbook-title">Guía paso a paso</div>
+
+                    <div class="runbook-phase">
+                        <div class="runbook-phase-head">A · Estructura actual del repo</div>
+                        <ol class="runbook-steps">
+                            <li>Estado en GitHub (<code>Babooni-Technologies/ai-foundation</code>):
+                                <div class="code-block">ai-foundation/
+├── README.md              # catálogo de subkits copiables
+├── CHANGELOG.md
+├── .github/workflows/     # CI del propio repo ai-foundation
+├── scripts/
+├── react/
+│   ├── front/             # kit React → copiar a raíz repo frontend React
+│   └── back/              # kit Node  → copiar a raíz repo API Node
+└── angular/
+    ├── front/             # kit Angular → copiar a raíz repo frontend Angular
+    └── back/              # kit Java   → copiar a raíz repo API Java</div>
+                            </li>
+                            <li>Contenido típico dentro de cada subkit (<code>react/front/</code>, <code>react/back/</code>, etc.): reglas Cursor/Claude (<code>.cursor/</code>, skills), <code>docs/</code> (gitflow, deploy, idp…), DoR, CI, prompts, configs lint, tests de ejemplo, workflows.</li>
+                            <li>Objetivo Fase 0 — enriquecer los cuatro subkits con CI GitFlow, Sonar, deploy y arquetipos (T-06).</li>
+                            <li>Ampliar tabla del <code>README.md</code>: kit · subcarpeta · tecnología · versión · qué copiar · última actualización (CHANGELOG).</li>
+                        </ol>
+                    </div>
+
+                    <div class="runbook-phase">
+                        <div class="runbook-phase-head">B · Adoptar subkit en proyecto (flujo oficial)</div>
+                        <ol class="runbook-steps">
+                            <li>Clonar ai-foundation o descargar la subcarpeta que corresponda desde GitHub.</li>
+                            <li>Copiar <strong>todo el contenido</strong> de la subcarpeta a la raíz del repo destino:
+                                <ul>
+                                    <li>App React → contenido de <code>react/front/</code></li>
+                                    <li>API Node → contenido de <code>react/back/</code></li>
+                                    <li>App Angular → contenido de <code>angular/front/</code></li>
+                                    <li>API Java → contenido de <code>angular/back/</code></li>
+                                </ul>
+                            </li>
+                            <li>Commit: <code>chore: adopt ai-foundation react/front kit vX.Y</code> · tag opcional referenciando CHANGELOG.</li>
+                            <li>Verificar: reglas IA activas en Cursor · CI pasa · DoR accesible al equipo.</li>
+                        </ol>
+                    </div>
+
+                    <div class="runbook-phase">
+                        <div class="runbook-phase-head">C · Adoptar subkits (piloto 1 y piloto 2)</div>
+                        <ol class="runbook-steps">
+                            <li><strong>Piloto 1 (sem 1-2):</strong> adoptar <code>react/front/</code> + <code>react/back/</code> en repos piloto · <code>npm test</code> / CI verde.</li>
+                            <li><strong>Piloto 2 (sem 3-4):</strong> adoptar <code>angular/front/</code> + <code>angular/back/</code> en repos piloto · <code>./gradlew test</code> en Java / CI Angular verde.</li>
+                        </ol>
+                    </div>
+
+                    <div class="runbook-phase">
+                        <div class="runbook-phase-head">D · Contribuir de vuelta a ai-foundation</div>
+                        <ol class="runbook-steps">
+                            <li>PR al kit correspondiente: mejora en reglas, skill, workflow o prompt genérico (sin datos de cliente).</li>
+                            <li>Actualizar <code>CHANGELOG.md</code> con semver del kit · revisión por par del mismo stack.</li>
+                            <li>Proyectos consumidores actualizan copiando diff del kit o cherry-pick de archivos concretos.</li>
+                        </ol>
+                    </div>
+
+                    <div class="runbook-phase">
+                        <div class="runbook-phase-head">E · Reglas de contribución</div>
+                        <ol class="runbook-steps">
+                            <li>Crear <code>CONTRIBUTING.md</code> en ai-foundation: fork/branch → PR → 1 review → merge.</li>
+                            <li>Convención: activos genéricos (sin datos de cliente) · licencia interna · versionar cambios breaking en CHANGELOG.</li>
+                        </ol>
+                    </div>
+
+                    <div class="verify-box"><strong>Verificación:</strong> README tabla kit/subcarpeta actualizada · piloto 1 (<code>react/front</code> + <code>react/back</code>) y piloto 2 (<code>angular/front</code> + <code>angular/back</code>) adoptados · CHANGELOG con versión · reglas IA visibles en IDE tras copiar subkit.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- T08 -->
+        <div class="task-card">
+            <div class="task-head"><h3>T-08 · Design System + Storybook</h3><span class="task-tag">Sem 5-6</span></div>
+            <div class="task-body">
+                <div class="task-meta">
+                    <div class="task-field"><label>Responsable</label><input type="text" data-store="t08-resp"></div>
+                    <div class="task-field"><label>Fecha objetivo</label><input type="date" data-store="t08-fecha"></div>
+                </div>
+                <table class="task-table">
+                    <tr><th>Objetivo</th><td>Design System en React (<code>@babooni/ui</code>) con Storybook · consumible desde apps React y Angular (wrapper o web components).</td></tr>
+                    <tr><th>Herramientas</th><td>React + Storybook 8 · npm · Angular apps consumen vía npm o module federation · docs en <code>react/front/docs/</code></td></tr>
+                    <tr><th>Entorno</th><td>Repo <code>design-system</code> · consumo piloto 1: app React (<code>react/front</code>) · piloto 2: app Angular (<code>angular/front</code>) con tokens/wrappers</td></tr>
+                </table>
+                <div class="task-runbook">
+                    <div class="runbook-title">Guía paso a paso</div>
+
+                    <div class="runbook-phase">
+                        <div class="runbook-phase-head">A · Crear el repo y paquete base</div>
+                        <ol class="runbook-steps">
+                            <li>Crear repo <code>Babooni-Technologies/design-system</code> (o carpeta <code>packages/ui</code> en monorepo).</li>
+                            <li>Inicializar paquete:
+                                <div class="code-block">mkdir design-system && cd design-system
+npm init -y
+npm pkg set name="@babooni/ui" version="0.1.0"
+npm install react react-dom --save-peer
+npm install -D typescript @types/react storybook @storybook/react-vite</div>
+                            </li>
+                            <li>Inicializar Storybook:
+                                <div class="code-block">npx storybook@latest init</div>
+                            </li>
+                            <li>Estructura mínima:
+                                <div class="code-block">src/
+├── components/
+│   ├── Button/
+│   │   ├── Button.tsx
+│   │   ├── Button.stories.tsx
+│   │   └── Button.module.css
+│   ├── Input/
+│   └── Modal/
+└── index.ts          # export { Button } from './components/Button'</div>
+                            </li>
+                        </ol>
+                    </div>
+
+                    <div class="runbook-phase">
+                        <div class="runbook-phase-head">B · Primeros componentes (MVP)</div>
+                        <ol class="runbook-steps">
+                            <li>Implementar con tokens de marca Babooni (negro #0a0a0a, rojo #e60000, Montserrat).</li>
+                            <li>Componentes mínimos Fase 0: <strong>Button</strong>, <strong>Input</strong>, <strong>Modal</strong>, <strong>Alert</strong>, <strong>Card</strong>.</li>
+                            <li>Cada componente: props tipadas, variantes (primary/secondary/danger), story con Controls en Storybook.</li>
+                            <li>Ejecutar local: <code>npm run storybook</code> → <code>http://localhost:6006</code>.</li>
+                        </ol>
+                    </div>
+
+                    <div class="runbook-phase">
+                        <div class="runbook-phase-head">C · Publicar Storybook</div>
+                        <ol class="runbook-steps">
+                            <li>Build estático: <code>npm run build-storybook</code> → carpeta <code>storybook-static/</code>.</li>
+                            <li>Opción A — PaaS: subir <code>storybook-static</code> a Railway/Render como sitio estático (mismo flujo T-03).</li>
+                            <li>Opción B — Chromatic: <code>npx chromatic --project-token=TOKEN</code> en CI para review visual en PRs.</li>
+                            <li>Workflow CI en merge a <code>main</code> despliega docs automáticamente.</li>
+                        </ol>
+                    </div>
+
+                    <div class="runbook-phase">
+                        <div class="runbook-phase-head">D · Acuerdo diseño ↔ desarrollo</div>
+                        <ol class="runbook-steps">
+                            <li>Documentar en <code>react/front/docs/design-system-process.md</code> (y enlace desde README de <code>react/front/</code>):
+                                <ul>
+                                    <li>Componentes base en React + Storybook (fuente de verdad visual)</li>
+                                    <li>Apps <strong>React</strong>: <code>npm install @babooni/ui</code></li>
+                                    <li>Apps <strong>Angular</strong>: wrappers o tokens en <code>angular/front/config/design-tokens.css</code></li>
+                                    <li>Entregables diseño = stories en Storybook, no PNGs sueltos</li>
+                                </ul>
+                            </li>
+                            <li>Publicar tokens Babooni en <code>react/front/config/design-tokens.css</code> (se copia con el subkit).</li>
+                            <li><strong>Piloto 1:</strong> integrar 1 componente del DS en app React piloto (<code>react/front</code> en producto real).</li>
+                            <li><strong>Piloto 2:</strong> validar consumo en app Angular piloto vía tokens (<code>angular/front/config/design-tokens.css</code>) o wrapper de componente.</li>
+                        </ol>
+                    </div>
+
+                    <div class="verify-box"><strong>Verificación:</strong> Storybook accesible en URL interna · 5 componentes base con stories · 1 app consume <code>@babooni/ui</code> · proceso diseño-dev documentado.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- T09 -->
+        <div class="task-card">
+            <div class="task-head"><h3>T-09 · Plan migración login → IDP</h3><span class="task-tag">Sem 5-6</span></div>
+            <div class="task-body">
+                <div class="task-meta">
+                    <div class="task-field"><label>Responsable</label><input type="text" data-store="t09-resp"></div>
+                    <div class="task-field"><label>Fecha objetivo</label><input type="date" data-store="t09-fecha"></div>
+                </div>
+                <table class="task-table">
+                    <tr><th>Objetivo</th><td>ADR aprobado con inventario de apps, IDP elegido, fases de migración y piloto en 1 app de bajo riesgo.</td></tr>
+                    <tr><th>Herramientas</th><td>Keycloak / Auth0 / Azure AD · OAuth2/OIDC · Spring Security</td></tr>
+                    <tr><th>Entorno</th><td>IDP staging · <strong>Piloto 1:</strong> app Node/React (<code>react/back</code> + <code>react/front</code>) · <strong>Piloto 2:</strong> app Java/Angular (<code>angular/back</code> + <code>angular/front</code>)</td></tr>
+                </table>
+                <div class="task-runbook">
+                    <div class="runbook-title">Guía paso a paso</div>
+
+                    <div class="runbook-phase">
+                        <div class="runbook-phase-head">A · Inventario de aplicaciones</div>
+                        <ol class="runbook-steps">
+                            <li>Crear inventario en <code>docs/adr/login-migration-inventory.md</code>:</li>
+                            <li>Por cada app, rellenar columna <strong>Stack</strong> (Java / Node / React / Angular):
+                                <div class="code-block">| App | Stack | Auth actual | Criticidad | Notas |
+| api-rrmm | Java | JWT custom (preving-security) | Alta | Spring Boot |
+| portal-web | React | OIDC parcial | Media | Vite + React 18 |
+| intranet-app | Angular | Sesión legacy | Media | Angular 17 |
+| worker-api | Node | API keys | Baja | Express/Fastify |</div>
+                            </li>
+                            <li>Buscar en repos: dependencias <code>preving-security</code>, filtros login propios, tablas usuarios locales duplicadas.</li>
+                            <li>Clasificar: <strong>P1 piloto 1</strong> (Node/React, bajo riesgo) · <strong>P1 piloto 2</strong> (Java/Angular) · <strong>P2</strong> · <strong>P3 críticas</strong>.</li>
+                        </ol>
+                    </div>
+
+                    <div class="runbook-phase">
+                        <div class="runbook-phase-head">B · Elegir IDP y registrar ADR</div>
+                        <ol class="runbook-steps">
+                            <li>Matriz de decisión (documentar en ADR):
+                                <ul>
+                                    <li><strong>Keycloak</strong> — self-hosted, control total, coste infra propio</li>
+                                    <li><strong>Auth0</strong> — SaaS, rápido, coste por MAU</li>
+                                    <li><strong>Azure AD B2C</strong> — si clientes ya en ecosistema Microsoft</li>
+                                </ul>
+                            </li>
+                            <li>Redactar <code>docs/adr/002-migracion-idp.md</code> con: contexto, IDP elegido, flujo OIDC, claims.</li>
+                            <li>Definir realms/clients: 1 client por app, redirect URIs staging y prod separados.</li>
+                        </ol>
+                    </div>
+
+                    <div class="runbook-phase">
+                        <div class="runbook-phase-head">C · Piloto técnico — piloto 1 (Node + React)</div>
+                        <ol class="runbook-steps">
+                            <li>Elegir app P1 piloto 1 en repos <code>react/back</code> y/o <code>react/front</code>.</li>
+                            <li>En IDP staging: crear client OIDC para app piloto 1.</li>
+                            <li><strong>Node API:</strong> middleware JWT con <code>passport</code> o validación JWKS del IDP.</li>
+                            <li><strong>React:</strong> librería OIDC (<code>oidc-client-ts</code>) · tokens en memoria, no localStorage para access token.</li>
+                            <li>Guías: <code>react/back/docs/idp.md</code>, <code>react/front/docs/idp.md</code>.</li>
+                            <li>Pruebas: login flow · logout · token expirado · rol insuficiente.</li>
+                        </ol>
+                    </div>
+
+                    <div class="runbook-phase">
+                        <div class="runbook-phase-head">D · Piloto técnico — piloto 2 (Java + Angular)</div>
+                        <ol class="runbook-steps">
+                            <li>Repetir flujo OIDC en app piloto 2 (<code>angular/back</code> y/o <code>angular/front</code>) tras validar piloto 1.</li>
+                            <li><strong>Spring Boot (Java):</strong>
+                                <div class="code-block">implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
+spring.security.oauth2.resourceserver.jwt.issuer-uri=https://IDP/realms/babooni</div>
+                            </li>
+                            <li><strong>Angular:</strong> <code>angular-oauth2-oidc</code> · tokens en memoria.</li>
+                            <li>Guías: <code>angular/back/docs/idp.md</code>, <code>angular/front/docs/idp.md</code>.</li>
+                        </ol>
+                    </div>
+
+                    <div class="runbook-phase">
+                        <div class="runbook-phase-head">E · Roadmap de migración masiva</div>
+                        <ol class="runbook-steps">
+                            <li>En ADR-002, tabla de fases:
+                                <div class="code-block">Fase 0 (sem 5-6): ADR + piloto P1 en staging
+Fase 1 (Q+1): P1 en prod + 2 apps P2 en staging
+Fase 2 (Q+2): apps P2 prod + inicio P3
+Fase 3: retirar preving-security JAR · deprecar tablas usuarios locales</div>
+                            </li>
+                            <li>Riesgos documentados: sesiones activas, integraciones batch con credenciales, apps legacy Java 7 sin OAuth2 nativo (gateway/BFF).</li>
+                            <li>Criterio de corte por app: 2 semanas sin incidencias auth en staging → ventana prod con rollback plan.</li>
+                        </ol>
+                    </div>
+
+                    <div class="verify-box"><strong>Verificación:</strong> Inventario completo · ADR-002 aprobado · OIDC funcional en staging piloto 1 y piloto 2 · roadmap con fechas · plan rollback documentado.</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    </div>
+</section>
+
+<section id="cronograma" class="doc-section">
+    <button type="button" class="doc-section-toggle" aria-expanded="false" aria-controls="panel-cronograma">
+        <div class="toggle-inner">
+            <div class="section-header">
+                <div class="section-number">2</div>
+                <h2>Cronograma <span class="red">6 semanas</span></h2>
+            </div>
+            <span class="toggle-icon" aria-hidden="true"></span>
+        </div>
+    </button>
+    <div id="panel-cronograma" class="doc-section-panel">
+    <div class="section-body">
+        <p class="section-desc">Tres fases progresivas. Asigna responsable de fase y fecha de cierre en la reunión.</p>
+        <div class="phase-grid">
+            <div class="phase">
+                <div class="phase-tag">Semana 1 — 2</div>
+                <h3>Cimientos</h3>
+                <ul>
+                    <li>T-01 GitFlow + main protegida</li>
+                    <li>T-02 CI piloto 1: react/back + react/front</li>
+                    <li>T-03 · Entorno staging PaaS activo (cuenta, proyecto, BD, secretos)</li>
+                    <li>T-03 · Deploy piloto 1 (tras CI verde): react/back + react/front</li>
+                    <li>T-07 Adoptar subkits piloto 1</li>
+                </ul>
+                <div class="task-meta" style="margin-top:12px">
+                    <div class="task-field"><label>Resp. fase</label><input type="text" data-store="fase1-resp"></div>
+                    <div class="task-field"><label>Cierre</label><input type="date" data-store="fase1-fecha"></div>
+                </div>
+            </div>
+            <div class="phase">
+                <div class="phase-tag">Semana 3 — 4</div>
+                <h3>Calidad</h3>
+                <ul>
+                    <li>T-02 CI piloto 2: angular/back + angular/front</li>
+                    <li>T-03 Deploy piloto 2: angular/back + angular/front</li>
+                    <li>T-04 Sonar piloto 1 + piloto 2</li>
+                    <li>T-05 Convención commits (configs/shared)</li>
+                    <li>T-06 Arquetipos por stack + arquitectura</li>
+                    <li>T-07 Adoptar subkits piloto 2</li>
+                </ul>
+                <div class="task-meta" style="margin-top:12px">
+                    <div class="task-field"><label>Resp. fase</label><input type="text" data-store="fase2-resp"></div>
+                    <div class="task-field"><label>Cierre</label><input type="date" data-store="fase2-fecha"></div>
+                </div>
+            </div>
+            <div class="phase">
+                <div class="phase-tag">Semana 5 — 6</div>
+                <h3>Producto</h3>
+                <ul>
+                    <li>T-08 Design System / Storybook</li>
+                    <li>T-09 Plan migración IDP</li>
+                    <li>Definition of Ready operativo</li>
+                    <li>T-07 Contribuir activos a ai-foundation</li>
+                </ul>
+                <div class="task-meta" style="margin-top:12px">
+                    <div class="task-field"><label>Resp. fase</label><input type="text" data-store="fase3-resp"></div>
+                    <div class="task-field"><label>Cierre</label><input type="date" data-store="fase3-fecha"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+
+<section id="checklist" class="doc-section">
+    <button type="button" class="doc-section-toggle" aria-expanded="false" aria-controls="panel-checklist">
+        <div class="toggle-inner">
+            <div class="section-header">
+                <div class="section-number">3</div>
+                <h2>Checklist de <span class="red">configuración</span></h2>
+            </div>
+            <span class="toggle-icon" aria-hidden="true"></span>
+        </div>
+    </button>
+    <div id="panel-checklist" class="doc-section-panel">
+    <div class="section-body">
+        <p class="section-desc">Marca cada ítem al completarlo. Usa <strong>Descargar HTML con datos</strong> en la barra lateral para compartir el plan completo con el equipo.</p>
+        <div class="two-col">
+            <div class="card">
+                <h3>Flujo y despliegue</h3>
+                <ul class="checklist" data-checklist="flujo">
+                    <li><label class="check-item"><input type="checkbox" data-id="flujo-1"><span class="check-text">GitFlow adoptado y documentado</span></label></li>
+                    <li><label class="check-item"><input type="checkbox" data-id="flujo-2"><span class="check-text">Rama main protegida</span></label></li>
+                    <li><label class="check-item"><input type="checkbox" data-id="flujo-3"><span class="check-text">PR con 1 aprobación mínima</span></label></li>
+                    <li><label class="check-item"><input type="checkbox" data-id="flujo-4"><span class="check-text">CI build+test (Java, Node, React o Angular)</span></label></li>
+                    <li><label class="check-item"><input type="checkbox" data-id="flujo-4b"><span class="check-text">Subkits react/front·back y angular/front·back en ai-foundation</span></label></li>
+                    <li><label class="check-item"><input type="checkbox" data-id="flujo-5"><span class="check-text">Deploy PaaS piloto 1 (react/back + react/front)</span></label></li>
+                    <li><label class="check-item"><input type="checkbox" data-id="flujo-5b"><span class="check-text">Deploy PaaS piloto 2 (angular/back + angular/front)</span></label></li>
+                    <li><label class="check-item"><input type="checkbox" data-id="flujo-6"><span class="check-text">Rollback verificado</span></label></li>
+                    <li><label class="check-item"><input type="checkbox" data-id="flujo-7"><span class="check-text">Secretos centralizados (sin SSH)</span></label></li>
+                </ul>
+                <p class="checklist-progress" data-progress-for="flujo"></p>
+            </div>
+            <div class="card">
+                <h3>Calidad</h3>
+                <ul class="checklist" data-checklist="calidad">
+                    <li><label class="check-item"><input type="checkbox" data-id="calidad-1"><span class="check-text">SonarQube/SonarCloud configurado</span></label></li>
+                    <li><label class="check-item"><input type="checkbox" data-id="calidad-2"><span class="check-text">Quality Gate org común</span></label></li>
+                    <li><label class="check-item"><input type="checkbox" data-id="calidad-3"><span class="check-text">Cobertura ≥70% en pipeline</span></label></li>
+                    <li><label class="check-item"><input type="checkbox" data-id="calidad-4"><span class="check-text">Tests unitarios + integración en CI</span></label></li>
+                    <li><label class="check-item"><input type="checkbox" data-id="calidad-5"><span class="check-text">Análisis dependencias (OWASP/Dependabot)</span></label></li>
+                    <li><label class="check-item"><input type="checkbox" data-id="calidad-6"><span class="check-text">Convención commits activa (<a href="https://iacedo.craft.me/u43GQUGEU8eypJ" target="_blank" rel="noopener">guía</a>)</span></label></li>
+                </ul>
+                <p class="checklist-progress" data-progress-for="calidad"></p>
+            </div>
+            <div class="card">
+                <h3>Arquitectura, diseño e IA</h3>
+                <ul class="checklist" data-checklist="arquitectura">
+                    <li><label class="check-item"><input type="checkbox" data-id="arq-1"><span class="check-text">Arquetipos en react/back·front y angular/back·front</span></label></li>
+                    <li><label class="check-item"><input type="checkbox" data-id="arq-1b"><span class="check-text">README ai-foundation tabla kit/subcarpeta actualizada</span></label></li>
+                    <li><label class="check-item"><input type="checkbox" data-id="arq-2"><span class="check-text">Repo central dependencias compartidas</span></label></li>
+                    <li><label class="check-item"><input type="checkbox" data-id="arq-3"><span class="check-text">Criterios SOLID / microservicios acordados</span></label></li>
+                    <li><label class="check-item"><input type="checkbox" data-id="arq-4"><span class="check-text">Plan migración login IDP aprobado</span></label></li>
+                    <li><label class="check-item"><input type="checkbox" data-id="arq-5"><span class="check-text">Design System / Storybook iniciado</span></label></li>
+                    <li><label class="check-item"><input type="checkbox" data-id="arq-6"><span class="check-text">Definition of Ready operativo</span></label></li>
+                    <li><label class="check-item"><input type="checkbox" data-id="arq-7"><span class="check-text">Subkits piloto 1 adoptados (react/back + react/front)</span></label></li>
+                    <li><label class="check-item"><input type="checkbox" data-id="arq-7b"><span class="check-text">Subkits piloto 2 adoptados (angular/back + angular/front)</span></label></li>
+                    <li><label class="check-item"><input type="checkbox" data-id="arq-8"><span class="check-text">Subkit copiado en al menos 1 proyecto (ej. react/front o react/back)</span></label></li>
+                </ul>
+                <p class="checklist-progress" data-progress-for="arquitectura"></p>
+            </div>
+        </div>
+    </div>
+    </div>
+</section>
+
+</main>
+</div>
+
+<footer>
+    <div class="container">
+        <div class="footer-logo">
+            <svg viewBox="0 0 848 199.39" xmlns="http://www.w3.org/2000/svg">
+                <path fill="rgba(255,255,255,0.78)" d="M22.89,28.62V0H0V109.7H114.47V28.62Zm68.68,41V85.85H22.89V53.42H91.57Z"/>
+                <path fill="rgba(255,255,255,0.78)" d="M297.61,28.62V0H274.72V109.7H389.18V28.62Zm68.68,41V85.85H297.61V53.42h68.68Z"/>
+                <path fill="rgba(255,255,255,0.78)" d="M137.36,28.62v24.8h45.79c45.11,0,45.78,0,45.78,1.91s-.67,1.9-45.78,1.9H137.36V109.7H251.82V28.62Zm57.23,57.23c-33.67,0-34.34,0-34.34-1.91S160.92,82,194.59,82s34.34,0,34.34,1.91S228.26,85.85,194.59,85.85Z"/>
+                <path fill="#ff0000" d="M412.08,28.62V109.7H526.54V28.62Zm91.57,41V85.85H435V53.42h68.68Z"/>
+                <path fill="#ff0000" d="M549.44,28.62V109.7H663.9V28.62Zm91.57,41V85.85H572.33V53.42H641Z"/>
+                <polygon fill="rgba(255,255,255,0.78)" points="686.79 69.16 686.79 109.7 709.69 109.7 709.69 53.42 778.37 53.42 778.37 109.7 801.26 109.7 801.26 28.62 686.79 28.62 686.79 69.16"/>
+                <polygon fill="rgba(255,255,255,0.78)" points="824.15 69.16 824.15 109.7 847.05 109.7 847.05 28.62 824.15 28.62 824.15 69.16"/>
+                <path fill="rgba(255,255,255,0.78)" d="M470.26,146.9v32.43h7.63l.1-14.59c0-16,.86-19.94,5-23,3.91-2.86,12.11-2.77,15.36.28l2.48,2.29v35h7.63V161.4c0-15.07-.29-18.32-1.72-21.08-2.29-4.58-5.91-7-11.54-7.54-6.58-.57-11,.38-14.4,3.24l-2.87,2.48v-24h-7.63Z"/>
+                <polygon fill="rgba(255,255,255,0.78)" points="627.65 146.9 627.65 179.33 635.28 179.33 635.28 114.47 627.65 114.47 627.65 146.9"/>
+                <path fill="rgba(255,255,255,0.78)" d="M749,117.52c-1.62,1.62-1.43,7,.19,8.39,4,3.25,8.77-2.1,6.48-7.15a4.18,4.18,0,0,0-6.67-1.24"/>
+                <polygon fill="rgba(255,255,255,0.78)" points="327.18 122.1 327.18 125.91 346.26 125.91 346.26 179.33 353.89 179.33 353.89 125.91 372.97 125.91 372.97 118.28 327.18 118.28 327.18 122.1"/>
+                <path fill="rgba(255,255,255,0.78)" d="M417.8,158.34v-5.53c0-7.63-3.53-14.59-9-17.84S396,131.73,390,134.78h0a18.21,18.21,0,0,0-7,6.78c-2.48,3.91-3,5.72-3.24,13-.29,5.15,0,9.73.76,11.92,1.52,4.68,6.29,9.92,11,12,4.48,2.1,15.26,2.39,20.51.57,2.95-1,3.34-1.62,3.62-4.77.19-1.9.1-3.53-.19-3.53s-3,.67-6,1.44a45.43,45.43,0,0,1-8.39,1.43c-6.49,0-13.83-6.59-13.83-12.5v-2.77Zm-30.72-6.67.67-2.67a11.55,11.55,0,0,1,6.49-8.3c3.91-1.72,5.72-1.72,9.73-.1,3.43,1.43,4.67,3.15,5.72,7.92l.67,3.15Z"/>
+                <path fill="rgba(255,255,255,0.78)" d="M437.83,134.69a19.47,19.47,0,0,0-7.06,6.87c-2.48,3.91-2.95,5.72-3.24,13-.86,17.36,5.91,25.66,20.79,25.75,8,0,10.88-1.43,11.26-5.62.29-3.15.29-3.25-2.86-2.58-11.93,2.48-16.6,1.24-19.75-5.06-2.67-5.15-2.76-15.83-.19-20.89,3-5.81,7.25-7,19.08-5.72,1.81.19,2.48-.28,3.24-2.38,1.34-4-.09-4.77-9.06-5.25-7-.29-8.39-.1-12.21,1.91"/>
+                <path fill="rgba(255,255,255,0.78)" d="M536.56,133.83a15.15,15.15,0,0,0-4.2,2.86c-1.81,2.29-3,2-3-.76,0-2.1-.38-2.39-3.33-2.39h-3.34v45.79h7.63l.09-14.59c0-16,.86-19.94,5-23,3.91-2.86,12.12-2.77,15.36.28l2.48,2.29v35h7.63V161.4c0-19.65-.67-22.42-6-26.33-3.34-2.48-14-3.15-18.31-1.24"/>
+                <path fill="rgba(255,255,255,0.78)" d="M605.43,135.64c-5.34-3.53-15.55-4.1-21.46-1-7,3.53-10.78,10.78-10.78,20.89,0,9.06,1.43,13.74,5.91,18.6,4.68,5.06,8.68,6.49,16.6,6,8.11-.47,12.78-3.62,16.31-10.87C617.64,157.77,614.49,141.65,605.43,135.64Zm-12.88,37.58c-8.2-1-11.64-6.2-11.64-17.36,0-11.35,5.15-17.17,14.22-16.12a20,20,0,0,1,6.29,1.82c3.53,2.29,5.25,7.34,5.25,15.07C606.67,168.36,601.61,174.37,592.55,173.22Z"/>
+                <path fill="rgba(255,255,255,0.78)" d="M679.83,135.64c-5.34-3.53-15.55-4.1-21.46-1-7,3.53-10.78,10.78-10.78,20.89,0,9.06,1.43,13.74,5.91,18.6,4.68,5.06,8.68,6.49,16.6,6,8.11-.47,12.78-3.62,16.31-10.87C692,157.77,688.89,141.65,679.83,135.64ZM667,173.22c-8.2-1-11.63-6.2-11.63-17.36,0-11.35,5.15-17.17,14.21-16.12a20,20,0,0,1,6.29,1.82c3.53,2.29,5.25,7.34,5.25,15.07C681.07,168.36,676,174.37,667,173.22Z"/>
+                <path fill="rgba(255,255,255,0.78)" d="M735.16,139.65c3.53-.86,5.34-3.44,3.43-5.15-.38-.38-6.77-1-14.12-1.34-12-.57-13.73-.38-17.45,1.34h0c-8.68,3.91-10.59,18.6-3.25,25.08,1.91,1.72,1.91,1.82.1,3.63-2,2-2.58,8.87-.76,9.92.57.38-.58,2-2.77,3.91-7.25,6.2-6,15.83,2.67,20.13,5.15,2.67,16.12,3,23.56.76,8.87-2.67,13.55-10.87,10.68-19-2.19-6.2-5-7.54-17.36-8.3-5.91-.38-10.77-.67-10.87-.76a5.53,5.53,0,0,1-.29-2.48c0-3,2.48-4.3,8.21-4.3a23.4,23.4,0,0,0,8.77-2c6.58-3.24,9.45-11.64,6.49-19.08C731.72,141,732.49,140.32,735.16,139.65Zm-6,39.58c2,1.72,1.9,7.06-.1,8.88-4.67,4-14.31,5.62-20.79,3.43s-7.25-10-1.15-12.78C711,177,726.86,177.33,729.15,179.23ZM724,154.34c-3.72,3.91-13.93,3.43-16.22-.77-2.39-4.57-.29-11.54,4.2-13.44,3.53-1.53,9.44-.29,11.73,2.48C726.57,145.85,726.67,151.48,724,154.34Z"/>
+                <path fill="rgba(255,255,255,0.78)" d="M807,158.34v-5.53c0-7.63-3.53-14.59-9-17.84s-12.88-3.24-18.79-.19h0a18.16,18.16,0,0,0-7,6.78c-2.48,3.91-3,5.72-3.24,13-.29,5.15,0,9.73.76,11.92,1.53,4.68,6.3,9.92,11,12,4.48,2.1,15.26,2.39,20.51.57,3-1,3.34-1.62,3.62-4.77.2-1.9.1-3.53-.19-3.53s-3,.67-6,1.44a45.29,45.29,0,0,1-8.39,1.43c-6.49,0-13.83-6.59-13.83-12.5v-2.77Zm-30.71-6.67.67-2.67a11.51,11.51,0,0,1,6.48-8.3c3.91-1.72,5.73-1.72,9.73-.1,3.44,1.43,4.68,3.15,5.73,7.92l.66,3.15Z"/>
+                <path fill="rgba(255,255,255,0.78)" d="M823.68,133.92c-5.15,2.29-7.63,5.92-7.63,11.07,0,6.2,3.24,9.54,13.16,13.55,11.35,4.67,14.31,8.1,10.3,12.11-3.53,3.53-13.64,3.34-22.32-.38-1.53-.67-1.72-.29-1.43,3.43s.57,4.29,3.62,5.34c4.58,1.53,16.6,1.53,20.32-.09a12.64,12.64,0,0,0,8.3-12.21c0-4.39-.38-5.25-3.62-8.3-2.2-2.1-6.49-4.48-11-6.2-4-1.43-7.92-3.43-8.68-4.29-4.77-5.25,1.52-9.64,11.35-7.92a43.75,43.75,0,0,1,7.25,1.62c1.14.38,1.9-.28,2.76-2.38.67-1.72.86-3.25.38-3.72-3.24-3-17.55-3.91-22.79-1.63"/>
+                <polygon fill="rgba(255,255,255,0.78)" points="747.84 156.44 747.84 179.33 755.47 179.33 755.47 133.54 747.84 133.54 747.84 156.44"/>
+            </svg>
+        </div>
+        <p>Plan operativo Fase 0 · <strong>Babooni Technologies</strong> · Documento interno · Jun 2026</p>
+        <div class="footer-contact">
+            <a href="mailto:info@babooni.com">info@babooni.com</a>
+            <a href="tel:617312356">617 31 23 56</a>
+            <span>C. Alfonso XII, 62 · Retiro · 28014 Madrid</span>
+        </div>
+    </div>
+</footer>
+</div>
+
+<script>
+(function(){
+    var STORE='babooni-plan-operativo';
+    var CK_STORE='babooni-plan-operativo-checklist';
+    var TASK_STORE='babooni-plan-operativo-tasks';
+    var EMBED_ID='babooni-plan-embedded';
+    var sections=document.querySelectorAll('.doc-section');
+    var links=document.querySelectorAll('.sidebar-link');
+    var nav=document.getElementById('sidebarNav');
+    var saveStatus=document.getElementById('saveStatus');
+
+    function readEmbedded(){
+        var el=document.getElementById(EMBED_ID);
+        if(!el)return null;
+        try{
+            var raw=el.textContent.trim();
+            if(el.getAttribute('data-encoding')==='base64'){
+                raw=decodeURIComponent(escape(atob(raw)));
+            }
+            return JSON.parse(raw);
+        }catch(e){return null;}
+    }
+
+    var embedded=readEmbedded();
+    var state=JSON.parse(localStorage.getItem(STORE)||'{}');
+    var ck=JSON.parse(localStorage.getItem(CK_STORE)||'{}');
+    var taskState=JSON.parse(localStorage.getItem(TASK_STORE)||'{}');
+
+    if(embedded){
+        if(embedded.fields)Object.assign(state,embedded.fields);
+        if(embedded.checklist)Object.assign(ck,embedded.checklist);
+        if(embedded.tasks)Object.assign(taskState,embedded.tasks);
+        localStorage.setItem(STORE,JSON.stringify(state));
+        localStorage.setItem(CK_STORE,JSON.stringify(ck));
+        localStorage.setItem(TASK_STORE,JSON.stringify(taskState));
+    }
+
+    function showStatus(msg,isErr){
+        if(!saveStatus)return;
+        saveStatus.textContent=msg;
+        saveStatus.classList.toggle('err',!!isErr);
+        clearTimeout(showStatus._t);
+        if(msg)showStatus._t=setTimeout(function(){saveStatus.textContent='';saveStatus.classList.remove('err');},5000);
+    }
+
+    function collectState(){
+        var fields={};
+        document.querySelectorAll('[data-store]').forEach(function(el){
+            var k=el.getAttribute('data-store');
+            if(el.value)fields[k]=el.value;
+        });
+        var checklist={};
+        document.querySelectorAll('.checklist input[type=checkbox]').forEach(function(cb){
+            var id=cb.getAttribute('data-id');
+            if(id&&cb.checked)checklist[id]=true;
+        });
+        return{
+            version:1,
+            doc:'babooni-plan-operativo',
+            exportedAt:new Date().toISOString(),
+            fields:fields,
+            checklist:checklist,
+            tasks:taskState
+        };
+    }
+
+    function downloadBlob(filename,content,type){
+        var blob=new Blob([content],{type:type||'application/octet-stream'});
+        var a=document.createElement('a');
+        a.href=URL.createObjectURL(blob);
+        a.download=filename;
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+        setTimeout(function(){URL.revokeObjectURL(a.href);},2000);
+    }
+
+    function dateStamp(){
+        var d=new Date();
+        return d.getFullYear()+'-'+String(d.getMonth()+1).padStart(2,'0')+'-'+String(d.getDate()).padStart(2,'0');
+    }
+
+    document.querySelectorAll('[data-store]').forEach(function(el){
+        var k=el.getAttribute('data-store');
+        if(state[k])el.value=state[k];
+        el.addEventListener('change',function(){state[k]=el.value;localStorage.setItem(STORE,JSON.stringify(state));});
+        el.addEventListener('input',function(){state[k]=el.value;localStorage.setItem(STORE,JSON.stringify(state));});
+    });
+    document.querySelectorAll('.task-card').forEach(function(card){
+        if(card.querySelector('.task-card-toggle'))return;
+        var head=card.querySelector('.task-head');
+        var body=card.querySelector('.task-body');
+        if(!head||!body)return;
+        var h3=head.querySelector('h3');
+        var taskId='task';
+        if(h3){
+            var m=h3.textContent.match(/T-(\d+)/);
+            if(m)taskId='t'+m[1];
+        }
+        card.id=taskId;
+        var panelId='panel-'+taskId;
+        var btn=document.createElement('button');
+        btn.type='button';
+        btn.className='task-card-toggle';
+        btn.setAttribute('aria-controls',panelId);
+        var inner=document.createElement('div');
+        inner.className='toggle-inner';
+        inner.appendChild(head);
+        var icon=document.createElement('span');
+        icon.className='toggle-icon';
+        icon.setAttribute('aria-hidden','true');
+        inner.appendChild(icon);
+        btn.appendChild(inner);
+        var panel=document.createElement('div');
+        panel.id=panelId;
+        panel.className='task-card-panel';
+        panel.appendChild(body);
+        card.insertBefore(btn,card.firstChild);
+        card.appendChild(panel);
+        var open=taskState.hasOwnProperty(taskId)?!!taskState[taskId]:false;
+        if(open){
+            card.classList.add('is-open');
+            btn.setAttribute('aria-expanded','true');
+        }else{
+            btn.setAttribute('aria-expanded','false');
+        }
+        btn.addEventListener('click',function(){
+            var isOpen=card.classList.toggle('is-open');
+            btn.setAttribute('aria-expanded',isOpen?'true':'false');
+            taskState[taskId]=isOpen;
+            localStorage.setItem(TASK_STORE,JSON.stringify(taskState));
+        });
+    });
+
+    function setActive(id){
+        if(!id)return;
+        links.forEach(function(l){l.classList.toggle('active',l.getAttribute('href')==='#'+id);});
+        if(nav){
+            var a=nav.querySelector('.sidebar-link.active');
+            if(a){
+                var navRect=nav.getBoundingClientRect();
+                var linkRect=a.getBoundingClientRect();
+                if(linkRect.top<navRect.top||linkRect.bottom>navRect.bottom){
+                    a.scrollIntoView({block:'nearest',behavior:'smooth'});
+                }
+            }
+        }
+    }
+    function setSectionOpen(section,open){
+        if(!section)return;
+        section.classList.toggle('is-open',!!open);
+        var toggle=section.querySelector('.doc-section-toggle');
+        if(toggle)toggle.setAttribute('aria-expanded',open?'true':'false');
+    }
+    var navLockUntil=0;
+    function navigateToSection(id){
+        navLockUntil=Date.now()+900;
+        sections.forEach(function(s){setSectionOpen(s,s.id===id);});
+        setActive(id);
+        var target=document.getElementById(id);
+        if(target){
+            requestAnimationFrame(function(){
+                target.scrollIntoView({behavior:'smooth',block:'start'});
+            });
+        }
+    }
+    function openSection(section){
+        setSectionOpen(section,true);
+    }
+    sections.forEach(function(s){
+        var t=s.querySelector('.doc-section-toggle');
+        if(!t)return;
+        t.addEventListener('click',function(){
+            var isOpen=s.classList.contains('is-open');
+            if(isOpen){
+                setSectionOpen(s,false);
+            }else{
+                openSection(s);
+            }
+            setActive(s.id);
+        });
+    });
+    links.forEach(function(l){
+        l.addEventListener('click',function(e){
+            e.preventDefault();
+            var id=l.getAttribute('href').slice(1);
+            if(!document.getElementById(id))return;
+            navigateToSection(id);
+        });
+    });
+    if('IntersectionObserver' in window){
+        var ratios={};
+        var obs=new IntersectionObserver(function(entries){
+            if(Date.now()<navLockUntil)return;
+            entries.forEach(function(e){ratios[e.target.id]=e.intersectionRatio;});
+            var best=null,m=0;
+            Object.keys(ratios).forEach(function(id){if(ratios[id]>m){m=ratios[id];best=id;}});
+            if(best&&m>0.05)setActive(best);
+        },{rootMargin:'-12% 0px -50% 0px',threshold:[0,.05,.15,.3,.5]});
+        sections.forEach(function(s){obs.observe(s);});
+    }
+
+    function progress(g){
+        var list=document.querySelector('[data-checklist="'+g+'"]');
+        var el=document.querySelector('[data-progress-for="'+g+'"]');
+        if(!list||!el)return;
+        var boxes=list.querySelectorAll('input[type=checkbox]'),d=0;
+        boxes.forEach(function(b){if(b.checked)d++;});
+        el.innerHTML='Progreso: <span>'+d+'/'+boxes.length+'</span>';
+    }
+    document.querySelectorAll('.checklist input').forEach(function(cb){
+        var id=cb.getAttribute('data-id');
+        if(id&&ck[id])cb.checked=true;
+        cb.addEventListener('change',function(){
+            if(id){ck[id]=cb.checked;localStorage.setItem(CK_STORE,JSON.stringify(ck));}
+            var g=cb.closest('[data-checklist]');if(g)progress(g.getAttribute('data-checklist'));
+        });
+    });
+    document.querySelectorAll('[data-checklist]').forEach(function(l){progress(l.getAttribute('data-checklist'));});
+
+    var btnSaveHtml=document.getElementById('btnSaveHtml');
+
+    if(btnSaveHtml){
+        btnSaveHtml.addEventListener('click',function(){
+            var payload=collectState();
+            var b64=btoa(unescape(encodeURIComponent(JSON.stringify(payload))));
+            var embed='<script type="application/json" id="'+EMBED_ID+'" data-encoding="base64">'+b64+'<\/script>\n';
+            var html='<!DOCTYPE html>\n'+document.documentElement.outerHTML;
+            html=html.replace(/<script type="application\/json" id="babooni-plan-embedded"[\s\S]*?<\/script>\s*/g,'');
+            html=html.replace(/<script>\s*\(function\(\)\{/,embed+'<script>\n(function(){');
+            downloadBlob('Plan_Operativo_Fase0_'+dateStamp()+'.html',html,'text/html;charset=utf-8');
+            showStatus('HTML descargado.');
+        });
+    }
+
+    if(embedded)showStatus('Plan compartido cargado ('+(embedded.exportedAt||'').slice(0,10)+').');
+})();
+</script>
+</body>
+</html>

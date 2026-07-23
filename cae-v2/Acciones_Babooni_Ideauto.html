@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Acciones Babooni - Ideauto · Babooni</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#0a0a0a;--red:#e60000;--red-light:#ff0000;--red-bg:#fef5f5;
+  --gold:#f4b900;--gold-bg:#fff8e1;--gold-dark:#c49500;
+  --bg:#fff;--bg-alt:#f6f6f7;--border:#e2e2e2;--border-light:#ededed;
+  --text:#0a0a0a;--text-secondary:#4a4a4a;--text-muted:#8a8a8a;
+  --green:#1d8a4a;--green-bg:#e6f7ee;--blue:#1d6aa5;--blue-bg:#e6f0f7;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Montserrat',sans-serif;background:#d8d8dc;color:var(--text);line-height:1.6;padding:24px 16px}
+.page-wrapper{max-width:920px;margin:0 auto;background:var(--bg);border-radius:14px;box-shadow:0 4px 32px rgba(0,0,0,.14);overflow:hidden}
+header{background:linear-gradient(135deg,#000 0%,#1a1a1a 100%);color:#fff;padding:44px 36px 40px;border-bottom:4px solid var(--red);min-height:150px}
+.header-inner{display:flex;align-items:center;gap:28px}
+.header-logo{flex-shrink:0;width:240px;padding-right:28px;border-right:1px solid rgba(255,255,255,.14)}
+.header-logo svg{display:block;width:100%;height:auto;max-height:80px}
+.header-text{min-width:0;flex:1}
+.header-text h1{font-size:26px;font-weight:800;margin-bottom:10px;line-height:1.2}
+.header-text h1 span{color:var(--red-light)}
+.header-text p{font-size:13px;color:rgba(255,255,255,.7);max-width:720px;line-height:1.55;margin:0}
+.badge{display:inline-block;margin-top:16px;background:var(--gold);color:var(--black);font-size:10px;font-weight:700;padding:6px 14px;border-radius:20px;text-transform:uppercase;letter-spacing:.4px}
+.main{padding:28px 32px 40px}
+.intro{background:var(--bg-alt);border-left:4px solid var(--black);padding:14px 18px;border-radius:0 8px 8px 0;font-size:13px;color:var(--text-secondary);margin-bottom:22px}
+.owner-col{border:1px solid var(--border);border-radius:12px;overflow:hidden;background:#fff}
+.owner-col.cae .owner-head{background:var(--gold-bg);border-bottom:1px solid #f0e0a8}
+.owner-col.babooni .owner-head{background:var(--green-bg);border-bottom:1px solid #c8e8d4}
+.owner-head{padding:18px 20px}
+.owner-head h2{font-size:18px;font-weight:800;margin:0 0 4px}
+.owner-head h2 span{color:var(--red)}
+.owner-head p{font-size:12.5px;color:var(--text-secondary);margin:0}
+.tag{display:inline-block;font-size:10px;font-weight:700;letter-spacing:.3px;text-transform:uppercase;padding:4px 10px 4px 8px;border-radius:8px;background:#fff;border:1px solid var(--border);border-left:4px solid var(--border);margin-bottom:8px}
+.tag-cae{border-left-color:var(--gold);color:var(--gold-dark)}
+.tag-prov{border-left-color:var(--green);color:var(--green)}
+.tag-bloqueante{border-left-color:var(--red);color:var(--red)}
+.item-meta{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}
+.item-list{list-style:none;padding:4px 0 8px}
+.item-list > li{padding:16px 20px;border-bottom:1px solid var(--border-light);font-size:13px;color:var(--text-secondary);line-height:1.55}
+.item-list > li:last-child{border-bottom:none}
+.item-list > li > strong{display:block;color:var(--text);font-size:14px;font-weight:800;margin-bottom:6px}
+.item-list li code{font-size:11px;background:#f0f0f2;border:1px solid var(--border);padding:1px 6px;border-radius:4px}
+.item-list li ul{margin:10px 0 0;padding-left:18px}
+.item-list li ul li{padding:5px 0;border-bottom:none;font-size:12.5px;list-style:disc;color:var(--text-secondary)}
+.item-list .subhead{display:block;font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.4px;color:var(--text-muted);margin:12px 0 4px}
+.std-line{display:block;margin-top:6px}
+.note{margin-top:22px;padding:14px 16px;border-radius:8px;background:var(--blue-bg);border-left:4px solid var(--blue);font-size:12.5px;color:var(--text-secondary)}
+.note a{color:var(--red);font-weight:600;text-decoration:none}
+.note a:hover{text-decoration:underline}
+.note strong{color:var(--text)}
+footer{text-align:center;padding:18px 28px;background:#111;color:rgba(255,255,255,.55);font-size:11px}
+footer strong{color:var(--red-light)}
+@media(max-width:900px){
+  header{padding:28px 20px}
+  .header-inner{flex-direction:column;align-items:flex-start;gap:16px}
+  .header-logo{width:200px;padding-right:0;border-right:none;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,.12)}
+  .main{padding:20px 18px 32px}
+}
+@media print{
+  body{background:#fff;padding:0}
+  .page-wrapper{box-shadow:none;border-radius:0}
+}
+</style>
+</head>
+<body>
+<div class="page-wrapper">
+<header>
+  <div class="header-inner">
+    <div class="header-logo">
+<svg viewBox="0 0 848 199.39" xmlns="http://www.w3.org/2000/svg">
+        <path fill="#ffffff" d="M22.89,28.62V0H0V109.7H114.47V28.62Zm68.68,41V85.85H22.89V53.42H91.57Z"/>
+        <path fill="#ffffff" d="M297.61,28.62V0H274.72V109.7H389.18V28.62Zm68.68,41V85.85H297.61V53.42h68.68Z"/>
+        <path fill="#ffffff" d="M137.36,28.62v24.8h45.79c45.11,0,45.78,0,45.78,1.91s-.67,1.9-45.78,1.9H137.36V109.7H251.82V28.62Zm57.23,57.23c-33.67,0-34.34,0-34.34-1.91S160.92,82,194.59,82s34.34,0,34.34,1.91S228.26,85.85,194.59,85.85Z"/>
+        <path fill="#ff0000" d="M412.08,28.62V109.7H526.54V28.62Zm91.57,41V85.85H435V53.42h68.68Z"/>
+        <path fill="#ff0000" d="M549.44,28.62V109.7H663.9V28.62Zm91.57,41V85.85H572.33V53.42H641Z"/>
+        <polygon fill="#ffffff" points="686.79 69.16 686.79 109.7 709.69 109.7 709.69 53.42 778.37 53.42 778.37 109.7 801.26 109.7 801.26 28.62 686.79 28.62 686.79 69.16"/>
+        <polygon fill="#ffffff" points="824.15 69.16 824.15 109.7 847.05 109.7 847.05 28.62 824.15 28.62 824.15 69.16"/>
+        <path fill="#ffffff" d="M470.26,146.9v32.43h7.63l.1-14.59c0-16,.86-19.94,5-23,3.91-2.86,12.11-2.77,15.36.28l2.48,2.29v35h7.63V161.4c0-15.07-.29-18.32-1.72-21.08-2.29-4.58-5.91-7-11.54-7.54-6.58-.57-11,.38-14.4,3.24l-2.87,2.48v-24h-7.63Z"/>
+        <polygon fill="#ffffff" points="627.65 146.9 627.65 179.33 635.28 179.33 635.28 114.47 627.65 114.47 627.65 146.9"/>
+        <path fill="#ffffff" d="M749,117.52c-1.62,1.62-1.43,7,.19,8.39,4,3.25,8.77-2.1,6.48-7.15a4.18,4.18,0,0,0-6.67-1.24"/>
+        <polygon fill="#ffffff" points="327.18 122.1 327.18 125.91 346.26 125.91 346.26 179.33 353.89 179.33 353.89 125.91 372.97 125.91 372.97 118.28 327.18 118.28 327.18 122.1"/>
+        <path fill="#ffffff" d="M417.8,158.34v-5.53c0-7.63-3.53-14.59-9-17.84S396,131.73,390,134.78h0a18.21,18.21,0,0,0-7,6.78c-2.48,3.91-3,5.72-3.24,13-.29,5.15,0,9.73.76,11.92,1.52,4.68,6.29,9.92,11,12,4.48,2.1,15.26,2.39,20.51.57,2.95-1,3.34-1.62,3.62-4.77.19-1.9.1-3.53-.19-3.53s-3,.67-6,1.44a45.43,45.43,0,0,1-8.39,1.43c-6.49,0-13.83-6.59-13.83-12.5v-2.77Zm-30.72-6.67.67-2.67a11.55,11.55,0,0,1,6.49-8.3c3.91-1.72,5.72-1.72,9.73-.1,3.43,1.43,4.67,3.15,5.72,7.92l.67,3.15Z"/>
+        <path fill="#ffffff" d="M437.83,134.69a19.47,19.47,0,0,0-7.06,6.87c-2.48,3.91-2.95,5.72-3.24,13-.86,17.36,5.91,25.66,20.79,25.75,8,0,10.88-1.43,11.26-5.62.29-3.15.29-3.25-2.86-2.58-11.93,2.48-16.6,1.24-19.75-5.06-2.67-5.15-2.76-15.83-.19-20.89,3-5.81,7.25-7,19.08-5.72,1.81.19,2.48-.28,3.24-2.38,1.34-4-.09-4.77-9.06-5.25-7-.29-8.39-.1-12.21,1.91"/>
+        <path fill="#ffffff" d="M536.56,133.83a15.15,15.15,0,0,0-4.2,2.86c-1.81,2.29-3,2-3-.76,0-2.1-.38-2.39-3.33-2.39h-3.34v45.79h7.63l.09-14.59c0-16,.86-19.94,5-23,3.91-2.86,12.12-2.77,15.36.28l2.48,2.29v35h7.63V161.4c0-19.65-.67-22.42-6-26.33-3.34-2.48-14-3.15-18.31-1.24"/>
+        <path fill="#ffffff" d="M605.43,135.64c-5.34-3.53-15.55-4.1-21.46-1-7,3.53-10.78,10.78-10.78,20.89,0,9.06,1.43,13.74,5.91,18.6,4.68,5.06,8.68,6.49,16.6,6,8.11-.47,12.78-3.62,16.31-10.87C617.64,157.77,614.49,141.65,605.43,135.64Zm-12.88,37.58c-8.2-1-11.64-6.2-11.64-17.36,0-11.35,5.15-17.17,14.22-16.12a20,20,0,0,1,6.29,1.82c3.53,2.29,5.25,7.34,5.25,15.07C606.67,168.36,601.61,174.37,592.55,173.22Z"/>
+        <path fill="#ffffff" d="M679.83,135.64c-5.34-3.53-15.55-4.1-21.46-1-7,3.53-10.78,10.78-10.78,20.89,0,9.06,1.43,13.74,5.91,18.6,4.68,5.06,8.68,6.49,16.6,6,8.11-.47,12.78-3.62,16.31-10.87C692,157.77,688.89,141.65,679.83,135.64ZM667,173.22c-8.2-1-11.63-6.2-11.63-17.36,0-11.35,5.15-17.17,14.21-16.12a20,20,0,0,1,6.29,1.82c3.53,2.29,5.25,7.34,5.25,15.07C681.07,168.36,676,174.37,667,173.22Z"/>
+        <path fill="#ffffff" d="M735.16,139.65c3.53-.86,5.34-3.44,3.43-5.15-.38-.38-6.77-1-14.12-1.34-12-.57-13.73-.38-17.45,1.34h0c-8.68,3.91-10.59,18.6-3.25,25.08,1.91,1.72,1.91,1.82.1,3.63-2,2-2.58,8.87-.76,9.92.57.38-.58,2-2.77,3.91-7.25,6.2-6,15.83,2.67,20.13,5.15,2.67,16.12,3,23.56.76,8.87-2.67,13.55-10.87,10.68-19-2.19-6.2-5-7.54-17.36-8.3-5.91-.38-10.77-.67-10.87-.76a5.53,5.53,0,0,1-.29-2.48c0-3,2.48-4.3,8.21-4.3a23.4,23.4,0,0,0,8.77-2c6.58-3.24,9.45-11.64,6.49-19.08C731.72,141,732.49,140.32,735.16,139.65Zm-6,39.58c2,1.72,1.9,7.06-.1,8.88-4.67,4-14.31,5.62-20.79,3.43s-7.25-10-1.15-12.78C711,177,726.86,177.33,729.15,179.23ZM724,154.34c-3.72,3.91-13.93,3.43-16.22-.77-2.39-4.57-.29-11.54,4.2-13.44,3.53-1.53,9.44-.29,11.73,2.48C726.57,145.85,726.67,151.48,724,154.34Z"/>
+        <path fill="#ffffff" d="M807,158.34v-5.53c0-7.63-3.53-14.59-9-17.84s-12.88-3.24-18.79-.19h0a18.16,18.16,0,0,0-7,6.78c-2.48,3.91-3,5.72-3.24,13-.29,5.15,0,9.73.76,11.92,1.53,4.68,6.3,9.92,11,12,4.48,2.1,15.26,2.39,20.51.57,3-1,3.34-1.62,3.62-4.77.2-1.9.1-3.53-.19-3.53s-3,.67-6,1.44a45.29,45.29,0,0,1-8.39,1.43c-6.49,0-13.83-6.59-13.83-12.5v-2.77Zm-30.71-6.67.67-2.67a11.51,11.51,0,0,1,6.48-8.3c3.91-1.72,5.73-1.72,9.73-.1,3.44,1.43,4.68,3.15,5.73,7.92l.66,3.15Z"/>
+        <path fill="#ffffff" d="M823.68,133.92c-5.15,2.29-7.63,5.92-7.63,11.07,0,6.2,3.24,9.54,13.16,13.55,11.35,4.67,14.31,8.1,10.3,12.11-3.53,3.53-13.64,3.34-22.32-.38-1.53-.67-1.72-.29-1.43,3.43s.57,4.29,3.62,5.34c4.58,1.53,16.6,1.53,20.32-.09a12.64,12.64,0,0,0,8.3-12.21c0-4.39-.38-5.25-3.62-8.3-2.2-2.1-6.49-4.48-11-6.2-4-1.43-7.92-3.43-8.68-4.29-4.77-5.25,1.52-9.64,11.35-7.92a43.75,43.75,0,0,1,7.25,1.62c1.14.38,1.9-.28,2.76-2.38.67-1.72.86-3.25.38-3.72-3.24-3-17.55-3.91-22.79-1.63"/>
+        <polygon fill="#ffffff" points="747.84 156.44 747.84 179.33 755.47 179.33 755.47 133.54 747.84 133.54 747.84 156.44"/>
+      </svg>
+    </div>
+    <div class="header-text">
+      <h1>Acciones <span>Babooni</span></h1>
+      <p>Tejado Babooni · Controles de aplicacion y hardening · Ideauto pre-pentest</p>
+      <span class="badge">Tejado Babooni</span>
+    </div>
+  </div>
+</header>
+<main class="main">
+  <section class="owner-col babooni">
+      <div class="owner-head">
+        <span class="tag tag-prov">Tejado Babooni</span>
+        <h2>Acciones <span>Babooni</span></h2>
+        <p>Controles de aplicacion, codigo y hardening a cargo de Babooni.</p>
+      </div>
+      <ul class="item-list">
+        <li>
+          <strong>CORS y proteccion de endpoints</strong>
+          Restriccion de origenes CORS y refuerzo de proteccion en endpoints de la API / portal.
+        </li>
+        <li>
+          <strong>Segregacion de roles y controles de acceso (RBAC)</strong>
+          Modelo de autorizacion por roles / permisos en backend con segregacion adecuada.
+        </li>
+        <li>
+          <strong>Content Security Policy (CSP)</strong>
+          <ul>
+            <li>Implementar politicas <strong>CSP</strong> para mitigar <strong>XSS</strong> y <strong>Clickjacking</strong>.</li>
+            <li>Valorar el uso de <strong>cookies</strong> frente a almacenamiento local para proteger los tokens de sesion.</li>
+          </ul>
+        </li>
+        <li>
+          <strong>Hashing de contraseñas: PBKDF2</strong>
+          Uso de <strong>PBKDF2 con 60.000 iteraciones</strong> (estandar de referencia acordado para el almacenamiento de contraseñas).
+        </li>
+        <li>
+          <div class="item-meta"><span class="tag tag-prov">Investigacion</span></div>
+          <strong>GraphQL — preocupacion e investigacion</strong>
+          <ul>
+            <li><strong>Preocupacion:</strong> el uso de GraphQL puede abrir superficies de ataque distintas a REST (introspection, queries profundas, DoS por complejidad, over-fetching / under-fetching, autorizacion por campo).</li>
+            <li><strong>Investigacion:</strong> revisar si Ideauto expone o usara GraphQL; inventariar endpoints, schema e introspection en prod/pre.</li>
+            <li><strong>Controles a valorar:</strong> desactivar introspection en produccion, limitar profundidad/complejidad de queries, rate-limit, autorizacion a nivel de campo/resolvers, y alineacion con OWASP (API Security / ASVS).</li>
+            <li><strong>Salida:</strong> informe breve con riesgo residual y acciones recomendadas (cerrar, endurecer o no aplica).</li>
+          </ul>
+        </li>
+        <li>
+          <strong>Validacion de codigo fuente con OWASP ASVS</strong>
+          Validar el codigo fuente usando el estandar <strong>ASVS</strong> (Application Security Verification Standard) de OWASP como marco de referencia para la auditoria.
+        </li>
+      </ul>
+  </section>
+</main>
+<footer>
+  <p>Acciones Babooni · <strong>Babooni Technologies</strong> · Uso interno · Ideauto pre-pentest</p>
+</footer>
+</div>
+</body>
+</html>

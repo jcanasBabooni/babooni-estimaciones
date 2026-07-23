@@ -1,0 +1,1202 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guía para completar la plantilla de análisis funcional Babooni</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+
+:root{
+  --black:#0a0a0a;--black-soft:#1a1a1a;--black-deep:#050505;--black-light:#2a2a2a;
+  --red:#e60000;--red-light:#ff0000;--red-dark:#b30000;--red-pale:#fdecec;--red-bg:#fef5f5;
+  --gold:#f4b900;--gold-light:#fff8e1;--gold-dark:#c49500;
+  --bg:#ffffff;--bg-alt:#f6f6f7;--bg-card:#ffffff;--bg-dark:#111111;
+  --border:#e2e2e2;--border-light:#ededed;--border-dark:#2a2a2a;
+  --text:#0a0a0a;--text-secondary:#4a4a4a;--text-muted:#8a8a8a;
+  --green:#1d8a4a;--green-bg:#e6f7ee;--green-border:#b8e6cc;
+  --orange:#d97a1c;--orange-bg:#fef3e2;--orange-border:#fad6a5;
+  --blue:#1d6aa5;--blue-bg:#e6f0f7;--blue-border:#b8d4e6;
+  --shadow-sm:0 1px 3px rgba(0,0,0,0.06);--shadow-md:0 4px 12px rgba(0,0,0,0.10);--shadow-lg:0 8px 30px rgba(0,0,0,0.14);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Montserrat','Segoe UI',-apple-system,BlinkMacSystemFont,sans-serif;background:#d8d8dc;color:var(--text);line-height:1.65;-webkit-font-smoothing:antialiased}
+.page-wrapper{max-width:960px;margin:32px auto;background:var(--bg);border-radius:16px;box-shadow:0 4px 40px rgba(0,0,0,0.18),0 1px 6px rgba(0,0,0,0.08);overflow:hidden}
+.container{max-width:100%;margin:0 auto;padding:0 40px}
+header{background:linear-gradient(135deg,#000000 0%,var(--black) 35%,var(--black-soft) 100%);color:white;padding:48px 0 44px;border-bottom:5px solid var(--red);position:relative;overflow:hidden}
+header::before{content:'';position:absolute;top:-50%;right:-10%;width:500px;height:500px;background:radial-gradient(circle,rgba(230,0,0,0.18) 0%,transparent 70%);border-radius:50%}
+header::after{content:'';position:absolute;bottom:-60%;left:-5%;width:400px;height:400px;background:radial-gradient(circle,rgba(255,255,255,0.04) 0%,transparent 70%);border-radius:50%}
+header .container{display:flex;justify-content:space-between;align-items:flex-start;position:relative;z-index:1;gap:24px}
+.header-logo{margin-bottom:18px}
+.header-logo svg{display:block;height:60px;width:auto}
+.header-left h1{font-size:28px;font-weight:800;letter-spacing:-0.5px;margin-bottom:6px;line-height:1.2}
+.header-left h1 .red{color:var(--red-light)}
+.header-left p{color:rgba(255,255,255,0.65);font-size:11px;font-weight:400}
+.header-badge{background:linear-gradient(135deg,var(--red) 0%,var(--red-dark) 100%);color:white;font-size:9px;font-weight:600;padding:7px 14px;border-radius:6px;text-align:center;line-height:1.4;box-shadow:0 4px 15px rgba(230,0,0,0.45);text-transform:uppercase;letter-spacing:0.5px;flex-shrink:0}
+.header-badge span{display:block;font-size:16px;font-weight:800;letter-spacing:-0.3px;text-transform:none}
+nav{background:var(--black);border-bottom:1px solid var(--border-dark);position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,0.20)}
+nav .container{display:flex;align-items:stretch;gap:0;width:100%}
+.nav-logo{display:flex;align-items:center;padding-right:14px;margin-right:4px;border-right:1px solid var(--border-dark);flex:0 0 auto}
+.nav-logo svg{display:block;height:26px;width:auto}
+nav a{flex:1;text-align:center;color:rgba(255,255,255,0.65);text-decoration:none;font-size:10px;font-weight:600;padding:14px 4px;white-space:nowrap;border-bottom:3px solid transparent;transition:all .25s ease;text-transform:uppercase;letter-spacing:0.4px;display:flex;align-items:center;justify-content:center;min-width:0}
+nav a:hover,nav a.is-active{color:white;border-bottom-color:var(--red);background:rgba(230,0,0,0.10)}
+nav a.is-active{background:rgba(230,0,0,0.15);font-weight:700}
+section{padding:44px 0;background:var(--bg)}
+section.alt{background:var(--bg-alt)}
+.section-header{display:flex;align-items:center;gap:14px;margin-bottom:8px}
+.section-number{background:linear-gradient(135deg,var(--black) 0%,var(--black-soft) 100%);color:white;font-size:14px;font-weight:700;width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 2px 8px rgba(0,0,0,0.25);position:relative}
+.section-number::after{content:'';position:absolute;inset:-3px;border-radius:50%;border:2px solid var(--red);opacity:0.25}
+.section-header h2{font-size:22px;font-weight:800;color:var(--black);letter-spacing:-0.3px}
+.section-header h2 .red{color:var(--red)}
+.section-desc{color:var(--text-secondary);font-size:14px;font-weight:400;margin-bottom:0;max-width:850px;padding-left:52px}
+.collapsible-section .section-toggle{width:100%;text-align:left;background:transparent;border:none;cursor:pointer;padding:0;margin-bottom:20px;font:inherit;color:inherit}
+.collapsible-section .section-toggle:hover .section-header h2{color:var(--red)}
+.collapsible-section .section-toggle:focus-visible{outline:2px solid var(--red);outline-offset:4px;border-radius:8px}
+.section-toggle-top{display:flex;align-items:flex-start;justify-content:space-between;gap:16px;width:100%}
+.toggle-chevron{flex-shrink:0;width:34px;height:34px;border-radius:50%;background:var(--bg-alt);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:18px;font-weight:700;line-height:1;color:var(--text-muted);transition:background .2s ease,border-color .2s ease,color .2s ease;margin-top:2px}
+.toggle-chevron::before{content:'+'}
+.collapsible-section.is-open .toggle-chevron{background:var(--red-bg);border-color:#f5b8b8;color:var(--red-dark)}
+.collapsible-section.is-open .toggle-chevron::before{content:'-'}
+.section-body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .35s ease}
+.collapsible-section.is-open .section-body{grid-template-rows:1fr}
+.section-body-inner{overflow:hidden;min-height:0}
+.collapsible-section.is-open .section-desc{margin-bottom:8px}
+.collapsible-section:not(.is-open){padding-bottom:28px}
+.card{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:24px 28px;margin-bottom:16px;box-shadow:var(--shadow-sm);transition:box-shadow .25s ease,transform .25s ease,border-color .25s ease}
+.card:hover{box-shadow:var(--shadow-md);transform:translateY(-1px);border-color:var(--black-light)}
+.card h3{font-size:16px;font-weight:700;color:var(--text);margin-bottom:12px;display:flex;align-items:center;gap:10px}
+.card h3 .step-num{background:var(--black);color:white;font-size:11px;font-weight:800;padding:4px 12px;border-radius:20px;letter-spacing:0.3px}
+.card h3 .step-icon{font-size:18px}
+.card p,.card li{font-size:13.5px;color:var(--text-secondary);line-height:1.7}
+.card ul{padding-left:20px;margin-top:6px}
+.card li{margin-bottom:4px}
+.card.dark{background:var(--black);color:white;border-color:var(--black-light)}
+.card.dark h3{color:white}
+.card.dark p,.card.dark li{color:rgba(255,255,255,0.75)}
+.timeline{position:relative;padding-left:32px}
+.timeline::before{content:'';position:absolute;left:13px;top:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--black) 0%,var(--red) 50%,var(--border) 100%);border-radius:2px}
+.timeline-item{position:relative;margin-bottom:24px;padding:16px 20px;background:var(--bg-card);border-radius:10px;border:1px solid var(--border-light);box-shadow:var(--shadow-sm);transition:box-shadow .2s,transform .2s}
+.timeline-item:hover{box-shadow:var(--shadow-md);transform:translateX(4px)}
+.timeline-item::before{content:'';position:absolute;left:-25px;top:18px;width:14px;height:14px;border-radius:50%;border:3px solid var(--black);background:white;z-index:1}
+.timeline-item.urgent::before{background:var(--red);border-color:var(--red);box-shadow:0 0 0 4px rgba(230,0,0,0.25)}
+.timeline-item.essential::before{background:var(--black);border-color:var(--black);box-shadow:0 0 0 4px rgba(0,0,0,0.15)}
+.timeline-date{font-size:11px;font-weight:700;color:var(--red);text-transform:uppercase;letter-spacing:0.6px;margin-bottom:4px}
+.timeline-title{font-size:15px;font-weight:700;color:var(--text);margin-bottom:4px}
+.timeline-desc{font-size:13px;color:var(--text-secondary);font-weight:400}
+.alert{border-radius:10px;padding:18px 22px;margin:16px 0;font-size:13.5px;box-shadow:var(--shadow-sm)}
+.alert h4{font-size:14px;font-weight:700;margin-bottom:6px}
+.alert p,.alert li{line-height:1.7}
+.alert ul{padding-left:20px;margin-top:4px}
+.alert-black{background:var(--bg-alt);border-left:5px solid var(--black)}
+.alert-black h4{color:var(--black)}
+.alert-red{background:var(--red-bg);border-left:5px solid var(--red)}
+.alert-red h4{color:var(--red-dark)}
+.alert-orange{background:var(--orange-bg);border-left:5px solid var(--orange)}
+.alert-orange h4{color:var(--orange)}
+.alert-green{background:var(--green-bg);border-left:5px solid var(--green)}
+.alert-green h4{color:var(--green)}
+.alert-gold{background:var(--gold-light);border-left:5px solid var(--gold)}
+.alert-gold h4{color:var(--gold-dark)}
+.table-wrapper{overflow-x:auto;margin:16px 0;border:1px solid var(--border);border-radius:10px;box-shadow:var(--shadow-sm)}
+table{width:100%;border-collapse:collapse;font-size:13px}
+thead{background:linear-gradient(135deg,var(--black) 0%,var(--black-soft) 100%);color:white}
+th{padding:12px 16px;text-align:left;font-weight:600;font-size:11px;text-transform:uppercase;letter-spacing:0.5px}
+td{padding:11px 16px;border-bottom:1px solid var(--border-light);vertical-align:top}
+tr:last-child td{border-bottom:none}
+tr:nth-child(even){background:var(--bg-alt)}
+tr:hover{background:var(--red-bg)}
+.tag{display:inline-block;font-size:10px;font-weight:700;padding:3px 10px;border-radius:20px;letter-spacing:0.3px;white-space:nowrap}
+.tag-critical{background:var(--red-bg);color:var(--red-dark);border:1px solid #f5b8b8}
+.tag-senior{background:var(--black);color:white}
+.tag-mid{background:var(--bg-alt);color:var(--text);border:1px solid var(--border)}
+.tag-bad{background:var(--red-bg);color:var(--red-dark);border:1px solid #f5b8b8}
+.tag-good{background:var(--green-bg);color:var(--green);border:1px solid var(--green-border)}
+.tag-fe{background:var(--blue-bg);color:var(--blue);border:1px solid var(--blue-border)}
+.tag-be{background:var(--orange-bg);color:var(--orange);border:1px solid var(--orange-border)}
+.tag-shared{background:var(--gold-light);color:var(--gold-dark);border:1px solid #f0d97a}
+.kpi-grid{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-bottom:24px}
+.kpi{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;overflow:hidden;min-width:0;padding:20px;text-align:center;box-shadow:var(--shadow-sm);transition:box-shadow .25s ease,transform .25s ease;position:relative}
+.kpi:hover{box-shadow:var(--shadow-md);transform:translateY(-2px)}
+.kpi::after{content:'';position:absolute;bottom:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--black),var(--red),var(--black))}
+.kpi.dark{background:var(--black);color:white;border-color:var(--black-light)}
+.kpi.dark .kpi-label{color:rgba(255,255,255,0.55)}
+.kpi.dark .kpi-sub{color:rgba(255,255,255,0.65)}
+.kpi-label{font-size:9px;color:var(--text-muted);text-transform:uppercase;letter-spacing:0.6px;margin-bottom:4px;font-weight:600}
+.kpi-value{font-size:28px;font-weight:800;overflow-wrap:break-word;word-break:break-word;line-height:1.1;color:var(--black)}
+.kpi.accent .kpi-value{color:var(--red)}
+.kpi.dark .kpi-value{color:white}
+.kpi-sub{font-size:10px;color:var(--text-secondary);margin-top:5px;font-weight:500}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.three-col{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+@media (max-width:800px){.two-col,.three-col{grid-template-columns:1fr}}
+.impact-block{background:var(--bg-card);border:1px solid var(--border);border-radius:10px;margin-bottom:12px;overflow:hidden;transition:all .25s ease}
+.impact-block:hover{box-shadow:var(--shadow-md);border-color:var(--black-light)}
+.impact-head{background:var(--black);color:white;padding:12px 20px;display:flex;align-items:center;gap:12px}
+.impact-head .impact-icon{font-size:18px;font-weight:800}
+.impact-head h4{font-size:14px;font-weight:700;margin:0;letter-spacing:-0.2px}
+.impact-body{display:grid;grid-template-columns:1fr 1fr}
+@media (max-width:700px){.impact-body{grid-template-columns:1fr}}
+.impact-cell{padding:14px 20px;font-size:13px;color:var(--text-secondary);line-height:1.6}
+.impact-cell.bad{background:var(--bg-alt);border-right:1px solid var(--border)}
+@media (max-width:700px){.impact-cell.bad{border-right:none;border-bottom:1px solid var(--border)}}
+.impact-cell strong{display:block;font-size:11px;text-transform:uppercase;letter-spacing:0.5px;margin-bottom:6px}
+.impact-cell.bad strong{color:var(--red-dark)}
+.impact-cell.good strong{color:var(--green)}
+.separator{border:none;height:2px;background:linear-gradient(90deg,transparent,var(--red),var(--black),var(--red),transparent);margin:0;opacity:0.4}
+.checklist{list-style:none;padding:0}
+.checklist li{padding:10px 0 10px 32px;position:relative;font-size:13.5px;color:var(--text-secondary);border-bottom:1px solid var(--border-light);transition:background .15s}
+.checklist li:hover{background:var(--bg-alt)}
+.checklist li:last-child{border-bottom:none}
+.checklist li::before{content:'[ ]';position:absolute;left:0;top:10px;font-size:12px;color:var(--red);font-weight:700;font-family:monospace}
+.phase{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:22px 24px;position:relative;transition:all .25s ease}
+.phase:hover{box-shadow:var(--shadow-lg);transform:translateY(-3px)}
+.phase-number{position:absolute;top:-16px;left:22px;width:40px;height:40px;border-radius:10px;background:var(--black);color:white;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:16px;box-shadow:var(--shadow-md)}
+.phase.urgent .phase-number{background:var(--red)}
+.phase-tag{display:inline-block;font-size:9px;font-weight:700;text-transform:uppercase;letter-spacing:1.5px;color:var(--text-muted);margin:14px 0 6px}
+.phase.urgent .phase-tag{color:var(--red)}
+.phase h3{font-size:16px;font-weight:800;color:var(--black);margin-bottom:12px;letter-spacing:-0.2px}
+.phase ul{list-style:none;padding:0}
+.phase li{font-size:12.5px;padding:7px 0 7px 18px;border-bottom:1px dashed var(--border-light);position:relative;color:var(--text)}
+.phase li:last-child{border-bottom:none}
+.phase li::before{content:'>';position:absolute;left:0;color:var(--red);font-weight:700}
+footer{padding:36px 0 28px;text-align:center;background:linear-gradient(135deg,var(--black-deep) 0%,var(--black) 100%);color:rgba(255,255,255,0.6)}
+footer .footer-logo svg{display:block;height:36px;width:auto;margin:0 auto 14px}
+footer p{font-size:12px;line-height:1.6;max-width:600px;margin:0 auto}
+footer strong{color:var(--red-light)}
+footer .footer-contact{margin-top:14px;display:flex;justify-content:center;gap:18px;flex-wrap:wrap;font-size:11px;color:rgba(255,255,255,0.50)}
+footer .footer-contact a{color:rgba(255,255,255,0.65);text-decoration:none;transition:color .2s}
+footer .footer-contact a:hover{color:var(--red-light)}
+@media (max-width:1024px){.page-wrapper{margin:16px;border-radius:12px}.kpi-grid{grid-template-columns:repeat(3,1fr)}}
+@media (max-width:700px){.page-wrapper{margin:0;border-radius:0}.container{padding:0 20px}.kpi-grid{grid-template-columns:repeat(2,1fr)}header{padding:36px 0 32px}.header-left h1{font-size:22px}.section-desc{padding-left:0}}
+@media print{body{background:white}.page-wrapper{margin:0;box-shadow:none;border-radius:0}header{border-radius:0;-webkit-print-color-adjust:exact;print-color-adjust:exact}footer{border-radius:0}nav{display:none}section{page-break-inside:avoid}.card:hover,.kpi:hover,.timeline-item:hover{transform:none;box-shadow:none}.collapsible-section .section-body{grid-template-rows:1fr!important}.toggle-chevron{display:none}}
+
+
+.doc-content h2{font-size:18px;font-weight:800;color:var(--black);margin:1.75rem 0 0.75rem;padding-bottom:0.35rem;border-bottom:2px solid var(--red);letter-spacing:-0.2px}
+.doc-content h3{font-size:15px;font-weight:700;color:var(--text);margin:1.25rem 0 0.5rem}
+.doc-content h4{font-size:13px;font-weight:700;color:var(--text-secondary);margin:1rem 0 0.4rem;text-transform:uppercase;letter-spacing:0.4px}
+.doc-content p,.doc-content li{font-size:13.5px;color:var(--text-secondary);line-height:1.7}
+.doc-content ul:not(.checklist),.doc-content ol{margin:0 0 1rem;padding-left:1.25rem}
+.doc-content li{margin-bottom:0.35rem}
+.doc-content a{color:var(--red-dark);text-decoration:none;font-weight:600}
+.doc-content a:hover{color:var(--red);text-decoration:underline}
+.doc-content code{font-family:Consolas,"Courier New",monospace;font-size:0.88em;background:var(--bg-alt);padding:0.12rem 0.35rem;border-radius:4px;color:var(--red-dark)}
+.doc-content pre{background:var(--black);color:rgba(255,255,255,0.85);padding:1rem 1.15rem;border-radius:10px;overflow-x:auto;font-size:0.85rem;line-height:1.45;margin:0 0 1.25rem;border-left:4px solid var(--red)}
+.doc-content pre code{background:transparent;color:inherit;padding:0}
+.doc-content hr{border:none;border-top:1px solid var(--border);margin:1.5rem 0}
+.doc-content .alert p:last-child{margin-bottom:0}
+.doc-content .section-subcard{background:var(--bg-card);border:1px solid var(--border);border-radius:12px;padding:1rem 1.15rem 0.5rem;margin:1rem 0 1.25rem;box-shadow:var(--shadow-sm)}
+.doc-content .section-subcard>h2{margin-top:0;border-bottom:none;padding-bottom:0}
+.steps-timeline{margin:1.25rem 0 1.75rem;padding-left:32px}
+.steps-timeline .timeline-item{margin-bottom:14px;padding:15px 18px 15px 20px}
+.steps-timeline .timeline-item::before{top:20px}
+.steps-timeline .timeline-date{font-size:10px;margin-bottom:6px}
+.steps-timeline .timeline-desc{font-size:13.5px;line-height:1.7;color:var(--text-secondary)}
+.steps-timeline .timeline-desc strong{color:var(--text);font-weight:700}
+.table-compare tbody td:first-child{color:var(--red-dark);background:var(--red-bg);font-weight:500}
+.table-compare tbody td:last-child{color:var(--green);background:var(--green-bg);font-weight:500}
+.table-compare thead th:first-child{background:linear-gradient(135deg,var(--red-dark) 0%,var(--red) 100%)}
+.table-compare thead th:last-child{background:linear-gradient(135deg,#167a42 0%,var(--green) 100%)}
+.table-meta tbody td:first-child{font-weight:700;color:var(--black);width:34%;background:var(--bg-alt);white-space:nowrap}
+.table-meta tbody td:last-child{color:var(--text-secondary)}
+.doc-content .table-wrapper tbody td{font-size:13.5px;line-height:1.65}
+.doc-content .table-wrapper tbody td strong{color:var(--text);font-weight:700}
+.checklist li:has(input[type=checkbox])::before{display:none}
+.checklist li:has(input[type=checkbox]){padding:10px 0;display:flex;align-items:flex-start}
+.checklist li label{display:flex;align-items:flex-start;gap:10px;width:100%;cursor:pointer;line-height:1.65}
+.checklist li input[type=checkbox]{margin:2px 0 0 0;flex-shrink:0;width:15px;height:15px;accent-color:var(--red);cursor:pointer}
+.checklist li.is-checked{color:var(--text-muted)}
+.checklist li.is-checked label{text-decoration:line-through;text-decoration-color:rgba(138,138,138,.45)}
+nav .container{justify-content:stretch}
+nav a{flex:1}
+.collapsible-section .section-body{margin-top:4px}
+
+</style>
+</head>
+<body>
+<div class="page-wrapper">
+
+<header>
+  <div class="container">
+    <div class="header-left">
+      <div class="header-logo"><svg xmlns="http://www.w3.org/2000/svg" id="Capa_1" data-name="Capa 1" viewBox="0 0 848 199.39"><defs><style>.cls-1{fill:#fff;}.cls-2{fill:red;}</style></defs><path class="cls-1" d="M22.89,28.62V0H0V109.7H114.47V28.62Zm68.68,41V85.85H22.89V53.42H91.57Z"></path><path class="cls-1" d="M297.61,28.62V0H274.72V109.7H389.18V28.62Zm68.68,41V85.85H297.61V53.42h68.68Z"></path><path class="cls-1" d="M137.36,28.62v24.8h45.79c45.11,0,45.78,0,45.78,1.91s-.67,1.9-45.78,1.9H137.36V109.7H251.82V28.62Zm57.23,57.23c-33.67,0-34.34,0-34.34-1.91S160.92,82,194.59,82s34.34,0,34.34,1.91S228.26,85.85,194.59,85.85Z"></path><path class="cls-2" d="M412.08,28.62V109.7H526.54V28.62Zm91.57,41V85.85H435V53.42h68.68Z"></path><path class="cls-2" d="M549.44,28.62V109.7H663.9V28.62Zm91.57,41V85.85H572.33V53.42H641Z"></path><polygon class="cls-1" points="686.79 69.16 686.79 109.7 709.69 109.7 709.69 53.42 778.37 53.42 778.37 109.7 801.26 109.7 801.26 28.62 686.79 28.62 686.79 69.16"></polygon><polygon class="cls-1" points="824.15 69.16 824.15 109.7 847.05 109.7 847.05 28.62 824.15 28.62 824.15 69.16"></polygon><path class="cls-1" d="M470.26,146.9v32.43h7.63l.1-14.59c0-16,.86-19.94,5-23,3.91-2.86,12.11-2.77,15.36.28l2.48,2.29v35h7.63V161.4c0-15.07-.29-18.32-1.72-21.08-2.29-4.58-5.91-7-11.54-7.54-6.58-.57-11,.38-14.4,3.24l-2.87,2.48v-24h-7.63Z"></path><polygon class="cls-1" points="627.65 146.9 627.65 179.33 635.28 179.33 635.28 114.47 627.65 114.47 627.65 146.9"></polygon><path class="cls-1" d="M749,117.52c-1.62,1.62-1.43,7,.19,8.39,4,3.25,8.77-2.1,6.48-7.15a4.18,4.18,0,0,0-6.67-1.24"></path><polygon class="cls-1" points="327.18 122.1 327.18 125.91 346.26 125.91 346.26 179.33 353.89 179.33 353.89 125.91 372.97 125.91 372.97 118.28 327.18 118.28 327.18 122.1"></polygon><path class="cls-1" d="M417.8,158.34v-5.53c0-7.63-3.53-14.59-9-17.84S396,131.73,390,134.78h0a18.21,18.21,0,0,0-7,6.78c-2.48,3.91-3,5.72-3.24,13-.29,5.15,0,9.73.76,11.92,1.52,4.68,6.29,9.92,11,12,4.48,2.1,15.26,2.39,20.51.57,2.95-1,3.34-1.62,3.62-4.77.19-1.9.1-3.53-.19-3.53s-3,.67-6,1.44a45.43,45.43,0,0,1-8.39,1.43c-6.49,0-13.83-6.59-13.83-12.5v-2.77Zm-30.72-6.67.67-2.67a11.55,11.55,0,0,1,6.49-8.3c3.91-1.72,5.72-1.72,9.73-.1,3.43,1.43,4.67,3.15,5.72,7.92l.67,3.15Z"></path><path class="cls-1" d="M437.83,134.69a19.47,19.47,0,0,0-7.06,6.87c-2.48,3.91-2.95,5.72-3.24,13-.86,17.36,5.91,25.66,20.79,25.75,8,0,10.88-1.43,11.26-5.62.29-3.15.29-3.25-2.86-2.58-11.93,2.48-16.6,1.24-19.75-5.06-2.67-5.15-2.76-15.83-.19-20.89,3-5.81,7.25-7,19.08-5.72,1.81.19,2.48-.28,3.24-2.38,1.34-4-.09-4.77-9.06-5.25-7-.29-8.39-.1-12.21,1.91"></path><path class="cls-1" d="M536.56,133.83a15.15,15.15,0,0,0-4.2,2.86c-1.81,2.29-3,2-3-.76,0-2.1-.38-2.39-3.33-2.39h-3.34v45.79h7.63l.09-14.59c0-16,.86-19.94,5-23,3.91-2.86,12.12-2.77,15.36.28l2.48,2.29v35h7.63V161.4c0-19.65-.67-22.42-6-26.33-3.34-2.48-14-3.15-18.31-1.24"></path><path class="cls-1" d="M605.43,135.64c-5.34-3.53-15.55-4.1-21.46-1-7,3.53-10.78,10.78-10.78,20.89,0,9.06,1.43,13.74,5.91,18.6,4.68,5.06,8.68,6.49,16.6,6,8.11-.47,12.78-3.62,16.31-10.87C617.64,157.77,614.49,141.65,605.43,135.64Zm-12.88,37.58c-8.2-1-11.64-6.2-11.64-17.36,0-11.35,5.15-17.17,14.22-16.12a20,20,0,0,1,6.29,1.82c3.53,2.29,5.25,7.34,5.25,15.07C606.67,168.36,601.61,174.37,592.55,173.22Z"></path><path class="cls-1" d="M679.83,135.64c-5.34-3.53-15.55-4.1-21.46-1-7,3.53-10.78,10.78-10.78,20.89,0,9.06,1.43,13.74,5.91,18.6,4.68,5.06,8.68,6.49,16.6,6,8.11-.47,12.78-3.62,16.31-10.87C692,157.77,688.89,141.65,679.83,135.64ZM667,173.22c-8.2-1-11.63-6.2-11.63-17.36,0-11.35,5.15-17.17,14.21-16.12a20,20,0,0,1,6.29,1.82c3.53,2.29,5.25,7.34,5.25,15.07C681.07,168.36,676,174.37,667,173.22Z"></path><path class="cls-1" d="M735.16,139.65c3.53-.86,5.34-3.44,3.43-5.15-.38-.38-6.77-1-14.12-1.34-12-.57-13.73-.38-17.45,1.34h0c-8.68,3.91-10.59,18.6-3.25,25.08,1.91,1.72,1.91,1.82.1,3.63-2,2-2.58,8.87-.76,9.92.57.38-.58,2-2.77,3.91-7.25,6.2-6,15.83,2.67,20.13,5.15,2.67,16.12,3,23.56.76,8.87-2.67,13.55-10.87,10.68-19-2.19-6.2-5-7.54-17.36-8.3-5.91-.38-10.77-.67-10.87-.76a5.53,5.53,0,0,1-.29-2.48c0-3,2.48-4.3,8.21-4.3a23.4,23.4,0,0,0,8.77-2c6.58-3.24,9.45-11.64,6.49-19.08C731.72,141,732.49,140.32,735.16,139.65Zm-6,39.58c2,1.72,1.9,7.06-.1,8.88-4.67,4-14.31,5.62-20.79,3.43s-7.25-10-1.15-12.78C711,177,726.86,177.33,729.15,179.23ZM724,154.34c-3.72,3.91-13.93,3.43-16.22-.77-2.39-4.57-.29-11.54,4.2-13.44,3.53-1.53,9.44-.29,11.73,2.48C726.57,145.85,726.67,151.48,724,154.34Z"></path><path class="cls-1" d="M807,158.34v-5.53c0-7.63-3.53-14.59-9-17.84s-12.88-3.24-18.79-.19h0a18.16,18.16,0,0,0-7,6.78c-2.48,3.91-3,5.72-3.24,13-.29,5.15,0,9.73.76,11.92,1.53,4.68,6.3,9.92,11,12,4.48,2.1,15.26,2.39,20.51.57,3-1,3.34-1.62,3.62-4.77.2-1.9.1-3.53-.19-3.53s-3,.67-6,1.44a45.29,45.29,0,0,1-8.39,1.43c-6.49,0-13.83-6.59-13.83-12.5v-2.77Zm-30.71-6.67.67-2.67a11.51,11.51,0,0,1,6.48-8.3c3.91-1.72,5.73-1.72,9.73-.1,3.44,1.43,4.68,3.15,5.73,7.92l.66,3.15Z"></path><path class="cls-1" d="M823.68,133.92c-5.15,2.29-7.63,5.92-7.63,11.07,0,6.2,3.24,9.54,13.16,13.55,11.35,4.67,14.31,8.1,10.3,12.11-3.53,3.53-13.64,3.34-22.32-.38-1.53-.67-1.72-.29-1.43,3.43s.57,4.29,3.62,5.34c4.58,1.53,16.6,1.53,20.32-.09a12.64,12.64,0,0,0,8.3-12.21c0-4.39-.38-5.25-3.62-8.3-2.2-2.1-6.49-4.48-11-6.2-4-1.43-7.92-3.43-8.68-4.29-4.77-5.25,1.52-9.64,11.35-7.92a43.75,43.75,0,0,1,7.25,1.62c1.14.38,1.9-.28,2.76-2.38.67-1.72.86-3.25.38-3.72-3.24-3-17.55-3.91-22.79-1.63"></path><polygon class="cls-1" points="747.84 156.44 747.84 179.33 755.47 179.33 755.47 133.54 747.84 133.54 747.84 156.44"></polygon></svg></div>
+      <h1>Guía para completar la <span class="red">plantilla</span> de análisis funcional</h1>
+      <p>Documentación Babooni · v.1 · 09/07/2026</p>
+      <p style="color:rgba(255,255,255,0.72);font-size:11px;margin-top:10px;max-width:620px;line-height:1.5">Metodología interna para redactar un funcional cerrado y utilizable en desarrollo. Documento de referencia (plantilla de ejemplo): <a href="https://docs.google.com/document/d/19GjlNjQZLtp5D2R62kfv0fI7F2xAMwkRRVMVgmfR7o8/edit?tab=t.0" target="_blank" rel="noopener noreferrer" style="color:rgba(255,255,255,0.92);font-weight:600;text-decoration:underline">Plantilla de análisis funcional Babooni (Google Drive)</a>.</p>
+    </div>
+    <div class="header-badge">
+      Guía metodológica<span>v.1</span>
+    </div>
+  </div>
+</header>
+
+<nav id="mainNav">
+  <div class="container">
+    <a href="#sec-1">Intro</a>
+    <a href="#sec-2">Uso</a>
+    <a href="#sec-3">Secciones</a>
+    <a href="#sec-4">Listo</a>
+    <a href="#sec-5">Ejemplo</a>
+    <a href="#sec-6">Apoyo</a>
+    <a href="#sec-7">Checklist</a>
+  </div>
+</nav>
+
+
+<section id="sec-1" class="collapsible-section is-open">
+  <div class="container">
+    <button type="button" class="section-toggle" aria-expanded="true" aria-controls="sec-1-body">
+      <div class="section-toggle-top">
+        <div class="section-header">
+          <div class="section-number">1</div>
+          <h2>Para qué sirve esta <span class="red">guía</span></h2>
+        </div>
+        <span class="toggle-chevron" aria-hidden="true"></span>
+      </div>
+    </button>
+    <div class="section-body" id="sec-1-body">
+      <div class="section-body-inner">
+        <div class="doc-content"><p>La plantilla de análisis funcional Babooni define <strong>qué
+información hay que recoger</strong> antes de estimar o desarrollar un
+evolutivo. El ejemplo ficticio (<em>Solicitud de registro de jornada
+diferido</em>) muestra <strong>cómo debe quedar un documento
+terminado</strong>.</p>
+<p>Esta guía responde a tres preguntas prácticas:</p>
+<ol type="1">
+<li><strong>Qué hay que escribir</strong> en cada apartado.</li>
+<li><strong>Qué preguntas hacer</strong> a negocio, usuarios y equipo
+técnico para no dejar huecos.</li>
+<li><strong>Cómo saber</strong> si el documento ya está listo para
+entregar a desarrollo.</li>
+</ol>
+<div class="alert alert-gold"><p><strong>Regla general:</strong> el funcional describe <em>qué</em>
+debe hacer el sistema y <em>bajo qué condiciones</em>, no <em>cómo</em>
+se programa. Si una frase solo tiene sentido en Java, SQL o en una
+librería concreta, no pertenece aquí.</p>
+</div>
+</div>
+      </div>
+    </div>
+  </div>
+</section>
+<hr class="separator">
+
+<section id="sec-2" class="collapsible-section alt">
+  <div class="container">
+    <button type="button" class="section-toggle" aria-expanded="false" aria-controls="sec-2-body">
+      <div class="section-toggle-top">
+        <div class="section-header">
+          <div class="section-number">2</div>
+          <h2>Cómo usar la guía junto al <span class="red">ejemplo</span></h2>
+        </div>
+        <span class="toggle-chevron" aria-hidden="true"></span>
+      </div>
+    </button>
+    <div class="section-body" id="sec-2-body">
+      <div class="section-body-inner">
+        <div class="doc-content"><div class="timeline steps-timeline">
+    <div class="timeline-item essential">
+      <div class="timeline-date">Paso 1</div>
+      <div class="timeline-desc">Lee primero el <strong>objetivo</strong> y
+el <strong>alcance</strong> del ejemplo para entender el nivel de
+detalle esperado.</div>
+    </div>
+    <div class="timeline-item essential">
+      <div class="timeline-date">Paso 2</div>
+      <div class="timeline-desc">Abre la plantilla vacía (copia de la
+estructura del ejemplo) para tu proyecto real.</div>
+    </div>
+    <div class="timeline-item essential">
+      <div class="timeline-date">Paso 3</div>
+      <div class="timeline-desc">Recorre esta guía <strong>sección a
+sección</strong> mientras redactas o revisas.</div>
+    </div>
+    <div class="timeline-item essential">
+      <div class="timeline-date">Paso 4</div>
+      <div class="timeline-desc">Contrasta tu borrador con el ejemplo: si
+tu sección es mucho más corta y hay workflow, permisos o validaciones,
+probablemente falta detalle.</div>
+    </div>
+    <div class="timeline-item essential">
+      <div class="timeline-date">Paso 5</div>
+      <div class="timeline-desc">Cierra las <strong>preguntas
+abiertas</strong> (sección 16) antes de enviar a estimación o
+sprint.</div>
+    </div>
+</div>
+<h3 id="orden-recomendado-de-redacción">Orden recomendado de
+redacción</h3>
+<p>No hace falta seguir el índice del 1 al 18 en orden estricto. Este
+flujo suele funcionar mejor:</p>
+<pre><code>Objetivo → Situación actual → Alcance → Actores → Pantallas
+    → Flujos → Estados (si hay workflow) → Reglas → Validaciones
+    → Datos → Integraciones → Criterios de aceptación → Simulaciones
+    → Riesgos y preguntas abiertas → Revisión final</code></pre>
+<p>Redacta primero lo que negocio explica con más claridad (problema,
+usuarios, flujo principal) y deja para el final la trazabilidad y el
+checklist.</p>
+</div>
+      </div>
+    </div>
+  </div>
+</section>
+<hr class="separator">
+
+<section id="sec-3" class="collapsible-section">
+  <div class="container">
+    <button type="button" class="section-toggle" aria-expanded="false" aria-controls="sec-3-body">
+      <div class="section-toggle-top">
+        <div class="section-header">
+          <div class="section-number">3</div>
+          <h2>Sección por sección: qué <span class="red">documentar</span> y cómo</h2>
+        </div>
+        <span class="toggle-chevron" aria-hidden="true"></span>
+      </div>
+    </button>
+    <div class="section-body" id="sec-3-body">
+      <div class="section-body-inner">
+        <div class="doc-content"><h2 id="objetivo-de-negocio-y-problema-sección-1">3.1. Objetivo de
+negocio y problema (Sección 1)</h2>
+<h3 id="para-qué-sirve">Para qué sirve</h3>
+<p>Fija <strong>por qué</strong> se hace el evolutivo y <strong>qué
+dolor</strong> resuelve. Es la brújula cuando más adelante surjan dudas
+de alcance.</p>
+<h3 id="qué-hay-que-escribir">Qué hay que escribir</h3>
+<ul>
+<li>Contexto en lenguaje de negocio (situación habitual, no
+técnica).</li>
+<li>Objetivo del evolutivo en 3–5 bullets concretos.</li>
+<li>Tabla de <strong>resultado esperado</strong>: problema actual,
+resultado deseado, principios (seguridad, UX, trazabilidad…).</li>
+</ul>
+<h3 id="preguntas-clave">Preguntas clave</h3>
+<ul>
+<li>¿Qué hace el usuario hoy cuando ocurre el problema?</li>
+<li>¿Qué pasa si no hacemos nada?</li>
+<li>¿Cómo sabremos que el evolutivo ha merecido la pena?</li>
+</ul>
+<h3 id="errores-frecuentes">Errores frecuentes</h3>
+<div class="table-wrapper table-compare"><table>
+
+<thead>
+<tr>
+<th style="text-align: left;">Mal</th>
+<th style="text-align: left;">Bien</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">“Mejorar el módulo de fichajes”</td>
+<td style="text-align: left;">“Permitir solicitar un tramo olvidado con
+aprobación del responsable”</td>
+</tr>
+<tr>
+<td style="text-align: left;">Describir pantallas sin explicar el
+problema</td>
+<td style="text-align: left;">Explicar el dolor operativo y luego la
+solución funcional</td>
+</tr>
+<tr>
+<td style="text-align: left;">Mezclar objetivo con diseño técnico</td>
+<td style="text-align: left;">Objetivo = comportamiento de negocio
+deseado</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="referencia-en-el-ejemplo">Referencia en el ejemplo</h3>
+<p>Secciones <strong>1.1 Contexto</strong>, <strong>1.2 Objetivo del
+evolutivo</strong> y <strong>1.3 Resultado esperado para
+negocio</strong>.</p>
+<h2 id="glosario-sección-2">3.2. Glosario (Sección 2)</h2>
+<h3 id="para-qué-sirve-1">Para qué sirve</h3>
+<p>Alinear vocabulario entre negocio, redacción funcional y desarrollo.
+Evita que la misma palabra signifique cosas distintas.</p>
+<h3 id="qué-hay-que-escribir-1">Qué hay que escribir</h3>
+<ul>
+<li>Términos de dominio que aparecerán en reglas, pantallas o
+informes.</li>
+<li>Definición funcional en una frase clara.</li>
+<li>Aclarar exclusiones (“este término no incluye…”).</li>
+</ul>
+<h3 id="preguntas-clave-1">Preguntas clave</h3>
+<ul>
+<li>¿Cómo llama negocio a esta entidad en el día a día?</li>
+<li>¿Hay términos que en IT significan otra cosa?</li>
+<li>¿Hay siglas o códigos internos que el lector deba conocer?</li>
+</ul>
+<h3 id="errores-frecuentes-1">Errores frecuentes</h3>
+<ul>
+<li>Glosario vacío en un proyecto con workflow propio.</li>
+<li>Definiciones circulares (“Solicitud: una solicitud del
+usuario”).</li>
+<li>Definir tablas o campos de base de datos en lugar de conceptos de
+negocio.</li>
+</ul>
+<h3 id="referencia-en-el-ejemplo-1">Referencia en el ejemplo</h3>
+<p>Tabla de términos: <em>Empleado</em>, <em>Responsable</em>, <em>Modo
+de fichaje</em>, <em>Solapamiento</em>, etc.</p>
+<h2 id="situación-actual-sección-3">3.3. Situación actual (Sección
+3)</h2>
+<h3 id="para-qué-sirve-2">Para qué sirve</h3>
+<p>Explica <strong>cómo funciona hoy</strong> el sistema o el proceso
+manual. Justifica el cambio y ayuda a detectar regresiones.</p>
+<h3 id="qué-hay-que-escribir-2">Qué hay que escribir</h3>
+<ul>
+<li>Comportamiento vigente por área o módulo (tabla resumen).</li>
+<li>Limitaciones concretas que motivan el evolutivo.</li>
+</ul>
+<h3 id="preguntas-clave-2">Preguntas clave</h3>
+<ul>
+<li>¿Qué hace el sistema hoy en este caso?</li>
+<li>¿Qué hace la gente fuera del sistema (Excel, email, papel)?</li>
+<li>¿Qué partes del comportamiento actual <strong>no</strong> deben
+cambiar?</li>
+</ul>
+<h3 id="errores-frecuentes-2">Errores frecuentes</h3>
+<ul>
+<li>Omitir el “as-is” y pasar directo a la solución.</li>
+<li>No indicar qué flujos existentes se mantienen intactos.</li>
+</ul>
+<h3 id="referencia-en-el-ejemplo-2">Referencia en el ejemplo</h3>
+<p>Secciones <strong>3.1 Comportamiento vigente</strong> y <strong>3.2
+Limitaciones que motivan el cambio</strong>.</p>
+<h2 id="alcance-sección-4">3.4. Alcance (Sección 4)</h2>
+<h3 id="para-qué-sirve-3">Para qué sirve</h3>
+<p>Protege la estimación y evita malentendidos. Es una de las secciones
+más importantes del documento.</p>
+<h3 id="qué-hay-que-escribir-3">Qué hay que escribir</h3>
+<ul>
+<li><strong>Entra en alcance:</strong> lista cerrada de capacidades
+incluidas.</li>
+<li><strong>Queda fuera de alcance:</strong> explícito, sin
+ambigüedad.</li>
+<li>**Decisiones funcionales cerradas (DF-*):** elecciones ya acordadas
+con negocio.</li>
+</ul>
+<h3 id="preguntas-clave-3">Preguntas clave</h3>
+<ul>
+<li>Si solo pudiéramos entregar 3 cosas, ¿cuáles serían?</li>
+<li>¿Qué nos habéis pedido pero queda para una fase 2?</li>
+<li>¿Hay decisiones que ya se tomaron en reunión y no deben
+reabrirse?</li>
+</ul>
+<h3 id="errores-frecuentes-3">Errores frecuentes</h3>
+<div class="table-wrapper table-compare"><table>
+
+<thead>
+<tr>
+<th style="text-align: left;">Mal</th>
+<th style="text-align: left;">Bien</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">“Integraciones varias”</td>
+<td style="text-align: left;">“Integración con nómina: fuera de alcance
+en v1”</td>
+</tr>
+<tr>
+<td style="text-align: left;">No listar exclusiones</td>
+<td style="text-align: left;">Lista “Queda fuera” tan detallada como
+“Entra”</td>
+</tr>
+<tr>
+<td style="text-align: left;">Dejar decisiones en “pendiente” sin
+marcarlas en sección 16</td>
+<td style="text-align: left;">DF-01: “Solo usuarios con modo vivo”
+(cerrado)</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="referencia-en-el-ejemplo-3">Referencia en el ejemplo</h3>
+<p>Secciones <strong>4.1</strong>, <strong>4.2</strong> y tabla
+<strong>4.3 Decisiones funcionales cerradas</strong>.</p>
+<h2 id="usuarios-y-perfiles-sección-5">3.5. Usuarios y perfiles (Sección
+5)</h2>
+<h3 id="para-qué-sirve-4">Para qué sirve</h3>
+<p>Define <strong>quién</strong> interactúa con el evolutivo y
+<strong>qué puede y no puede</strong> hacer.</p>
+<h3 id="qué-hay-que-escribir-4">Qué hay que escribir</h3>
+<p>Tabla con columnas recomendadas:</p>
+<div class="line-block">Perfil | Qué puede hacer | Qué no puede hacer |
+Observaciones |</div>
+<h3 id="preguntas-clave-4">Preguntas clave</h3>
+<ul>
+<li>¿Quién inicia la acción?</li>
+<li>¿Quién aprueba, consulta o audita?</li>
+<li>¿Hay perfiles que ven datos de otros? ¿Con qué criterio?</li>
+</ul>
+<h3 id="errores-frecuentes-4">Errores frecuentes</h3>
+<ul>
+<li>Solo listar roles sin permisos negativos.</li>
+<li>Suponer permisos “como los actuales” sin verificarlos.</li>
+</ul>
+<h3 id="referencia-en-el-ejemplo-4">Referencia en el ejemplo</h3>
+<p>Tabla de <em>Empleado</em>, <em>Responsable</em>,
+<em>Superadmin</em>, <em>Sistema</em>.</p>
+<h2 id="aplicaciones-módulos-y-pantallas-sección-6">3.6. Aplicaciones,
+módulos y pantallas (Sección 6)</h2>
+<h3 id="para-qué-sirve-5">Para qué sirve</h3>
+<p>Mapa de impacto: dónde tocará el desarrollo y qué prioridad tiene
+cada cambio.</p>
+<h3 id="qué-hay-que-escribir-5">Qué hay que escribir</h3>
+<div class="line-block">Aplicación | Módulo / pantalla | Cambio esperado
+| Comportamiento que se mantiene | Prioridad |</div>
+<h3 id="preguntas-clave-5">Preguntas clave</h3>
+<ul>
+<li>¿Hay pantallas nuevas o solo cambios en existentes?</li>
+<li>¿Qué no debe romperse bajo ningún concepto?</li>
+<li>¿Qué es imprescindible para la primera entrega?</li>
+</ul>
+<h3 id="errores-frecuentes-5">Errores frecuentes</h3>
+<ul>
+<li>Nombres de pantalla inventados sin validar con la aplicación
+real.</li>
+<li>No distinguir cambio funcional de cambio cosmético.</li>
+</ul>
+<h3 id="referencia-en-el-ejemplo-5">Referencia en el ejemplo</h3>
+<p>Tabla con rutas <code>/registro-jornada</code>, bandeja admin,
+notificaciones, auditoría, etc.</p>
+<h2 id="modelo-de-estados-sección-7">3.7. Modelo de estados (Sección
+7)</h2>
+<div class="alert alert-gold"><p>Aplica cuando el evolutivo tiene workflow (solicitudes, aprobaciones,
+borradores, ciclos de vida).</p>
+</div>
+<h3 id="para-qué-sirve-6">Para qué sirve</h3>
+<p>Elimina ambigüedad sobre transiciones válidas. Desarrollo y QA lo
+usarán como contrato.</p>
+<h3 id="qué-hay-que-escribir-6">Qué hay que escribir</h3>
+<ul>
+<li>Diagrama o tabla de estados.</li>
+<li>Definición de cada estado (qué significa, quién lo ve, si es
+editable).</li>
+<li>Tabla de eventos: evento → estado origen → estado destino →
+actor.</li>
+</ul>
+<h3 id="preguntas-clave-6">Preguntas clave</h3>
+<ul>
+<li>¿Puede volver atrás? ¿Quién y en qué condiciones?</li>
+<li>¿Hay estados finales irreversibles?</li>
+<li>¿Qué ocurre si dos actores actúan a la vez?</li>
+</ul>
+<h3 id="errores-frecuentes-6">Errores frecuentes</h3>
+<ul>
+<li>Describir el flujo solo en prosa sin estados nombrados.</li>
+<li>Olvidar quién ejecuta cada transición (usuario vs sistema).</li>
+</ul>
+<h3 id="referencia-en-el-ejemplo-6">Referencia en el ejemplo</h3>
+<p>Estados <code>BORRADOR</code>, <code>ENVIADA</code>,
+<code>DEVUELTA</code>, <code>APROBADA</code>, <code>RECHAZADA</code>,
+<code>ANULADA</code> y tabla de eventos <strong>7.3</strong>.</p>
+<h2 id="flujos-y-casos-de-uso-sección-8">3.8. Flujos y casos de uso
+(Sección 8)</h2>
+<h3 id="para-qué-sirve-7">Para qué sirve</h3>
+<p>Narra el comportamiento paso a paso y cubre escenarios identificables
+(no solo el camino feliz).</p>
+<h3 id="qué-hay-que-escribir-7">Qué hay que escribir</h3>
+<ul>
+<li><strong>Flujo principal</strong> numerado.</li>
+<li><strong>Flujos alternativos</strong> (devolución, rechazo,
+cancelación…).</li>
+<li><strong>Flujos de excepción</strong> (error de validación, conflicto
+de datos…).</li>
+<li>Tabla de **casos de uso (CU-*)** con actor, precondiciones y
+resultado.</li>
+<li>Tabla de **casuísticas de borde (CB-*)** para situaciones poco
+obvias.</li>
+</ul>
+<h3 id="preguntas-clave-7">Preguntas clave</h3>
+<ul>
+<li>¿Qué pasa si el usuario cancela a medias?</li>
+<li>¿Qué pasa si los datos cambian mientras la solicitud está
+pendiente?</li>
+<li>¿Qué ocurre en el límite (plazos, duplicados, permisos
+revocados)?</li>
+</ul>
+<h3 id="errores-frecuentes-7">Errores frecuentes</h3>
+<div class="table-wrapper table-compare"><table>
+
+<thead>
+<tr>
+<th style="text-align: left;">Mal</th>
+<th style="text-align: left;">Bien</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Un único flujo “todo va bien”</td>
+<td style="text-align: left;">Principal + alternativos +
+excepciones</td>
+</tr>
+<tr>
+<td style="text-align: left;">Casos de uso sin precondiciones</td>
+<td style="text-align: left;">“Dado solicitud ENVIADA y responsable con
+permiso…”</td>
+</tr>
+<tr>
+<td style="text-align: left;">Olvidar al actor <em>Sistema</em> cuando
+hay validaciones automáticas</td>
+<td style="text-align: left;">CU-12: Bloquear solicitud fuera de plazo —
+Actor: Sistema</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="referencia-en-el-ejemplo-7">Referencia en el ejemplo</h3>
+<p>Secciones <strong>8.1</strong> a <strong>8.6</strong>, incluidas
+casuísticas CB-01 a CB-08.</p>
+<h2 id="reglas-de-negocio-y-validaciones-sección-9">3.9. Reglas de
+negocio y validaciones (Sección 9)</h2>
+<h3 id="para-qué-sirve-8">Para qué sirve</h3>
+<p>Es la <strong>fuente única de verdad</strong> para validaciones,
+bloqueos y mensajes al usuario.</p>
+<h3 id="qué-hay-que-escribir-8">Qué hay que escribir</h3>
+<ul>
+<li>Reglas numeradas por familia: <strong>RN-G</strong> (generales),
+<strong>RN-D</strong> (datos), <strong>RN-S</strong>
+(solapamientos/concurrencia), <strong>RN-P</strong> (permisos)…</li>
+<li>Catálogos cerrados si existen (motivos, tipos, estados).</li>
+<li>Tabla de <strong>validaciones</strong>: situación | tipo
+(bloqueo/info/aviso) | mensaje orientativo | ¿bloquea? | referencia
+RN/CB.</li>
+</ul>
+<h3 id="preguntas-clave-8">Preguntas clave</h3>
+<ul>
+<li>¿Qué datos son obligatorios y en qué condiciones?</li>
+<li>¿Qué mensaje exacto (o casi exacto) debe ver el usuario?</li>
+<li>¿La regla bloquea la acción o solo avisa?</li>
+</ul>
+<h3 id="errores-frecuentes-8">Errores frecuentes</h3>
+<ul>
+<li>Reglas en prosa suelta sin numerar (no trazables a QA).</li>
+<li>Mensajes genéricos (“Error en el formulario”).</li>
+<li>Validar en envío una regla que negocio exige en aprobación (o al
+revés) sin documentarlo.</li>
+</ul>
+<h3 id="referencia-en-el-ejemplo-8">Referencia en el ejemplo</h3>
+<p>Secciones <strong>9.1</strong> a <strong>9.6</strong>, incluido
+catálogo de motivos y tabla de mensajes.</p>
+<h2 id="diccionario-funcional-de-datos-sección-10">3.10. Diccionario
+funcional de datos (Sección 10)</h2>
+<h3 id="para-qué-sirve-9">Para qué sirve</h3>
+<p>Define <strong>qué información</strong> maneja el evolutivo, sin
+bajar a tablas SQL. Contrato semántico entre funcional y desarrollo.</p>
+<h3 id="qué-hay-que-escribir-9">Qué hay que escribir</h3>
+<p>Por entidad o concepto:</p>
+<div class="line-block">Campo | Obligatorio | Descripción | Validación
+funcional |</div>
+<p>Incluir relaciones relevantes (“solo si estado = APROBADA”, “derivado
+de sesión”, etc.).</p>
+<h3 id="preguntas-clave-9">Preguntas clave</h3>
+<ul>
+<li>¿Qué datos pide el formulario?</li>
+<li>¿Qué datos genera el sistema automáticamente?</li>
+<li>¿Qué datos deben conservarse para auditoría o informes?</li>
+</ul>
+<h3 id="errores-frecuentes-9">Errores frecuentes</h3>
+<ul>
+<li>Copiar el modelo de base de datos existente sin filtrar lo que
+aplica al evolutivo.</li>
+<li>Campos “obligatorios” sin definir cuándo (siempre vs
+condicional).</li>
+</ul>
+<h3 id="referencia-en-el-ejemplo-9">Referencia en el ejemplo</h3>
+<p>Entidades <code>SolicitudRegistroDiferido</code>,
+<code>DecisionSolicitud</code> y extensión de
+<code>RegistroJornada</code>.</p>
+<h2 id="integraciones-dependencias-y-supuestos-sección-11">3.11.
+Integraciones, dependencias y supuestos (Sección 11)</h2>
+<h3 id="para-qué-sirve-10">Para qué sirve</h3>
+<p>Dejar claro de qué depende el evolutivo y qué se da por hecho.</p>
+<h3 id="qué-hay-que-escribir-10">Qué hay que escribir</h3>
+<ul>
+<li>Dependencias internas (módulos, servicios, configuraciones).</li>
+<li>Integraciones externas con indicación <strong>sí/no en esta
+versión</strong>.</li>
+<li>Supuestos numerados <strong>SU-</strong>* que, si dejan de
+cumplirse, cambian el alcance.</li>
+</ul>
+<h3 id="preguntas-clave-10">Preguntas clave</h3>
+<ul>
+<li>¿Necesitamos otro equipo o sistema para cerrar esto?</li>
+<li>¿Qué creemos verdad hoy pero no hemos verificado?</li>
+<li>¿Qué pasa si el supuesto SU-01 falla?</li>
+</ul>
+<h3 id="referencia-en-el-ejemplo-10">Referencia en el ejemplo</h3>
+<p>Dependencias de autenticación, almacenamiento documental, auditoría;
+integraciones Email/Nómina fuera de v1.</p>
+<h2 id="impacto-en-informes-exportaciones-y-auditoría-sección-12">3.12.
+Impacto en informes, exportaciones y auditoría (Sección 12)</h2>
+<h3 id="para-qué-sirve-11">Para qué sirve</h3>
+<p>Evita sorpresas en cierre de proyecto: informes legales, exports,
+trazabilidad.</p>
+<h3 id="qué-hay-que-escribir-11">Qué hay que escribir</h3>
+<ul>
+<li>Cambios en informes o exports (nuevas columnas, nuevos
+listados).</li>
+<li>Eventos de auditoría mínimos (dominio, acción, actor, payload
+acotado).</li>
+<li>Retención si aplica normativa o política interna.</li>
+</ul>
+<h3 id="preguntas-clave-11">Preguntas clave</h3>
+<ul>
+<li>¿Hay que demostrar quién aprobó qué y cuándo?</li>
+<li>¿Algún informe mensual o regulatorio cambia?</li>
+<li>¿Qué NO debe guardarse por privacidad?</li>
+</ul>
+<h3 id="referencia-en-el-ejemplo-11">Referencia en el ejemplo</h3>
+<p>Columna <em>Origen</em> en export de jornada; eventos
+<code>solicitud_registro_diferido.enviar|aprobar|…</code>.</p>
+<h2 id="criterios-de-aceptación-sección-13">3.13. Criterios de
+aceptación (Sección 13)</h2>
+<h3 id="para-qué-sirve-12">Para qué sirve</h3>
+<p>Definition of Done verificable para QA y desarrollo. Cierra el
+funcional en comportamientos comprobables.</p>
+<h3 id="qué-hay-que-escribir-12">Qué hay que escribir</h3>
+<p>Tabla <strong>CA-</strong>* en formato:</p>
+<div class="alert alert-gold"><p><strong>Dado</strong> … <strong>Cuando</strong> …
+<strong>Entonces</strong> …</p>
+</div>
+<p>Con tipo (Funcional, UX, Seguridad, Trazabilidad…) y prioridad.</p>
+<h3 id="preguntas-clave-12">Preguntas clave</h3>
+<ul>
+<li>¿Cómo comprobamos en una demo que esto está bien?</li>
+<li>¿Cuáles son los 5 casos que no pueden fallar nunca?</li>
+<li>¿Hay reglas de seguridad o permisos críticos?</li>
+</ul>
+<h3 id="errores-frecuentes-10">Errores frecuentes</h3>
+<div class="table-wrapper table-compare"><table>
+
+<thead>
+<tr>
+<th style="text-align: left;">Mal</th>
+<th style="text-align: left;">Bien</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">“Debe funcionar correctamente”</td>
+<td style="text-align: left;">CA-04: Dado solicitud ENVIADA… entonces
+registro creado con origen SOLICITUD_APROBADA</td>
+</tr>
+<tr>
+<td style="text-align: left;">Criterios no comprobables</td>
+<td style="text-align: left;">Criterio observable en pantalla, dato o
+log</td>
+</tr>
+<tr>
+<td style="text-align: left;">Duplicar todo el funcional</td>
+<td style="text-align: left;">Cubrir caminos críticos y reglas clave; no
+repetir cada RN</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="referencia-en-el-ejemplo-12">Referencia en el ejemplo</h3>
+<p>CA-01 a CA-15 con prioridades Crítica / Alta / Media.</p>
+<h2 id="matriz-de-trazabilidad-sección-14">3.14. Matriz de trazabilidad
+(Sección 14)</h2>
+<h3 id="para-qué-sirve-13">Para qué sirve</h3>
+<p>Conecta casos de uso, reglas y criterios de aceptación. Facilita
+revisión de cobertura.</p>
+<h3 id="qué-hay-que-escribir-13">Qué hay que escribir</h3>
+<div class="line-block">Caso de uso | Reglas aplicables | Criterios de
+aceptación |</div>
+<p>No hace falta trazar el 100% de las RN; prioriza flujos principales y
+reglas críticas.</p>
+<h3 id="referencia-en-el-ejemplo-13">Referencia en el ejemplo</h3>
+<p>Matriz CU-02 → RN-G01, RN-D01–D10 → CA-03, CA-10, CA-11.</p>
+<h2 id="simulación-funcional-sección-15">3.15. Simulación funcional
+(Sección 15)</h2>
+<h3 id="para-qué-sirve-14">Para qué sirve</h3>
+<p>Historias concretas que negocio entiende y QA puede convertir en
+casos de prueba.</p>
+<h3 id="qué-hay-que-escribir-14">Qué hay que escribir</h3>
+<p>2–4 escenarios mínimo:</p>
+<ul>
+<li>Al menos <strong>2 caminos correctos</strong> (escenario A,
+B…).</li>
+<li>Al menos <strong>1 escenario de error o bloqueo</strong> (escenario
+D: fuera de plazo).</li>
+</ul>
+<p>Formato tabla: Paso | Actor | Acción | Resultado.</p>
+<h3 id="preguntas-clave-13">Preguntas clave</h3>
+<ul>
+<li>¿Puedes contarme un caso real de la semana pasada?</li>
+<li>¿Qué haría un usuario para “romper” el flujo?</li>
+<li>¿Qué ejemplo usaríamos en la demo con el cliente?</li>
+</ul>
+<h3 id="referencia-en-el-ejemplo-14">Referencia en el ejemplo</h3>
+<p>Escenarios A (olvido de fichaje), B (devolución), C (solapamiento), D
+(fuera de plazo).</p>
+<h2 id="riesgos-supuestos-y-preguntas-abiertas-sección-16">3.16.
+Riesgos, supuestos y preguntas abiertas (Sección 16)</h2>
+<h3 id="para-qué-sirve-15">Para qué sirve</h3>
+<p>Transparencia sobre lo no cerrado. Lo crítico no debería quedar aquí
+al iniciar desarrollo.</p>
+<h3 id="qué-hay-que-escribir-15">Qué hay que escribir</h3>
+<ul>
+<li>**Riesgos funcionales (RI-*):** qué puede salir mal y mitigación en
+esta versión.</li>
+<li>**Preguntas abiertas (PO-*):** decisión pendiente, impacto,
+propuesta provisional.</li>
+</ul>
+<h3 id="regla-de-cierre">Regla de cierre</h3>
+<div class="table-wrapper"><table>
+
+<thead>
+<tr>
+<th style="text-align: left;">Tipo</th>
+<th style="text-align: left;">Cuándo debe estar resuelto</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Pregunta que afecta a estados, permisos o
+alcance</td>
+<td style="text-align: left;">Antes de estimación</td>
+</tr>
+<tr>
+<td style="text-align: left;">Pregunta que afecta a un mensaje o informe
+secundario</td>
+<td style="text-align: left;">Antes del sprint que lo implementa</td>
+</tr>
+<tr>
+<td style="text-align: left;">Riesgo aceptado</td>
+<td style="text-align: left;">Documentado con mitigación explícita</td>
+</tr>
+</tbody>
+</table></div>
+<h3 id="referencia-en-el-ejemplo-15">Referencia en el ejemplo</h3>
+<p>RI-01 a RI-03; PO-01 a PO-04 con propuesta provisional.</p>
+</div>
+      </div>
+    </div>
+  </div>
+</section>
+<hr class="separator">
+
+<section id="sec-4" class="collapsible-section alt">
+  <div class="container">
+    <button type="button" class="section-toggle" aria-expanded="false" aria-controls="sec-4-body">
+      <div class="section-toggle-top">
+        <div class="section-header">
+          <div class="section-number">4</div>
+          <h2>Cuándo el documento está listo para <span class="red">desarrollo</span></h2>
+        </div>
+        <span class="toggle-chevron" aria-hidden="true"></span>
+      </div>
+    </button>
+    <div class="section-body" id="sec-4-body">
+      <div class="section-body-inner">
+        <div class="doc-content"><p>Marca <strong>Sí</strong> en todas antes de entregar:</p>
+<ul class="checklist">
+<li><label><input type="checkbox" />Objetivo comprensible sin contexto
+técnico previo</label></li>
+<li><label><input type="checkbox" />Fuera de alcance explícito y
+acordado</label></li>
+<li><label><input type="checkbox" />Cada perfil tiene permisos positivos
+y negativos</label></li>
+<li><label><input type="checkbox" />Flujo principal + alternativas + al
+menos una excepción documentados</label></li>
+<li><label><input type="checkbox" />Reglas de negocio numeradas y
+enlazadas a mensajes de usuario</label></li>
+<li><label><input type="checkbox" />Si hay workflow, estados y
+transiciones cerrados</label></li>
+<li><label><input type="checkbox" />Criterios de aceptación comprobables
+para lo crítico</label></li>
+<li><label><input type="checkbox" />Simulaciones que negocio reconoce
+como reales</label></li>
+<li><label><input type="checkbox" />Sin contradicciones entre secciones
+(revisión cruzada hecha)</label></li>
+<li><label><input type="checkbox" />Preguntas abiertas críticas
+resueltas o escaladas con fecha</label></li>
+</ul>
+</div>
+      </div>
+    </div>
+  </div>
+</section>
+<hr class="separator">
+
+<section id="sec-5" class="collapsible-section">
+  <div class="container">
+    <button type="button" class="section-toggle" aria-expanded="false" aria-controls="sec-5-body">
+      <div class="section-toggle-top">
+        <div class="section-header">
+          <div class="section-number">5</div>
+          <h2>Cómo sacar partido del ejemplo <span class="red">ficticio</span></h2>
+        </div>
+        <span class="toggle-chevron" aria-hidden="true"></span>
+      </div>
+    </button>
+    <div class="section-body" id="sec-5-body">
+      <div class="section-body-inner">
+        <div class="doc-content"><p>El ejemplo <em>Solicitud de registro de jornada diferido</em> no es
+un proyecto real: es <strong>referencia de nivel de
+detalle</strong>.</p>
+<div class="table-wrapper"><table>
+
+<thead>
+<tr>
+<th style="text-align: left;">Si tu evolutivo…</th>
+<th style="text-align: left;">Fíjate en el ejemplo en…</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Tiene aprobaciones o bandejas</td>
+<td style="text-align: left;">Secciones 7, 8, 9.6 y escenarios A–C</td>
+</tr>
+<tr>
+<td style="text-align: left;">Tiene plazos o validaciones de fechas</td>
+<td style="text-align: left;">RN-D01–D03, CA-10, escenario D</td>
+</tr>
+<tr>
+<td style="text-align: left;">Afecta a informes o auditoría</td>
+<td style="text-align: left;">Secciones 12 y CA-14</td>
+</tr>
+<tr>
+<td style="text-align: left;">Tiene permisos por ámbito (empresa,
+centro)</td>
+<td style="text-align: left;">RN-P01–P03, CA-15</td>
+</tr>
+<tr>
+<td style="text-align: left;">Necesita catálogo configurable</td>
+<td style="text-align: left;">Sección 9.5 (motivos)</td>
+</tr>
+</tbody>
+</table></div>
+<p><strong>Cómo reutilizarlo:</strong> copia la estructura de secciones,
+sustituye dominio y reglas, y elimina todo lo que no aplique. No copies
+texto literal salvo instrucciones metodológicas.</p>
+</div>
+      </div>
+    </div>
+  </div>
+</section>
+<hr class="separator">
+
+<section id="sec-6" class="collapsible-section alt">
+  <div class="container">
+    <button type="button" class="section-toggle" aria-expanded="false" aria-controls="sec-6-body">
+      <div class="section-toggle-top">
+        <div class="section-header">
+          <div class="section-number">6</div>
+          <h2>Apoyo recomendado durante la <span class="red">redacción</span></h2>
+        </div>
+        <span class="toggle-chevron" aria-hidden="true"></span>
+      </div>
+    </button>
+    <div class="section-body" id="sec-6-body">
+      <div class="section-body-inner">
+        <div class="doc-content"><p>Aunque una sola persona pueda redactar el documento, el resultado
+mejora con:</p>
+<div class="table-wrapper table-meta"><table>
+
+<thead>
+<tr>
+<th style="text-align: left;">Momento</th>
+<th style="text-align: left;">Participantes sugeridos</th>
+<th style="text-align: left;">Objetivo</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align: left;">Kick-off funcional</td>
+<td style="text-align: left;">Referente de negocio + redactor</td>
+<td style="text-align: left;">Objetivo, alcance, actores</td>
+</tr>
+<tr>
+<td style="text-align: left;">Taller de flujos</td>
+<td style="text-align: left;">Usuario final + responsable operativo</td>
+<td style="text-align: left;">Flujos, estados, casuísticas</td>
+</tr>
+<tr>
+<td style="text-align: left;">Revisión de reglas</td>
+<td style="text-align: left;">Negocio + desarrollo (solo
+validación)</td>
+<td style="text-align: left;">Confirmar reglas RN-* y mensajes</td>
+</tr>
+<tr>
+<td style="text-align: left;">Cierre pre-desarrollo</td>
+<td style="text-align: left;">PM/referente + redactor</td>
+<td style="text-align: left;">Checklist sección 4 de esta guía</td>
+</tr>
+</tbody>
+</table></div>
+<p>El redactor consolida lo acordado en la plantilla; no sustituye la
+conversación con negocio.</p>
+</div>
+      </div>
+    </div>
+  </div>
+</section>
+<hr class="separator">
+
+<section id="sec-7" class="collapsible-section">
+  <div class="container">
+    <button type="button" class="section-toggle" aria-expanded="false" aria-controls="sec-7-body">
+      <div class="section-toggle-top">
+        <div class="section-header">
+          <div class="section-number">7</div>
+          <h2>Checklist rápido de <span class="red">calidad</span> (antes de enviar)</h2>
+        </div>
+        <span class="toggle-chevron" aria-hidden="true"></span>
+      </div>
+    </button>
+    <div class="section-body" id="sec-7-body">
+      <div class="section-body-inner">
+        <div class="doc-content"><ul class="checklist">
+<li><label><input type="checkbox" />Título y metadatos de portada
+completos</label></li>
+<li><label><input type="checkbox" />Historial de cambios con versión y
+autor</label></li>
+<li><label><input type="checkbox" />Glosario con términos críticos del
+dominio</label></li>
+<li><label><input type="checkbox" />Decisiones DF-* para temas ya
+acordados</label></li>
+<li><label><input type="checkbox" />Tabla de pantallas con
+prioridad</label></li>
+<li><label><input type="checkbox" />Diagrama o tabla de estados (si
+aplica workflow)</label></li>
+<li><label><input type="checkbox" />Casos de uso con
+precondiciones</label></li>
+<li><label><input type="checkbox" />Casuísticas de borde (mínimo 5 en
+evolutivos medios)</label></li>
+<li><label><input type="checkbox" />Tabla validaciones con mensaje y si
+bloquea</label></li>
+<li><label><input type="checkbox" />Diccionario de datos con
+obligatoriedad</label></li>
+<li><label><input type="checkbox" />Criterios
+Given/When/Then</label></li>
+<li><label><input type="checkbox" />Matriz de trazabilidad CU → RN →
+CA</label></li>
+<li><label><input type="checkbox" />Simulaciones felices y de
+error</label></li>
+<li><label><input type="checkbox" />Preguntas abiertas solo para lo no
+crítico o con fecha de cierre</label></li>
+</ul>
+<p><strong>Fin del documento</strong></p>
+</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container">
+    <div class="footer-logo"><svg viewBox="0 0 848 199.39" xmlns="http://www.w3.org/2000/svg">
+        <path fill="rgba(255,255,255,0.78)" d="M22.89,28.62V0H0V109.7H114.47V28.62Zm68.68,41V85.85H22.89V53.42H91.57Z"/>
+        <path fill="rgba(255,255,255,0.78)" d="M297.61,28.62V0H274.72V109.7H389.18V28.62Zm68.68,41V85.85H297.61V53.42h68.68Z"/>
+        <path fill="rgba(255,255,255,0.78)" d="M137.36,28.62v24.8h45.79c45.11,0,45.78,0,45.78,1.91s-.67,1.9-45.78,1.9H137.36V109.7H251.82V28.62Zm57.23,57.23c-33.67,0-34.34,0-34.34-1.91S160.92,82,194.59,82s34.34,0,34.34,1.91S228.26,85.85,194.59,85.85Z"/>
+        <path fill="#ff0000" d="M412.08,28.62V109.7H526.54V28.62Zm91.57,41V85.85H435V53.42h68.68Z"/>
+        <path fill="#ff0000" d="M549.44,28.62V109.7H663.9V28.62Zm91.57,41V85.85H572.33V53.42H641Z"/>
+        <polygon fill="rgba(255,255,255,0.78)" points="686.79 69.16 686.79 109.7 709.69 109.7 709.69 53.42 778.37 53.42 778.37 109.7 801.26 109.7 801.26 28.62 686.79 28.62 686.79 69.16"/>
+        <polygon fill="rgba(255,255,255,0.78)" points="824.15 69.16 824.15 109.7 847.05 109.7 847.05 28.62 824.15 28.62 824.15 69.16"/>
+      </svg></div>
+    <p>Guía para completar la plantilla de análisis funcional — <strong>Babooni Technologies</strong> — Uso interno — v.1 — 09/07/2026</p>
+    <div class="footer-contact">
+      <a href="mailto:info@babooni.com">info@babooni.com</a>
+      <a href="tel:617312356">617 31 23 56</a>
+      <span>C. Alfonso XII, 62 - Retiro - 28014 Madrid</span>
+    </div>
+  </div>
+</footer>
+
+</div>
+<script>
+document.querySelectorAll('.collapsible-section .section-toggle').forEach(function(btn) {
+  var section = btn.closest('.collapsible-section');
+  btn.addEventListener('click', function() {
+    var open = section.classList.toggle('is-open');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
+});
+document.querySelectorAll('nav a[href^="#"]').forEach(function(link) {
+  link.addEventListener('click', function() {
+    var id = link.getAttribute('href').slice(1);
+    var section = document.getElementById(id);
+    if (!section || !section.classList.contains('collapsible-section')) return;
+    section.classList.add('is-open');
+    var btn = section.querySelector('.section-toggle');
+    if (btn) btn.setAttribute('aria-expanded', 'true');
+  });
+});
+if (location.hash) {
+  var target = document.querySelector(location.hash);
+  if (target && target.classList.contains('collapsible-section')) {
+    target.classList.add('is-open');
+    var toggle = target.querySelector('.section-toggle');
+    if (toggle) toggle.setAttribute('aria-expanded', 'true');
+  }
+}
+(function initNavScrollSpy() {
+  var nav = document.getElementById('mainNav');
+  if (!nav) return;
+  var navLinks = Array.prototype.slice.call(nav.querySelectorAll('a[href^="#"]'));
+  if (!navLinks.length) return;
+  var sections = navLinks.map(function(link) {
+    return document.getElementById(link.getAttribute('href').slice(1));
+  }).filter(Boolean);
+  if (!sections.length) return;
+  function setActive(id) {
+    navLinks.forEach(function(link) {
+      link.classList.toggle('is-active', link.getAttribute('href') === '#' + id);
+    });
+  }
+  function updateActiveSection() {
+    var navHeight = nav.offsetHeight || 0;
+    var marker = window.scrollY + navHeight + 48;
+    var current = sections[0];
+    sections.forEach(function(section) {
+      if (section.offsetTop <= marker) current = section;
+    });
+    if (current) setActive(current.id);
+  }
+  var scrollScheduled = false;
+  window.addEventListener('scroll', function() {
+    if (scrollScheduled) return;
+    scrollScheduled = true;
+    window.requestAnimationFrame(function() {
+      updateActiveSection();
+      scrollScheduled = false;
+    });
+  }, { passive: true });
+  updateActiveSection();
+})();
+document.querySelectorAll('.doc-content h2').forEach(function(h2) {
+  if (/^3\.\d+\./.test(h2.textContent.trim())) {
+    var card = document.createElement('div');
+    card.className = 'section-subcard';
+    h2.parentNode.insertBefore(card, h2);
+    card.appendChild(h2);
+    var el = h2.nextElementSibling;
+    while (el && !(el.tagName === 'H2')) {
+      var next = el.nextElementSibling;
+      card.appendChild(el);
+      el = next;
+    }
+  }
+});
+(function initChecklists() {
+  var STORAGE_KEY = 'guia-funcional-checklist-v1';
+  var checkboxes = Array.prototype.slice.call(document.querySelectorAll('.checklist input[type=checkbox]'));
+  var saved = {};
+  try { saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}'); } catch (e) {}
+  checkboxes.forEach(function(cb, i) {
+    if (!cb.id) cb.id = 'guia-chk-' + i;
+    if (saved[cb.id]) cb.checked = true;
+    cb.addEventListener('click', function(e) { e.stopPropagation(); });
+    cb.addEventListener('change', function() {
+      saved[cb.id] = cb.checked;
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(saved));
+      var li = cb.closest('li');
+      if (li) li.classList.toggle('is-checked', cb.checked);
+    });
+    var li = cb.closest('li');
+    if (li) li.classList.toggle('is-checked', cb.checked);
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,2271 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Base Técnica Crítica | Babooni</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --black: #0a0a0a;
+            --black-soft: #1a1a1a;
+            --black-deep: #050505;
+            --black-light: #2a2a2a;
+            --red: #e60000;
+            --red-light: #ff0000;
+            --red-dark: #b30000;
+            --red-pale: #fdecec;
+            --red-bg: #fef5f5;
+            --gold: #f4b900;
+            --gold-light: #fff8e1;
+            --gold-dark: #c49500;
+            --bg: #ffffff;
+            --bg-alt: #f6f6f7;
+            --bg-card: #ffffff;
+            --bg-dark: #111111;
+            --border: #e2e2e2;
+            --border-light: #ededed;
+            --border-dark: #2a2a2a;
+            --text: #0a0a0a;
+            --text-secondary: #4a4a4a;
+            --text-muted: #8a8a8a;
+            --green: #1d8a4a;
+            --green-bg: #e6f7ee;
+            --green-border: #b8e6cc;
+            --orange: #d97a1c;
+            --orange-bg: #fef3e2;
+            --orange-border: #fad6a5;
+            --blue: #1c6fd9;
+            --blue-bg: #e8f1fd;
+            --blue-border: #b9d6f7;
+            --purple: #7a3cd9;
+            --purple-bg: #f1eafd;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.06);
+            --shadow-md: 0 4px 12px rgba(0,0,0,0.10);
+            --shadow-lg: 0 8px 30px rgba(0,0,0,0.14);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Montserrat', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #d8d8dc;
+            color: var(--text);
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .page-wrapper {
+            max-width: 1280px;
+            margin: 24px auto;
+            background: var(--bg-alt);
+            border-radius: 16px;
+            box-shadow: 0 4px 40px rgba(0,0,0,0.18), 0 1px 6px rgba(0,0,0,0.08);
+            overflow: visible;
+        }
+
+        .container { max-width: 100%; margin: 0 auto; padding: 0 44px; }
+
+        /* HEADER */
+        header {
+            background: linear-gradient(135deg, #000000 0%, var(--black) 35%, var(--black-soft) 100%);
+            color: white;
+            padding: 48px 0 44px;
+            border-bottom: 5px solid var(--red);
+            border-radius: 16px 16px 0 0;
+            position: relative;
+            overflow: hidden;
+        }
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -10%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, rgba(230,0,0,0.18) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: -60%;
+            left: -5%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            position: relative;
+            z-index: 1;
+            gap: 24px;
+        }
+        .header-logo { margin-bottom: 18px; }
+        .header-logo svg { display: block; height: 42px; width: auto; }
+        .header-left h1 {
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 6px;
+            line-height: 1.2;
+        }
+        .header-left h1 .red { color: var(--red-light); }
+        .header-left p {
+            color: rgba(255,255,255,0.65);
+            font-size: 11px;
+            font-weight: 400;
+        }
+        .header-badge {
+            background: linear-gradient(135deg, var(--red) 0%, var(--red-dark) 100%);
+            color: white;
+            font-size: 9px;
+            font-weight: 600;
+            padding: 7px 14px;
+            border-radius: 6px;
+            text-align: center;
+            line-height: 1.4;
+            box-shadow: 0 4px 15px rgba(230,0,0,0.45);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            flex-shrink: 0;
+        }
+        .header-badge span {
+            display: block;
+            font-size: 16px;
+            font-weight: 800;
+            letter-spacing: -0.3px;
+            text-transform: none;
+        }
+
+        /* META BAR (chips bajo header) */
+        .meta-bar {
+            background: linear-gradient(180deg, var(--black-deep) 0%, var(--black) 100%);
+            border-bottom: 3px solid var(--red);
+            padding: 20px 32px 22px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 14px;
+        }
+        .meta-chip {
+            position: relative;
+            background: linear-gradient(145deg, rgba(255,255,255,0.09) 0%, rgba(255,255,255,0.03) 100%);
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 12px;
+            padding: 14px 16px 14px 52px;
+            overflow: hidden;
+            transition: border-color .2s, transform .2s, box-shadow .2s;
+        }
+        .meta-chip::before {
+            content: '';
+            position: absolute;
+            left: 0; top: 0; bottom: 0;
+            width: 3px;
+            background: var(--chip-accent, var(--red));
+            border-radius: 12px 0 0 12px;
+        }
+        .meta-chip::after {
+            content: '';
+            position: absolute;
+            top: -30px; right: -30px;
+            width: 80px; height: 80px;
+            background: radial-gradient(circle, var(--chip-glow, rgba(230,0,0,0.15)) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .meta-chip:hover {
+            border-color: rgba(255,255,255,0.22);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+        }
+        .meta-chip[data-tone="gold"] { --chip-accent: var(--gold); --chip-glow: rgba(244,185,0,0.18); }
+        .meta-chip[data-tone="blue"] { --chip-accent: #4da3ff; --chip-glow: rgba(77,163,255,0.18); }
+        .meta-chip[data-tone="green"] { --chip-accent: #3dd68c; --chip-glow: rgba(61,214,140,0.18); }
+        .meta-icon {
+            position: absolute;
+            left: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 28px;
+            height: 28px;
+            border-radius: 8px;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.10);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            line-height: 1;
+            color: rgba(255,255,255,0.85);
+            line-height: 1;
+        }
+        .meta-label {
+            display: block;
+            font-size: 8.5px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: rgba(255,255,255,0.42);
+            margin-bottom: 4px;
+        }
+        .meta-value {
+            display: block;
+            font-size: 12px;
+            font-weight: 600;
+            color: rgba(255,255,255,0.95);
+            line-height: 1.4;
+            letter-spacing: -0.1px;
+        }
+
+        /* LAYOUT: sidebar + contenido */
+        .doc-layout {
+            display: grid;
+            grid-template-columns: 252px 1fr;
+            gap: 24px;
+            padding: 28px 32px 36px;
+            align-items: start;
+            min-height: 60vh;
+        }
+
+        /* SIDEBAR — sticky: la columna ocupa toda la altura del grid */
+        .sidebar-col {
+            position: relative;
+            align-self: stretch;
+            display: flex;
+            flex-direction: column;
+        }
+        .sidebar-sticky {
+            position: sticky;
+            top: 16px;
+            max-height: calc(100vh - 32px);
+            display: flex;
+            flex-direction: column;
+            flex: 0 0 auto;
+        }
+        .sidebar {
+            background: var(--bg-card);
+            border-radius: 12px;
+            border: 1px solid var(--border);
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            min-height: 0;
+        }
+        .sidebar-label {
+            font-size: 9px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1.2px;
+            color: var(--red);
+            padding: 16px 18px 12px;
+            border-bottom: 1px solid var(--border-light);
+            margin: 0;
+        }
+        .sidebar-nav {
+            display: flex;
+            flex-direction: column;
+            padding: 6px 0 10px;
+            overflow-y: auto;
+            flex: 1;
+            min-height: 0;
+            scrollbar-width: thin;
+            scrollbar-color: var(--border) transparent;
+        }
+        .sidebar-nav::-webkit-scrollbar { width: 5px; }
+        .sidebar-nav::-webkit-scrollbar-thumb {
+            background: var(--border);
+            border-radius: 4px;
+        }
+        .sidebar-link {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 16px 10px 14px;
+            text-decoration: none;
+            color: var(--text-secondary);
+            font-size: 12px;
+            font-weight: 600;
+            line-height: 1.3;
+            border-left: 3px solid transparent;
+            transition: background .18s ease, color .18s ease, border-color .18s ease;
+        }
+        .sidebar-link:hover {
+            background: var(--bg-alt);
+            color: var(--black);
+        }
+        .sidebar-link.active {
+            background: var(--red-bg);
+            border-left-color: var(--red);
+            color: var(--black);
+        }
+        .sidebar-num {
+            width: 28px;
+            height: 28px;
+            min-width: 28px;
+            border-radius: 7px;
+            background: var(--bg-alt);
+            color: var(--text-muted);
+            font-size: 11px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background .18s ease, color .18s ease;
+        }
+        .sidebar-link.active .sidebar-num {
+            background: var(--red);
+            color: white;
+            box-shadow: 0 2px 8px rgba(230,0,0,0.35);
+        }
+        .sidebar-link-doc {
+            margin-top: 8px;
+            border-top: 1px solid var(--border-light);
+            padding-top: 14px !important;
+            background: linear-gradient(90deg, rgba(230,0,0,0.06) 0%, transparent 100%);
+        }
+        .sidebar-link-doc .sidebar-num {
+            background: var(--black);
+            color: var(--gold);
+            font-size: 11px;
+        }
+
+        .doc-main {
+            min-width: 0;
+        }
+
+        /* ACCORDION SECTIONS */
+        .doc-section {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            margin-bottom: 14px;
+            box-shadow: var(--shadow-sm);
+            overflow: hidden;
+            scroll-margin-top: 24px;
+        }
+        .doc-section.alt-bg { background: var(--bg-card); }
+        .doc-section-toggle {
+            width: 100%;
+            display: block;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            text-align: left;
+            padding: 18px 22px;
+            transition: background .2s ease;
+            border-bottom: 1px solid transparent;
+        }
+        .doc-section.is-open .doc-section-toggle {
+            border-bottom-color: var(--border-light);
+            background: linear-gradient(180deg, rgba(230,0,0,0.03) 0%, transparent 100%);
+        }
+        .doc-section-toggle:hover { background: rgba(230,0,0,0.04); }
+        .doc-section-toggle .toggle-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+        }
+        .doc-section-toggle .section-header { margin-bottom: 0; flex: 1; }
+        .doc-section-toggle .section-header h2 { font-size: 17px; }
+        .doc-section-toggle .section-number {
+            width: 34px;
+            height: 34px;
+            font-size: 13px;
+            border-radius: 8px;
+        }
+        .doc-section-toggle .section-number::after { display: none; }
+        .toggle-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background: var(--bg-alt);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            transition: transform .3s ease, background .2s ease, border-color .2s ease;
+        }
+        .toggle-icon::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            border-right: 2.5px solid var(--red);
+            border-bottom: 2.5px solid var(--red);
+            transform: rotate(45deg) translate(-2px, -2px);
+            transition: transform .3s ease;
+        }
+        .doc-section.is-open .toggle-icon {
+            background: var(--black);
+            border-color: var(--black);
+        }
+        .doc-section.is-open .toggle-icon::before {
+            border-color: white;
+            transform: rotate(-135deg) translate(-1px, -1px);
+        }
+        .doc-section-panel {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height .45s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .doc-section.is-open .doc-section-panel {
+            max-height: 12000px;
+        }
+        .section-body { padding: 0 22px 28px; }
+
+        /* SECTIONS (legacy helpers) */
+        section { background: var(--bg); }
+        section.alt { background: var(--bg-alt); }
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            margin-bottom: 8px;
+        }
+        .section-number {
+            background: linear-gradient(135deg, var(--black) 0%, var(--black-soft) 100%);
+            color: white;
+            font-size: 14px;
+            font-weight: 700;
+            width: 38px;
+            height: 38px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+            position: relative;
+        }
+        .section-number::after {
+            content: '';
+            position: absolute;
+            inset: -3px;
+            border-radius: 50%;
+            border: 2px solid var(--red);
+            opacity: 0.25;
+        }
+        .section-header h2 {
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--black);
+            letter-spacing: -0.3px;
+        }
+        .section-header h2 .red { color: var(--red); }
+        .section-desc {
+            color: var(--text-secondary);
+            font-size: 14px;
+            font-weight: 400;
+            margin-bottom: 24px;
+            max-width: 880px;
+        }
+        .doc-section-toggle + .doc-section-panel .section-desc {
+            padding-left: 0;
+            padding-top: 4px;
+        }
+
+        /* CARDS */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px 28px;
+            margin-bottom: 16px;
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow .25s ease, transform .25s ease, border-color .25s ease;
+        }
+        .card:hover {
+            box-shadow: var(--shadow-md);
+            transform: translateY(-1px);
+            border-color: var(--black-light);
+        }
+        .card h3 {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .card h3 .step-num {
+            background: var(--black);
+            color: white;
+            font-size: 11px;
+            font-weight: 800;
+            padding: 4px 12px;
+            border-radius: 20px;
+            letter-spacing: 0.3px;
+        }
+        .card h3 .step-icon { font-size: 18px; }
+        .card p, .card li {
+            font-size: 13.5px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+        .card ul { padding-left: 20px; margin-top: 6px; }
+        .card li { margin-bottom: 4px; }
+        .card.dark {
+            background: var(--black);
+            color: white;
+            border-color: var(--black-light);
+        }
+        .card.dark h3 { color: white; }
+        .card.dark p, .card.dark li { color: rgba(255,255,255,0.75); }
+
+        /* ALERT BOXES */
+        .alert {
+            border-radius: 10px;
+            padding: 18px 22px;
+            margin: 16px 0;
+            font-size: 13.5px;
+            box-shadow: var(--shadow-sm);
+        }
+        .alert h4 { font-size: 14px; font-weight: 700; margin-bottom: 6px; }
+        .alert p, .alert li { line-height: 1.7; }
+        .alert ul { padding-left: 20px; margin-top: 4px; }
+        .alert-black { background: var(--bg-alt); border-left: 5px solid var(--black); }
+        .alert-black h4 { color: var(--black); }
+        .alert-red { background: var(--red-bg); border-left: 5px solid var(--red); }
+        .alert-red h4 { color: var(--red-dark); }
+        .alert-orange { background: var(--orange-bg); border-left: 5px solid var(--orange); }
+        .alert-orange h4 { color: var(--orange); }
+        .alert-green { background: var(--green-bg); border-left: 5px solid var(--green); }
+        .alert-green h4 { color: var(--green); }
+        .alert-gold { background: var(--gold-light); border-left: 5px solid var(--gold); }
+        .alert-gold h4 { color: var(--gold-dark); }
+        .alert-blue { background: var(--blue-bg); border-left: 5px solid var(--blue); }
+        .alert-blue h4 { color: var(--blue); }
+
+        /* TABLES */
+        .table-wrapper {
+            overflow-x: auto;
+            margin: 16px 0;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            box-shadow: var(--shadow-sm);
+        }
+        table { width: 100%; border-collapse: collapse; font-size: 13px; }
+        thead {
+            background: linear-gradient(135deg, var(--black) 0%, var(--black-soft) 100%);
+            color: white;
+        }
+        th {
+            padding: 12px 16px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        td { padding: 11px 16px; border-bottom: 1px solid var(--border-light); vertical-align: top; }
+        tr:last-child td { border-bottom: none; }
+        tbody tr:nth-child(even) { background: var(--bg-alt); }
+        tbody tr:hover { background: var(--red-bg); }
+
+        /* TAGS */
+        .tag {
+            display: inline-block;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 20px;
+            letter-spacing: 0.3px;
+            white-space: nowrap;
+        }
+        .tag-critical { background: var(--red-bg); color: var(--red-dark); border: 1px solid #f5b8b8; }
+        .tag-senior { background: var(--black); color: white; }
+        .tag-mid { background: var(--bg-alt); color: var(--text); border: 1px solid var(--border); }
+        .tag-bad { background: var(--red-bg); color: var(--red-dark); border: 1px solid #f5b8b8; }
+        .tag-good { background: var(--green-bg); color: var(--green); border: 1px solid var(--green-border); }
+        .tag-blue { background: var(--blue-bg); color: var(--blue); border: 1px solid var(--blue-border); }
+        .tag-gold { background: var(--gold-light); color: var(--gold-dark); border: 1px solid #f0d98a; }
+
+        /* KPI */
+        .kpi-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+        .kpi {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            overflow: hidden;
+            min-width: 0;
+            padding: 20px;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow .25s ease, transform .25s ease;
+            position: relative;
+        }
+        .kpi:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+        .kpi::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--black), var(--red), var(--black));
+        }
+        .kpi.dark { background: var(--black); color: white; border-color: var(--black-light); }
+        .kpi.dark .kpi-label { color: rgba(255,255,255,0.55); }
+        .kpi.dark .kpi-sub { color: rgba(255,255,255,0.65); }
+        .kpi-label {
+            font-size: 9px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.6px;
+            margin-bottom: 4px;
+            font-weight: 600;
+        }
+        .kpi-value {
+            font-size: 28px;
+            font-weight: 800;
+            overflow-wrap: break-word;
+            word-break: break-word;
+            line-height: 1.1;
+            color: var(--black);
+        }
+        .kpi.accent .kpi-value { color: var(--red); }
+        .kpi.dark .kpi-value { color: white; }
+        .kpi-sub { font-size: 10px; color: var(--text-secondary); margin-top: 5px; font-weight: 500; }
+
+        /* GRID HELPERS */
+        .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+        .three-col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+        @media (max-width: 800px) { .two-col, .three-col { grid-template-columns: 1fr; } }
+
+        /* COMPARE BOXES */
+        .compare-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+            margin: 16px 0;
+        }
+        @media (max-width: 800px) { .compare-grid { grid-template-columns: 1fr; } }
+        .compare { border-radius: 10px; padding: 20px 22px; border: 1px solid; }
+        .compare h4 {
+            font-size: 13px; font-weight: 700; margin-bottom: 12px;
+            text-transform: uppercase; letter-spacing: 0.3px;
+        }
+        .compare ul { list-style: none; padding: 0; }
+        .compare li { padding: 6px 0 6px 22px; position: relative; font-size: 13px; line-height: 1.6; }
+        .compare-bad { background: var(--bg-alt); border-color: var(--border); }
+        .compare-bad h4 { color: var(--red-dark); }
+        .compare-bad li { color: var(--text-secondary); }
+        .compare-bad li::before {
+            content: '✕'; position: absolute; left: 0; top: 6px; color: var(--red); font-weight: 700;
+        }
+        .compare-good { background: var(--black); border-color: var(--black); color: white; }
+        .compare-good h4 { color: var(--red-light); }
+        .compare-good li { color: rgba(255,255,255,0.85); }
+        .compare-good li::before {
+            content: '✓'; position: absolute; left: 0; top: 6px; color: var(--red-light); font-weight: 700;
+        }
+
+        /* SEPARATOR */
+        .separator {
+            border: none;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--red), var(--black), var(--red), transparent);
+            margin: 0;
+            opacity: 0.4;
+        }
+
+        /* ===== DIAGRAM COMPONENTS ===== */
+
+        /* Pipeline visual (replaces flat chips) */
+        .pipeline {
+            display: flex;
+            align-items: stretch;
+            gap: 0;
+            margin: 24px 0 8px;
+            position: relative;
+            padding: 8px 0;
+        }
+        .pipeline::before {
+            content: '';
+            position: absolute;
+            top: 38px;
+            left: 8%;
+            right: 8%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--blue) 0%, var(--orange) 45%, var(--red) 100%);
+            border-radius: 4px;
+            opacity: 0.35;
+            z-index: 0;
+        }
+        .pipeline-node {
+            flex: 1;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+            padding: 0 4px;
+        }
+        .node-badge {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--black);
+            color: white;
+            font-size: 10px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+            border: 2px solid white;
+            position: relative;
+            z-index: 2;
+        }
+        .pipeline-node.node-accent .node-badge {
+            background: var(--red);
+            box-shadow: 0 2px 12px rgba(230,0,0,0.45);
+        }
+        .pipeline-node.node-dark .node-badge { background: var(--black); }
+        .node-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 14px;
+            padding: 14px 10px 12px;
+            text-align: center;
+            width: 100%;
+            box-shadow: var(--shadow-sm);
+            transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .node-card::before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 3px;
+            background: var(--node-accent, var(--blue));
+        }
+        .pipeline-node:hover .node-card {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-md);
+            border-color: var(--node-accent, var(--red));
+        }
+        .node-icon {
+            font-size: 26px;
+            display: block;
+            margin-bottom: 8px;
+            line-height: 1;
+        }
+        .node-title {
+            display: block;
+            font-size: 11.5px;
+            font-weight: 800;
+            color: var(--black);
+            margin-bottom: 3px;
+            letter-spacing: -0.2px;
+        }
+        .node-desc {
+            display: block;
+            font-size: 9.5px;
+            color: var(--text-muted);
+            line-height: 1.35;
+        }
+        .pipeline-node.node-dark .node-card {
+            background: var(--black);
+            border-color: var(--black-light);
+        }
+        .pipeline-node.node-dark .node-title { color: white; }
+        .pipeline-node.node-dark .node-desc { color: rgba(255,255,255,0.55); }
+        .pipeline-node.node-accent .node-card {
+            background: linear-gradient(145deg, var(--red) 0%, var(--red-dark) 100%);
+            border-color: var(--red-dark);
+        }
+        .pipeline-node.node-accent .node-title { color: white; }
+        .pipeline-node.node-accent .node-desc { color: rgba(255,255,255,0.88); }
+        .pipeline-node.node-accent .node-card::before { background: rgba(255,255,255,0.35); }
+        .pipeline-connector {
+            flex: 0 0 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            align-self: center;
+            margin-top: 18px;
+            color: var(--red);
+            font-size: 16px;
+            font-weight: 800;
+            opacity: 0.7;
+            z-index: 1;
+        }
+        .pipeline-connector::after { content: '▶'; }
+        /* Per-step accent colors */
+        .pipeline-node[data-tone="blue"] { --node-accent: var(--blue); }
+        .pipeline-node[data-tone="green"] { --node-accent: var(--green); }
+        .pipeline-node[data-tone="orange"] { --node-accent: var(--orange); }
+        .pipeline-node[data-tone="purple"] { --node-accent: var(--purple); }
+        .pipeline-node[data-tone="red"] { --node-accent: var(--red); }
+        .pipeline-node[data-tone="black"] { --node-accent: var(--black); }
+        @media (max-width: 780px) {
+            .pipeline {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 0;
+                padding-left: 20px;
+            }
+            .pipeline::before {
+                top: 12px;
+                bottom: 12px;
+                left: 33px;
+                right: auto;
+                width: 4px;
+                height: auto;
+                background: linear-gradient(180deg, var(--blue) 0%, var(--orange) 50%, var(--red) 100%);
+            }
+            .pipeline-node {
+                flex-direction: row;
+                align-items: flex-start;
+                gap: 14px;
+                padding: 8px 0;
+            }
+            .node-badge { margin-bottom: 0; flex-shrink: 0; }
+            .node-card { text-align: left; padding: 12px 14px; }
+            .pipeline-connector {
+                flex: none;
+                height: 12px;
+                margin: 0 0 0 33px;
+                transform: rotate(90deg);
+            }
+        }
+        /* 6-step pipeline: slightly compact on desktop */
+        .pipeline-wide .node-card { padding: 12px 8px 10px; }
+        .pipeline-wide .node-title { font-size: 10.5px; }
+        .pipeline-wide .node-desc { font-size: 9px; }
+        .pipeline-wide .node-icon { font-size: 22px; }
+        .pipeline-wide .node-badge { width: 24px; height: 24px; font-size: 9px; }
+        .pipeline-wide .pipeline-connector { flex: 0 0 10px; font-size: 14px; }
+
+        /* GitHub kit banner */
+        .kit-banner {
+            background: linear-gradient(135deg, var(--black-deep) 0%, var(--black-soft) 100%);
+            border: 1px solid var(--black-light);
+            border-radius: 14px;
+            padding: 22px 26px;
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin: 16px 0;
+            box-shadow: var(--shadow-md);
+            transition: transform .25s ease, box-shadow .25s ease;
+        }
+        .kit-banner:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+        .kit-banner-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 12px;
+            background: rgba(255,255,255,0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            flex-shrink: 0;
+        }
+        .kit-banner-body { flex: 1; min-width: 0; }
+        .kit-banner-body h4 {
+            color: white;
+            font-size: 15px;
+            font-weight: 800;
+            margin-bottom: 4px;
+            letter-spacing: -0.2px;
+        }
+        .kit-banner-body p {
+            color: rgba(255,255,255,0.65);
+            font-size: 12.5px;
+            line-height: 1.55;
+            margin: 0;
+        }
+        .kit-banner-body a {
+            color: var(--red-light);
+            text-decoration: none;
+            font-weight: 600;
+            word-break: break-all;
+        }
+        .kit-banner-body a:hover { text-decoration: underline; }
+        .kit-banner-cta {
+            flex-shrink: 0;
+            background: var(--red);
+            color: white;
+            text-decoration: none;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 10px 16px;
+            border-radius: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            transition: background .2s ease;
+            white-space: nowrap;
+        }
+        .kit-banner-cta:hover { background: var(--red-light); }
+        @media (max-width: 700px) {
+            .kit-banner { flex-direction: column; text-align: center; }
+        }
+
+        /* Cause/symptom diagram */
+        .root-cause {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            align-items: center;
+            gap: 18px;
+            margin: 20px 0;
+        }
+        @media (max-width: 700px) { .root-cause { grid-template-columns: 1fr; } }
+        .rc-box { border-radius: 10px; padding: 18px 20px; }
+        .rc-cause { background: var(--black); color: white; }
+        .rc-cause h4 { color: var(--red-light); font-size: 13px; text-transform: uppercase; letter-spacing: .4px; margin-bottom: 10px; }
+        .rc-cause ul { padding-left: 18px; }
+        .rc-cause li { font-size: 12.5px; color: rgba(255,255,255,0.82); margin-bottom: 5px; }
+        .rc-symptom { background: var(--red-bg); border: 1px solid #f5b8b8; }
+        .rc-symptom h4 { color: var(--red-dark); font-size: 13px; text-transform: uppercase; letter-spacing: .4px; margin-bottom: 10px; }
+        .rc-symptom ul { padding-left: 18px; }
+        .rc-symptom li { font-size: 12.5px; color: var(--text-secondary); margin-bottom: 5px; }
+        .rc-arrow { font-size: 30px; color: var(--red); font-weight: 800; text-align: center; }
+        @media (max-width: 700px) { .rc-arrow { transform: rotate(90deg); } }
+
+        /* Pillars grid */
+        .pillars { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin: 16px 0; }
+        @media (max-width: 800px) { .pillars { grid-template-columns: 1fr; } }
+        .pillar {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-top: 4px solid var(--red);
+            border-radius: 10px;
+            padding: 18px 18px 16px;
+            transition: all .25s ease;
+        }
+        .pillar:hover { transform: translateY(-3px); box-shadow: var(--shadow-md); }
+        .pillar .p-icon { font-size: 26px; margin-bottom: 8px; }
+        .pillar h4 { font-size: 13.5px; font-weight: 800; color: var(--black); margin-bottom: 6px; }
+        .pillar p { font-size: 12px; color: var(--text-secondary); line-height: 1.55; }
+
+        /* Code block */
+        .codeblock {
+            background: var(--black-deep);
+            border: 1px solid var(--black-light);
+            border-radius: 10px;
+            padding: 16px 18px;
+            margin: 14px 0;
+            overflow-x: auto;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            line-height: 1.7;
+            color: #e0e0e0;
+        }
+        .codeblock .c-comment { color: #6a9955; }
+        .codeblock .c-key { color: #ff6b6b; }
+        .codeblock .c-str { color: #f4b900; }
+        .codeblock .c-dim { color: #888; }
+        .codeblock .c-title {
+            color: var(--red-light); font-weight: 600; display: block; margin-bottom: 8px;
+            font-family: 'Montserrat', sans-serif; font-size: 11px; text-transform: uppercase; letter-spacing: .5px;
+        }
+
+        /* Pyramid (testing) */
+        .pyramid { display: flex; flex-direction: column; align-items: center; gap: 6px; margin: 18px 0; }
+        .pyr-row {
+            color: white;
+            border-radius: 6px;
+            padding: 12px 16px;
+            text-align: center;
+            font-size: 12.5px;
+            font-weight: 700;
+            box-shadow: var(--shadow-sm);
+            display: flex; flex-direction: column;
+        }
+        .pyr-row span { font-weight: 400; font-size: 10.5px; opacity: .85; margin-top: 2px; }
+        .pyr-1 { width: 40%; background: var(--red); }
+        .pyr-2 { width: 65%; background: var(--orange); }
+        .pyr-3 { width: 90%; background: var(--black); }
+        @media (max-width: 600px) { .pyr-1, .pyr-2, .pyr-3 { width: 100%; } }
+
+        /* Phase cards */
+        .phase {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px 24px 20px;
+            position: relative;
+            transition: all .25s ease;
+        }
+        .phase:hover { box-shadow: var(--shadow-lg); transform: translateY(-3px); }
+        .phase-number {
+            position: absolute;
+            top: -16px; left: 22px;
+            width: 40px; height: 40px;
+            border-radius: 10px;
+            background: var(--black);
+            color: white;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 800; font-size: 16px;
+            box-shadow: var(--shadow-md);
+        }
+        .phase.urgent .phase-number { background: var(--red); }
+        .phase-tag {
+            display: inline-block;
+            font-size: 9px; font-weight: 700;
+            text-transform: uppercase; letter-spacing: 1.5px;
+            color: var(--text-muted);
+            margin: 14px 0 6px;
+        }
+        .phase.urgent .phase-tag { color: var(--red); }
+        .phase h3 { font-size: 16px; font-weight: 800; color: var(--black); margin-bottom: 12px; letter-spacing: -0.2px; }
+        .phase ul { list-style: none; padding: 0; }
+        .phase li {
+            font-size: 12.5px; padding: 7px 0 7px 18px;
+            border-bottom: 1px dashed var(--border-light); position: relative; color: var(--text);
+        }
+        .phase li:last-child { border-bottom: none; }
+        .phase li::before { content: '→'; position: absolute; left: 0; color: var(--red); font-weight: 700; }
+
+        /* TIMELINE */
+        .timeline { position: relative; padding-left: 32px; }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 13px; top: 0; bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, var(--red) 0%, var(--black) 60%, var(--border) 100%);
+            border-radius: 2px;
+        }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 18px;
+            padding: 16px 20px;
+            background: var(--bg-card);
+            border-radius: 10px;
+            border: 1px solid var(--border-light);
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow .2s, transform .2s;
+        }
+        .timeline-item:hover { box-shadow: var(--shadow-md); transform: translateX(4px); }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -25px; top: 18px;
+            width: 14px; height: 14px;
+            border-radius: 50%;
+            border: 3px solid var(--red);
+            background: var(--red);
+            box-shadow: 0 0 0 4px rgba(230,0,0,0.18);
+            z-index: 1;
+        }
+        .timeline-item.essential::before { background: var(--black); border-color: var(--black); box-shadow: 0 0 0 4px rgba(0,0,0,0.12); }
+        .timeline-date {
+            font-size: 11px; font-weight: 700; color: var(--red);
+            text-transform: uppercase; letter-spacing: 0.6px; margin-bottom: 4px;
+        }
+        .timeline-title { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 4px; }
+        .timeline-desc { font-size: 13px; color: var(--text-secondary); font-weight: 400; }
+
+        /* CHECKLIST interactiva */
+        .checklist { list-style: none; padding: 0; margin: 0; }
+        .checklist li {
+            padding: 0;
+            border-bottom: 1px solid var(--border-light);
+        }
+        .checklist li:last-child { border-bottom: none; }
+        .check-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            padding: 10px 12px 10px 10px;
+            cursor: pointer;
+            transition: background .15s;
+            user-select: none;
+        }
+        .check-item:hover { background: var(--bg-alt); }
+        .check-item input[type="checkbox"] {
+            width: 17px;
+            height: 17px;
+            min-width: 17px;
+            margin-top: 2px;
+            accent-color: var(--red);
+            cursor: pointer;
+            flex-shrink: 0;
+        }
+        .check-text {
+            font-size: 13.5px;
+            color: var(--text-secondary);
+            line-height: 1.5;
+            transition: color .2s, opacity .2s;
+        }
+        .check-item:has(input:checked) .check-text {
+            color: var(--text-muted);
+            text-decoration: line-through;
+            opacity: 0.72;
+        }
+        .checklist-progress {
+            font-size: 11px;
+            font-weight: 700;
+            color: var(--text-muted);
+            margin-top: 10px;
+            padding: 0 10px;
+        }
+        .checklist-progress span { color: var(--red); }
+        .card.dark .check-item:hover { background: rgba(255,255,255,0.05); }
+        .card.dark .check-item input[type="checkbox"] { accent-color: var(--red-light); }
+        .card.dark .check-text { color: rgba(255,255,255,0.82); }
+        .card.dark .check-item:has(input:checked) .check-text {
+            color: rgba(255,255,255,0.45);
+        }
+        .card.dark .checklist li { border-color: var(--black-light); }
+        .card.dark .checklist-progress { color: rgba(255,255,255,0.45); }
+        .card.dark .checklist-progress span { color: var(--red-light); }
+
+        /* CTA BLOCK */
+        .cta-block {
+            background: linear-gradient(135deg, var(--black-deep) 0%, var(--black) 50%, var(--black-soft) 100%);
+            color: white;
+            padding: 36px 38px;
+            border-radius: 14px;
+            margin: 24px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        .cta-block::before {
+            content: '';
+            position: absolute;
+            top: -40%; right: -10%;
+            width: 350px; height: 350px;
+            background: radial-gradient(circle, rgba(230,0,0,0.20) 0%, transparent 70%);
+            border-radius: 50%;
+        }
+        .cta-block > * { position: relative; z-index: 1; }
+        .cta-block h3 { font-size: 22px; font-weight: 800; margin-bottom: 10px; letter-spacing: -0.4px; }
+        .cta-block h3 .red { color: var(--red-light); }
+        .cta-block p { color: rgba(255,255,255,0.75); font-size: 14px; margin-bottom: 20px; max-width: 680px; }
+        .cta-actions { display: grid; gap: 10px; max-width: 640px; }
+        .cta-action {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.10);
+            padding: 14px 18px;
+            border-radius: 10px;
+            display: flex; align-items: center; gap: 14px;
+            transition: all .25s ease;
+        }
+        .cta-action:hover { background: rgba(230,0,0,0.10); border-color: var(--red); transform: translateX(6px); }
+        .cta-action .num {
+            width: 30px; height: 30px;
+            border-radius: 50%;
+            background: var(--red);
+            color: white;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 800; font-size: 13px;
+            flex-shrink: 0;
+        }
+        .cta-action span { font-size: 13.5px; font-weight: 500; }
+
+        /* FOOTER */
+        footer {
+            padding: 36px 0 28px;
+            text-align: center;
+            background: linear-gradient(135deg, var(--black-deep) 0%, var(--black) 100%);
+            color: rgba(255,255,255,0.6);
+            border-radius: 0 0 16px 16px;
+        }
+        footer .footer-logo svg { display: block; height: 36px; width: auto; margin: 0 auto 14px; }
+        footer p { font-size: 12px; line-height: 1.6; max-width: 640px; margin: 0 auto; }
+        footer strong { color: var(--red-light); }
+        footer .footer-contact {
+            margin-top: 14px;
+            display: flex; justify-content: center; gap: 18px; flex-wrap: wrap;
+            font-size: 11px; color: rgba(255,255,255,0.50);
+        }
+        footer .footer-contact a { color: rgba(255,255,255,0.65); text-decoration: none; transition: color .2s; }
+        footer .footer-contact a:hover { color: var(--red-light); }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .page-wrapper { margin: 16px; border-radius: 12px; }
+            header { border-radius: 12px 12px 0 0; }
+            footer { border-radius: 0 0 12px 12px; }
+            .kpi-grid { grid-template-columns: repeat(3, 1fr); }
+            .meta-bar { grid-template-columns: repeat(2, 1fr); }
+            .doc-layout {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+            .sidebar-col { position: static; }
+            .sidebar-sticky { position: static; max-height: none; }
+            .sidebar-nav {
+                flex-direction: row;
+                flex-wrap: wrap;
+                gap: 4px;
+                padding: 10px 12px;
+            }
+            .sidebar-link {
+                flex: 1 1 auto;
+                border-left: none;
+                border-radius: 8px;
+                padding: 8px 12px;
+                font-size: 11px;
+            }
+            .sidebar-link.active {
+                border-left: none;
+                box-shadow: inset 0 0 0 2px var(--red);
+            }
+            .sidebar-label { padding-bottom: 8px; }
+        }
+        @media (max-width: 700px) {
+            .page-wrapper { margin: 0; border-radius: 0; }
+            header { border-radius: 0; }
+            footer { border-radius: 0; }
+            .container { padding: 0 20px; }
+            .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+            header { padding: 36px 0 32px; }
+            header .container { padding: 0 20px; }
+            .meta-bar { grid-template-columns: 1fr; padding: 14px 20px; }
+            .doc-layout { padding: 16px; }
+            .header-left h1 { font-size: 22px; }
+        }
+
+        /* PRINT */
+        @media print {
+            body { background: white; }
+            .page-wrapper { margin: 0; box-shadow: none; border-radius: 0; max-width: 100%; }
+            header { border-radius: 0; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            footer { border-radius: 0; }
+            .sidebar { display: none; }
+            .meta-bar { display: none; }
+            .doc-layout { grid-template-columns: 1fr; padding: 0; }
+            section { page-break-inside: avoid; }
+            * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+            .card:hover, .kpi:hover, .pipeline-node:hover .node-card, .phase:hover, .timeline-item:hover { transform: none; box-shadow: var(--shadow-sm); }
+            .doc-section-panel { max-height: none !important; overflow: visible !important; }
+            .toggle-icon { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="page-wrapper">
+
+<header>
+    <div class="container">
+        <div class="header-left">
+            <div class="header-logo">
+                <svg viewBox="0 0 848 199.39" xmlns="http://www.w3.org/2000/svg">
+                    <path fill="#ffffff" d="M22.89,28.62V0H0V109.7H114.47V28.62Zm68.68,41V85.85H22.89V53.42H91.57Z"/>
+                    <path fill="#ffffff" d="M297.61,28.62V0H274.72V109.7H389.18V28.62Zm68.68,41V85.85H297.61V53.42h68.68Z"/>
+                    <path fill="#ffffff" d="M137.36,28.62v24.8h45.79c45.11,0,45.78,0,45.78,1.91s-.67,1.9-45.78,1.9H137.36V109.7H251.82V28.62Zm57.23,57.23c-33.67,0-34.34,0-34.34-1.91S160.92,82,194.59,82s34.34,0,34.34,1.91S228.26,85.85,194.59,85.85Z"/>
+                    <path fill="#ff0000" d="M412.08,28.62V109.7H526.54V28.62Zm91.57,41V85.85H435V53.42h68.68Z"/>
+                    <path fill="#ff0000" d="M549.44,28.62V109.7H663.9V28.62Zm91.57,41V85.85H572.33V53.42H641Z"/>
+                    <polygon fill="#ffffff" points="686.79 69.16 686.79 109.7 709.69 109.7 709.69 53.42 778.37 53.42 778.37 109.7 801.26 109.7 801.26 28.62 686.79 28.62 686.79 69.16"/>
+                    <polygon fill="#ffffff" points="824.15 69.16 824.15 109.7 847.05 109.7 847.05 28.62 824.15 28.62 824.15 69.16"/>
+                    <path fill="#ffffff" d="M470.26,146.9v32.43h7.63l.1-14.59c0-16,.86-19.94,5-23,3.91-2.86,12.11-2.77,15.36.28l2.48,2.29v35h7.63V161.4c0-15.07-.29-18.32-1.72-21.08-2.29-4.58-5.91-7-11.54-7.54-6.58-.57-11,.38-14.4,3.24l-2.87,2.48v-24h-7.63Z"/>
+                    <polygon fill="#ffffff" points="627.65 146.9 627.65 179.33 635.28 179.33 635.28 114.47 627.65 114.47 627.65 146.9"/>
+                    <path fill="#ffffff" d="M749,117.52c-1.62,1.62-1.43,7,.19,8.39,4,3.25,8.77-2.1,6.48-7.15a4.18,4.18,0,0,0-6.67-1.24"/>
+                    <polygon fill="#ffffff" points="327.18 122.1 327.18 125.91 346.26 125.91 346.26 179.33 353.89 179.33 353.89 125.91 372.97 125.91 372.97 118.28 327.18 118.28 327.18 122.1"/>
+                    <path fill="#ffffff" d="M417.8,158.34v-5.53c0-7.63-3.53-14.59-9-17.84S396,131.73,390,134.78h0a18.21,18.21,0,0,0-7,6.78c-2.48,3.91-3,5.72-3.24,13-.29,5.15,0,9.73.76,11.92,1.52,4.68,6.29,9.92,11,12,4.48,2.1,15.26,2.39,20.51.57,2.95-1,3.34-1.62,3.62-4.77.19-1.9.1-3.53-.19-3.53s-3,.67-6,1.44a45.43,45.43,0,0,1-8.39,1.43c-6.49,0-13.83-6.59-13.83-12.5v-2.77Zm-30.72-6.67.67-2.67a11.55,11.55,0,0,1,6.49-8.3c3.91-1.72,5.72-1.72,9.73-.1,3.43,1.43,4.67,3.15,5.72,7.92l.67,3.15Z"/>
+                    <path fill="#ffffff" d="M437.83,134.69a19.47,19.47,0,0,0-7.06,6.87c-2.48,3.91-2.95,5.72-3.24,13-.86,17.36,5.91,25.66,20.79,25.75,8,0,10.88-1.43,11.26-5.62.29-3.15.29-3.25-2.86-2.58-11.93,2.48-16.6,1.24-19.75-5.06-2.67-5.15-2.76-15.83-.19-20.89,3-5.81,7.25-7,19.08-5.72,1.81.19,2.48-.28,3.24-2.38,1.34-4-.09-4.77-9.06-5.25-7-.29-8.39-.1-12.21,1.91"/>
+                    <path fill="#ffffff" d="M536.56,133.83a15.15,15.15,0,0,0-4.2,2.86c-1.81,2.29-3,2-3-.76,0-2.1-.38-2.39-3.33-2.39h-3.34v45.79h7.63l.09-14.59c0-16,.86-19.94,5-23,3.91-2.86,12.12-2.77,15.36.28l2.48,2.29v35h7.63V161.4c0-19.65-.67-22.42-6-26.33-3.34-2.48-14-3.15-18.31-1.24"/>
+                    <path fill="#ffffff" d="M605.43,135.64c-5.34-3.53-15.55-4.1-21.46-1-7,3.53-10.78,10.78-10.78,20.89,0,9.06,1.43,13.74,5.91,18.6,4.68,5.06,8.68,6.49,16.6,6,8.11-.47,12.78-3.62,16.31-10.87C617.64,157.77,614.49,141.65,605.43,135.64Zm-12.88,37.58c-8.2-1-11.64-6.2-11.64-17.36,0-11.35,5.15-17.17,14.22-16.12a20,20,0,0,1,6.29,1.82c3.53,2.29,5.25,7.34,5.25,15.07C606.67,168.36,601.61,174.37,592.55,173.22Z"/>
+                    <path fill="#ffffff" d="M679.83,135.64c-5.34-3.53-15.55-4.1-21.46-1-7,3.53-10.78,10.78-10.78,20.89,0,9.06,1.43,13.74,5.91,18.6,4.68,5.06,8.68,6.49,16.6,6,8.11-.47,12.78-3.62,16.31-10.87C692,157.77,688.89,141.65,679.83,135.64ZM667,173.22c-8.2-1-11.63-6.2-11.63-17.36,0-11.35,5.15-17.17,14.21-16.12a20,20,0,0,1,6.29,1.82c3.53,2.29,5.25,7.34,5.25,15.07C681.07,168.36,676,174.37,667,173.22Z"/>
+                    <path fill="#ffffff" d="M735.16,139.65c3.53-.86,5.34-3.44,3.43-5.15-.38-.38-6.77-1-14.12-1.34-12-.57-13.73-.38-17.45,1.34h0c-8.68,3.91-10.59,18.6-3.25,25.08,1.91,1.72,1.91,1.82.1,3.63-2,2-2.58,8.87-.76,9.92.57.38-.58,2-2.77,3.91-7.25,6.2-6,15.83,2.67,20.13,5.15,2.67,16.12,3,23.56.76,8.87-2.67,13.55-10.87,10.68-19-2.19-6.2-5-7.54-17.36-8.3-5.91-.38-10.77-.67-10.87-.76a5.53,5.53,0,0,1-.29-2.48c0-3,2.48-4.3,8.21-4.3a23.4,23.4,0,0,0,8.77-2c6.58-3.24,9.45-11.64,6.49-19.08C731.72,141,732.49,140.32,735.16,139.65Zm-6,39.58c2,1.72,1.9,7.06-.1,8.88-4.67,4-14.31,5.62-20.79,3.43s-7.25-10-1.15-12.78C711,177,726.86,177.33,729.15,179.23ZM724,154.34c-3.72,3.91-13.93,3.43-16.22-.77-2.39-4.57-.29-11.54,4.2-13.44,3.53-1.53,9.44-.29,11.73,2.48C726.57,145.85,726.67,151.48,724,154.34Z"/>
+                    <path fill="#ffffff" d="M807,158.34v-5.53c0-7.63-3.53-14.59-9-17.84s-12.88-3.24-18.79-.19h0a18.16,18.16,0,0,0-7,6.78c-2.48,3.91-3,5.72-3.24,13-.29,5.15,0,9.73.76,11.92,1.53,4.68,6.3,9.92,11,12,4.48,2.1,15.26,2.39,20.51.57,3-1,3.34-1.62,3.62-4.77.2-1.9.1-3.53-.19-3.53s-3,.67-6,1.44a45.29,45.29,0,0,1-8.39,1.43c-6.49,0-13.83-6.59-13.83-12.5v-2.77Zm-30.71-6.67.67-2.67a11.51,11.51,0,0,1,6.48-8.3c3.91-1.72,5.73-1.72,9.73-.1,3.44,1.43,4.68,3.15,5.73,7.92l.66,3.15Z"/>
+                    <path fill="#ffffff" d="M823.68,133.92c-5.15,2.29-7.63,5.92-7.63,11.07,0,6.2,3.24,9.54,13.16,13.55,11.35,4.67,14.31,8.1,10.3,12.11-3.53,3.53-13.64,3.34-22.32-.38-1.53-.67-1.72-.29-1.43,3.43s.57,4.29,3.62,5.34c4.58,1.53,16.6,1.53,20.32-.09a12.64,12.64,0,0,0,8.3-12.21c0-4.39-.38-5.25-3.62-8.3-2.2-2.1-6.49-4.48-11-6.2-4-1.43-7.92-3.43-8.68-4.29-4.77-5.25,1.52-9.64,11.35-7.92a43.75,43.75,0,0,1,7.25,1.62c1.14.38,1.9-.28,2.76-2.38.67-1.72.86-3.25.38-3.72-3.24-3-17.55-3.91-22.79-1.63"/>
+                    <polygon fill="#ffffff" points="747.84 156.44 747.84 179.33 755.47 179.33 755.47 133.54 747.84 133.54 747.84 156.44"/>
+                </svg>
+            </div>
+            <h1>Base Técnica <span class="red">Crítica</span></h1>
+            <p>Estandarización, automatización y criterios técnicos comunes · Babooni Technologies</p>
+            <p style="color:rgba(255,255,255,0.72);font-size:11px;margin-top:10px;max-width:560px;line-height:1.5">Por qué urge configurar la "Fase 0" del desarrollo: flujo de trabajo, CI/CD, calidad, arquitectura, diseño→desarrollo y reutilización de activos técnicos. Plan de implantación en <strong style="color:#fff">semanas</strong>, no meses.</p>
+        </div>
+        <div class="header-badge">
+            Decisión técnica<span>Esta semana</span>
+        </div>
+    </div>
+</header>
+
+<div class="meta-bar">
+    <div class="meta-chip" data-tone="red">
+        <span class="meta-icon">🎯</span>
+        <span class="meta-label">Objetivo</span>
+        <span class="meta-value">Configurar la Fase 0 del desarrollo</span>
+    </div>
+    <div class="meta-chip" data-tone="gold">
+        <span class="meta-icon">⏱</span>
+        <span class="meta-label">Plazo</span>
+        <span class="meta-value">≈ 6 semanas · no requiere contratar</span>
+    </div>
+    <div class="meta-chip" data-tone="green">
+        <span class="meta-icon">🤖</span>
+        <span class="meta-label">AI Foundation</span>
+        <span class="meta-value">Repo común de activos reutilizables (tests ✓)</span>
+    </div>
+    <div class="meta-chip" data-tone="blue">
+        <span class="meta-icon">📋</span>
+        <span class="meta-label">Fuente</span>
+        <span class="meta-value">Reunión técnica · Jun 2026</span>
+    </div>
+</div>
+
+<div class="doc-layout">
+    <aside class="sidebar-col" id="sidebar">
+        <div class="sidebar-sticky">
+        <div class="sidebar">
+        <p class="sidebar-label">— Base técnica</p>
+        <nav class="sidebar-nav" id="sidebarNav" aria-label="Secciones del documento">
+            <a href="#contexto" class="sidebar-link active" data-section="contexto">
+                <span class="sidebar-num">●</span>
+                <span>Contexto</span>
+            </a>
+            <a href="#causas" class="sidebar-link" data-section="causas">
+                <span class="sidebar-num">1</span>
+                <span>Síntomas vs causas</span>
+            </a>
+            <a href="#fase0" class="sidebar-link" data-section="fase0">
+                <span class="sidebar-num">2</span>
+                <span>Flujo de código</span>
+            </a>
+            <a href="#cicd" class="sidebar-link" data-section="cicd">
+                <span class="sidebar-num">3</span>
+                <span>CI/CD y despliegue</span>
+            </a>
+            <a href="#calidad" class="sidebar-link" data-section="calidad">
+                <span class="sidebar-num">4</span>
+                <span>Calidad centralizada</span>
+            </a>
+            <a href="#arquitectura" class="sidebar-link" data-section="arquitectura">
+                <span class="sidebar-num">5</span>
+                <span>Arquitectura</span>
+            </a>
+            <a href="#conway" class="sidebar-link" data-section="conway">
+                <span class="sidebar-num">6</span>
+                <span>Diseño → Dev</span>
+            </a>
+            <a href="#funcional" class="sidebar-link" data-section="funcional">
+                <span class="sidebar-num">7</span>
+                <span>Def. funcional</span>
+            </a>
+            <a href="#ai-foundation" class="sidebar-link" data-section="ai-foundation">
+                <span class="sidebar-num">8</span>
+                <span>AI Foundation</span>
+            </a>
+        </nav>
+        </div>
+        </div>
+    </aside>
+
+    <main class="doc-main" id="docMain">
+
+<!-- CONTEXTO -->
+<section id="contexto" class="doc-section is-open">
+    <button type="button" class="doc-section-toggle" aria-expanded="true" aria-controls="panel-contexto">
+        <div class="toggle-inner">
+            <div class="section-header">
+                <div class="section-number">●</div>
+                <h2>El problema de <span class="red">fondo</span></h2>
+            </div>
+            <span class="toggle-icon" aria-hidden="true"></span>
+        </div>
+    </button>
+    <div id="panel-contexto" class="doc-section-panel">
+        <div class="section-body">
+        <p class="section-desc">No nos faltan ganas ni talento: nos falta <strong>base</strong>. Dedicamos más tiempo a apagar fuegos (síntomas) que a resolver las causas. La ausencia de un "paso previo" de estandarización en cada fase, la falta de criterios técnicos comunes y la carencia de automatización generan retrasos, errores recurrentes y deuda técnica que ya impacta a clientes.</p>
+
+        <div class="kpi-grid">
+            <div class="kpi accent">
+                <div class="kpi-label">Despliegues</div>
+                <div class="kpi-value" style="font-size:18px;line-height:1.2">Manuales</div>
+                <div class="kpi-sub">SSH a mano = riesgo y errores</div>
+            </div>
+            <div class="kpi">
+                <div class="kpi-label">Calidad</div>
+                <div class="kpi-value" style="font-size:18px;line-height:1.2">Ad-hoc</div>
+                <div class="kpi-sub">Sin Sonar / cobertura común</div>
+            </div>
+            <div class="kpi">
+                <div class="kpi-label">Criterios técnicos</div>
+                <div class="kpi-value" style="font-size:18px;line-height:1.2">Dispares</div>
+                <div class="kpi-sub">Cada proyecto/persona distinto</div>
+            </div>
+            <div class="kpi">
+                <div class="kpi-label">Diseño → Dev</div>
+                <div class="kpi-value" style="font-size:18px;line-height:1.2">Acoplado</div>
+                <div class="kpi-sub">Pantallas, no componentes</div>
+            </div>
+            <div class="kpi dark">
+                <div class="kpi-label">Implantación base</div>
+                <div class="kpi-value">≈ 6<span style="font-size:14px"> sem</span></div>
+                <div class="kpi-sub">No meses: es config, no producto</div>
+            </div>
+        </div>
+
+        <div class="alert alert-red">
+            <h4>⚠ El coste de no configurar la base ya lo estamos pagando</h4>
+            <p>Las quejas de clientes con el <strong>login</strong>, los retrasos del nuevo cliente, el rechazo técnico a los entregables de diseño y los despliegues que se rompen <strong>no son mala suerte</strong>: son el resultado directo de no haber montado la "Fase 0". Cada semana sin esta base multiplica la deuda técnica.</p>
+        </div>
+
+        <div class="alert alert-gold">
+            <h4>★ Antecedente: ya lo avisamos en octubre</h4>
+            <p>En el <em>Plan Organizacional Crítico</em> (octubre del año pasado) se propuso una transformación completa. Solo se abordó el rol de <strong>Project Manager</strong>; el resto sigue pendiente. Este documento se centra ahora en lo más barato, rápido y de mayor retorno: <strong>configurar la base técnica</strong>. No requiere contratar, requiere decidir.</p>
+        </div>
+        </div>
+    </div>
+</section>
+
+<!-- SÍNTOMAS VS CAUSAS -->
+<section id="causas" class="doc-section alt-bg">
+    <button type="button" class="doc-section-toggle" aria-expanded="false" aria-controls="panel-causas">
+        <div class="toggle-inner">
+            <div class="section-header">
+                <div class="section-number">1</div>
+                <h2>Apagar fuegos vs. atacar la <span class="red">causa</span></h2>
+            </div>
+            <span class="toggle-icon" aria-hidden="true"></span>
+        </div>
+    </button>
+    <div id="panel-causas" class="doc-section-panel">
+        <div class="section-body">
+        <p class="section-desc">Cada incidencia recurrente que nos consume el día a día tiene un origen estructural. Si solo tratamos el síntoma, vuelve. Si configuramos la causa una vez, desaparece para siempre.</p>
+
+        <div class="root-cause">
+            <div class="rc-box rc-cause">
+                <h4>Causa (lo que falta configurar)</h4>
+                <ul>
+                    <li>Sin flujo de ramas estándar (GitFlow)</li>
+                    <li>Despliegues manuales por SSH</li>
+                    <li>Sin CI/CD ni pipelines</li>
+                    <li>Sin calidad centralizada (Sonar, cobertura)</li>
+                    <li>Criterios de arquitectura no unificados</li>
+                    <li>Diseño sin librería de componentes</li>
+                    <li>Sin definición funcional previa</li>
+                </ul>
+            </div>
+            <div class="rc-arrow">⇒</div>
+            <div class="rc-box rc-symptom">
+                <h4>Síntoma (lo que sufrimos)</h4>
+                <ul>
+                    <li>Errores humanos en producción</li>
+                    <li>Retrasos y cuellos de botella</li>
+                    <li>Bugs recurrentes y regresiones</li>
+                    <li>Quejas de clientes (p. ej. login)</li>
+                    <li>Deuda técnica creciente</li>
+                    <li>Re-trabajo de UI continuo</li>
+                    <li>Desviaciones de alcance y plazos</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="alert alert-black">
+            <h4>La regla mental</h4>
+            <p>Cuando una incidencia se repite por tercera vez, <strong>no es un bug: es una configuración que falta</strong>. La solución no es arreglarlo otra vez, es montar el mecanismo que impide que vuelva a ocurrir.</p>
+        </div>
+        </div>
+    </div>
+</section>
+
+<!-- FASE 0 -->
+<section id="fase0" class="doc-section">
+    <button type="button" class="doc-section-toggle" aria-expanded="false" aria-controls="panel-fase0">
+        <div class="toggle-inner">
+            <div class="section-header">
+                <div class="section-number">2</div>
+                <h2>Fase 0 — Flujo de trabajo del <span class="red">código</span></h2>
+            </div>
+            <span class="toggle-icon" aria-hidden="true"></span>
+        </div>
+    </button>
+    <div id="panel-fase0" class="doc-section-panel">
+        <div class="section-body">
+        <p class="section-desc">El primer cimiento: un ciclo de vida del código estándar y compartido por todos. Mismo flujo de ramas, mismas reglas de merge, misma forma de llevar el código a producción. Sin esto, nada de lo demás se sostiene.</p>
+
+        <div class="card">
+            <h3><span class="step-num">2.1</span> GitFlow simplificado (Trunk + Release)</h3>
+            <p style="margin-bottom:14px">Modelo de ramas claro y conocido por todos. Cada cambio entra por una rama corta, pasa por revisión y se integra automáticamente. <strong>Nadie</strong> toca producción a mano.</p>
+            <div class="pipeline" role="list" aria-label="Flujo GitFlow">
+                <div class="pipeline-node" data-tone="blue" role="listitem">
+                    <div class="node-badge">1</div>
+                    <div class="node-card">
+                        <span class="node-icon" aria-hidden="true">🌿</span>
+                        <span class="node-title">feature/*</span>
+                        <span class="node-desc">Rama corta por tarea</span>
+                    </div>
+                </div>
+                <div class="pipeline-connector" aria-hidden="true"></div>
+                <div class="pipeline-node" data-tone="purple" role="listitem">
+                    <div class="node-badge">2</div>
+                    <div class="node-card">
+                        <span class="node-icon" aria-hidden="true">🔀</span>
+                        <span class="node-title">Pull Request</span>
+                        <span class="node-desc">Revisión + checks</span>
+                    </div>
+                </div>
+                <div class="pipeline-connector" aria-hidden="true"></div>
+                <div class="pipeline-node node-dark" data-tone="black" role="listitem">
+                    <div class="node-badge">3</div>
+                    <div class="node-card">
+                        <span class="node-icon" aria-hidden="true">🌳</span>
+                        <span class="node-title">develop / main</span>
+                        <span class="node-desc">Integración continua</span>
+                    </div>
+                </div>
+                <div class="pipeline-connector" aria-hidden="true"></div>
+                <div class="pipeline-node" data-tone="orange" role="listitem">
+                    <div class="node-badge">4</div>
+                    <div class="node-card">
+                        <span class="node-icon" aria-hidden="true">🏷️</span>
+                        <span class="node-title">release / tag</span>
+                        <span class="node-desc">Versión candidata</span>
+                    </div>
+                </div>
+                <div class="pipeline-connector" aria-hidden="true"></div>
+                <div class="pipeline-node node-accent" data-tone="red" role="listitem">
+                    <div class="node-badge">5</div>
+                    <div class="node-card">
+                        <span class="node-icon" aria-hidden="true">🚀</span>
+                        <span class="node-title">Producción</span>
+                        <span class="node-desc">Despliegue automático</span>
+                    </div>
+                </div>
+            </div>
+            <div class="alert alert-blue" style="margin-top:8px">
+                <h4>Reglas mínimas no negociables</h4>
+                <ul>
+                    <li>Rama <strong>main protegida</strong>: no se hace push directo, solo vía PR aprobado.</li>
+                    <li>Todo PR pasa <strong>checks verdes</strong> (build + tests + análisis) antes de poder mergear.</li>
+                    <li>Al menos <strong>1 aprobación</strong> de otra persona (revisión de pares).</li>
+                    <li>Commits con <a href="https://iacedo.craft.me/u43GQUGEU8eypJ" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline">convención acordada</a> (<em>Conventional Commits</em>) para versionado y changelog automáticos.</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="compare-grid">
+            <div class="compare compare-bad">
+                <h4>Hoy: despliegue manual por SSH</h4>
+                <ul>
+                    <li>Solo 1-2 personas saben desplegar (cuello de botella)</li>
+                    <li>Pasos manuales = errores humanos</li>
+                    <li>Sin trazabilidad de qué se subió y cuándo</li>
+                    <li>Rollback lento y arriesgado</li>
+                    <li>Credenciales y accesos SSH dispersos (riesgo de seguridad)</li>
+                </ul>
+            </div>
+            <div class="compare compare-good">
+                <h4>Objetivo: despliegue automático</h4>
+                <ul>
+                    <li>Cualquier dev despliega de forma autónoma y segura</li>
+                    <li>Proceso repetible e idéntico siempre</li>
+                    <li>Historial completo: quién, qué y cuándo</li>
+                    <li>Rollback en 1 clic a la versión anterior</li>
+                    <li>Secretos gestionados, sin SSH a mano</li>
+                </ul>
+            </div>
+        </div>
+        </div>
+    </div>
+</section>
+
+<!-- CI/CD & PaaS -->
+<section id="cicd" class="doc-section alt-bg">
+    <button type="button" class="doc-section-toggle" aria-expanded="false" aria-controls="panel-cicd">
+        <div class="toggle-inner">
+            <div class="section-header">
+                <div class="section-number">3</div>
+                <h2>CI/CD y plataforma de <span class="red">despliegue</span></h2>
+            </div>
+            <span class="toggle-icon" aria-hidden="true"></span>
+        </div>
+    </button>
+    <div id="panel-cicd" class="doc-section-panel">
+        <div class="section-body">
+        <p class="section-desc">La automatización del camino "del commit a producción". Cada push dispara un pipeline que compila, prueba, analiza y despliega solo si todo está verde. La infraestructura se gestiona con PaaS/OaaS para minimizar coste y mantenimiento.</p>
+
+        <div class="card">
+            <h3><span class="step-num">3.1</span> Pipeline estándar (mismo para todos los proyectos)</h3>
+            <div class="pipeline pipeline-wide" role="list" aria-label="Pipeline CI/CD">
+                <div class="pipeline-node" data-tone="blue" role="listitem">
+                    <div class="node-badge">1</div>
+                    <div class="node-card">
+                        <span class="node-icon" aria-hidden="true">📥</span>
+                        <span class="node-title">Commit / PR</span>
+                        <span class="node-desc">Dispara el pipeline</span>
+                    </div>
+                </div>
+                <div class="pipeline-connector" aria-hidden="true"></div>
+                <div class="pipeline-node" data-tone="purple" role="listitem">
+                    <div class="node-badge">2</div>
+                    <div class="node-card">
+                        <span class="node-icon" aria-hidden="true">🔨</span>
+                        <span class="node-title">Build</span>
+                        <span class="node-desc">Compila y empaqueta</span>
+                    </div>
+                </div>
+                <div class="pipeline-connector" aria-hidden="true"></div>
+                <div class="pipeline-node" data-tone="green" role="listitem">
+                    <div class="node-badge">3</div>
+                    <div class="node-card">
+                        <span class="node-icon" aria-hidden="true">🧪</span>
+                        <span class="node-title">Test</span>
+                        <span class="node-desc">Unit + integración</span>
+                    </div>
+                </div>
+                <div class="pipeline-connector" aria-hidden="true"></div>
+                <div class="pipeline-node" data-tone="orange" role="listitem">
+                    <div class="node-badge">4</div>
+                    <div class="node-card">
+                        <span class="node-icon" aria-hidden="true">🔎</span>
+                        <span class="node-title">Análisis</span>
+                        <span class="node-desc">Sonar + seguridad</span>
+                    </div>
+                </div>
+                <div class="pipeline-connector" aria-hidden="true"></div>
+                <div class="pipeline-node node-dark" data-tone="black" role="listitem">
+                    <div class="node-badge">5</div>
+                    <div class="node-card">
+                        <span class="node-icon" aria-hidden="true">📦</span>
+                        <span class="node-title">Artefacto</span>
+                        <span class="node-desc">Imagen / versión</span>
+                    </div>
+                </div>
+                <div class="pipeline-connector" aria-hidden="true"></div>
+                <div class="pipeline-node node-accent" data-tone="red" role="listitem">
+                    <div class="node-badge">6</div>
+                    <div class="node-card">
+                        <span class="node-icon" aria-hidden="true">🚀</span>
+                        <span class="node-title">Deploy</span>
+                        <span class="node-desc">Auto a entorno</span>
+                    </div>
+                </div>
+            </div>
+            <p style="margin-top:6px;font-size:12.5px;color:var(--text-muted)">Si cualquier etapa falla, el pipeline se detiene y <strong>nada</strong> llega a producción. La calidad deja de depender de la disciplina individual y pasa a estar garantizada por la máquina.</p>
+        </div>
+
+        <div class="card">
+            <h3><span class="step-num">3.2</span> Estrategia de infraestructura: PaaS/OaaS primero</h3>
+            <p style="margin-bottom:10px">Para una empresa de nuestro tamaño, gestionar servidores a mano (instalar, parchear, asegurar, monitorizar) es un coste oculto enorme en <strong>horas de desarrollo</strong>. Una plataforma gestionada (tipo Railway, Render, Fly.io o similar) permite desplegar en segundos con coste de infraestructura muy bajo.</p>
+            <div class="table-wrapper">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Criterio</th>
+                            <th>Servidor manual (SSH)</th>
+                            <th>PaaS / OaaS gestionado</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>Tiempo de despliegue</strong></td>
+                            <td><span class="tag tag-bad">Minutos/horas</span> y propenso a fallos</td>
+                            <td><span class="tag tag-good">Segundos</span>, automático</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Quién puede desplegar</strong></td>
+                            <td>Solo quien tiene acceso SSH</td>
+                            <td>Cualquier dev, de forma segura</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Mantenimiento (parches, OS)</strong></td>
+                            <td>Responsabilidad nuestra</td>
+                            <td>Gestionado por la plataforma</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Coste real</strong></td>
+                            <td>Bajo en €/mes, <strong>alto en horas</strong></td>
+                            <td>Bajo en €/mes <strong>y</strong> en horas</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Rollback</strong></td>
+                            <td>Manual y arriesgado</td>
+                            <td>1 clic</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Seguridad de accesos</strong></td>
+                            <td>Llaves SSH dispersas</td>
+                            <td>Roles y secretos centralizados</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="alert alert-orange" style="margin-top:6px">
+                <h4>Matiz importante (decisión consciente, no dogma)</h4>
+                <p>PaaS es la opción por defecto por su <strong>relación coste/beneficio</strong>. Donde un requisito de cliente, cumplimiento o coste a gran escala lo justifique, se evalúa infraestructura gestionada. La clave es que <strong>la decisión sea técnica y documentada</strong>, no por inercia o por "siempre lo hemos hecho así".</p>
+            </div>
+        </div>
+        </div>
+    </div>
+</section>
+
+<!-- CALIDAD -->
+<section id="calidad" class="doc-section">
+    <button type="button" class="doc-section-toggle" aria-expanded="false" aria-controls="panel-calidad">
+        <div class="toggle-inner">
+            <div class="section-header">
+                <div class="section-number">4</div>
+                <h2>Estrategia de calidad <span class="red">centralizada</span></h2>
+            </div>
+            <span class="toggle-icon" aria-hidden="true"></span>
+        </div>
+    </button>
+    <div id="panel-calidad" class="doc-section-panel">
+        <div class="section-body">
+        <p class="section-desc">La calidad debe ser parte de la arquitectura, no un añadido por proyecto o por persona. Una configuración común evita discrepancias de criterios, métricas y mantenimiento a largo plazo. Se define una vez y se hereda en todos los repos.</p>
+
+        <div class="pillars">
+            <div class="pillar">
+                <div class="p-icon" aria-hidden="true">🧪</div>
+                <h4>Testing</h4>
+                <p>Tests unitarios y de integración obligatorios en el pipeline. La rama no se mergea si los tests no pasan.</p>
+            </div>
+            <div class="pillar">
+                <div class="p-icon" aria-hidden="true">🔎</div>
+                <h4>Análisis estático</h4>
+                <p>SonarQube/SonarCloud con un único <em>Quality Gate</em> compartido: bugs, code smells, vulnerabilidades y duplicidad.</p>
+            </div>
+            <div class="pillar">
+                <div class="p-icon" aria-hidden="true">📊</div>
+                <h4>Cobertura</h4>
+                <p>Umbral mínimo común (p. ej. 70% en módulos críticos). Medible, visible y exigible en cada PR.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3><span class="step-num">4.1</span> Pirámide de testing (dónde invertir el esfuerzo)</h3>
+            <div class="pyramid">
+                <div class="pyr-row pyr-1">E2E / UI <span>Pocos · flujos críticos</span></div>
+                <div class="pyr-row pyr-2">Integración <span>Medios · APIs y BD</span></div>
+                <div class="pyr-row pyr-3">Unitarios <span>Muchos · rápidos y baratos</span></div>
+            </div>
+            <p style="font-size:12.5px;color:var(--text-muted);text-align:center">Base ancha de tests unitarios (rápidos y baratos), menos de integración y solo los E2E imprescindibles. Maximiza confianza minimizando tiempo de ejecución.</p>
+        </div>
+
+        <div class="card">
+            <h3><span class="step-num">4.2</span> Quality Gate compartido</h3>
+            <div class="codeblock">
+<span class="c-title">Ejemplo de criterios comunes (heredados por todos los proyectos)</span>
+<span class="c-comment"># Bloquea el merge si no se cumple:</span>
+<span class="c-key">cobertura_nuevo_codigo</span>:   <span class="c-str">"&gt;= 70%"</span>
+<span class="c-key">duplicidad</span>:                <span class="c-str">"&lt; 3%"</span>
+<span class="c-key">vulnerabilidades</span>:          <span class="c-str">0</span>   <span class="c-comment"># ninguna nueva</span>
+<span class="c-key">bugs_bloqueantes</span>:          <span class="c-str">0</span>
+<span class="c-key">security_hotspots</span>:         <span class="c-str">"revisados"</span>
+<span class="c-key">deuda_tecnica_nueva</span>:       <span class="c-str">"&lt;= 5%"</span>
+            </div>
+            <p style="font-size:12.5px;color:var(--text-muted)">Definido una sola vez a nivel de organización. Cada repo nuevo lo hereda automáticamente: <strong>cero configuración ad-hoc</strong>, mismos criterios para todos.</p>
+        </div>
+
+        <div class="card">
+            <h3><span class="step-num">4.3</span> Convención de commits</h3>
+            <p style="margin-bottom:10px">Mensajes de commit homogéneos permiten generar changelogs automáticos, trazar qué cambió en cada release y revisar PRs con contexto. Adoptamos la guía acordada por el equipo:</p>
+            <div class="alert alert-blue" style="margin-top:0">
+                <h4>Guía oficial</h4>
+                <p><a href="https://iacedo.craft.me/u43GQUGEU8eypJ" target="_blank" rel="noopener noreferrer"><strong>Commit Message Guide</strong> → iacedo.craft.me</a> — formato <em>Conventional Commits</em> (<code>feat:</code>, <code>fix:</code>, <code>chore:</code>…), cuerpo opcional y referencia a ticket cuando aplique.</p>
+            </div>
+            <div class="codeblock" style="margin-top:10px">
+<span class="c-title">Ejemplos válidos</span>
+<span class="c-str">feat(auth): add OAuth2 login via Keycloak</span>
+<span class="c-str">fix(api): prevent null pointer on empty payload</span>
+<span class="c-str">chore(deps): bump spring-boot to 3.2.0</span>
+<span class="c-str">docs(readme): update deployment instructions</span>
+            </div>
+        </div>
+        </div>
+    </div>
+</section>
+
+<!-- ARQUITECTURA -->
+<section id="arquitectura" class="doc-section alt-bg">
+    <button type="button" class="doc-section-toggle" aria-expanded="false" aria-controls="panel-arquitectura">
+        <div class="toggle-inner">
+            <div class="section-header">
+                <div class="section-number">5</div>
+                <h2>Arquitectura y criterios <span class="red">técnicos comunes</span></h2>
+            </div>
+            <span class="toggle-icon" aria-hidden="true"></span>
+        </div>
+    </button>
+    <div id="panel-arquitectura" class="doc-section-panel">
+        <div class="section-body">
+        <p class="section-desc">Necesitamos unificar criterios sobre arquitectura, principios SOLID, gestión de microservicios y dependencias compartidas. Decisiones cuestionadas durante meses están generando ahora exactamente las incidencias que se anticiparon.</p>
+
+        <div class="three-col">
+            <div class="card">
+                <h3><span class="step-icon">🧱</span> SOLID y capas</h3>
+                <p>Estructura común Controller → Service → DAO, separación de responsabilidades e inyección por constructor. Mismo esqueleto en todos los servicios.</p>
+            </div>
+            <div class="card">
+                <h3><span class="step-icon">🧩</span> Microservicios</h3>
+                <p>Límites claros por dominio, contratos de API versionados y comunicación bien definida. Evitar el "monolito distribuido".</p>
+            </div>
+            <div class="card">
+                <h3><span class="step-icon">📚</span> Dependencias compartidas</h3>
+                <p>Librerías comunes versionadas en un repositorio central de artefactos. Una sola fuente de verdad, sin copiar-pegar entre proyectos.</p>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3><span class="step-num">5.1</span> Caso real: el login (librería propia vs. IDP estándar)</h3>
+            <p style="margin-bottom:14px">Las quejas actuales de clientes con el login vienen de mantener una <strong>librería de autenticación propia</strong> donde existen soluciones estándar ampliamente probadas (IDP / Identity Provider). Es el ejemplo perfecto de "reinventar la rueda" generando deuda y riesgo.</p>
+            <div class="compare-grid">
+                <div class="compare compare-bad">
+                    <h4>Librería de login propia</h4>
+                    <ul>
+                        <li>Mantenimiento y bugs a nuestro cargo</li>
+                        <li>Superficie de seguridad sin auditar</li>
+                        <li>Sin SSO, MFA ni social login "de serie"</li>
+                        <li>Cada cliente nuevo = más parches</li>
+                        <li>Quejas y fricción ya en producción</li>
+                    </ul>
+                </div>
+                <div class="compare compare-good">
+                    <h4>IDP estándar (Keycloak, Auth0, Cognito…)</h4>
+                    <ul>
+                        <li>OAuth2 / OIDC probado por millones de usuarios</li>
+                        <li>MFA, SSO y social login incluidos</li>
+                        <li>Seguridad mantenida por el proveedor</li>
+                        <li>Menos código propio = menos deuda</li>
+                        <li>Estándar = integración rápida con clientes</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="alert alert-black" style="margin-top:6px">
+                <h4>Principio: comprar/estándar antes que construir</h4>
+                <p>Construimos lo que es <strong>nuestro valor diferencial</strong>. Para todo lo demás (auth, pagos, notificaciones, logging…) usamos estándares probados. Cada componente "casero" que sustituye a un estándar es deuda técnica que pagaremos con intereses.</p>
+            </div>
+        </div>
+        </div>
+    </div>
+</section>
+
+<!-- LEY DE CONWAY -->
+<section id="conway" class="doc-section">
+    <button type="button" class="doc-section-toggle" aria-expanded="false" aria-controls="panel-conway">
+        <div class="toggle-inner">
+            <div class="section-header">
+                <div class="section-number">6</div>
+                <h2>Diseño → Desarrollo (Ley de <span class="red">Conway</span>)</h2>
+            </div>
+            <span class="toggle-icon" aria-hidden="true"></span>
+        </div>
+    </button>
+    <div id="panel-conway" class="doc-section-panel">
+        <div class="section-body">
+        <p class="section-desc">La arquitectura del software acaba reflejando la estructura de comunicación de la empresa. Si Diseño hace de analista funcional sin validación técnica y entrega pantallas completas en Figma, el código hereda esa misma falta de modularidad. Hay que insertar un filtro y una herramienta de estandarización.</p>
+
+        <div class="card">
+            <h3><span class="step-num">6.1</span> Flujo actual (acoplado)</h3>
+            <div class="pipeline" role="list" aria-label="Flujo actual acoplado">
+                <div class="pipeline-node" data-tone="purple" role="listitem">
+                    <div class="node-badge">1</div>
+                    <div class="node-card">
+                        <span class="node-icon" aria-hidden="true">🎨</span>
+                        <span class="node-title">Diseño</span>
+                        <span class="node-desc">Ejerce de analista</span>
+                    </div>
+                </div>
+                <div class="pipeline-connector" aria-hidden="true"></div>
+                <div class="pipeline-node" data-tone="orange" role="listitem">
+                    <div class="node-badge">2</div>
+                    <div class="node-card">
+                        <span class="node-icon" aria-hidden="true">🖼️</span>
+                        <span class="node-title">Figma</span>
+                        <span class="node-desc">Pantallas completas</span>
+                    </div>
+                </div>
+                <div class="pipeline-connector" aria-hidden="true"></div>
+                <div class="pipeline-node node-accent" data-tone="red" role="listitem">
+                    <div class="node-badge">3</div>
+                    <div class="node-card">
+                        <span class="node-icon" aria-hidden="true">😖</span>
+                        <span class="node-title">Desarrollo</span>
+                        <span class="node-desc">Sobreinterpreta y duplica</span>
+                    </div>
+                </div>
+            </div>
+            <p style="font-size:12.5px;color:var(--text-muted)">Resultado: tablas, botones y vistas responsive reinterpretadas una y otra vez, esfuerzo duplicado y rechazo técnico a los entregables.</p>
+        </div>
+
+        <div class="card">
+            <h3><span class="step-num">6.2</span> Flujo propuesto (modular)</h3>
+            <div class="pipeline" role="list" aria-label="Flujo propuesto modular">
+                <div class="pipeline-node" data-tone="blue" role="listitem">
+                    <div class="node-badge">1</div>
+                    <div class="node-card">
+                        <span class="node-icon" aria-hidden="true">🔍</span>
+                        <span class="node-title">Análisis funcional</span>
+                        <span class="node-desc">Filtro previo validado</span>
+                    </div>
+                </div>
+                <div class="pipeline-connector" aria-hidden="true"></div>
+                <div class="pipeline-node" data-tone="purple" role="listitem">
+                    <div class="node-badge">2</div>
+                    <div class="node-card">
+                        <span class="node-icon" aria-hidden="true">🎨</span>
+                        <span class="node-title">Diseño</span>
+                        <span class="node-desc">Por componentes</span>
+                    </div>
+                </div>
+                <div class="pipeline-connector" aria-hidden="true"></div>
+                <div class="pipeline-node node-dark" data-tone="black" role="listitem">
+                    <div class="node-badge">3</div>
+                    <div class="node-card">
+                        <span class="node-icon" aria-hidden="true">📕</span>
+                        <span class="node-title">Storybook</span>
+                        <span class="node-desc">Sistema de diseño</span>
+                    </div>
+                </div>
+                <div class="pipeline-connector" aria-hidden="true"></div>
+                <div class="pipeline-node" data-tone="green" role="listitem">
+                    <div class="node-badge">4</div>
+                    <div class="node-card">
+                        <span class="node-icon" aria-hidden="true">😀</span>
+                        <span class="node-title">Desarrollo</span>
+                        <span class="node-desc">Reutiliza componentes</span>
+                    </div>
+                </div>
+            </div>
+            <div class="alert alert-green" style="margin-top:8px">
+                <h4>El cambio clave</h4>
+                <p>Un <strong>Design System en Storybook</strong> (botones, tablas, inputs, modales…) ya implementados y documentados) convierte el diseño en piezas reutilizables. Diseño y desarrollo hablan el mismo idioma: lo que se diseña ya existe como componente, se deja de "traducir" Figma a código.</p>
+            </div>
+        </div>
+        </div>
+    </div>
+</section>
+
+<!-- DEFINICIÓN FUNCIONAL -->
+<section id="funcional" class="doc-section alt-bg">
+    <button type="button" class="doc-section-toggle" aria-expanded="false" aria-controls="panel-funcional">
+        <div class="toggle-inner">
+            <div class="section-header">
+                <div class="section-number">7</div>
+                <h2>Definición funcional <span class="red">previa</span></h2>
+            </div>
+            <span class="toggle-icon" aria-hidden="true"></span>
+        </div>
+    </button>
+    <div id="panel-funcional" class="doc-section-panel">
+        <div class="section-body">
+        <p class="section-desc">Consolidar un paso de definición funcional antes de iniciar desarrollos evita desviaciones de plazo. El caso del nuevo cliente lo ilustra: tras meses de definición en diseño, el desarrollo real es bajo para las fechas, y el alcance se ha acotado a la carrera por canales informales (WhatsApp).</p>
+
+        <div class="card">
+            <h3><span class="step-num">7.1</span> Puerta de entrada antes de desarrollar (Definition of Ready)</h3>
+            <div class="pipeline" role="list" aria-label="Definition of Ready">
+                <div class="pipeline-node" data-tone="blue" role="listitem">
+                    <div class="node-badge">1</div>
+                    <div class="node-card">
+                        <span class="node-icon" aria-hidden="true">💬</span>
+                        <span class="node-title">Necesidad</span>
+                        <span class="node-desc">Cliente / negocio</span>
+                    </div>
+                </div>
+                <div class="pipeline-connector" aria-hidden="true"></div>
+                <div class="pipeline-node" data-tone="purple" role="listitem">
+                    <div class="node-badge">2</div>
+                    <div class="node-card">
+                        <span class="node-icon" aria-hidden="true">📝</span>
+                        <span class="node-title">Def. funcional</span>
+                        <span class="node-desc">Alcance + criterios</span>
+                    </div>
+                </div>
+                <div class="pipeline-connector" aria-hidden="true"></div>
+                <div class="pipeline-node node-dark" data-tone="black" role="listitem">
+                    <div class="node-badge">3</div>
+                    <div class="node-card">
+                        <span class="node-icon" aria-hidden="true">✅</span>
+                        <span class="node-title">Validación técnica</span>
+                        <span class="node-desc">Viabilidad + estimación</span>
+                    </div>
+                </div>
+                <div class="pipeline-connector" aria-hidden="true"></div>
+                <div class="pipeline-node" data-tone="orange" role="listitem">
+                    <div class="node-badge">4</div>
+                    <div class="node-card">
+                        <span class="node-icon" aria-hidden="true">🎨</span>
+                        <span class="node-title">Diseño</span>
+                        <span class="node-desc">Sobre base validada</span>
+                    </div>
+                </div>
+                <div class="pipeline-connector" aria-hidden="true"></div>
+                <div class="pipeline-node node-accent" data-tone="red" role="listitem">
+                    <div class="node-badge">5</div>
+                    <div class="node-card">
+                        <span class="node-icon" aria-hidden="true">⚙️</span>
+                        <span class="node-title">Desarrollo</span>
+                        <span class="node-desc">Sin sorpresas</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="two-col">
+            <div class="alert alert-red" style="margin:0">
+                <h4>Sin puerta de entrada</h4>
+                <ul>
+                    <li>Alcance difuso que crece sin control</li>
+                    <li>Decisiones por WhatsApp, sin registro</li>
+                    <li>Estimaciones que no se cumplen</li>
+                    <li>Recortes de alcance a última hora</li>
+                </ul>
+            </div>
+            <div class="alert alert-green" style="margin:0">
+                <h4>Con Definition of Ready</h4>
+                <ul>
+                    <li>Alcance y criterios de aceptación cerrados</li>
+                    <li>Comunicación formal y trazable con cliente</li>
+                    <li>Estimaciones realistas y comprometibles</li>
+                    <li>Plazos protegidos desde el inicio</li>
+                </ul>
+            </div>
+        </div>
+        </div>
+    </div>
+</section>
+
+<!-- AI FOUNDATION -->
+<section id="ai-foundation" class="doc-section">
+    <button type="button" class="doc-section-toggle" aria-expanded="false" aria-controls="panel-ai-foundation">
+        <div class="toggle-inner">
+            <div class="section-header">
+                <div class="section-number">8</div>
+                <h2>AI Foundation — repositorio de <span class="red">activos reutilizables</span></h2>
+            </div>
+            <span class="toggle-icon" aria-hidden="true"></span>
+        </div>
+    </button>
+    <div id="panel-ai-foundation" class="doc-section-panel">
+        <div class="section-body">
+        <p class="section-desc">La IA ya forma parte del desarrollo diario, pero el conocimiento útil no puede quedarse en chats individuales. Necesitamos un <strong>único repositorio</strong> donde centralizar todo lo que el equipo pueda copiar, versionar y mejorar entre proyectos. El modelo a seguir es el que ya funciona con los <strong>kits de test</strong>: mismo README, misma plantilla, mismas reglas de contribución.</p>
+
+        <div class="kit-banner">
+            <div class="kit-banner-icon" aria-hidden="true">📦</div>
+            <div class="kit-banner-body">
+                <h4>AI Foundation — repositorio común</h4>
+                <p>Un solo sitio para activos técnicos reutilizables: tests, prompts, configs de IDE, plantillas CI, skills de agentes… Todo con el mismo criterio de versionado que ya aplicamos a los kits de test.</p>
+                <p style="margin-top:6px;color:rgba(255,255,255,0.55);font-family:'JetBrains Mono',monospace;font-size:11px">github.com/Babooni-Technologies/ai-foundation</p>
+            </div>
+            <a href="https://github.com/Babooni-Technologies/ai-foundation" target="_blank" rel="noopener noreferrer" class="kit-banner-cta">Ver en GitHub →</a>
+        </div>
+
+        <div class="compare-grid">
+            <div class="compare compare-good">
+                <h4>✓ Ya tenemos — el patrón de referencia</h4>
+                <ul>
+                    <li>Carpeta <strong>tests/</strong> con kits copiables (JUnit, Mockito, integración…)</li>
+                    <li>Plantilla markdown + README con índice de kits disponibles</li>
+                    <li>Contribución vía PR: revisar, versionar, compartir</li>
+                    <li>Modelo probado: un solo repo, un solo criterio para todos</li>
+                </ul>
+            </div>
+            <div class="compare compare-bad">
+                <h4>○ Hoy se pierde — fuera del repo</h4>
+                <ul>
+                    <li>Prompts buenos atrapados en chats de Cursor/IA</li>
+                    <li>Configs de IDE (.cursorrules, skills) duplicadas por proyecto</li>
+                    <li>Plantillas de pipeline CI reescritas en cada repo</li>
+                    <li>Guías de arquitectura en Notion/Drive sin versionado</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3><span class="step-num">8.1</span> Qué puede vivir en ai-foundation</h3>
+            <p style="margin-bottom:12px">Todo activo que un compañero pueda necesitar mañana debería poder encontrarlo aquí. Ejemplos concretos:</p>
+            <div class="three-col">
+                <div class="card" style="box-shadow:none;border:1px solid var(--border-light)">
+                    <h4 style="font-size:13px;margin-bottom:8px">Y Tests</h4>
+                    <p style="font-size:12.5px;color:var(--text-secondary)">Kits de unitarios, integración y e2e por stack. <strong>Ya operativo.</strong></p>
+                </div>
+                <div class="card" style="box-shadow:none;border:1px solid var(--border-light)">
+                    <h4 style="font-size:13px;margin-bottom:8px">Y- Prompts y skills</h4>
+                    <p style="font-size:12.5px;color:var(--text-secondary)">Instrucciones para agentes IA: code review, tests, SQL, refactors seguros.</p>
+                </div>
+                <div class="card" style="box-shadow:none;border:1px solid var(--border-light)">
+                    <h4 style="font-size:13px;margin-bottom:8px">sT️ Configs</h4>
+                    <p style="font-size:12.5px;color:var(--text-secondary)">.cursorrules, plantillas de PR, hooks de pre-commit, snippets de IDE.</p>
+                </div>
+                <div class="card" style="box-shadow:none;border:1px solid var(--border-light)">
+                    <h4 style="font-size:13px;margin-bottom:8px">Y"" CI/CD</h4>
+                    <p style="font-size:12.5px;color:var(--text-secondary)">Workflows reutilizables de GitHub Actions / GitLab CI.</p>
+                </div>
+                <div class="card" style="box-shadow:none;border:1px solid var(--border-light)">
+                    <h4 style="font-size:13px;margin-bottom:8px">Y" Arquitectura</h4>
+                    <p style="font-size:12.5px;color:var(--text-secondary)">Plantillas de capas, ADRs, checklists de seguridad.</p>
+                </div>
+                <div class="card" style="box-shadow:none;border:1px solid var(--border-light)">
+                    <h4 style="font-size:13px;margin-bottom:8px">Y"" Docs técnicas</h4>
+                    <p style="font-size:12.5px;color:var(--text-secondary)">Runbooks de despliegue, onboarding, troubleshooting.</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3><span class="step-num">8.2</span> Estructura objetivo del repo</h3>
+            <div class="codeblock">
+<span class="c-title">ai-foundation — estructura objetivo</span>
+<span class="c-key">ai-foundation/</span>
+├── <span class="c-key">tests/</span>          <span class="c-comment"># ✓ YA EXISTE — patrón de referencia</span>
+├── <span class="c-key">prompts/</span>        <span class="c-comment"># skills e instrucciones IA</span>
+├── <span class="c-key">configs/</span>        <span class="c-comment"># .cursorrules, hooks, IDE</span>
+├── <span class="c-key">ci/</span>             <span class="c-comment"># workflows reutilizables</span>
+├── <span class="c-key">architecture/</span>   <span class="c-comment"># plantillas, ADRs</span>
+├── <span class="c-key">docs/</span>           <span class="c-comment"># runbooks, guías</span>
+├── <span class="c-key">CONTRIBUTING.md</span>
+└── <span class="c-key">README.md</span>         <span class="c-comment"># índice maestro</span>
+            </div>
+        </div>
+
+        <div class="card">
+            <h3><span class="step-num">8.3</span> Plantilla estándar (copiar de tests/)</h3>
+            <div class="codeblock">
+<span class="c-comment"># Título del activo</span>
+<span class="c-key">## Objetivo</span>      <span class="c-dim">Qué resuelve y cuándo usarlo</span>
+<span class="c-key">## Contexto</span>     <span class="c-dim">Proyecto / stack / restricciones</span>
+<span class="c-key">## Contenido</span>    <span class="c-dim">Kit, prompt, config o workflow</span>
+<span class="c-key">## Ejemplo</span>      <span class="c-dim">Entrada y resultado esperado</span>
+<span class="c-key">## Autor / fecha</span>
+            </div>
+            <div class="alert alert-blue" style="margin-top:6px">
+                <h4>Regla de oro</h4>
+                <p>Si algo te ha funcionado bien y otro compañero lo va a necesitar → <strong>PR a ai-foundation</strong>. Mismo README, misma plantilla, misma revisión por pares.</p>
+            </div>
+        </div>
+        </div>
+    </div>
+</section>
+
+    </main><!-- /doc-main -->
+</div><!-- /doc-layout -->
+
+<footer>
+    <div class="container">
+        <div class="footer-logo">
+            <svg viewBox="0 0 848 199.39" xmlns="http://www.w3.org/2000/svg">
+                <path fill="rgba(255,255,255,0.78)" d="M22.89,28.62V0H0V109.7H114.47V28.62Zm68.68,41V85.85H22.89V53.42H91.57Z"/>
+                <path fill="rgba(255,255,255,0.78)" d="M297.61,28.62V0H274.72V109.7H389.18V28.62Zm68.68,41V85.85H297.61V53.42h68.68Z"/>
+                <path fill="rgba(255,255,255,0.78)" d="M137.36,28.62v24.8h45.79c45.11,0,45.78,0,45.78,1.91s-.67,1.9-45.78,1.9H137.36V109.7H251.82V28.62Zm57.23,57.23c-33.67,0-34.34,0-34.34-1.91S160.92,82,194.59,82s34.34,0,34.34,1.91S228.26,85.85,194.59,85.85Z"/>
+                <path fill="#ff0000" d="M412.08,28.62V109.7H526.54V28.62Zm91.57,41V85.85H435V53.42h68.68Z"/>
+                <path fill="#ff0000" d="M549.44,28.62V109.7H663.9V28.62Zm91.57,41V85.85H572.33V53.42H641Z"/>
+                <polygon fill="rgba(255,255,255,0.78)" points="686.79 69.16 686.79 109.7 709.69 109.7 709.69 53.42 778.37 53.42 778.37 109.7 801.26 109.7 801.26 28.62 686.79 28.62 686.79 69.16"/>
+                <polygon fill="rgba(255,255,255,0.78)" points="824.15 69.16 824.15 109.7 847.05 109.7 847.05 28.62 824.15 28.62 824.15 69.16"/>
+                <path fill="rgba(255,255,255,0.78)" d="M470.26,146.9v32.43h7.63l.1-14.59c0-16,.86-19.94,5-23,3.91-2.86,12.11-2.77,15.36.28l2.48,2.29v35h7.63V161.4c0-15.07-.29-18.32-1.72-21.08-2.29-4.58-5.91-7-11.54-7.54-6.58-.57-11,.38-14.4,3.24l-2.87,2.48v-24h-7.63Z"/>
+                <polygon fill="rgba(255,255,255,0.78)" points="627.65 146.9 627.65 179.33 635.28 179.33 635.28 114.47 627.65 114.47 627.65 146.9"/>
+                <path fill="rgba(255,255,255,0.78)" d="M749,117.52c-1.62,1.62-1.43,7,.19,8.39,4,3.25,8.77-2.1,6.48-7.15a4.18,4.18,0,0,0-6.67-1.24"/>
+                <polygon fill="rgba(255,255,255,0.78)" points="327.18 122.1 327.18 125.91 346.26 125.91 346.26 179.33 353.89 179.33 353.89 125.91 372.97 125.91 372.97 118.28 327.18 118.28 327.18 122.1"/>
+                <path fill="rgba(255,255,255,0.78)" d="M417.8,158.34v-5.53c0-7.63-3.53-14.59-9-17.84S396,131.73,390,134.78h0a18.21,18.21,0,0,0-7,6.78c-2.48,3.91-3,5.72-3.24,13-.29,5.15,0,9.73.76,11.92,1.52,4.68,6.29,9.92,11,12,4.48,2.1,15.26,2.39,20.51.57,2.95-1,3.34-1.62,3.62-4.77.19-1.9.1-3.53-.19-3.53s-3,.67-6,1.44a45.43,45.43,0,0,1-8.39,1.43c-6.49,0-13.83-6.59-13.83-12.5v-2.77Zm-30.72-6.67.67-2.67a11.55,11.55,0,0,1,6.49-8.3c3.91-1.72,5.72-1.72,9.73-.1,3.43,1.43,4.67,3.15,5.72,7.92l.67,3.15Z"/>
+                <path fill="rgba(255,255,255,0.78)" d="M437.83,134.69a19.47,19.47,0,0,0-7.06,6.87c-2.48,3.91-2.95,5.72-3.24,13-.86,17.36,5.91,25.66,20.79,25.75,8,0,10.88-1.43,11.26-5.62.29-3.15.29-3.25-2.86-2.58-11.93,2.48-16.6,1.24-19.75-5.06-2.67-5.15-2.76-15.83-.19-20.89,3-5.81,7.25-7,19.08-5.72,1.81.19,2.48-.28,3.24-2.38,1.34-4-.09-4.77-9.06-5.25-7-.29-8.39-.1-12.21,1.91"/>
+                <path fill="rgba(255,255,255,0.78)" d="M536.56,133.83a15.15,15.15,0,0,0-4.2,2.86c-1.81,2.29-3,2-3-.76,0-2.1-.38-2.39-3.33-2.39h-3.34v45.79h7.63l.09-14.59c0-16,.86-19.94,5-23,3.91-2.86,12.12-2.77,15.36.28l2.48,2.29v35h7.63V161.4c0-19.65-.67-22.42-6-26.33-3.34-2.48-14-3.15-18.31-1.24"/>
+                <path fill="rgba(255,255,255,0.78)" d="M605.43,135.64c-5.34-3.53-15.55-4.1-21.46-1-7,3.53-10.78,10.78-10.78,20.89,0,9.06,1.43,13.74,5.91,18.6,4.68,5.06,8.68,6.49,16.6,6,8.11-.47,12.78-3.62,16.31-10.87C617.64,157.77,614.49,141.65,605.43,135.64Zm-12.88,37.58c-8.2-1-11.64-6.2-11.64-17.36,0-11.35,5.15-17.17,14.22-16.12a20,20,0,0,1,6.29,1.82c3.53,2.29,5.25,7.34,5.25,15.07C606.67,168.36,601.61,174.37,592.55,173.22Z"/>
+                <path fill="rgba(255,255,255,0.78)" d="M679.83,135.64c-5.34-3.53-15.55-4.1-21.46-1-7,3.53-10.78,10.78-10.78,20.89,0,9.06,1.43,13.74,5.91,18.6,4.68,5.06,8.68,6.49,16.6,6,8.11-.47,12.78-3.62,16.31-10.87C692,157.77,688.89,141.65,679.83,135.64ZM667,173.22c-8.2-1-11.63-6.2-11.63-17.36,0-11.35,5.15-17.17,14.21-16.12a20,20,0,0,1,6.29,1.82c3.53,2.29,5.25,7.34,5.25,15.07C681.07,168.36,676,174.37,667,173.22Z"/>
+                <path fill="rgba(255,255,255,0.78)" d="M735.16,139.65c3.53-.86,5.34-3.44,3.43-5.15-.38-.38-6.77-1-14.12-1.34-12-.57-13.73-.38-17.45,1.34h0c-8.68,3.91-10.59,18.6-3.25,25.08,1.91,1.72,1.91,1.82.1,3.63-2,2-2.58,8.87-.76,9.92.57.38-.58,2-2.77,3.91-7.25,6.2-6,15.83,2.67,20.13,5.15,2.67,16.12,3,23.56.76,8.87-2.67,13.55-10.87,10.68-19-2.19-6.2-5-7.54-17.36-8.3-5.91-.38-10.77-.67-10.87-.76a5.53,5.53,0,0,1-.29-2.48c0-3,2.48-4.3,8.21-4.3a23.4,23.4,0,0,0,8.77-2c6.58-3.24,9.45-11.64,6.49-19.08C731.72,141,732.49,140.32,735.16,139.65Zm-6,39.58c2,1.72,1.9,7.06-.1,8.88-4.67,4-14.31,5.62-20.79,3.43s-7.25-10-1.15-12.78C711,177,726.86,177.33,729.15,179.23ZM724,154.34c-3.72,3.91-13.93,3.43-16.22-.77-2.39-4.57-.29-11.54,4.2-13.44,3.53-1.53,9.44-.29,11.73,2.48C726.57,145.85,726.67,151.48,724,154.34Z"/>
+                <path fill="rgba(255,255,255,0.78)" d="M807,158.34v-5.53c0-7.63-3.53-14.59-9-17.84s-12.88-3.24-18.79-.19h0a18.16,18.16,0,0,0-7,6.78c-2.48,3.91-3,5.72-3.24,13-.29,5.15,0,9.73.76,11.92,1.53,4.68,6.3,9.92,11,12,4.48,2.1,15.26,2.39,20.51.57,3-1,3.34-1.62,3.62-4.77.2-1.9.1-3.53-.19-3.53s-3,.67-6,1.44a45.29,45.29,0,0,1-8.39,1.43c-6.49,0-13.83-6.59-13.83-12.5v-2.77Zm-30.71-6.67.67-2.67a11.51,11.51,0,0,1,6.48-8.3c3.91-1.72,5.73-1.72,9.73-.1,3.44,1.43,4.68,3.15,5.73,7.92l.66,3.15Z"/>
+                <path fill="rgba(255,255,255,0.78)" d="M823.68,133.92c-5.15,2.29-7.63,5.92-7.63,11.07,0,6.2,3.24,9.54,13.16,13.55,11.35,4.67,14.31,8.1,10.3,12.11-3.53,3.53-13.64,3.34-22.32-.38-1.53-.67-1.72-.29-1.43,3.43s.57,4.29,3.62,5.34c4.58,1.53,16.6,1.53,20.32-.09a12.64,12.64,0,0,0,8.3-12.21c0-4.39-.38-5.25-3.62-8.3-2.2-2.1-6.49-4.48-11-6.2-4-1.43-7.92-3.43-8.68-4.29-4.77-5.25,1.52-9.64,11.35-7.92a43.75,43.75,0,0,1,7.25,1.62c1.14.38,1.9-.28,2.76-2.38.67-1.72.86-3.25.38-3.72-3.24-3-17.55-3.91-22.79-1.63"/>
+                <polygon fill="rgba(255,255,255,0.78)" points="747.84 156.44 747.84 179.33 755.47 179.33 755.47 133.54 747.84 133.54 747.84 156.44"/>
+            </svg>
+        </div>
+        <p>Base Técnica Crítica · <strong>Babooni Technologies</strong> · Documento interno · Jun 2026</p>
+        <div class="footer-contact">
+            <a href="mailto:info@babooni.com">info@babooni.com</a>
+            <a href="tel:617312356">617 31 23 56</a>
+            <span>C. Alfonso XII, 62 · Retiro · 28014 Madrid</span>
+        </div>
+    </div>
+</footer>
+
+</div><!-- /page-wrapper -->
+
+<script>
+(function () {
+    var sections = document.querySelectorAll('.doc-section');
+    var sidebarLinks = document.querySelectorAll('.sidebar-link');
+    var sidebarNav = document.getElementById('sidebarNav');
+    var lastActiveId = null;
+    var sectionRatios = {};
+
+    function scrollSidebarToActive() {
+        if (!sidebarNav) return;
+        var active = sidebarNav.querySelector('.sidebar-link.active');
+        if (!active) return;
+        var navRect = sidebarNav.getBoundingClientRect();
+        var linkRect = active.getBoundingClientRect();
+        if (linkRect.top < navRect.top || linkRect.bottom > navRect.bottom) {
+            active.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+        }
+    }
+
+    function setActiveLink(id) {
+        if (!id || id === lastActiveId) return;
+        lastActiveId = id;
+        sidebarLinks.forEach(function (link) {
+            link.classList.toggle('active', link.getAttribute('href') === '#' + id);
+        });
+        scrollSidebarToActive();
+    }
+
+    function openSection(section) {
+        if (!section) return;
+        section.classList.add('is-open');
+        var toggle = section.querySelector('.doc-section-toggle');
+        if (toggle) toggle.setAttribute('aria-expanded', 'true');
+    }
+
+    sections.forEach(function (section) {
+        var toggle = section.querySelector('.doc-section-toggle');
+        if (!toggle) return;
+        toggle.addEventListener('click', function () {
+            var isOpen = section.classList.contains('is-open');
+            if (isOpen) {
+                section.classList.remove('is-open');
+                toggle.setAttribute('aria-expanded', 'false');
+            } else {
+                openSection(section);
+            }
+            setActiveLink(section.id);
+        });
+    });
+
+    sidebarLinks.forEach(function (link) {
+        link.addEventListener('click', function (e) {
+            var href = link.getAttribute('href');
+            if (href.indexOf('.html') !== -1) return;
+            e.preventDefault();
+            var id = href.slice(1);
+            var target = document.getElementById(id);
+            if (!target) return;
+            openSection(target);
+            setActiveLink(id);
+            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        });
+    });
+
+    if ('IntersectionObserver' in window) {
+        var observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                sectionRatios[entry.target.id] = entry.intersectionRatio;
+            });
+            var bestId = null, bestRatio = 0;
+            Object.keys(sectionRatios).forEach(function (id) {
+                if (sectionRatios[id] > bestRatio) {
+                    bestRatio = sectionRatios[id];
+                    bestId = id;
+                }
+            });
+            if (bestId && bestRatio > 0.05) setActiveLink(bestId);
+        }, { rootMargin: '-12% 0px -50% 0px', threshold: [0, 0.05, 0.15, 0.3, 0.5, 0.75, 1] });
+        sections.forEach(function (s) { observer.observe(s); });
+    }
+})();
+</script>
+
+</body>
+</html>
